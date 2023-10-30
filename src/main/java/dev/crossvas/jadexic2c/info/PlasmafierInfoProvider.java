@@ -7,8 +7,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.PlasmafierTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,20 +15,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
 
 public enum PlasmafierInfoProvider implements IHelper {
     INSTANCE;
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "PlasmaInfo")) {
             return;
         }
-        if (!blockAccessor.getServerData().contains("PlasmaInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("PlasmaInfo");
+
+        CompoundTag tag = getData(blockAccessor, "PlasmaInfo");
         if (blockAccessor.getBlockEntity() instanceof PlasmafierTileEntity tile) {
             Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
             Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());

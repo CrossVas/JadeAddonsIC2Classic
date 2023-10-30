@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.generators.tiles.SolarPanelTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,13 +21,11 @@ public enum SolarPanelInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "SolarPanelInfo")) {
             return;
         }
-        if (!blockAccessor.getServerData().contains("SolarPanelInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("SolarPanelInfo");
+
+        CompoundTag tag = getData(blockAccessor, "SolarPanelInfo");
 
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof SolarPanelTileEntity panel) {

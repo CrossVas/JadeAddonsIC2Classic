@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.tiles.mv.BaseTeleporterTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,13 +24,11 @@ public enum BaseTeleporterInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "BaseTeleporterInfo")) {
             return;
         }
-        if (!blockAccessor.getServerData().contains("BaseTeleporterInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("BaseTeleporterInfo");
+
+        CompoundTag tag = getData(blockAccessor, "BaseTeleporterInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof BaseTeleporterTileEntity tp) {
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tp.getTier()));

@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.generators.tiles.WindmillTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,13 +21,11 @@ public enum WindmillGenInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
+        if (!shouldAddInfo(blockAccessor, "WindmillInfo")) {
+             return;
         }
-        if (!blockAccessor.getServerData().contains("WindmillInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("WindmillInfo");
+
+        CompoundTag tag = getData(blockAccessor, "WindmillInfo");
 
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof WindmillTileEntity windmill) {

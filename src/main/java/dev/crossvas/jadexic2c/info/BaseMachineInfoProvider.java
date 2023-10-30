@@ -12,8 +12,6 @@ import ic2.core.block.machines.tiles.mv.RareEarthCentrifugeTileEntity;
 import ic2.core.block.machines.tiles.mv.RefineryTileEntity;
 import ic2.core.block.machines.tiles.mv.SlowGrinderTileEntity;
 import ic2.core.block.machines.tiles.mv.VacuumCannerTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -33,17 +31,12 @@ public enum BaseMachineInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "BaseMachineInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("BaseMachineInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("BaseMachineInfo");
-        BlockEntity blockEntity = blockAccessor.getBlockEntity();
-        if (blockEntity instanceof BaseMachineTileEntity tile) {
+        CompoundTag tag = getData(blockAccessor, "BaseMachineInfo");
+        if (blockAccessor.getBlockEntity() instanceof BaseMachineTileEntity tile) {
             Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
             Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
             Helpers.text(iTooltip, "ic2.probe.eu.usage.name", tile.getEnergyPerTick());

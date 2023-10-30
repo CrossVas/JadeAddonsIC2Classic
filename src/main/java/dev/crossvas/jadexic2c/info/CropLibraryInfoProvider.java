@@ -28,15 +28,11 @@ public enum CropLibraryInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("CropLibraryInfo")) {
+        if (!shouldAddInfo(blockAccessor, "CropLibraryInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("CropLibraryInfo");
-
+        CompoundTag tag = getData(blockAccessor, "CropLibraryInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseCropLibraryTileEntity lib) {
                 if (lib instanceof IEnergySink sink) {

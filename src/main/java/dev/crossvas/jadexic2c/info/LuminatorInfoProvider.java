@@ -23,15 +23,11 @@ public enum LuminatorInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "LuminatorInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("LuminatorInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("LuminatorInfo");
+        CompoundTag tag = getData(blockAccessor, "LuminatorInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof LuminatorTileEntity || tile instanceof ConstructionLightTileEntity) {
                 Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(((IEUStorage) tile).getTier()));

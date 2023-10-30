@@ -30,7 +30,6 @@ public enum EUStorageInfoProvider implements IHelper {
 
         CompoundTag tag = getData(blockAccessor, "EUStorageInfo");
         int stored = tag.getInt("storedEnergy");
-
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CreativeSourceTileEntity) {
                 Helpers.barLiteral(iTooltip, 1, 1, Component.translatable("ic2.probe.eu.storage.name", "Infinite").withStyle(ChatFormatting.WHITE), ColorMix.RED);

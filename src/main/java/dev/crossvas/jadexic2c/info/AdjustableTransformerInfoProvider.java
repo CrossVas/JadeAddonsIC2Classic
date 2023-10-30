@@ -23,15 +23,11 @@ public enum AdjustableTransformerInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "AdjTransformerInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("AdjTransformerInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("AdjTransformerInfo");
+        CompoundTag tag = getData(blockAccessor, "AdjTransformerInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof AdjustableTransformerTileEntity transformer) {
                 int energyPacket = tag.getInt("energyPacket");

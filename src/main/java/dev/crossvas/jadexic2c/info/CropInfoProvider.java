@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropTile;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -24,18 +22,12 @@ public enum CropInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "CropInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("CropInfo")) {
-            return;
-        }
-
-        BlockEntity blockEntity = blockAccessor.getBlockEntity();
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("CropInfo");
-        if (blockEntity instanceof ICropTile tile) {
+        CompoundTag tag = getData(blockAccessor, "CropInfo");
+        if (blockAccessor.getBlockEntity() instanceof ICropTile tile) {
             ICrop crop = tile.getCrop();
             if (crop != null) {
                 int maxStage = tag.getInt("growthSteps");

@@ -7,8 +7,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseGeneratorTileEntity;
 import ic2.core.block.generators.tiles.*;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
@@ -21,20 +19,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
 
 public enum BaseGeneratorInfoProvider implements IHelper {
     INSTANCE;
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "BaseGeneratorInfo")) {
             return;
         }
-        if (!blockAccessor.getServerData().contains("BaseGeneratorInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("BaseGeneratorInfo");
+
+        CompoundTag tag = getData(blockAccessor, "BaseGeneratorInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseGeneratorTileEntity gen) {
                 float euProduction = tag.getFloat("euProduction");

@@ -8,8 +8,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.recipes.misc.EnrichRecipe;
 import ic2.core.block.machines.tiles.hv.UraniumEnchricherTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -27,13 +25,11 @@ public enum UraniumEnricherInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "EnricherInfo")) {
             return;
         }
-        if (!blockAccessor.getServerData().contains("EnricherInfo")) {
-            return;
-        }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("EnricherInfo");
+
+        CompoundTag tag = getData(blockAccessor, "EnricherInfo");
 
         if (blockAccessor.getBlockEntity() instanceof UraniumEnchricherTileEntity tile) {
             int mainProgress = tag.getInt("mainProgress");

@@ -22,15 +22,11 @@ public enum OceanGenInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("OceanGenInfo")) {
+        if (!shouldAddInfo(blockAccessor, "OceanGenInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("OceanGenInfo");
-
+        CompoundTag tag = getData(blockAccessor, "OceanGenInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof OceanGeneratorTileEntity gen) {
                 float production = tag.getFloat("production");

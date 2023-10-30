@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.machines.tiles.nv.StoneBasicMachineTileEntity;
 import ic2.core.block.machines.tiles.nv.StoneCannerTileEntity;
@@ -27,15 +26,11 @@ public enum StoneMachineInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "StoneMachineInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("StoneMachineInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("StoneMachineInfo");
+        CompoundTag tag = getData(blockAccessor, "StoneMachineInfo");
 
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
 

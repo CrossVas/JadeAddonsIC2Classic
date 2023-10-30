@@ -23,15 +23,11 @@ public enum ChargePadInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("ChargePadInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ChargePadInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("ChargePadInfo");
-
+        CompoundTag tag = getData(blockAccessor, "ChargePadInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof BaseChargePadTileEntity pad) {
                 int maxInput = tag.getInt("maxInput");

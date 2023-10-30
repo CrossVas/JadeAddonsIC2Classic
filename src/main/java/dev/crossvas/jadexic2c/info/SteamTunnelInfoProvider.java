@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;

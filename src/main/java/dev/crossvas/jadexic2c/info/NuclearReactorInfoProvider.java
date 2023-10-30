@@ -2,17 +2,13 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.CustomBox;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
 import ic2.core.platform.player.PlayerHandler;
-import ic2.core.platform.registries.IC2Fluids;
 import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.math.ColorUtils;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -21,17 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.api.ui.IProgressStyle;
 
 public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
     INSTANCE;

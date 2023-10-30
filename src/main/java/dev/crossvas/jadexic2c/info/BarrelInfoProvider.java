@@ -5,8 +5,6 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,15 +26,11 @@ public enum BarrelInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!blockAccessor.getServerData().contains("BarrelInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BarrelInfo")) {
             return;
         }
 
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("BarrelInfo");
+        CompoundTag tag = getData(blockAccessor, "BarrelInfo");
         if (blockAccessor.getBlockEntity() instanceof BarrelTileEntity) {
             int wheatAmount = tag.getInt("wheatAmount");
             int hopsAmount = tag.getInt("hopsAmount");

@@ -7,7 +7,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
-import ic2.core.block.multi.tiles.FuelBoilerLinkTileEntity;
 import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.math.ColorUtils;
@@ -32,7 +31,6 @@ public enum FuelBoilerInfoProvider implements IHelper {
         }
 
         CompoundTag tag = getData(blockAccessor, "FuelBoilerInfo");
-
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof FuelBoilerTileEntity boiler) {
                 addInfo(boiler, blockAccessor, iTooltip, tag);

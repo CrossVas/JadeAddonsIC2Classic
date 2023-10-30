@@ -25,10 +25,7 @@ public enum ChargingBenchInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor)) {
-            return;
-        }
-        if (!hasData(blockAccessor, "ChargingBenchInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ChargingBenchInfo")) {
             return;
         }
 

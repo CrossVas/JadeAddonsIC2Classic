@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.lv.WoodGassifierTileEntity;
@@ -23,14 +22,11 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("GassificatorInfo")) {
+        if (!shouldAddInfo(blockAccessor, "GassificatorInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("GassificatorInfo");
+        CompoundTag tag = getData(blockAccessor, "GassificatorInfo");
         if (blockAccessor.getBlockEntity() instanceof WoodGassifierTileEntity gas) {
             Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gas.getTier()));
             Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", gas.getMaxInput());

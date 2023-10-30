@@ -35,16 +35,11 @@ public enum CableInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "CableInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("CableInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("CableInfo");
-
+        CompoundTag tag = getData(blockAccessor, "CableInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CableTileEntity cable) {
                 Helpers.text(iTooltip,"tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);

@@ -8,8 +8,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
 import ic2.core.block.machines.tiles.lv.MinerTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -19,23 +17,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
 
 public enum MinerInfoProvider implements IHelper {
     INSTANCE;
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "MinerInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("MinerInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("MinerInfo");
-
+        CompoundTag tag = getData(blockAccessor, "MinerInfo");
         if (blockAccessor.getBlockEntity() instanceof MinerTileEntity miner) {
             Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
             Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", miner.getMaxInput());

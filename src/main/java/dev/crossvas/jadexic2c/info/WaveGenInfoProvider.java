@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.WaveGenTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,14 +21,11 @@ public enum WaveGenInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("WaveGenInfo")) {
+        if (!shouldAddInfo(blockAccessor, "WaveGenInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("WaveGenInfo");
+        CompoundTag tag = getData(blockAccessor, "WaveGenInfo");
 
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof WaveGenTileEntity waveGen) {

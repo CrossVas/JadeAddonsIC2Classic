@@ -1,7 +1,6 @@
 package dev.crossvas.jadexic2c.utils;
 
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
-import ic2.core.utils.collection.NBTListWrapper;
 import ic2.core.utils.math.ColorUtils;
 import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
@@ -9,25 +8,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
-import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
 import snownee.jade.api.ui.IProgressStyle;
-import snownee.jade.impl.Tooltip;
-
-import javax.tools.Tool;
 
 public class Helpers {
 

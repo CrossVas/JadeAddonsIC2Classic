@@ -23,15 +23,11 @@ public enum BaseEnergyStorageInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "EnergyStorageInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("EnergyStorageInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("EnergyStorageInfo");
+        CompoundTag tag = getData(blockAccessor, "EnergyStorageInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));

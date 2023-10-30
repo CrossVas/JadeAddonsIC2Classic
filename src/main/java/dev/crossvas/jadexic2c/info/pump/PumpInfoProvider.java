@@ -24,15 +24,11 @@ public enum PumpInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "PumpInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("PumpInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("PumpInfo");
+        CompoundTag tag = getData(blockAccessor, "PumpInfo");
         if (blockAccessor.getBlockEntity() instanceof PumpTileEntity pump) {
             Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pump.getTier()));
             Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", pump.getMaxInput());

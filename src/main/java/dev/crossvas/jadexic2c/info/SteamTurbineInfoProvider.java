@@ -3,7 +3,6 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.SteamTurbineTileEntity;
@@ -22,10 +21,11 @@ public enum SteamTurbineInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "SteamTurbineInfo")) {
             return;
         }
-        CompoundTag tag = blockAccessor.getServerData().getCompound("SteamTurbineInfo");
+
+        CompoundTag tag = getData(blockAccessor, "SteamTurbineInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof SteamTurbineTileEntity turbine) {
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(turbine.getSourceTier()));

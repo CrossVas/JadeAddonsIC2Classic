@@ -7,8 +7,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -19,23 +17,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
 
 public enum ElectrolyzerInfoProvider implements IHelper {
     INSTANCE;
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
+        if (!shouldAddInfo(blockAccessor, "ElectrolyzerInfo")) {
             return;
         }
 
-        if (!blockAccessor.getServerData().contains("ElectrolyzerInfo")) {
-            return;
-        }
-
-        CompoundTag tag = blockAccessor.getServerData().getCompound("ElectrolyzerInfo");
-
+        CompoundTag tag = getData(blockAccessor, "ElectrolyzerInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof ElectrolyzerTileEntity ele) {
                 boolean discharging = tag.getBoolean("canPower");

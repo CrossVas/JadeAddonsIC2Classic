@@ -8,7 +8,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseBatteryStationTileEntity;
 import ic2.core.utils.helpers.Formatters;
-import ic2.probeplugin.styles.IC2Styles;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,14 +25,11 @@ public enum BatteryStationInfoProvider implements IHelper {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor.getPlayer())) {
-            return;
-        }
-        if (!blockAccessor.getServerData().contains("BatteryStationInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BatteryStationInfo")) {
             return;
         }
 
-        CompoundTag tag = blockAccessor.getServerData().getCompound("BatteryStationInfo");
+        CompoundTag tag = getData(blockAccessor, "BatteryStationInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseBatteryStationTileEntity station) {
                 Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
