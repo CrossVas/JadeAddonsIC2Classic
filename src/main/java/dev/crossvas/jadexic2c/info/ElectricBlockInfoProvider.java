@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
@@ -21,7 +22,6 @@ import ic2.core.block.machines.tiles.mv.ChunkloaderTileEntity;
 import ic2.core.block.machines.tiles.mv.CropHarvesterTileEntity;
 import ic2.core.block.machines.tiles.mv.ReactorPlannerTileEntity;
 import ic2.core.block.machines.tiles.mv.TeslaCoilTileEntity;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -98,7 +98,7 @@ public enum ElectricBlockInfoProvider implements IHelper {
                 float progress = tag.getFloat("uuProgress");
                 if (progress > 0.0F) {
                     Helpers.barLiteral(iTooltip, (int) progress, (int) massFab.getMaxProgress(), Component.translatable("ic2.probe.progress.moderate.name",
-                            ProbePluginHelper.THERMAL_GEN.format((double) (progress / massFab.getMaxProgress()) * 100.0)), ColorMix.PURPLE);
+                            Formatter.THERMAL_GEN.format((double) (progress / massFab.getMaxProgress()) * 100.0)), ColorMix.PURPLE);
                 }
                 if (tag.getInt("scrap") > 0) {
                     Helpers.barLiteral(iTooltip, tag.getInt("scrap"), tag.getInt("scrapValue") * 2, Component.translatable("ic2.probe.matter.amplifier.name",

@@ -2,6 +2,7 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
@@ -9,7 +10,6 @@ import ic2.api.reactor.ISteamReactor;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
 import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -67,11 +67,11 @@ public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServ
         if (PlayerHandler.getHandler(blockAccessor.getPlayer()).hasEUReader()) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
-                    Helpers.text(tooltip, "ic2.probe.eu.output.current.name", ProbePluginHelper.formatNumber((double) reactor.getProvidedEnergy(), 5));
+                    Helpers.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));
                     Helpers.text(tooltip, "ic2.probe.reactor.breeding.name", reactor.getHeat() / 3000 + 1);
                 } else if (tile instanceof ISteamReactor steamReactor) {
-                    Helpers.text(tooltip, "ic2.probe.steam.output.name", ProbePluginHelper.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
-                    Helpers.text(tooltip, "ic2.probe.water.consumption.name", ProbePluginHelper.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
+                    Helpers.text(tooltip, "ic2.probe.steam.output.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
+                    Helpers.text(tooltip, "ic2.probe.water.consumption.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
                     Helpers.text(tooltip, "ic2.probe.pump.pressure", 100);
                     Helpers.text(tooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(20000L));
                     Helpers.addClientTankFromTag(tooltip, blockAccessor);

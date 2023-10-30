@@ -2,11 +2,11 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.WaveGenTileEntity;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +31,7 @@ public enum WaveGenInfoProvider implements IHelper {
             if (tile instanceof WaveGenTileEntity waveGen) {
                 float production = tag.getFloat("production");
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(waveGen.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", ProbePluginHelper.formatNumber((double) production, 5));
+                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 5));
                 Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", waveGen.getMaxEnergyOutput());
             }
         }

@@ -2,13 +2,13 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseGeneratorTileEntity;
 import ic2.core.block.generators.tiles.*;
 import ic2.core.utils.math.ColorUtils;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -34,17 +34,17 @@ public enum BaseGeneratorInfoProvider implements IHelper {
             if (tile instanceof BaseGeneratorTileEntity gen) {
                 float euProduction = tag.getFloat("euProduction");
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", ProbePluginHelper.formatNumber((double) euProduction, 5));
+                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
 
                 Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
                 if (gen instanceof SolarTurbineTileEntity) {
                     int heat = tag.getInt("heat");
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.heat.name", ProbePluginHelper.THERMAL_GEN.format((double) ((float) heat / 240.0F))).withStyle(ChatFormatting.WHITE));
+                    Helpers.text(iTooltip, Component.translatable("ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F))).withStyle(ChatFormatting.WHITE));
                     Helpers.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof ThermalGeneratorTileEntity) {
                     float subProduction = tag.getFloat("subProduction");
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", ProbePluginHelper.THERMAL_GEN.format((double) subProduction)).withStyle(ChatFormatting.WHITE));
+                    Helpers.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction)).withStyle(ChatFormatting.WHITE));
                     Helpers.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof GeoGenTileEntity) {

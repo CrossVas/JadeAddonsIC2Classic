@@ -2,6 +2,7 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.tiles.teleporter.TeleporterTarget;
 import ic2.core.IC2;
@@ -10,7 +11,6 @@ import ic2.core.block.machines.tiles.hv.TeleporterTileEntity;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.SanityHelper;
 import ic2.core.utils.helpers.TeleportUtil;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -57,11 +57,11 @@ public enum TeleporterInfoProvider implements IHelper {
                             break;
                         case FLUID:
                             Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", ProbePluginHelper.formatNumber((double)(availableEnergy / (long)baseCost * 10L), 6)));
+                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", Formatter.formatNumber((double)(availableEnergy / (long)baseCost * 10L), 6)));
                             break;
                         case ITEM:
                             Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", ProbePluginHelper.formatNumber((double)(availableEnergy / (long)baseCost / 100L * 64L), 6)));
+                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", Formatter.formatNumber((double)(availableEnergy / (long)baseCost / 100L * 64L), 6)));
                             break;
                         case SPAWNER:
                             Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(baseCost * 25000)));

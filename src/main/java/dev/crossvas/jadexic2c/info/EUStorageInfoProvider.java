@@ -3,11 +3,11 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.tiles.readers.IEUStorage;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.storage.tiles.CreativeSourceTileEntity;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -34,7 +34,7 @@ public enum EUStorageInfoProvider implements IHelper {
             if (tile instanceof CreativeSourceTileEntity) {
                 Helpers.barLiteral(iTooltip, 1, 1, Component.translatable("ic2.probe.eu.storage.name", "Infinite").withStyle(ChatFormatting.WHITE), ColorMix.RED);
             } else if (tile instanceof IEUStorage storage) {
-                Helpers.barLiteral(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.name", ProbePluginHelper.formatNumber(stored, 5)).withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                Helpers.barLiteral(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.name", Formatter.formatNumber(stored, 5)).withStyle(ChatFormatting.WHITE), ColorMix.RED);
             }
         }
     }

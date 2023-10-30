@@ -3,11 +3,11 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.OceanGeneratorTileEntity;
-import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,11 +31,11 @@ public enum OceanGenInfoProvider implements IHelper {
             if (tile instanceof OceanGeneratorTileEntity gen) {
                 float production = tag.getFloat("production");
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", ProbePluginHelper.formatNumber((double) production, 5));
+                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 5));
                 Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
 
-                Helpers.bar(iTooltip, Integer.parseInt(ProbePluginHelper.formatInt(tag.getInt("water"), 4)), 1000, "ic2.probe.water.full.name", ColorMix.BLUE);
-                Helpers.bar(iTooltip, Integer.parseInt(ProbePluginHelper.formatInt(tag.getInt("coral"), 4)), 50, "ic2.probe.corals.full.name", ColorMix.PURPLE);
+                Helpers.bar(iTooltip, Integer.parseInt(Formatter.formatInt(tag.getInt("water"), 4)), 1000, "ic2.probe.water.full.name", ColorMix.BLUE);
+                Helpers.bar(iTooltip, Integer.parseInt(Formatter.formatInt(tag.getInt("coral"), 4)), 50, "ic2.probe.corals.full.name", ColorMix.PURPLE);
             }
         }
     }
