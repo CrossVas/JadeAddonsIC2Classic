@@ -1,0 +1,20 @@
+{
+  "config.jade.plugin_ic2.wrenchable_info": "Wrenchable Info",
+  "config.jade.plugin_ic2.eu_storage_info": "EU Storage Info",
+  "config.jade.plugin_ic2.eu_reader": "EU-Reader Info",
+  "config.jade.plugin_ic2.thermometer": "Thermometer Info",
+  "config.jade.plugin_ic2.crop": "Crop Info",
+  "config.jade.plugin_ic2.remove_renders_fluid": "Disable Tank Render for IC2Classic",
+  "config.jade.plugin_ic2.remove_modid": "Remove Mod Name",
+  "config.jade.plugin_ic2.relocate_modid": "Relocate Mod Name",
+
+  "ic2.probe.wrenchable.drop_chance.info": "Drop Chance",
+  "ic2.probe.wrenchable.info": "Wrenchable Block",
+
+  "ic2.barrel.info.water": "Water: %sk / %sk mB",
+  "ic2.barrel.info.fluid": "%s: %s / %sk mB",
+  "ic2.barrel.info.age": "Age: %s",
+  "ic2.probe.eu.storage.full.name": "Energy: %s/%s EU",
+
+  "config.jade.plugin_ic2.base_generator": "Basic Generators"
+}

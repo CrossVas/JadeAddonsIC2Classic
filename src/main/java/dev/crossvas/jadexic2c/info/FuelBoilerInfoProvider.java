@@ -1,0 +1,96 @@
+package dev.crossvas.jadexic2c.info;
+
+import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Helpers;
+import ic2.core.block.base.tiles.BaseLinkingTileEntity;
+import ic2.core.block.base.tiles.BaseTileEntity;
+import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
+import ic2.core.block.multi.tiles.FuelBoilerLinkTileEntity;
+import ic2.core.platform.player.PlayerHandler;
+import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.math.ColorUtils;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+
+public enum FuelBoilerInfoProvider implements IHelper {
+    INSTANCE;
+
+    @Override
+    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        if (!shouldAddInfo(blockAccessor, "FuelBoilerInfo")) {
+            return;
+        }
+
+        CompoundTag tag = getData(blockAccessor, "FuelBoilerInfo");
+
+        if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
+            if (tile instanceof FuelBoilerTileEntity boiler) {
+                addInfo(boiler, blockAccessor, iTooltip, tag);
+            }
+
+            if (tile instanceof BaseLinkingTileEntity linking) {
+                CompoundTag linkingLag = tag.getCompound("LinkingBlockInfo");
+                BlockEntity master = linking.getMaster();
+                if (master instanceof FuelBoilerTileEntity boiler) {
+                    addInfo(boiler, blockAccessor, iTooltip, linkingLag);
+                }
+            }
+        }
+    }
+
+    public void addInfo(FuelBoilerTileEntity boiler, BlockAccessor accessor, ITooltip iTooltip, CompoundTag tag) {
+        int fuel = tag.getInt("fuel");
+        int maxFuel = tag.getInt("maxFuel");
+        int heat = tag.getInt("heat");
+        Helpers.barLiteral(iTooltip, fuel, maxFuel, Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
+
+        if (PlayerHandler.getHandler(accessor.getPlayer()).hasThermometer()) {
+            Helpers.barLiteral(iTooltip, heat, boiler.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
+                    heat / 30, Formatters.EU_READER_FORMAT.format((double) boiler.getMaxHeat() / 30)).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+        }
+        Helpers.addClientTankFromTag(iTooltip, accessor);
+        if (!boiler.isValid) {
+            long time = boiler.clockTime(512);
+            Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+        }
+    }
+
+    @Override
+    public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
+        CompoundTag tag = new CompoundTag();
+        CompoundTag linkingTag = new CompoundTag();
+        if (blockEntity instanceof FuelBoilerTileEntity boiler) {
+            tag.putInt("fuel", boiler.getFuel());
+            tag.putInt("maxFuel", boiler.getMaxFuel());
+            tag.putInt("heat", boiler.getHeat());
+            Helpers.loadTankData(compoundTag, boiler);
+        } else if (blockEntity instanceof BaseTileEntity tile) {
+            if (tile instanceof BaseLinkingTileEntity linking) {
+                BlockEntity master = linking.getMaster();
+                if (master instanceof FuelBoilerTileEntity boiler) {
+                    linkingTag.putInt("fuel", boiler.getFuel());
+                    linkingTag.putInt("maxFuel", boiler.getMaxFuel());
+                    linkingTag.putInt("heat", boiler.getHeat());
+                }
+                tag.put("LinkingBlockInfo", linkingTag);
+                Helpers.loadTankData(compoundTag, linking);
+            }
+        }
+        compoundTag.put("FuelBoilerInfo", tag);
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return JadeIC2CPluginHandler.EU_READER_INFO;
+    }
+}

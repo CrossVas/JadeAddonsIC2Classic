@@ -1,0 +1,97 @@
+package dev.crossvas.jadexic2c.info;
+
+import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Helpers;
+import ic2.core.block.base.tiles.BaseInventoryTileEntity;
+import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
+import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
+import ic2.core.inventory.filter.IFilter;
+import ic2.core.inventory.filter.SpecialFilters;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElementHelper;
+
+public enum ElectrolyzerInfoProvider implements IHelper {
+    INSTANCE;
+
+    @Override
+    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        if (!canHandle(blockAccessor.getPlayer())) {
+            return;
+        }
+
+        if (!blockAccessor.getServerData().contains("ElectrolyzerInfo")) {
+            return;
+        }
+
+        CompoundTag tag = blockAccessor.getServerData().getCompound("ElectrolyzerInfo");
+
+        if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
+            if (tile instanceof ElectrolyzerTileEntity ele) {
+                boolean discharging = tag.getBoolean("canPower");
+                boolean charging = tag.getBoolean("shouldDrain");
+                int transfer = tag.getInt("transferRate");
+                int energy = tag.getInt("energy");
+                int maxEnergy = tag.getInt("maxEnergy");
+                Helpers.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
+                Helpers.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
+
+                if (energy > 0) {
+                    Helpers.barLiteral(iTooltip, energy, maxEnergy,
+                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                }
+            }
+
+            if (tile instanceof ChargedElectrolyzerTileEntity ele) {
+                boolean discharging = tag.getBoolean("canPowerC");
+                boolean charging = tag.getBoolean("shouldDrainC");
+                int transfer = tag.getInt("transferRateC");
+                int energy = tag.getInt("energyC");
+                int maxEnergy = tag.getInt("maxEnergyC");
+                Helpers.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
+                Helpers.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
+
+                if (energy > 0) {
+                    Helpers.barLiteral(iTooltip, energy, maxEnergy,
+                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
+        CompoundTag tag = new CompoundTag();
+        if (blockEntity instanceof BaseInventoryTileEntity tile) {
+            if (tile instanceof ElectrolyzerTileEntity ele) {
+                tag.putInt("energy", ele.energy);
+                tag.putInt("maxEnergy", ele.maxEnergy);
+                tag.putInt("transferRate", ele.getTransferrate());
+                tag.putBoolean("canPower", ele.canPower());
+                tag.putBoolean("shouldDrain", ele.shouldDrain());
+            } else if (tile instanceof ChargedElectrolyzerTileEntity ele) {
+                tag.putInt("energyC", ele.energy);
+                tag.putInt("maxEnergyC", ele.maxEnergy);
+                tag.putInt("transferRateC", ele.getTransferrate());
+                tag.putBoolean("canPowerC", ele.canPower());
+                tag.putBoolean("shouldDrainC", ele.shouldDrain());
+            }
+        }
+        compoundTag.put("ElectrolyzerInfo", tag);
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return JadeIC2CPluginHandler.EU_READER_INFO;
+    }
+}

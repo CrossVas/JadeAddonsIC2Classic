@@ -1,0 +1,97 @@
+package dev.crossvas.jadexic2c.info;
+
+import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.utils.ColorMix;
+import dev.crossvas.jadexic2c.utils.Helpers;
+import ic2.api.energy.EnergyNet;
+import ic2.core.block.base.tiles.BaseElectricTileEntity;
+import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
+import ic2.core.block.machines.tiles.lv.MinerTileEntity;
+import ic2.core.inventory.filter.IFilter;
+import ic2.core.inventory.filter.SpecialFilters;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElementHelper;
+
+public enum MinerInfoProvider implements IHelper {
+    INSTANCE;
+
+    @Override
+    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        if (!canHandle(blockAccessor.getPlayer())) {
+            return;
+        }
+
+        if (!blockAccessor.getServerData().contains("MinerInfo")) {
+            return;
+        }
+
+        CompoundTag tag = blockAccessor.getServerData().getCompound("MinerInfo");
+
+        if (blockAccessor.getBlockEntity() instanceof MinerTileEntity miner) {
+            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
+            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", miner.getMaxInput());
+            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
+
+            byte finished = tag.getByte("finished");
+            float progress = tag.getFloat("progress");
+            boolean refueling = tag.getBoolean("refueling");
+            boolean isStuck = tag.getBoolean("isStuck");
+            boolean isOperating = tag.getBoolean("isOperating");
+
+            if (miner instanceof RocketMinerTileEntity) {
+                switch (finished) {
+                    case 0:
+                        Helpers.text(iTooltip, refueling ? "ic2.probe.miner.refuel.name" : "ic2.probe.miner.mining.name");
+                        break;
+                    case 1:
+                        Helpers.text(iTooltip, "ic2.probe.miner.retracting.name");
+                    case 3:
+                        Helpers.text(iTooltip, "ic2.probe.miner.power.name");
+                }
+                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+            } else {
+                Helpers.text(iTooltip, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
+            }
+
+            if (!isStuck && progress > 0) {
+                float scaledOp = Math.min(6.0E7F, progress);
+                float scaledMaxOp = Math.min(6.0E7F, miner.getMaxProgress());
+                Helpers.barLiteral(iTooltip, (int) scaledOp, (int) scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", (int) scaledOp, (int) scaledMaxOp), ColorMix.BLUE);
+            }
+
+            int y = miner.getPipeTip().getY();
+            Helpers.barLiteral(iTooltip, y, miner.getPosition().getY(), Component.translatable("ic2.probe.miner.progress.name", y), ColorMix.BROWN);
+        }
+    }
+
+    @Override
+    public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
+        CompoundTag tag = new CompoundTag();
+        if (blockEntity instanceof BaseElectricTileEntity tile) {
+            if (tile instanceof RocketMinerTileEntity rocket) {
+                tag.putByte("finished", (byte) rocket.finished);
+                tag.putBoolean("refueling", rocket.isRefueling());
+                Helpers.loadTankData(rocket.tank, compoundTag);
+            } else if (tile instanceof MinerTileEntity miner) {
+                tag.putFloat("progress", miner.getProgress());
+                tag.putBoolean("isStuck", miner.isStuck());
+                tag.putBoolean("isOperating", miner.isOperating());
+            }
+        }
+        compoundTag.put("MinerInfo", tag);
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return JadeIC2CPluginHandler.EU_READER_INFO;
+    }
+}
