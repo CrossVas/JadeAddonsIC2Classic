@@ -11,7 +11,6 @@ import ic2.probeplugin.base.ProbePluginHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -39,15 +38,6 @@ public enum EUStorageInfoProvider implements IHelper {
                 Helpers.barLiteral(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.name", ProbePluginHelper.formatNumber(stored, 5)).withStyle(ChatFormatting.WHITE), ColorMix.RED);
             }
         }
-    }
-
-    public static MutableComponent getEnergyStorageInfo(int current, int max) {
-        if (max > 1000000) {
-            return Component.translatable("ic2.probe.eu.storage.full.name", current / 1000000, max / 1000000);
-        } else if (max > 100000) {
-            return Component.translatable("ic2.probe.eu.storage.full.name", current / 1000, max / 1000);
-        }
-        return Component.empty();
     }
 
     @Override
