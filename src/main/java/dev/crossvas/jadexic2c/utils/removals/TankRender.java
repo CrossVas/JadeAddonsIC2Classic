@@ -8,7 +8,7 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum TankRender implements IBlockComponentProvider, IEntityComponentProvider {
+public enum TankRender implements IBlockComponentProvider {
     INSTANCE;
 
     public static final ResourceLocation FORGE_FLUID = new ResourceLocation("fluid");
@@ -31,10 +31,5 @@ public enum TankRender implements IBlockComponentProvider, IEntityComponentProvi
     @Override
     public ResourceLocation getUid() {
         return ID;
-    }
-
-    @Override
-    public void appendTooltip(ITooltip iTooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-
     }
 }
