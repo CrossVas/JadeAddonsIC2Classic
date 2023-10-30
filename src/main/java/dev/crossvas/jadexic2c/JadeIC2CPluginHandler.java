@@ -42,6 +42,8 @@ import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.block.multi.BaseMultiBlock;
 import ic2.core.block.multi.TurbineMultiBlock;
+import ic2.core.block.personal.PersonalBlock;
+import ic2.core.block.personal.tile.FluidOMatTileEntity;
 import ic2.core.block.storage.*;
 import ic2.core.block.storage.tiles.RedirectorMasterTileEntity;
 import ic2.core.block.storage.tiles.RedirectorSlaveTileEntity;
@@ -165,6 +167,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(DynamicTankInfoProvider.INSTANCE, TankBlock.class);
         registration.registerBlockComponent(PushingValveInfoProvider.INSTANCE, ValveBlock.class);
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
+        registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
 
         registration.usePickedResult(IC2Blocks.COLOSSAL_BASE);
@@ -239,6 +242,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(RedirectorSlaveInfoProvider.INSTANCE, RedirectorSlaveTileEntity.class);
         registration.registerBlockDataProvider(PipePumpInfoProvider.INSTANCE, ElectricPipePumpTileEntity.class);
         registration.registerBlockDataProvider(VillagerOMatInfoProvider.INSTANCE, VillagerOMatTileEntity.class);
+        registration.registerBlockDataProvider(FluidOMatInfoProvider.INSTANCE, FluidOMatTileEntity.class);
         registration.registerBlockDataProvider(FuelBoilerInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(ThermonuclearReactorInfoProvider.INSTANCE, BaseTileEntity.class);
 

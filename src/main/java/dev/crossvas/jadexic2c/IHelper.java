@@ -5,7 +5,6 @@ import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -19,12 +18,8 @@ public interface IHelper extends IBlockComponentProvider, IServerDataProvider<Bl
             case "thermometer" -> SpecialFilters.THERMOMETER;
             case "crop" -> SpecialFilters.CROP_SCANNER;
             default -> throw new IllegalStateException("Unexpected value: " + id +
-                    ". Expected: " + JadeIC2CPluginHandler.EU_READER_INFO.getPath() + JadeIC2CPluginHandler.THERMOMETER_INFO.getPath() + JadeIC2CPluginHandler.CROP_INFO.getPath());
+                    ". Expected: " + JadeIC2CPluginHandler.EU_READER_INFO.getPath() + JadeIC2CPluginHandler.THERMOMETER_INFO.getPath() + JadeIC2CPluginHandler.CROP_INFO.getPath() + JadeIC2CPluginHandler.EU_STORAGE_INFO);
         };
-    }
-
-    default boolean canHandle(Player player) {
-        return StackUtil.hasHotbarItems(player, getFilter(getUid()));
     }
 
     default boolean canHandle(BlockAccessor accessor) {
