@@ -113,25 +113,4 @@ public class Helpers {
             }
         }
     }
-
-    public static void loadInvData(CompoundTag serverData, BlockEntity entity) {
-        if (entity instanceof IItemHandler itemHandler) {
-            loadInvData(itemHandler, serverData);
-        } else {
-            entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent( handler -> loadInvData(handler, serverData));
-        }
-    }
-
-    public static void loadInvData(IItemHandler itemHandler, CompoundTag serverData) {
-        ListTag stackList = new ListTag();
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            ItemStack stack = itemHandler.getStackInSlot(i);
-            CompoundTag stackData = stack.save(new CompoundTag());
-            stackData.putInt("count", stack.getCount());
-            stackList.add(stackData);
-        }
-        if (!stackList.isEmpty()) {
-            serverData.put("InventoryData", stackList);
-        }
-    }
 }
