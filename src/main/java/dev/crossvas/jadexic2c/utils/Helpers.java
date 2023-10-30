@@ -10,6 +10,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandler;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElement;
@@ -109,6 +111,27 @@ public class Helpers {
                             new CustomBox(fluidStack.getFluid() == Fluids.LAVA ? ColorUtils.doubleDarker(-29925) : ColorUtils.doubleDarker(IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor())), false));
                 }
             }
+        }
+    }
+
+    public static void loadInvData(CompoundTag serverData, BlockEntity entity) {
+        if (entity instanceof IItemHandler itemHandler) {
+            loadInvData(itemHandler, serverData);
+        } else {
+            entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent( handler -> loadInvData(handler, serverData));
+        }
+    }
+
+    public static void loadInvData(IItemHandler itemHandler, CompoundTag serverData) {
+        ListTag stackList = new ListTag();
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            ItemStack stack = itemHandler.getStackInSlot(i);
+            CompoundTag stackData = stack.save(new CompoundTag());
+            stackData.putInt("count", stack.getCount());
+            stackList.add(stackData);
+        }
+        if (!stackList.isEmpty()) {
+            serverData.put("InventoryData", stackList);
         }
     }
 }

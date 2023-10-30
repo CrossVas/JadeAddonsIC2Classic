@@ -6,7 +6,6 @@ import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
-import ic2.core.block.generators.tiles.SteamTunnelTileEntity;
 import ic2.core.block.machines.tiles.luv.FusionReactorTileEntity;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;

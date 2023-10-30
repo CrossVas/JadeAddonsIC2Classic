@@ -15,7 +15,7 @@ public interface IHelper extends IBlockComponentProvider, IServerDataProvider<Bl
 
     default IFilter getFilter(ResourceLocation id) {
         return switch (id.getPath()) {
-            case "eu_reader" -> SpecialFilters.EU_READER;
+            case "eu_storage_info", "eu_reader" -> SpecialFilters.EU_READER;
             case "thermometer" -> SpecialFilters.THERMOMETER;
             case "crop" -> SpecialFilters.CROP_SCANNER;
             default -> throw new IllegalStateException("Unexpected value: " + id +

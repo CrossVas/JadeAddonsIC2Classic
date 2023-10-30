@@ -24,7 +24,6 @@ import ic2.core.block.crops.CropTileEntity;
 import ic2.core.block.generators.*;
 import ic2.core.block.generators.tiles.*;
 import ic2.core.block.machines.BaseMachineBlock;
-import ic2.core.block.machines.ElectricEnchanterBlock;
 import ic2.core.block.machines.NoStateMachineBlock;
 import ic2.core.block.machines.customBlocks.TeleporterBlock;
 import ic2.core.block.machines.customBlocks.VillagerOMatBlock;
@@ -122,8 +121,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
                 BaseMachineBlock.class,
                 MonitorBlock.class,
-                NoStateMachineBlock.class,
-                ElectricEnchanterBlock.class);
+                NoStateMachineBlock.class);
 
         registerBlocks(registration, BaseGeneratorInfoProvider.INSTANCE,
                 BaseGeneratorBlock.class,

@@ -107,7 +107,7 @@ public enum BarrelInfoProvider implements IHelper {
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, wheatAmount, 20, "ic2.probe.barrel.beer.redstone.name", ColorMix.RED);
                     Helpers.bar(iTooltip, hopsAmount, 20, "ic2.probe.barrel.beer.glowstone.name", ColorMix.YELLOW);
-                    Helpers.monoBar(iTooltip, fluidAmount / 1000, 32000 / 1000, water, ColorMix.MONO_BLUE);
+                    Helpers.monoBar(iTooltip, fluidAmount / 1000, 3000 / 1000, water, ColorMix.MONO_BLUE);
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
                     int brewedPotion = tag.getInt("brewedPotion");
                     Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : MobEffect.byId(brewedPotion).getDisplayName();

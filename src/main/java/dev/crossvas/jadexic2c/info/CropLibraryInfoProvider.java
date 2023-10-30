@@ -7,9 +7,8 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseCropLibraryTileEntity;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.collection.NBTListWrapper;
+import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElementHelper;
 
 public enum CropLibraryInfoProvider implements IHelper {
     INSTANCE;
@@ -63,9 +63,12 @@ public enum CropLibraryInfoProvider implements IHelper {
                 }
 
                 Helpers.text(iTooltip, "");
+                IElementHelper h = iTooltip.getElementHelper();
+
                 int counter = 0;
                 for (CompoundTag itemTag : itemsTagList) {
-                    ItemStack crop = ItemStack.of(itemTag);
+                    ItemStack crop = ItemStack.of(itemTag.getCompound("stack"));
+                    crop.setCount(itemTag.getInt("count"));
                     if (counter < 7) {
                         iTooltip.append(iTooltip.getElementHelper().item(crop));
                         counter++;
@@ -90,10 +93,15 @@ public enum CropLibraryInfoProvider implements IHelper {
                 tag.putInt("typeLimit", lib.storage.getTypeLimit());
                 tag.putInt("statLimit", lib.storage.getStatLimit());
                 ListTag itemsList = new ListTag();
-                for (ItemStack stack : lib.storage.getTypes()) {
-                    itemsList.add(stack.save(new CompoundTag()));
+                for (ItemStack stack : StackUtil.copyNonEmpty(lib.storage.getTypes())) {
+                    CompoundTag stackTag = new CompoundTag();
+                    stackTag.put("stack", stack.save(new CompoundTag()));
+                    stackTag.putInt("count", stack.getCount());
+                    itemsList.add(stackTag);
                 }
-                tag.put("items", itemsList);
+                if (!itemsList.isEmpty()) {
+                    tag.put("items", itemsList);
+                }
             }
         }
         compoundTag.put("CropLibraryInfo", tag);
