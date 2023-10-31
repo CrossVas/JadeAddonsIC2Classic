@@ -156,6 +156,11 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 ValveBlock.class
         );
 
+        registerBlocks(registration, DynamicTankInfoProvider.INSTANCE,
+                TankBlock.class,
+                ValveBlock.class
+        );
+
         registration.registerBlockComponent(NuclearReactorInfoProvider.INSTANCE, ReactorChamberBlock.class);
         registration.registerBlockComponent(BaseEnergyStorageInfoProvider.INSTANCE, EnergyStorageBlock.class);
         registration.registerBlockComponent(CableInfoProvider.INSTANCE, CableBlock.class);
@@ -164,7 +169,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(ChargingBenchInfoProvider.INSTANCE, ChargingBenchBlock.class);
         registration.registerBlockComponent(TeleporterInfoProvider.INSTANCE, TeleporterBlock.class);
         registration.registerBlockComponent(ElectricFisherInfoProvider.INSTANCE, NoStateMachineBlock.class);
-        registration.registerBlockComponent(DynamicTankInfoProvider.INSTANCE, TankBlock.class);
         registration.registerBlockComponent(PushingValveInfoProvider.INSTANCE, ValveBlock.class);
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
