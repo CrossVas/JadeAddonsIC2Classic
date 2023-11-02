@@ -32,10 +32,10 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
 
         IElement wrenchIcon = iTooltip.getElementHelper().item(IC2Items.WRENCH.getDefaultInstance()).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
         if (blockEntity instanceof IWrenchableTile tile && tile.isHarvestWrenchRequired(player)) {
-            Helpers.space_y(iTooltip, 10);
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
             if (actualRate > 0) { // if it's actually wrenchable. Blame IWrenchableTile.
+                Helpers.space_y(iTooltip, 10);
                 iTooltip.add(wrenchIcon);
                 if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                     double dropChance = tool.getActualLoss(handHeldStack, tile.getDropRate(player));

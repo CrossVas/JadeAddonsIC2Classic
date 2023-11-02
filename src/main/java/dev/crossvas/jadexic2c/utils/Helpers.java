@@ -72,15 +72,14 @@ public class Helpers {
         if (!stackList.isEmpty()) {
             Helpers.text(iTooltip, Component.translatable(text).withStyle(style));
             Helpers.space_y(iTooltip, 3);
-        }
-
-        for (ItemStack stack : stackList) {
-            if (counter < 7) {
-                iTooltip.append(iTooltip.getElementHelper().item(stack));
-                counter++;
-                if (counter == 6) {
-                    counter = 0;
-                    Helpers.text(iTooltip, "");
+            for (ItemStack stack : stackList) {
+                if (counter < 7) {
+                    iTooltip.append(iTooltip.getElementHelper().item(stack));
+                    counter++;
+                    if (counter == 6) {
+                        counter = 0;
+                        Helpers.text(iTooltip, "");
+                    }
                 }
             }
         }
