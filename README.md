@@ -9,7 +9,6 @@
 **<font size="3">Almost every aspect of the mod is covered, except some parts that require much deeper knowledge which I don't possess at this moment.</font>**
 
 **<font size="3">These parts are:</font>**
- - Item tubes - because I'm too dumb to understand how to transfer data; 
  - several structures (Multiblock Tank, Steam Tunnel) - for more info you'll have to check the main block or the valve, sorry.
 
 **<font size="3">Everything else is working just fine.</font>**

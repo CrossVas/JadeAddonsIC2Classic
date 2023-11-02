@@ -12,7 +12,6 @@ import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +20,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IElementHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum CropLibraryInfoProvider implements IHelper {
     INSTANCE;
@@ -54,26 +55,13 @@ public enum CropLibraryInfoProvider implements IHelper {
                 }
 
                 Iterable<CompoundTag> itemsTagList = NBTListWrapper.wrap(tag.getList("items", 10), CompoundTag.class);
-                if (itemsTagList.iterator().hasNext()) {
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.crop_library.name").withStyle(ChatFormatting.YELLOW));
-                }
-
-                Helpers.text(iTooltip, "");
-                IElementHelper h = iTooltip.getElementHelper();
-
-                int counter = 0;
-                for (CompoundTag itemTag : itemsTagList) {
-                    ItemStack crop = ItemStack.of(itemTag.getCompound("stack"));
-                    crop.setCount(itemTag.getInt("count"));
-                    if (counter < 7) {
-                        iTooltip.append(iTooltip.getElementHelper().item(crop));
-                        counter++;
-                        if (counter == 6) {
-                            counter = 0;
-                            Helpers.text(iTooltip, "");
-                        }
-                    }
-                }
+                List<ItemStack> stackList = new ArrayList<>();
+                itemsTagList.forEach(stackTag -> {
+                    ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
+                    stack.setCount(stackTag.getInt("count"));
+                    stackList.add(stack);
+                });
+                Helpers.grid(iTooltip, "ic2.probe.crop_library.name", ChatFormatting.YELLOW, stackList);
             }
         }
     }

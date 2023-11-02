@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -17,6 +18,8 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElementHelper;
 import snownee.jade.api.ui.IProgressStyle;
+
+import java.util.List;
 
 public class Helpers {
 
@@ -62,6 +65,25 @@ public class Helpers {
 
     public static void appendText(ITooltip tooltip, String text, Object... args) {
         tooltip.append(tooltip.getElementHelper().text(Component.translatable(text, args).withStyle(ChatFormatting.WHITE)));
+    }
+
+    public static void grid(ITooltip iTooltip, String text, ChatFormatting style, List<ItemStack> stackList) {
+        int counter = 0;
+        if (!stackList.isEmpty()) {
+            Helpers.text(iTooltip, Component.translatable(text).withStyle(style));
+            Helpers.space_y(iTooltip, 3);
+        }
+
+        for (ItemStack stack : stackList) {
+            if (counter < 7) {
+                iTooltip.append(iTooltip.getElementHelper().item(stack));
+                counter++;
+                if (counter == 6) {
+                    counter = 0;
+                    Helpers.text(iTooltip, "");
+                }
+            }
+        }
     }
 
     public static void loadTankData(CompoundTag serverData, BlockEntity entity) {

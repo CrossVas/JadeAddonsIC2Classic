@@ -52,6 +52,8 @@ import ic2.core.block.storage.tiles.transformer.AdjustableTransformerTileEntity;
 import ic2.core.block.transport.fluid.PipeBlock;
 import ic2.core.block.transport.fluid.PumpBlock;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
+import ic2.core.block.transport.item.TubeBlock;
+import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.platform.registries.IC2Blocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -173,6 +175,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
+        registration.registerBlockComponent(TubeInfoProvider.INSTANCE, TubeBlock.class);
 
         registration.usePickedResult(IC2Blocks.COLOSSAL_BASE);
         registration.usePickedResult(IC2Blocks.PRESSURE_ALLOY_FURNACE_MULTIBLOCK);
@@ -249,6 +252,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(FluidOMatInfoProvider.INSTANCE, FluidOMatTileEntity.class);
         registration.registerBlockDataProvider(FuelBoilerInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(ThermonuclearReactorInfoProvider.INSTANCE, BaseTileEntity.class);
+        registration.registerBlockDataProvider(TubeInfoProvider.INSTANCE, TubeTileEntity.class);
 
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
     }
