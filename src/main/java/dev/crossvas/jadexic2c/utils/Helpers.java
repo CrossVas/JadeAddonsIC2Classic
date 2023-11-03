@@ -71,7 +71,7 @@ public class Helpers {
         int counter = 0;
         if (!stackList.isEmpty()) {
             Helpers.text(iTooltip, Component.translatable(text).withStyle(style));
-            Helpers.space_y(iTooltip, 3);
+            Helpers.space_y(iTooltip, 2);
             for (ItemStack stack : stackList) {
                 if (counter < 7) {
                     iTooltip.append(iTooltip.getElementHelper().item(stack));
@@ -82,6 +82,7 @@ public class Helpers {
                     }
                 }
             }
+            Helpers.space_y(iTooltip, 2);
         }
     }
 

@@ -8,8 +8,10 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -64,7 +66,7 @@ public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServ
     }
 
     public static void addToTooltip(ITooltip tooltip, BlockEntity tile, BlockAccessor blockAccessor) {
-        if (PlayerHandler.getHandler(blockAccessor.getPlayer()).hasEUReader()) {
+        if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
                     Helpers.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));
@@ -77,7 +79,7 @@ public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServ
                     Helpers.addClientTankFromTag(tooltip, blockAccessor);
                 }
 
-                if (PlayerHandler.getHandler(blockAccessor.getPlayer()).hasThermometer()) {
+                if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
                     Helpers.barLiteral(tooltip, reactorTile.getHeat(), reactorTile.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
                             reactorTile.getHeat(), Formatters.EU_READER_FORMAT.format((double) reactorTile.getMaxHeat() / 1000.0)).append("k").withStyle(ChatFormatting.WHITE), getReactorColor(reactorTile.getHeat(), reactorTile.getMaxHeat()));
                 }
