@@ -7,22 +7,25 @@ import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
 import ic2.core.block.transport.item.TubeTileEntity;
-import ic2.core.block.transport.item.tubes.RequestTubeTileEntity;
-import ic2.core.block.transport.item.tubes.StackingTubeTileEntity;
+import ic2.core.block.transport.item.tubes.*;
 import ic2.core.utils.collection.NBTListWrapper;
+import ic2.core.utils.helpers.SanityHelper;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenCustomHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec2;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
@@ -106,9 +109,91 @@ public enum TubeInfoProvider implements IHelper {
                     Helpers.grid(iTooltip, "ic2.probe.tube.stuck", ChatFormatting.WHITE, insertionList);
                 }
 
+                if (tube instanceof RoundRobinTubeTileEntity) {
+                    Helpers.space_y(iTooltip, 3);
+                    Helpers.text(iTooltip, Component.translatable("ic2.tube.round_robin.info").withStyle(ChatFormatting.GOLD));
+                    int[] size = tag.getIntArray("size");
+                    for (int i = 0; i < size.length; i++) {
+                        int count = size[i];
+                        if (count > 0) {
+                            Direction side = Direction.from3DDataValue(i);
+                            Helpers.text(iTooltip, Component.literal( SanityHelper.toPascalCase(side.getName()) + ": " + count).withStyle(getColor(i)));
+                        }
+                    }
+                }
+
+                if (tube instanceof DirectionalTubeTileEntity directional) {
+                    Helpers.space_y(iTooltip, 3);
+                    Direction facing = directional.getFacing();
+                    String facingName = SanityHelper.toPascalCase(facing.getName());
+                    Helpers.text(iTooltip, Component.translatable("ic2.tube.directional.info").withStyle(ChatFormatting.GOLD).append(getColor(facing.get3DDataValue()) + facingName));
+                }
+
+                if (tube instanceof FilterTubeTileEntity) {
+                    Iterable<CompoundTag> filteredItemsTagList = NBTListWrapper.wrap(tag.getList("FilteredItems", 10), CompoundTag.class);
+                    List<FilterTubeTileEntity.FilterEntry> filteredList = new ArrayList<>();
+                    filteredItemsTagList.forEach(filter -> {
+                        if (filter != null) {
+                            filteredList.add(FilterTubeTileEntity.FilterEntry.read(filter.getCompound("filter")));
+                        }
+                    });
+                    if (!filteredList.isEmpty()) {
+                        Helpers.space_y(iTooltip, 3);
+                        for (FilterTubeTileEntity.FilterEntry entry : filteredList) {
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                            iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
+                            iTooltip.append(iTooltip.getElementHelper().spacer(3, 0));
+                            Helpers.appendText(iTooltip, getSides(entry));
+                        }
+                    }
+
+                }
+
+                if (tube instanceof TeleportTubeTileEntity) {
+                    String freq = tag.getString("freq");
+                    Helpers.space_y(iTooltip, 3);
+                    Helpers.text(iTooltip, Component.translatable( "ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
+                }
+
+                if (tube instanceof PickupTubeTileEntity) {
+                    boolean largeRadius = tag.getBoolean("largeRadius");
+                    Helpers.space_y(iTooltip, 3);
+                    Helpers.text(iTooltip, Component.translatable( "ic2.tube.pickup.info").withStyle(ChatFormatting.GOLD).append((largeRadius ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(largeRadius)));
+                }
             }
             // OMG, what is this
         }
+    }
+
+    public static ChatFormatting getColor(int index) {
+        return switch (index) {
+            case 0 -> ChatFormatting.AQUA;
+            case 1 -> ChatFormatting.RED;
+            case 2 -> ChatFormatting.YELLOW;
+            case 3 -> ChatFormatting.BLUE;
+            case 4 -> ChatFormatting.LIGHT_PURPLE;
+            case 5 -> ChatFormatting.GREEN;
+            default -> throw new IllegalStateException("Unexpected value: 0 > index > 5");
+        };
+    }
+
+    public static Component getSides(FilterTubeTileEntity.FilterEntry entry) {
+        Component component = Component.empty();
+        if (entry.getSides() != null) {
+            String[] directionList = entry.getSides().toString().replaceAll("\\[", "").replaceAll("]", "")
+                    .replaceAll("north", ChatFormatting.YELLOW + "N")
+                    .replaceAll("south", ChatFormatting.BLUE + "S")
+                    .replaceAll("east", ChatFormatting.GREEN + "E")
+                    .replaceAll("west", ChatFormatting.LIGHT_PURPLE + "W")
+                    .replaceAll("down", ChatFormatting.AQUA + "D")
+                    .replaceAll("up", ChatFormatting.RED + "U").split(",", -1);
+
+            for (String side : directionList) {
+                component = component.copy().append(side);
+            }
+            return component;
+        }
+        return component;
     }
 
     @Override
@@ -223,10 +308,25 @@ public enum TubeInfoProvider implements IHelper {
                         }
                         tag.put("InsertionItems", itemsList);
                     }
+                } else if (tube instanceof RoundRobinTubeTileEntity rrobin) {
+                    tag.putIntArray("size", rrobin.cap);
+                } else if (tube instanceof FilterTubeTileEntity filter) {
+                    itemsList = new ListTag();
+                    for (FilterTubeTileEntity.FilterEntry entry : filter.stacks) {
+                        CompoundTag stackedTag = new CompoundTag();
+                        stackedTag.put("filter", entry.write());
+                        itemsList.add(stackedTag);
+                    }
+                    tag.put("FilteredItems", itemsList);
+                } else if (tube instanceof TeleportTubeTileEntity teleport) {
+                    tag.putString("freq", teleport.frequency);
+                } else if (tube instanceof PickupTubeTileEntity pickup) {
+                    CompoundTag pickupTag = new CompoundTag();
+                    pickup.saveAdditional(pickupTag);
+                    tag.putBoolean("largeRadius", pickupTag.getBoolean("large"));
                 }
             }
         }
-
         compoundTag.put("TubeInfo", tag);
     }
 

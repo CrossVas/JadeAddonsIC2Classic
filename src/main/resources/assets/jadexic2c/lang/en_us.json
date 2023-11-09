@@ -10,6 +10,11 @@
 
   "ic2.probe.wrenchable.drop_chance.info": "Drop Chance",
   "ic2.probe.wrenchable.info": "Wrenchable Block",
+  "ic2.tube.round_robin.info": "Round Robin Rules",
+  "ic2.tube.directional.info": "Direction: %s",
+  "ic2.tube.filter.info": "Filter:",
+  "ic2.tube.teleport.info": "Network ID: ",
+  "ic2.tube.pickup.info": "Large Radius: ",
 
   "ic2.barrel.info.water": "Water: %sk / %sk mB",
   "ic2.barrel.info.fluid": "%s: %s / %sk mB",
