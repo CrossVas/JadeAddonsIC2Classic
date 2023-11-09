@@ -13,6 +13,8 @@
   "ic2.tube.round_robin.info": "Round Robin Rules",
   "ic2.tube.directional.info": "Direction: %s",
   "ic2.tube.filter.info": "Filter:",
+  "ic2.tube.extraction_filter.info": "Filter:",
+  "ic2.tube.extraction_filter_whitelist.info": "Whitelist:",
   "ic2.tube.teleport.info": "Network ID: ",
   "ic2.tube.pickup.info": "Large Radius: ",
 

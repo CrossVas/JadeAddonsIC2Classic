@@ -149,6 +149,35 @@ public enum TubeInfoProvider implements IHelper {
 
                 }
 
+                if (tube instanceof FilteredExtractionTubeTileEntity) {
+                    Iterable<CompoundTag> extractionFilteredItemsTagList = NBTListWrapper.wrap(tag.getList("ExtractionFilteredItems", 10), CompoundTag.class);
+                    List<FilteredExtractionTubeTileEntity.FilterEntry> extractionFilteredList = new ArrayList<>();
+                    extractionFilteredItemsTagList.forEach(filter -> {
+                        if (filter != null) {
+                            extractionFilteredList.add(FilteredExtractionTubeTileEntity.FilterEntry.read(filter.getCompound("extractionFilter")));
+                        }
+                    });
+
+                    if (!extractionFilteredList.isEmpty()) {
+                        boolean whitelist = tag.getBoolean("whitelist");
+                        Helpers.space_y(iTooltip, 3);
+                        for (FilteredExtractionTubeTileEntity.FilterEntry entry : extractionFilteredList) {
+                            boolean checkNBT = (entry.getFlags() & 16) != 0;
+                            boolean checkFluid = (entry.getFlags() & 128) != 0;
+                            boolean checkDurability = (entry.getFlags() & 256) != 0;
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter.info").withStyle(ChatFormatting.GOLD));
+                            iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
+                            iTooltip.append(iTooltip.getElementHelper().text(Component.literal(" ")
+                                    .append((checkNBT ? ChatFormatting.GREEN : ChatFormatting.RED) + "NBT").append(" ")
+                                    .append((checkFluid ? ChatFormatting.GREEN : ChatFormatting.RED) + "Fluid").append(" ")
+                                    .append((checkDurability ? ChatFormatting.GREEN : ChatFormatting.RED) + "Meta")));
+                        }
+
+                        Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
+                                .append((whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)));
+                    }
+                }
+
                 if (tube instanceof TeleportTubeTileEntity) {
                     String freq = tag.getString("freq");
                     Helpers.space_y(iTooltip, 3);
@@ -318,6 +347,16 @@ public enum TubeInfoProvider implements IHelper {
                         itemsList.add(stackedTag);
                     }
                     tag.put("FilteredItems", itemsList);
+                } else if (tube instanceof FilteredExtractionTubeTileEntity filteredExtraction) {
+                    itemsList = new ListTag();
+                    for (FilteredExtractionTubeTileEntity.FilterEntry entry : filteredExtraction.filters) {
+                        CompoundTag extractionFilteredTag = new CompoundTag();
+                        extractionFilteredTag.put("extractionFilter", entry.save());
+                        itemsList.add(extractionFilteredTag);
+                    }
+                    tag.put("ExtractionFilteredItems", itemsList);
+                    // flags
+                    tag.putBoolean("whitelist", filteredExtraction.whitelist);
                 } else if (tube instanceof TeleportTubeTileEntity teleport) {
                     tag.putString("freq", teleport.frequency);
                 } else if (tube instanceof PickupTubeTileEntity pickup) {
