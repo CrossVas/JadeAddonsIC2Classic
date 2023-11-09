@@ -165,7 +165,7 @@ public enum TubeInfoProvider implements IHelper {
                             boolean checkNBT = (entry.getFlags() & 16) != 0;
                             boolean checkFluid = (entry.getFlags() & 128) != 0;
                             boolean checkDurability = (entry.getFlags() & 256) != 0;
-                            Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter.info").withStyle(ChatFormatting.GOLD));
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
                             iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
                             iTooltip.append(iTooltip.getElementHelper().text(Component.literal(" ")
                                     .append((checkNBT ? ChatFormatting.GREEN : ChatFormatting.RED) + "NBT").append(" ")
