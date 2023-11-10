@@ -165,12 +165,14 @@ public enum TubeInfoProvider implements IHelper {
                             boolean checkNBT = (entry.getFlags() & 16) != 0;
                             boolean checkFluid = (entry.getFlags() & 128) != 0;
                             boolean checkDurability = (entry.getFlags() & 256) != 0;
-                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                            int keepItem = entry.getKeepItems();
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter_no.info", extractionFilteredList.indexOf(entry) + 1).withStyle(ChatFormatting.GOLD));
                             iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
                             iTooltip.append(iTooltip.getElementHelper().text(Component.literal(" ")
-                                    .append((checkNBT ? ChatFormatting.GREEN : ChatFormatting.RED) + "NBT").append(" ")
-                                    .append((checkFluid ? ChatFormatting.GREEN : ChatFormatting.RED) + "Fluid").append(" ")
-                                    .append((checkDurability ? ChatFormatting.GREEN : ChatFormatting.RED) + "Meta")));
+                                    .append(checkNBT ? ChatFormatting.GREEN + "*nbt " : "")
+                                    .append(checkFluid ? ChatFormatting.GREEN + "*fluid " : "")
+                                    .append(checkDurability ? ChatFormatting.GREEN + "*meta " : "")
+                                    .append(keepItem > 0 ? ChatFormatting.WHITE + "Keep: " + keepItem : "")));
                         }
 
                         Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
