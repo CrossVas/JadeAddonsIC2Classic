@@ -204,7 +204,7 @@ public enum TubeInfoProvider implements IHelper {
             case 3 -> ChatFormatting.BLUE;
             case 4 -> ChatFormatting.LIGHT_PURPLE;
             case 5 -> ChatFormatting.GREEN;
-            default -> throw new IllegalStateException("Unexpected value: 0 > index > 5");
+            default -> ChatFormatting.WHITE;
         };
     }
 
