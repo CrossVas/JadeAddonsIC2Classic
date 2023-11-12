@@ -35,7 +35,7 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
             if (actualRate > 0) { // if it's actually wrenchable. Blame IWrenchableTile.
-                Helpers.space_y(iTooltip, 10);
+                Helpers.space_y(iTooltip, 3);
                 iTooltip.add(wrenchIcon);
                 if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                     double dropChance = tool.getActualLoss(handHeldStack, tile.getDropRate(player));
