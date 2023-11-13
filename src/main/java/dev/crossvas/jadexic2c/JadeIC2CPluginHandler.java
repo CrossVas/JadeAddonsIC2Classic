@@ -274,8 +274,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(SteamTunnelInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(ElectricFisherInfoProvider.INSTANCE, ElectricFisherTileEntity.class);
         registration.registerBlockDataProvider(DynamicTankInfoProvider.INSTANCE, BaseTileEntity.class);
-//        registration.registerBlockDataProvider(CasingInfoProvider.INSTANCE, BaseTileEntity.class);
-//        registration.registerBlockDataProvider(CasingInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(RedirectorMasterInfoProvider.INSTANCE, RedirectorMasterTileEntity.class);
         registration.registerBlockDataProvider(RedirectorSlaveInfoProvider.INSTANCE, RedirectorSlaveTileEntity.class);
         registration.registerBlockDataProvider(PipePumpInfoProvider.INSTANCE, ElectricPipePumpTileEntity.class);
