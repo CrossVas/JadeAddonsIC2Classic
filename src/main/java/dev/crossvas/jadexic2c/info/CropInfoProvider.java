@@ -18,7 +18,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum CropInfoProvider implements IHelper {
+public enum CropInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

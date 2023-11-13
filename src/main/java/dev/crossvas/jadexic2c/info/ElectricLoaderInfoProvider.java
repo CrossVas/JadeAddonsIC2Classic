@@ -18,7 +18,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum ElectricLoaderInfoProvider implements IHelper {
+public enum ElectricLoaderInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

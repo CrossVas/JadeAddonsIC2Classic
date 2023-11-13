@@ -19,7 +19,7 @@ import snownee.jade.api.config.IPluginConfig;
 
 import java.util.Set;
 
-public enum BaseTeleporterInfoProvider implements IHelper {
+public enum BaseTeleporterInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

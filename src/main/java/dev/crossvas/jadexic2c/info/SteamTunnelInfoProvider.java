@@ -5,10 +5,12 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Formatter;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
+import ic2.core.block.base.features.multiblock.IMultiBlockClickable;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.SteamTunnelTileEntity;
+import ic2.core.platform.events.MultiBlockManager;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +23,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum SteamTunnelInfoProvider implements IHelper {
+public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override
@@ -45,12 +47,23 @@ public enum SteamTunnelInfoProvider implements IHelper {
             }
 
             if (tile instanceof BaseLinkingTileEntity linking) {
-                CompoundTag linkingLag = tag.getCompound("LinkingBlockInfo");
+                CompoundTag linkingTag = tag.getCompound("LinkingBlockInfo");
                 BlockEntity master = linking.getMaster();
                 if (master instanceof SteamTunnelTileEntity tunnel) {
-                    addInfo(tunnel, iTooltip, linkingLag);
+                    addInfo(tunnel, iTooltip, linkingTag);
                     Helpers.addClientTankFromTag(iTooltip, blockAccessor);
                 }
+            }
+        }
+
+        IMultiBlockClickable multiblock = MultiBlockManager.INSTANCE.getMultiBlock(blockAccessor.getLevel(), blockAccessor.getPosition());
+
+        if (blockAccessor.getBlockEntity() instanceof IMultiBlockClickable casing) {
+            CompoundTag casingTag = tag.getCompound("CasingBlockInfo");
+            BlockEntity origin = blockAccessor.getLevel().getBlockEntity(casing.getOrigin());
+            if (origin instanceof SteamTunnelTileEntity tunnel) {
+                addInfo(tunnel, iTooltip, casingTag);
+                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
             }
         }
     }
@@ -80,6 +93,14 @@ public enum SteamTunnelInfoProvider implements IHelper {
                 }
                 Helpers.loadTankData(compoundTag, linking);
                 tag.put("LinkingBlockInfo", linkingTag);
+            } else if (tile instanceof IMultiBlockClickable clickable) {
+                CompoundTag casingTag = new CompoundTag();
+                BlockEntity origin = level.getBlockEntity(clickable.getOrigin());
+                if (origin instanceof SteamTunnelTileEntity tunnel) {
+                    casingTag.putFloat("energyProduction", tunnel.getEUProduction());
+                }
+                Helpers.loadTankData(compoundTag, (BlockEntity) clickable);
+                tag.put("CasingBlockInfo", casingTag);
             }
         }
         compoundTag.put("SteamTunnelInfo", tag);

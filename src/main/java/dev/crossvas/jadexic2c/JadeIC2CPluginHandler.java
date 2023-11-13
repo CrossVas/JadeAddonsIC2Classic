@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.utils.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.core.block.base.blocks.BaseTexturedBlock;
 import ic2.core.block.base.blocks.ValveBlock;
+import ic2.core.block.base.features.multiblock.IMultiBlockClickable;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
@@ -54,10 +55,16 @@ import ic2.core.block.transport.fluid.PumpBlock;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
 import ic2.core.block.transport.item.TubeBlock;
 import ic2.core.block.transport.item.TubeTileEntity;
+import ic2.core.platform.events.MultiBlockManager;
 import ic2.core.platform.registries.IC2Blocks;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.*;
@@ -176,17 +183,11 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
         registration.registerBlockComponent(TubeInfoProvider.INSTANCE, TubeBlock.class);
-
         registration.usePickedResult(IC2Blocks.COLOSSAL_BASE);
         registration.usePickedResult(IC2Blocks.PRESSURE_ALLOY_FURNACE_MULTIBLOCK);
         registration.usePickedResult(IC2Blocks.FUEL_BOILER_MULTIBLOCK);
 
-        // remove builtin fluid tank render for IC2 FluidHandlers. We use our own style.
-        registration.registerBlockComponent(TankRender.INSTANCE, Block.class);
-        registration.registerBlockComponent(ModNameRender.ModNameRemover.INSTANCE, Block.class);
-        registration.registerBlockComponent(ModNameRender.ModNameRelocator.INSTANCE, Block.class);
-        registration.registerBlockComponent(EUStorageInfoProvider.INSTANCE, Block.class);
-
+        // TODO: rethink this
         registration.addRayTraceCallback(new JadeRayTraceCallback() {
             @Override
             public @Nullable Accessor<?> onRayTrace(HitResult hitResult, @Nullable Accessor<?> accessor, @Nullable Accessor<?> accessor1) {
@@ -202,6 +203,34 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 return accessor;
             }
         });
+
+        // add tank info for MultiTank Casing
+        registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
+            if (accessor instanceof BlockAccessor blockAccessor) {
+                Level level = blockAccessor.getLevel();
+                BlockPos pos = blockAccessor.getPosition();
+                IMultiBlockClickable multi = MultiBlockManager.INSTANCE.getMultiBlock(level, pos);
+                if (multi != null) {
+                    BlockPos originPos = multi.getOrigin();
+                    BlockEntity origin = level.getBlockEntity(originPos);
+                    BlockHitResult blockHitResult = blockAccessor.getHitResult();
+                    return registration.blockAccessor()
+                            .from(blockAccessor)
+                            .hit(blockHitResult.withPosition(originPos))
+                            .blockState(level.getBlockState(originPos))
+                            .blockEntity(origin)
+                            .fakeBlock(new ItemStack(level.getBlockState(originPos).getBlock()))
+                            .build();
+                }
+            }
+            return accessor;
+        });
+
+        // remove builtin fluid tank render for IC2 FluidHandlers. We use our own style.
+        registration.registerBlockComponent(TankRender.INSTANCE, Block.class);
+        registration.registerBlockComponent(ModNameRender.ModNameRemover.INSTANCE, Block.class);
+        registration.registerBlockComponent(ModNameRender.ModNameRelocator.INSTANCE, Block.class);
+        registration.registerBlockComponent(EUStorageInfoProvider.INSTANCE, Block.class);
     }
 
     @Override
@@ -245,6 +274,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(SteamTunnelInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(ElectricFisherInfoProvider.INSTANCE, ElectricFisherTileEntity.class);
         registration.registerBlockDataProvider(DynamicTankInfoProvider.INSTANCE, BaseTileEntity.class);
+//        registration.registerBlockDataProvider(CasingInfoProvider.INSTANCE, BaseTileEntity.class);
+//        registration.registerBlockDataProvider(CasingInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(RedirectorMasterInfoProvider.INSTANCE, RedirectorMasterTileEntity.class);
         registration.registerBlockDataProvider(RedirectorSlaveInfoProvider.INSTANCE, RedirectorSlaveTileEntity.class);
         registration.registerBlockDataProvider(PipePumpInfoProvider.INSTANCE, ElectricPipePumpTileEntity.class);

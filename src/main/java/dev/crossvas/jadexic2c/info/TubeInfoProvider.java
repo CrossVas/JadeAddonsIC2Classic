@@ -33,7 +33,7 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum TubeInfoProvider implements IHelper {
+public enum TubeInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

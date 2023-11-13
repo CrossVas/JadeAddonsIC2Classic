@@ -20,7 +20,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum UraniumEnricherInfoProvider implements IHelper {
+public enum UraniumEnricherInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

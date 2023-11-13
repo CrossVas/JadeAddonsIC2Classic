@@ -18,7 +18,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum AdjustableTransformerInfoProvider implements IHelper {
+public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

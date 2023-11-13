@@ -19,7 +19,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum ThermonuclearReactorInfoProvider implements IHelper {
+public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

@@ -16,7 +16,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum WindmillGenInfoProvider implements IHelper {
+public enum WindmillGenInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

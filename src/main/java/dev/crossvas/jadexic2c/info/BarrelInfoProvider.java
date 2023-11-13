@@ -21,7 +21,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-public enum BarrelInfoProvider implements IHelper {
+public enum BarrelInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

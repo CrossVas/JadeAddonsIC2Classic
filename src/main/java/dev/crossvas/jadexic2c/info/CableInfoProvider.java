@@ -28,7 +28,7 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public enum CableInfoProvider implements IHelper {
+public enum CableInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     static final Cache<BlockPos, EnergyContainer> CACHE;

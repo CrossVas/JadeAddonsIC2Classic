@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
+import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Formatter;
@@ -25,12 +26,12 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!blockAccessor.getServerData().contains("NuclearReactorInfo")) {
+        if (!hasData(blockAccessor, "NuclearReactorInfo")) {
             return;
         }
 
@@ -66,7 +67,7 @@ public enum NuclearReactorInfoProvider implements IBlockComponentProvider, IServ
     }
 
     public static void addToTooltip(ITooltip tooltip, BlockEntity tile, BlockAccessor blockAccessor) {
-        if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
+        if (/*StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER) && */INSTANCE.canHandle(blockAccessor)) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
                     Helpers.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));

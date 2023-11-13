@@ -5,12 +5,11 @@ import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 
-public interface IHelper extends IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+public interface IHelper<T> extends IBlockComponentProvider, IServerDataProvider<T> {
 
     default IFilter getFilter(ResourceLocation id) {
         return switch (id.getPath()) {

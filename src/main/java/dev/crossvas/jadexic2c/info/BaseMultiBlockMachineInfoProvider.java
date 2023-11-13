@@ -24,7 +24,7 @@ import snownee.jade.api.config.IPluginConfig;
 
 import java.text.DecimalFormat;
 
-public enum BaseMultiBlockMachineInfoProvider implements IHelper {
+public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

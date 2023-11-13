@@ -21,7 +21,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum FuelBoilerInfoProvider implements IHelper {
+public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

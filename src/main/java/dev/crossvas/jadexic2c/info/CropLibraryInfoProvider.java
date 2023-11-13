@@ -24,7 +24,7 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum CropLibraryInfoProvider implements IHelper {
+public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

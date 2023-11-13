@@ -18,7 +18,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum MinerInfoProvider implements IHelper {
+public enum MinerInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override

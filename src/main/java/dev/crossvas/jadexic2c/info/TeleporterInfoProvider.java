@@ -22,7 +22,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public enum TeleporterInfoProvider implements IHelper {
+public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
 
     @Override
