@@ -57,9 +57,9 @@ import ic2.core.block.transport.item.TubeBlock;
 import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.platform.events.MultiBlockManager;
 import ic2.core.platform.registries.IC2Blocks;
+import ic2.core.platform.registries.IC2Tiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -81,8 +81,9 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
     public static final ResourceLocation EU_STORAGE_INFO = new ResourceLocation("ic2", "eu_storage_info");
 
     /**
-     * {@link ic2.core.platform.registries.IC2Blocks}
-     * for quick access to IC2Blocks info
+     * {@link IC2Blocks}
+     * {@link IC2Tiles}
+     * for quick access
      * */
 
     @Override

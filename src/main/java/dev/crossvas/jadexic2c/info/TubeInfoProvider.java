@@ -46,15 +46,6 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             // transported
             if (tile instanceof TubeTileEntity tube) {
-                Iterable<CompoundTag> itemsTagList = NBTListWrapper.wrap(tag.getList("TransportItems", 10), CompoundTag.class);
-                List<ItemStack> transportedList = new ArrayList<>();
-                itemsTagList.forEach(stackTag -> {
-                    ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
-                    stack.setCount(stackTag.getInt("count"));
-                    transportedList.add(stack);
-                });
-                Helpers.grid(iTooltip, "ic2.probe.tube.transported", ChatFormatting.WHITE, transportedList);
-
                 // cached
                 if (tube instanceof StackingTubeTileEntity) {
                     Iterable<CompoundTag> stackedItemsTagList = NBTListWrapper.wrap(tag.getList("StackedItems", 10), CompoundTag.class);
@@ -150,6 +141,7 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                 }
 
                 if (tube instanceof FilteredExtractionTubeTileEntity) {
+                    Helpers.space_y(iTooltip, 3);
                     Iterable<CompoundTag> extractionFilteredItemsTagList = NBTListWrapper.wrap(tag.getList("ExtractionFilteredItems", 10), CompoundTag.class);
                     List<FilteredExtractionTubeTileEntity.FilterEntry> extractionFilteredList = new ArrayList<>();
                     extractionFilteredItemsTagList.forEach(filter -> {
@@ -159,8 +151,6 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                     });
 
                     if (!extractionFilteredList.isEmpty()) {
-                        boolean whitelist = tag.getBoolean("whitelist");
-                        Helpers.space_y(iTooltip, 3);
                         for (FilteredExtractionTubeTileEntity.FilterEntry entry : extractionFilteredList) {
                             boolean checkNBT = (entry.getFlags() & 16) != 0;
                             boolean checkFluid = (entry.getFlags() & 128) != 0;
@@ -174,10 +164,11 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                                     .append(checkDurability ? ChatFormatting.GREEN + "*meta " : "")
                                     .append(keepItem > 0 ? ChatFormatting.WHITE + "Keep: " + keepItem : "")));
                         }
-
-                        Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
-                                .append((whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)));
                     }
+
+                    boolean whitelist = tag.getBoolean("whitelist");
+                    Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
+                            .append((whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)));
                 }
 
                 if (tube instanceof TeleportTubeTileEntity) {
@@ -191,6 +182,15 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                     Helpers.space_y(iTooltip, 3);
                     Helpers.text(iTooltip, Component.translatable( "ic2.tube.pickup.info").withStyle(ChatFormatting.GOLD).append((largeRadius ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(largeRadius)));
                 }
+
+                Iterable<CompoundTag> itemsTagList = NBTListWrapper.wrap(tag.getList("TransportItems", 10), CompoundTag.class);
+                List<ItemStack> transportedList = new ArrayList<>();
+                itemsTagList.forEach(stackTag -> {
+                    ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
+                    stack.setCount(stackTag.getInt("count"));
+                    transportedList.add(stack);
+                });
+                Helpers.grid(iTooltip, "ic2.probe.tube.transported", ChatFormatting.WHITE, transportedList);
             }
             // OMG, what is this
         }
