@@ -33,8 +33,11 @@ public enum TransformerInfoProvider implements IHelper<BlockEntity> {
                 int highOutput = tag.getInt("highOut");
                 boolean isActive = tag.getBoolean("isActive");
 
-                Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", tile.isActive() ? lowOutput : highOutput);
-                Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", tile.isActive() ? highOutput : lowOutput);
+                Helpers.text(iTooltip, Component.translatable("ic2.probe.transformer.inverted").withStyle(ChatFormatting.GOLD).
+                        append((isActive ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(isActive)));
+
+                Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", isActive ? lowOutput : highOutput);
+                Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", isActive ? highOutput : lowOutput);
                 Helpers.text(iTooltip,"ic2.probe.transformer.packets.name", isActive ? 1 : 4);
 
                 long averageOut = tag.getLong("averageOut");

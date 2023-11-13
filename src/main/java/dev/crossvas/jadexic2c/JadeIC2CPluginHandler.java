@@ -219,7 +219,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                             .hit(blockHitResult.withPosition(originPos))
                             .blockState(level.getBlockState(originPos))
                             .blockEntity(origin)
-                            .fakeBlock(new ItemStack(level.getBlockState(originPos).getBlock()))
+//                            .fakeBlock(new ItemStack(level.getBlockState(originPos).getBlock()))
                             .build();
                 }
             }
