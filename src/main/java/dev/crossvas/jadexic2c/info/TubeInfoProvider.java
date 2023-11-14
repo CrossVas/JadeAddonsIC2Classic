@@ -167,20 +167,36 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                         }
                     });
 
+                    List<FilteredExtractionTubeTileEntity.FilterEntry> generalFilter = new ArrayList<>();
+                    List<FilteredExtractionTubeTileEntity.FilterEntry> metaFilter = new ArrayList<>();
+
                     if (!extractionFilteredList.isEmpty()) {
                         for (FilteredExtractionTubeTileEntity.FilterEntry entry : extractionFilteredList) {
-                            boolean checkNBT = (entry.getFlags() & 16) != 0;
-                            boolean checkFluid = (entry.getFlags() & 128) != 0;
-                            boolean checkDurability = (entry.getFlags() & 256) != 0;
-                            int keepItem = entry.getKeepItems();
-                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter_no.info", extractionFilteredList.indexOf(entry) + 1).withStyle(ChatFormatting.GOLD));
-                            iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
+                            if (!hasFlags(entry)) {
+                                generalFilter.add(entry);
+                            } else {
+                                metaFilter.add(entry);
+                            }
+                        }
+                    }
+                    if (!generalFilter.isEmpty()) {
+                        grid(iTooltip, "ic2.tube.filter.info", ChatFormatting.GOLD, generalFilter);
+                    }
+
+                    if (!metaFilter.isEmpty()) {
+                        metaFilter.forEach(filter -> {
+                            boolean checkNBT = (filter.getFlags() & 16) != 0;
+                            boolean checkFluid = (filter.getFlags() & 128) != 0;
+                            boolean checkDurability = (filter.getFlags() & 256) != 0;
+                            int keepItem = filter.getKeepItems();
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.meta_filter.info").withStyle(ChatFormatting.GOLD));
+                            iTooltip.append(iTooltip.getElementHelper().item(filter.getStack()).translate(new Vec2(0, -5)));
                             iTooltip.append(iTooltip.getElementHelper().text(Component.literal(" ")
                                     .append(checkNBT ? ChatFormatting.GREEN + "*nbt " : "")
                                     .append(checkFluid ? ChatFormatting.GREEN + "*fluid " : "")
                                     .append(checkDurability ? ChatFormatting.GREEN + "*meta " : "")
                                     .append(keepItem > 0 ? ChatFormatting.WHITE + "Keep: " + keepItem : "")));
-                        }
+                        });
                     }
 
                     boolean whitelist = tag.getBoolean("whitelist");
@@ -211,37 +227,6 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
             }
             // OMG, what is this
         }
-    }
-
-    public static ChatFormatting getColor(int index) {
-        return switch (index) {
-            case 0 -> ChatFormatting.AQUA;
-            case 1 -> ChatFormatting.RED;
-            case 2 -> ChatFormatting.YELLOW;
-            case 3 -> ChatFormatting.BLUE;
-            case 4 -> ChatFormatting.LIGHT_PURPLE;
-            case 5 -> ChatFormatting.GREEN;
-            default -> ChatFormatting.WHITE;
-        };
-    }
-
-    public static Component getSides(FilterTubeTileEntity.FilterEntry entry) {
-        Component component = Component.empty();
-        if (entry.getSides() != null) {
-            String[] directionList = entry.getSides().toString().replaceAll("\\[", "").replaceAll("]", "")
-                    .replaceAll("north", ChatFormatting.YELLOW + "N")
-                    .replaceAll("south", ChatFormatting.BLUE + "S")
-                    .replaceAll("east", ChatFormatting.GREEN + "E")
-                    .replaceAll("west", ChatFormatting.LIGHT_PURPLE + "W")
-                    .replaceAll("down", ChatFormatting.AQUA + "D")
-                    .replaceAll("up", ChatFormatting.RED + "U").split(",", -1);
-
-            for (String side : directionList) {
-                component = component.copy().append(side);
-            }
-            return component;
-        }
-        return component;
     }
 
     @Override
@@ -391,5 +376,66 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
     @Override
     public ResourceLocation getUid() {
         return JadeIC2CPluginHandler.EU_READER_INFO;
+    }
+
+    // Utils
+
+    public static boolean hasFlags(FilteredExtractionTubeTileEntity.FilterEntry entry) {
+        boolean checkNBT = (entry.getFlags() & 16) != 0;
+        boolean checkFluid = (entry.getFlags() & 128) != 0;
+        boolean checkDurability = (entry.getFlags() & 256) != 0;
+        int keepItem = entry.getKeepItems();
+        return checkNBT || checkFluid || checkDurability || keepItem > 0;
+    }
+
+    public static ChatFormatting getColor(int index) {
+        return switch (index) {
+            case 0 -> ChatFormatting.AQUA;
+            case 1 -> ChatFormatting.RED;
+            case 2 -> ChatFormatting.YELLOW;
+            case 3 -> ChatFormatting.BLUE;
+            case 4 -> ChatFormatting.LIGHT_PURPLE;
+            case 5 -> ChatFormatting.GREEN;
+            default -> ChatFormatting.WHITE;
+        };
+    }
+
+    public static Component getSides(FilterTubeTileEntity.FilterEntry entry) {
+        Component component = Component.empty();
+        if (entry.getSides() != null) {
+            String[] directionList = entry.getSides().toString().replaceAll("\\[", "").replaceAll("]", "")
+                    .replaceAll("north", ChatFormatting.YELLOW + "N")
+                    .replaceAll("south", ChatFormatting.BLUE + "S")
+                    .replaceAll("east", ChatFormatting.GREEN + "E")
+                    .replaceAll("west", ChatFormatting.LIGHT_PURPLE + "W")
+                    .replaceAll("down", ChatFormatting.AQUA + "D")
+                    .replaceAll("up", ChatFormatting.RED + "U").split(",", -1);
+
+            for (String side : directionList) {
+                component = component.copy().append(side);
+            }
+            return component;
+        }
+        return component;
+    }
+
+    public static void grid(ITooltip iTooltip, String text, ChatFormatting style, List<FilteredExtractionTubeTileEntity.FilterEntry> entryList) {
+        int counter = 0;
+        int size = 7;
+        if (!entryList.isEmpty()) {
+            Helpers.text(iTooltip, Component.translatable(text).withStyle(style));
+            Helpers.space_y(iTooltip, 2);
+            for (FilteredExtractionTubeTileEntity.FilterEntry entry : entryList) {
+                if (counter <= size) {
+                    iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()));
+                    counter++;
+                    if (counter == size) {
+                        counter = 0;
+                        Helpers.text(iTooltip, "");
+                    }
+                }
+            }
+            Helpers.space_y(iTooltip, 2);
+        }
     }
 }
