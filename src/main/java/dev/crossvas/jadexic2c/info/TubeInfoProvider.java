@@ -14,6 +14,7 @@ import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenCustomHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -31,6 +32,7 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public enum TubeInfoProvider implements IHelper<BlockEntity> {
@@ -130,12 +132,27 @@ public enum TubeInfoProvider implements IHelper<BlockEntity> {
                     });
                     if (!filteredList.isEmpty()) {
                         Helpers.space_y(iTooltip, 3);
-                        for (FilterTubeTileEntity.FilterEntry entry : filteredList) {
-                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
-                            iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
-                            iTooltip.append(iTooltip.getElementHelper().spacer(3, 0));
-                            Helpers.appendText(iTooltip, getSides(entry));
+                        Object2ObjectOpenHashMap<Component, List<FilterTubeTileEntity.FilterEntry>> mappedFilter = new Object2ObjectOpenHashMap<>();
+                        for (FilterTubeTileEntity.FilterEntry filterEntry : filteredList) {
+                            Component side = getSides(filterEntry);
+                            if (mappedFilter.containsKey(side)) {
+                                List<FilterTubeTileEntity.FilterEntry> existing = new ArrayList<>(mappedFilter.get(side));
+                                existing.add(filterEntry);
+                                mappedFilter.put(side, existing);
+                            } else {
+                                mappedFilter.put(side, Collections.singletonList(filterEntry));
+                            }
                         }
+
+                        mappedFilter.keySet().forEach(side -> {
+                            Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                            for (FilterTubeTileEntity.FilterEntry entry : mappedFilter.get(side)) {
+                                iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
+                            }
+                            iTooltip.append(iTooltip.getElementHelper().spacer(3, 0));
+                            Helpers.appendText(iTooltip, "→ ");
+                            Helpers.appendText(iTooltip, side);
+                        });
                     }
 
                 }
