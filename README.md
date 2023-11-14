@@ -11,7 +11,7 @@
 **<font size="3">Almost every aspect of the mod is covered, except some parts that require much deeper knowledge which I don't possess at this moment.</font>**
 
 **<font size="3">These parts are:</font>**
-- several structures (Multiblock Tank, Steam Tunnel) - for more info you'll have to check the main block or the valve, sorry.
+- Steam Tunnel - for more info you'll have to check the main block or the valve, sorry.
 
 **<font size="3">Everything else is working just fine.</font>**
 
