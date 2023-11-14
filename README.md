@@ -8,12 +8,7 @@
 
 <img src="images/full.png">
 
-**<font size="3">Almost every aspect of the mod is covered, except some parts that require much deeper knowledge which I don't possess at this moment.</font>**
-
-**<font size="3">These parts are:</font>**
-- Steam Tunnel - for more info you'll have to check the main block or the valve, sorry.
-
-**<font size="3">Everything else is working just fine.</font>**
+**<font size="3">Almost every aspect of the mod is covered.</font>**
 
 **<font size="3">Make sure to check the Config (NUM0 by default)</font>**
 

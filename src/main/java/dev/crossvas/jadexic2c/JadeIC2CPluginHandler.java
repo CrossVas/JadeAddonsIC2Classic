@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c;
 import dev.crossvas.jadexic2c.info.*;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
+import dev.crossvas.jadexic2c.utils.Helpers;
 import dev.crossvas.jadexic2c.utils.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.core.block.base.blocks.BaseTexturedBlock;
@@ -10,6 +11,7 @@ import ic2.core.block.base.blocks.ValveBlock;
 import ic2.core.block.base.features.multiblock.IMultiBlockClickable;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
+import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.*;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
@@ -58,18 +60,21 @@ import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.platform.events.MultiBlockManager;
 import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.*;
 import snownee.jade.api.callback.JadeRayTraceCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @WailaPlugin("ic2")
@@ -188,16 +193,24 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.usePickedResult(IC2Blocks.PRESSURE_ALLOY_FURNACE_MULTIBLOCK);
         registration.usePickedResult(IC2Blocks.FUEL_BOILER_MULTIBLOCK);
 
-        // TODO: rethink this
         registration.addRayTraceCallback(new JadeRayTraceCallback() {
             @Override
             public @Nullable Accessor<?> onRayTrace(HitResult hitResult, @Nullable Accessor<?> accessor, @Nullable Accessor<?> accessor1) {
                 if (accessor instanceof BlockAccessor target) {
                     Block targetBlock = target.getBlock();
                     if (targetBlock instanceof TurbineMultiBlock) {
-                        BlockState targetState = target.getBlockState();
-                        if (targetState.getValue(TurbineMultiBlock.FORMED) == 3) {
-                            return registration.blockAccessor().from(target).blockState(IC2Blocks.STEAM_TUNNEL.defaultBlockState()).build();
+                        BlockHitResult hit = target.getHitResult();
+
+                        BlockPos startPos = target.getPosition();
+                        BlockPos masterPos = Helpers.getMasterPos(startPos, target);
+                        BlockEntity master = target.getLevel().getBlockEntity(masterPos);
+                        if (master != null) {
+                            return registration.blockAccessor()
+                                    .from(target)
+                                    .hit(hit.withPosition(masterPos))
+                                    .blockEntity(master)
+                                    .blockState(target.getLevel().getBlockState(masterPos))
+                                    .build();
                         }
                     }
                 }

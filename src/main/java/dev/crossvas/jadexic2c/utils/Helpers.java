@@ -1,8 +1,11 @@
 package dev.crossvas.jadexic2c.utils;
 
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
+import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.utils.math.ColorUtils;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -19,7 +22,9 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElementHelper;
 import snownee.jade.api.ui.IProgressStyle;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Helpers {
 
@@ -123,5 +128,33 @@ public class Helpers {
                 }
             }
         }
+    }
+
+    public static BlockPos getMasterPos(BlockPos location, BlockAccessor blockAccessor) {
+        BlockPos masterPos = BlockPos.ZERO;
+        List<BlockPos> found = new ArrayList<>();
+        Set<BlockPos> checked = new ObjectOpenHashSet<>();
+        found.add(location);
+        for (int i = 0; i < found.size(); i++) {
+            BlockPos blockPos = found.get(i);
+            checked.add(blockPos);
+            for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-1, -1, -1), blockPos.offset(1, 1, 1))) {
+                if (!checked.contains(pos)) {
+                    if (!blockAccessor.getLevel().getBlockState(pos).isAir()) {
+                        BlockEntity checkEntity = blockAccessor.getLevel().getBlockEntity(pos);
+                        found.add(pos.immutable());
+                        if (checkEntity instanceof BaseLinkingTileEntity linking) {
+                            if (linking.getMaster() != null) {
+                                masterPos = linking.getMaster().getBlockPos().immutable();
+                            }
+                        }
+                        if (found.size() > 32) { // at this point the whole structure should be covered
+                            return masterPos;
+                        }
+                    }
+                }
+            }
+        }
+        return masterPos;
     }
 }
