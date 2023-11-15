@@ -7,11 +7,11 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseCropLibraryTileEntity;
-import ic2.core.utils.collection.NBTListWrapper;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -54,11 +54,12 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
                     Helpers.text(iTooltip, "ic2.probe.crop_library.size.name", sizeLimit);
                 }
 
-                Iterable<CompoundTag> itemsTagList = NBTListWrapper.wrap(tag.getList("items", 10), CompoundTag.class);
+                ListTag itemsTagList = tag.getList("items", Tag.TAG_COMPOUND);
                 List<ItemStack> stackList = new ArrayList<>();
                 itemsTagList.forEach(stackTag -> {
-                    ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
-                    stack.setCount(stackTag.getInt("count"));
+                    CompoundTag itemTag = (CompoundTag) stackTag;
+                    ItemStack stack = ItemStack.of(itemTag.getCompound("stack"));
+                    stack.setCount(itemTag.getInt("count"));
                     stackList.add(stack);
                 });
                 Helpers.grid(iTooltip, "ic2.probe.crop_library.name", ChatFormatting.YELLOW, stackList);
