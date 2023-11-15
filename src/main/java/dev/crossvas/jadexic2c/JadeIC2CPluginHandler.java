@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c;
 import dev.crossvas.jadexic2c.info.*;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
+import dev.crossvas.jadexic2c.info.tubes.*;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import dev.crossvas.jadexic2c.utils.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
@@ -11,7 +12,6 @@ import ic2.core.block.base.blocks.ValveBlock;
 import ic2.core.block.base.features.multiblock.IMultiBlockClickable;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
-import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.*;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
@@ -57,10 +57,10 @@ import ic2.core.block.transport.fluid.PumpBlock;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
 import ic2.core.block.transport.item.TubeBlock;
 import ic2.core.block.transport.item.TubeTileEntity;
+import ic2.core.block.transport.item.tubes.*;
 import ic2.core.platform.events.MultiBlockManager;
 import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -72,9 +72,6 @@ import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.*;
 import snownee.jade.api.callback.JadeRayTraceCallback;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 @WailaPlugin("ic2")
@@ -135,6 +132,18 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 RedirectorSlaveInfoProvider.INSTANCE
         );
 
+        registerProvidersForBlock(registration, TubeBlock.class,
+                BasicTubeInfoProvider.INSTANCE,
+                StackingTubeInfoProvider.INSTANCE,
+                RequestTubeInfoProvider.INSTANCE,
+                RoundRobinTubeInfoProvider.INSTANCE,
+                DirectionalTubeInfoProvider.INSTANCE,
+                PickupTubeInfoProvider.INSTANCE,
+                TeleportTubeInfoProvider.INSTANCE,
+                FilterTubeInfoProvider.INSTANCE,
+                FilteredExtractionTubeInfoProvider.INSTANCE
+        );
+
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
                 BaseMachineBlock.class,
                 MonitorBlock.class,
@@ -188,7 +197,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
-        registration.registerBlockComponent(TubeInfoProvider.INSTANCE, TubeBlock.class);
         registration.usePickedResult(IC2Blocks.COLOSSAL_BASE);
         registration.usePickedResult(IC2Blocks.PRESSURE_ALLOY_FURNACE_MULTIBLOCK);
         registration.usePickedResult(IC2Blocks.FUEL_BOILER_MULTIBLOCK);
@@ -294,7 +302,16 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(FluidOMatInfoProvider.INSTANCE, FluidOMatTileEntity.class);
         registration.registerBlockDataProvider(FuelBoilerInfoProvider.INSTANCE, BaseTileEntity.class);
         registration.registerBlockDataProvider(ThermonuclearReactorInfoProvider.INSTANCE, BaseTileEntity.class);
-        registration.registerBlockDataProvider(TubeInfoProvider.INSTANCE, TubeTileEntity.class);
+
+        registration.registerBlockDataProvider(BasicTubeInfoProvider.INSTANCE, TubeTileEntity.class);
+        registration.registerBlockDataProvider(StackingTubeInfoProvider.INSTANCE, StackingTubeTileEntity.class);
+        registration.registerBlockDataProvider(RequestTubeInfoProvider.INSTANCE, RequestTubeTileEntity.class);
+        registration.registerBlockDataProvider(RoundRobinTubeInfoProvider.INSTANCE, RoundRobinTubeTileEntity.class);
+        registration.registerBlockDataProvider(DirectionalTubeInfoProvider.INSTANCE, DirectionalTubeTileEntity.class);
+        registration.registerBlockDataProvider(PickupTubeInfoProvider.INSTANCE, PickupTubeTileEntity.class);
+        registration.registerBlockDataProvider(TeleportTubeInfoProvider.INSTANCE, TeleportTubeTileEntity.class);
+        registration.registerBlockDataProvider(FilterTubeInfoProvider.INSTANCE, FilterTubeTileEntity.class);
+        registration.registerBlockDataProvider(FilteredExtractionTubeInfoProvider.INSTANCE, FilteredExtractionTubeTileEntity.class);
 
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
     }

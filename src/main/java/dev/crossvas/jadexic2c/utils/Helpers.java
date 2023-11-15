@@ -157,4 +157,16 @@ public class Helpers {
         }
         return masterPos;
     }
+
+    public static ChatFormatting getColor(int index) {
+        return switch (index) {
+            case 0 -> ChatFormatting.AQUA;
+            case 1 -> ChatFormatting.RED;
+            case 2 -> ChatFormatting.YELLOW;
+            case 3 -> ChatFormatting.BLUE;
+            case 4 -> ChatFormatting.LIGHT_PURPLE;
+            case 5 -> ChatFormatting.GREEN;
+            default -> ChatFormatting.WHITE;
+        };
+    }
 }
