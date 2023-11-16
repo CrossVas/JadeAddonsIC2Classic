@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
+import snownee.jade.api.TooltipPosition;
 import snownee.jade.api.config.IPluginConfig;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
                     stack.setCount(itemTag.getInt("count"));
                     transportedList.add(stack);
                 });
+                Helpers.space_y(iTooltip, 3);
                 Helpers.grid(iTooltip, "ic2.probe.tube.transported", ChatFormatting.GOLD, transportedList);
             }
         }
@@ -83,6 +85,11 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
             }
             compoundTag.put("BasicTubeInfo", tag);
         }
+    }
+
+    @Override
+    public int getDefaultPriority() {
+        return TooltipPosition.TAIL;
     }
 
     @Override

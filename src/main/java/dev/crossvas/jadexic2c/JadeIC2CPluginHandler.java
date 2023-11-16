@@ -133,7 +133,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         );
 
         registerProvidersForBlock(registration, TubeBlock.class,
-                BasicTubeInfoProvider.INSTANCE,
                 StackingTubeInfoProvider.INSTANCE,
                 RequestTubeInfoProvider.INSTANCE,
                 RoundRobinTubeInfoProvider.INSTANCE,
@@ -141,7 +140,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 PickupTubeInfoProvider.INSTANCE,
                 TeleportTubeInfoProvider.INSTANCE,
                 FilterTubeInfoProvider.INSTANCE,
-                FilteredExtractionTubeInfoProvider.INSTANCE
+                FilteredExtractionTubeInfoProvider.INSTANCE,
+                BasicTubeInfoProvider.INSTANCE
         );
 
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
@@ -162,7 +162,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         // multiblocks with valves
         registerBlocks(registration, SteamTunnelInfoProvider.INSTANCE,
                 TurbineBlock.class,
-//                TurbineMultiBlock.class,
                 ValveBlock.class
         );
         registerBlocks(registration, ThermonuclearReactorInfoProvider.INSTANCE,
@@ -225,7 +224,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                     BlockPos originPos = multi.getOrigin();
                     BlockEntity origin = level.getBlockEntity(originPos);
                     BlockHitResult blockHitResult = blockAccessor.getHitResult();
-                    if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) {
+                    if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .hit(blockHitResult.withPosition(originPos))
