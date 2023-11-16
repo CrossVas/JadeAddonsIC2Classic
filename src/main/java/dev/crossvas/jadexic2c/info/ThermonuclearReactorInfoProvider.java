@@ -3,7 +3,6 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.tiles.luv.FusionReactorTileEntity;
@@ -38,13 +37,6 @@ public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
                     }
                 }
             }
-
-            if (tile instanceof BaseLinkingTileEntity linking) {
-                BlockEntity master = linking.getMaster();
-                if (master instanceof FusionReactorTileEntity) {
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
-                }
-            }
         }
     }
 
@@ -56,8 +48,6 @@ public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
                 if (multi instanceof FusionReactorTileEntity tunnel) {
                     Helpers.loadTankData(compoundTag, tunnel);
                 }
-            } else if (tile instanceof BaseLinkingTileEntity linking) {
-                Helpers.loadTankData(compoundTag, linking);
             }
         }
         compoundTag.put("FusionReactorInfo", tag);

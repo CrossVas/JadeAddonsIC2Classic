@@ -5,7 +5,6 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
-import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseMultiMachineTileEntity;
@@ -39,17 +38,6 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseMultiMachineTileEntity multiTile) {
                 addMultiInfo(multiTile, iTooltip, tag);
                 Helpers.addClientTankFromTag(iTooltip, blockAccessor);
-            }
-
-            // check for casing block
-            if (tile instanceof BaseLinkingTileEntity linking) {
-                CompoundTag linkingLag = tag.getCompound("LinkingBlockInfo");
-                BlockEntity master = linking.getMaster();
-                if (master instanceof BaseMultiMachineTileEntity multi) {
-                    addMultiInfo(multi, iTooltip, linkingLag);
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
-                }
-
             }
         }
     }
@@ -86,19 +74,6 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
                 if (multiTile instanceof PressureAlloyFurnaceTileEntity furnace) {
                     tag.putInt("speed", furnace.getSpeed());
                 }
-            }
-        } else if (blockEntity instanceof BaseTileEntity tile) {
-            if (tile instanceof BaseLinkingTileEntity linking) {
-                BlockEntity master = linking.getMaster();
-                CompoundTag linkingTag = new CompoundTag();
-                if (master instanceof BaseMultiMachineTileEntity multi) {
-                    linkingTag.putInt("energyPerTick", multi.getEnergyPerTick());
-                    if (multi instanceof PressureAlloyFurnaceTileEntity furnace) {
-                        linkingTag.putInt("speed", furnace.getSpeed());
-                    }
-                }
-                tag.put("LinkingBlockInfo", linkingTag);
-                Helpers.loadTankData(compoundTag, linking);
             }
         }
         compoundTag.put("BaseMultBlockInfo", tag);

@@ -197,10 +197,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
-        registration.usePickedResult(IC2Blocks.COLOSSAL_BASE);
-        registration.usePickedResult(IC2Blocks.PRESSURE_ALLOY_FURNACE_MULTIBLOCK);
-        registration.usePickedResult(IC2Blocks.FUEL_BOILER_MULTIBLOCK);
 
+        // handles SteamTunnel multiblock
         registration.addRayTraceCallback(new JadeRayTraceCallback() {
             @Override
             public @Nullable Accessor<?> onRayTrace(HitResult hitResult, @Nullable Accessor<?> accessor, @Nullable Accessor<?> accessor1) {
@@ -226,7 +224,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
             }
         });
 
-        // add tank info for MultiTank Casing
+        // handles most multiblocks
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
             if (accessor instanceof BlockAccessor blockAccessor) {
                 Level level = blockAccessor.getLevel();
@@ -316,6 +314,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
     }
 
+    @SafeVarargs
     private static void registerBlocks(IWailaClientRegistration r, IBlockComponentProvider p, Class<? extends Block>... c) {
         Stream.of(c).forEach(block -> r.registerBlockComponent(p, block));
     }

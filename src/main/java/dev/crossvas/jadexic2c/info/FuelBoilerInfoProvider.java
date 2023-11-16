@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Helpers;
-import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
 import ic2.core.platform.player.PlayerHandler;
@@ -35,14 +34,6 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof FuelBoilerTileEntity boiler) {
                 addInfo(boiler, blockAccessor, iTooltip, tag);
             }
-
-            if (tile instanceof BaseLinkingTileEntity linking) {
-                CompoundTag linkingLag = tag.getCompound("LinkingBlockInfo");
-                BlockEntity master = linking.getMaster();
-                if (master instanceof FuelBoilerTileEntity boiler) {
-                    addInfo(boiler, blockAccessor, iTooltip, linkingLag);
-                }
-            }
         }
     }
 
@@ -66,23 +57,11 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         CompoundTag tag = new CompoundTag();
-        CompoundTag linkingTag = new CompoundTag();
         if (blockEntity instanceof FuelBoilerTileEntity boiler) {
             tag.putInt("fuel", boiler.getFuel());
             tag.putInt("maxFuel", boiler.getMaxFuel());
             tag.putInt("heat", boiler.getHeat());
             Helpers.loadTankData(compoundTag, boiler);
-        } else if (blockEntity instanceof BaseTileEntity tile) {
-            if (tile instanceof BaseLinkingTileEntity linking) {
-                BlockEntity master = linking.getMaster();
-                if (master instanceof FuelBoilerTileEntity boiler) {
-                    linkingTag.putInt("fuel", boiler.getFuel());
-                    linkingTag.putInt("maxFuel", boiler.getMaxFuel());
-                    linkingTag.putInt("heat", boiler.getHeat());
-                }
-                tag.put("LinkingBlockInfo", linkingTag);
-                Helpers.loadTankData(compoundTag, linking);
-            }
         }
         compoundTag.put("FuelBoilerInfo", tag);
     }
