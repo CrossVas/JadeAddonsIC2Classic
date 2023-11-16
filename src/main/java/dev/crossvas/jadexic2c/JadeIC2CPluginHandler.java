@@ -43,7 +43,6 @@ import ic2.core.block.machines.tiles.mv.RangedPumpTileEntity;
 import ic2.core.block.misc.BarrelBlock;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
-import ic2.core.block.multi.BaseMultiBlock;
 import ic2.core.block.multi.TurbineMultiBlock;
 import ic2.core.block.personal.PersonalBlock;
 import ic2.core.block.personal.tile.FluidOMatTileEntity;
@@ -51,6 +50,7 @@ import ic2.core.block.storage.*;
 import ic2.core.block.storage.tiles.RedirectorMasterTileEntity;
 import ic2.core.block.storage.tiles.RedirectorSlaveTileEntity;
 import ic2.core.block.storage.tiles.TankBlock;
+import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
 import ic2.core.block.storage.tiles.transformer.AdjustableTransformerTileEntity;
 import ic2.core.block.transport.fluid.PipeBlock;
 import ic2.core.block.transport.fluid.PumpBlock;
@@ -154,37 +154,28 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 ThermalGeneratorBlock.class);
 
         registerBlocks(registration, LuminatorInfoProvider.INSTANCE, LuminatorBlock.class, ConstructionLightBlock.class);
-
-        registerBlocks(registration, BaseMultiBlockMachineInfoProvider.INSTANCE,
-                BaseMachineBlock.class,
-                BaseMultiBlock.class
-        );
-
-        registerBlocks(registration, SteamTunnelInfoProvider.INSTANCE,
-                TurbineBlock.class,
-                TurbineMultiBlock.class,
-                ValveBlock.class
-        );
-
         registerBlocks(registration, PipePumpInfoProvider.INSTANCE,
                 PipeBlock.class,
                 PumpBlock.class
         );
 
-        registerBlocks(registration, FuelBoilerInfoProvider.INSTANCE,
-                FuelBoilerBlock.class,
-                BaseMultiBlock.class);
-
+        // multiblocks with valves
+        registerBlocks(registration, SteamTunnelInfoProvider.INSTANCE,
+                TurbineBlock.class,
+//                TurbineMultiBlock.class,
+                ValveBlock.class
+        );
         registerBlocks(registration, ThermonuclearReactorInfoProvider.INSTANCE,
                 NoStateMachineBlock.class,
                 ValveBlock.class
         );
-
         registerBlocks(registration, DynamicTankInfoProvider.INSTANCE,
                 TankBlock.class,
                 ValveBlock.class
         );
 
+        registration.registerBlockComponent(BaseMultiBlockMachineInfoProvider.INSTANCE, BaseMachineBlock.class);
+        registration.registerBlockComponent(FuelBoilerInfoProvider.INSTANCE, FuelBoilerBlock.class);
         registration.registerBlockComponent(NuclearReactorInfoProvider.INSTANCE, ReactorChamberBlock.class);
         registration.registerBlockComponent(BaseEnergyStorageInfoProvider.INSTANCE, EnergyStorageBlock.class);
         registration.registerBlockComponent(CableInfoProvider.INSTANCE, CableBlock.class);
@@ -234,12 +225,14 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                     BlockPos originPos = multi.getOrigin();
                     BlockEntity origin = level.getBlockEntity(originPos);
                     BlockHitResult blockHitResult = blockAccessor.getHitResult();
-                    return registration.blockAccessor()
-                            .from(blockAccessor)
-                            .hit(blockHitResult.withPosition(originPos))
-                            .blockState(level.getBlockState(originPos))
-                            .blockEntity(origin)
-                            .build();
+                    if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) {
+                        return registration.blockAccessor()
+                                .from(blockAccessor)
+                                .hit(blockHitResult.withPosition(originPos))
+                                .blockState(level.getBlockState(originPos))
+                                .blockEntity(origin)
+                                .build();
+                    }
                 }
             }
             return accessor;

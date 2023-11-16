@@ -4,7 +4,9 @@ import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
+import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
+import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
 import ic2.core.block.storage.tiles.tank.TankTileEntity;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -39,6 +41,15 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
                 }
             }
         }
+
+        if (blockAccessor.getBlockEntity() instanceof BaseLinkingTileEntity linking) {
+            if (linking instanceof BaseValveTileEntity) {
+                BlockEntity master = linking.getMaster();
+                if (master instanceof TankTileEntity) {
+                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                }
+            }
+        }
     }
 
     @Override
@@ -49,6 +60,11 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
                 if (multi instanceof TankTileEntity tank) {
                     Helpers.loadTankData(compoundTag, tank);
                 }
+            }
+        } else if (blockEntity instanceof BaseLinkingTileEntity linking) {
+            BlockEntity master = linking.getMaster();
+            if (master instanceof TankTileEntity) {
+                Helpers.loadTankData(compoundTag, linking);
             }
         }
         compoundTag.put("DynamicTankInfo", tag);
