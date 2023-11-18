@@ -130,34 +130,6 @@ public class Helpers {
         }
     }
 
-    public static BlockPos getMasterPos(BlockPos location, BlockAccessor blockAccessor) {
-        BlockPos masterPos = BlockPos.ZERO;
-        List<BlockPos> found = new ArrayList<>();
-        Set<BlockPos> checked = new ObjectOpenHashSet<>();
-        found.add(location);
-        for (int i = 0; i < found.size(); i++) {
-            BlockPos blockPos = found.get(i);
-            checked.add(blockPos);
-            for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-1, -1, -1), blockPos.offset(1, 1, 1))) {
-                if (!checked.contains(pos)) {
-                    if (!blockAccessor.getLevel().getBlockState(pos).isAir()) {
-                        BlockEntity checkEntity = blockAccessor.getLevel().getBlockEntity(pos);
-                        found.add(pos.immutable());
-                        if (checkEntity instanceof BaseLinkingTileEntity linking) {
-                            if (linking.getMaster() != null) {
-                                masterPos = linking.getMaster().getBlockPos().immutable();
-                            }
-                        }
-                        if (found.size() > 32) { // at this point the whole structure should be covered
-                            return masterPos;
-                        }
-                    }
-                }
-            }
-        }
-        return masterPos;
-    }
-
     public static ChatFormatting getColor(int index) {
         return switch (index) {
             case 0 -> ChatFormatting.AQUA;

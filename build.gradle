@@ -106,7 +106,7 @@ dependencies {
     implementation fg.deobf("mekanism:Mekanism:1.19.2-10.3.8.477")
     runtimeOnly fg.deobf("curse.maven:jei-238222:4712866")
 
-    implementation fg.deobf("curse.maven:ic2-classic-242942:4746971")
+    implementation fg.deobf("curse.maven:ic2-classic-242942:4874850")
     implementation fg.deobf("curse.maven:jade-324717:4800904")
 
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.3.103")

@@ -29,14 +29,30 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "CropInfo");
         if (blockAccessor.getBlockEntity() instanceof ICropTile tile) {
+            // growth info
+            int maxStage = tag.getInt("growthSteps");
+            int currentStage = tag.getInt("growthStage");
+            int scanLevel = tag.getInt("scanLevel");
+            int growthSpeed = tag.getInt("growthSpeed");
+            int points = tag.getInt("growthPoints");
+            int maxPoints = tag.getInt("growthDuration");
+
+            // stats info
+            int growth = tag.getInt("growth");
+            int gain = tag.getInt("gain");
+            int resistance = tag.getInt("resistance");
+            // storage info
+            int fertilizer = tag.getInt("fertilizer");
+            int water = tag.getInt("water");
+            int weedex = tag.getInt("weedex");
+            // environment info
+            int nutrients = tag.getInt("nutrients");
+            int humidity = tag.getInt("humidity");
+            int env = tag.getInt("env");
+            int light = tag.getInt("light");
+
             ICrop crop = tile.getCrop();
             if (crop != null) {
-                int maxStage = tag.getInt("growthSteps");
-                int currentStage = tag.getInt("growthStage");
-                int scanLevel = tag.getInt("scanLevel");
-                int growthSpeed = tag.getInt("growthSpeed");
-                int points = tag.getInt("growthPoints");
-                int maxPoints = tag.getInt("growthDuration");
                 if (scanLevel < 4 && currentStage < maxStage) {
                     iTooltip.add(Component.literal("Crop: ").append("Unknown"));
                     Helpers.bar(iTooltip, scanLevel, 4, "ic2.probe.crop.info.scan", ColorMix.GREEN);
@@ -58,31 +74,22 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
                     }
 
                     if (scanLevel >= 4) {
-                        int growth = tag.getInt("growth");
-                        int gain = tag.getInt("gain");
-                        int resistance = tag.getInt("resistance");
-
-                        Helpers.text(iTooltip, Component.translatable("ic2.probe.crop.stats").withStyle(ChatFormatting.YELLOW));
+                        Helpers.text(iTooltip, Component.translatable("ic2.probe.crop.stats").withStyle(ChatFormatting.YELLOW)); // title
                         Helpers.bar(iTooltip, growth, 31, "ic2.probe.crop.info.growth", ColorMix.AQUA);
                         Helpers.bar(iTooltip, gain, 31, "ic2.probe.crop.info.gain", ColorMix.PURPLE);
                         Helpers.bar(iTooltip, resistance, 31, "ic2.probe.crop.info.resistance", ColorMix.GOLD);
+
+                        int need = (crop.getProperties().getTier() - 1) * 4 + growth + gain + resistance;
+                        int have = crop.getStatInfluence(tile, humidity, nutrients, env) * 5;
+                        Helpers.bar(iTooltip, need, have, "ic2.probe.crop.info.needs", ColorMix.AQUA);
                     }
                 }
             }
-
-            int fertilizer = tag.getInt("fertilizer");
-            int water = tag.getInt("water");
-            int weedex = tag.getInt("weedex");
 
             Helpers.text(iTooltip, Component.translatable("ic2.probe.crop.storage").withStyle(ChatFormatting.YELLOW)); // title
             Helpers.bar(iTooltip, fertilizer, 300, "ic2.probe.crop.info.fertilizer", ColorMix.BROWN);
             Helpers.bar(iTooltip, water, 200, "ic2.probe.crop.info.water", ColorMix.CORNFLOWER);
             Helpers.bar(iTooltip, weedex, 150, "ic2.probe.crop.info.weedex", ColorMix.PINK);
-
-            int nutrients = tag.getInt("nutrients");
-            int humidity = tag.getInt("humidity");
-            int env = tag.getInt("env");
-            int light = tag.getInt("light");
 
             Helpers.text(iTooltip, Component.translatable("ic2.probe.crop.env").withStyle(ChatFormatting.YELLOW)); // title
             Helpers.monoBar(iTooltip, nutrients, 20, "ic2.probe.crop.info.nutrients", ColorMix.MONO_LIME);

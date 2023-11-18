@@ -31,6 +31,7 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
+                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
                 Helpers.text(iTooltip, "ic2.probe.eu.output.name", tag.getInt("providedEnergy"));
 
                 long averageIn = tag.getLong("averageIn");

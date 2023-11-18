@@ -3,8 +3,10 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.items.readers.IWrenchTool;
 import ic2.core.block.base.features.IWrenchableTile;
+import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.platform.registries.IC2Items;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -29,12 +31,18 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
         BlockEntity blockEntity = blockAccessor.getBlockEntity();
         Player player = blockAccessor.getPlayer();
         ItemStack handHeldStack = player.getMainHandItem();
-
+        boolean showInfo;
         IElement wrenchIcon = iTooltip.getElementHelper().item(IC2Items.WRENCH.getDefaultInstance()).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
         if (blockEntity instanceof IWrenchableTile tile) {
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
-            if (actualRate > 0) { // if it's actually wrenchable. Blame IWrenchableTile.
+            if (tile instanceof IStructureListener) {
+                CompoundTag structureTag = blockAccessor.getServerData().getCompound("structureData");
+                showInfo = !structureTag.getBoolean("isStructure") && actualRate > 0;
+            } else {
+                showInfo = actualRate > 0;
+            }
+            if (showInfo) {
                 Helpers.space_y(iTooltip, 3);
                 iTooltip.add(wrenchIcon);
                 if (handHeldStack.getItem() instanceof IWrenchTool tool) {

@@ -4,12 +4,11 @@ import dev.crossvas.jadexic2c.info.*;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
 import dev.crossvas.jadexic2c.info.tubes.*;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import dev.crossvas.jadexic2c.utils.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
 import ic2.core.block.base.blocks.BaseTexturedBlock;
 import ic2.core.block.base.blocks.ValveBlock;
-import ic2.core.block.base.features.multiblock.IMultiBlockClickable;
+import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
@@ -43,7 +42,6 @@ import ic2.core.block.machines.tiles.mv.RangedPumpTileEntity;
 import ic2.core.block.misc.BarrelBlock;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
-import ic2.core.block.multi.TurbineMultiBlock;
 import ic2.core.block.personal.PersonalBlock;
 import ic2.core.block.personal.tile.FluidOMatTileEntity;
 import ic2.core.block.storage.*;
@@ -58,19 +56,17 @@ import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
 import ic2.core.block.transport.item.TubeBlock;
 import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.block.transport.item.tubes.*;
-import ic2.core.platform.events.MultiBlockManager;
+import ic2.core.platform.events.StructureManager;
 import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.*;
-import snownee.jade.api.callback.JadeRayTraceCallback;
 
 import java.util.stream.Stream;
 
@@ -188,48 +184,23 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
 
-        // handles SteamTunnel multiblock
-        registration.addRayTraceCallback(new JadeRayTraceCallback() {
-            @Override
-            public @Nullable Accessor<?> onRayTrace(HitResult hitResult, @Nullable Accessor<?> accessor, @Nullable Accessor<?> accessor1) {
-                if (accessor instanceof BlockAccessor target) {
-                    Block targetBlock = target.getBlock();
-                    if (targetBlock instanceof TurbineMultiBlock) {
-                        BlockHitResult hit = target.getHitResult();
-
-                        BlockPos startPos = target.getPosition();
-                        BlockPos masterPos = Helpers.getMasterPos(startPos, target);
-                        BlockEntity master = target.getLevel().getBlockEntity(masterPos);
-                        if (master != null) {
-                            return registration.blockAccessor()
-                                    .from(target)
-                                    .hit(hit.withPosition(masterPos))
-                                    .blockEntity(master)
-                                    .blockState(target.getLevel().getBlockState(masterPos))
-                                    .build();
-                        }
-                    }
-                }
-                return accessor;
-            }
-        });
-
-        // handles most multiblocks
+        // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
             if (accessor instanceof BlockAccessor blockAccessor) {
                 Level level = blockAccessor.getLevel();
                 BlockPos pos = blockAccessor.getPosition();
-                IMultiBlockClickable multi = MultiBlockManager.INSTANCE.getMultiBlock(level, pos);
-                if (multi != null) {
-                    BlockPos originPos = multi.getOrigin();
-                    BlockEntity origin = level.getBlockEntity(originPos);
-                    BlockHitResult blockHitResult = blockAccessor.getHitResult();
+                BlockHitResult blockHitResult = blockAccessor.getHitResult();
+                IStructureListener listener = StructureManager.INSTANCE.getListener(level, pos);
+                if (listener instanceof BlockEntity master) {
                     if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
+                        CompoundTag structureTag = new CompoundTag();
+                        structureTag.putBoolean("isStructure", true);
+                        blockAccessor.getServerData().put("structureData", structureTag);
                         return registration.blockAccessor()
                                 .from(blockAccessor)
-                                .hit(blockHitResult.withPosition(originPos))
-                                .blockState(level.getBlockState(originPos))
-                                .blockEntity(origin)
+                                .hit(blockHitResult.withPosition(master.getBlockPos()))
+                                .blockState(level.getBlockState(master.getBlockPos()))
+                                .blockEntity(master)
                                 .build();
                     }
                 }
