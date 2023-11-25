@@ -39,7 +39,8 @@ public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
                 TeleporterTarget target = TeleporterTarget.read(tag.getCompound("TeleportTarget"));
                 int baseCost = tag.getInt("cost");
                 long availableEnergy = tag.getLong("availableEnergy");
-                if (target == null) {
+                boolean noTarget = tag.getBoolean("no_target");
+                if (noTarget) {
                     Helpers.text(iTooltip,"ic2.probe.teleporter.no_target");
                 } else if (!tag.getBoolean("isMathching")) {
                     Helpers.text(iTooltip,"ic2.probe.teleporter.invalid_target");
@@ -76,7 +77,11 @@ public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof TeleporterTileEntity teleport) {
                 CompoundTag tag = new CompoundTag();
-                tag.put("TeleportTarget", teleport.target.write(new CompoundTag()));
+                if (teleport.target == null) {
+                    tag.putBoolean("no_target", true);
+                } else {
+                    tag.put("TeleportTarget", teleport.target.write(new CompoundTag()));
+                }
                 tag.putBoolean("isMathching", teleport.hasMatchingType());
                 tag.putInt("cost", teleport.getBaseCost());
                 tag.putLong("availableEnergy", teleport.getAvailableEnergy());
