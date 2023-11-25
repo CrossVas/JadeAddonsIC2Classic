@@ -36,7 +36,7 @@ public enum BaseTeleporterInfoProvider implements IHelper<BlockEntity> {
                 Set<BaseTeleporterTileEntity.LocalTarget> targets = tp.getTargets();
                 String name = tag.getString("name");
                 String networkID = tag.getString("networkID");
-                if (targets.size() > 0) {
+                if (!targets.isEmpty()) {
                     Helpers.text(iTooltip, Component.translatable("gui.ic2.base_teleporter.name").append(": ").append(name).withStyle(ChatFormatting.WHITE));
                     Helpers.text(iTooltip, Component.translatable("gui.ic2.base_teleporter.network").append(": ").append(networkID).withStyle(ChatFormatting.WHITE));
                     Helpers.space_y(iTooltip, 3);

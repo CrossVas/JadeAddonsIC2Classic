@@ -58,7 +58,6 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
                     Helpers.bar(iTooltip, scanLevel, 4, "ic2.probe.crop.info.scan", ColorMix.GREEN);
                 } else {
                     iTooltip.add(Component.literal("Crop: ").append(crop.getName()).withStyle(ChatFormatting.WHITE));
-                    iTooltip.append(iTooltip.getElementHelper().spacer(5, 0));
                     iTooltip.append(iTooltip.getElementHelper().item(crop.getDisplayItem()).translate(new Vec2(0, -5)));
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.crop.growth").withStyle(ChatFormatting.YELLOW));
                     if (currentStage < maxStage) {

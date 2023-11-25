@@ -47,7 +47,7 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
                 iTooltip.add(wrenchIcon);
                 if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                     double dropChance = tool.getActualLoss(handHeldStack, tile.getDropRate(player));
-                    Helpers.appendText(iTooltip, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append(" % ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")).withStyle(ChatFormatting.GRAY));
+                    Helpers.appendText(iTooltip, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")).withStyle(ChatFormatting.GRAY));
                 } else {
                     Helpers.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                 }

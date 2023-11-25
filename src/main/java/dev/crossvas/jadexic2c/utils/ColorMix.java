@@ -30,6 +30,6 @@ public enum ColorMix {
         this.mono = color;
         this.aColor = color;
         this.bColor = ColorUtils.darker(color);
-        this.back = ColorUtils.darker(bColor);
+        this.back = ColorUtils.doubleDarker(color);
     }
 }
