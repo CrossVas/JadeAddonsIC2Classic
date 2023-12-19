@@ -4,7 +4,7 @@
   "config.jade.plugin_ic2.eu_reader": "EU-Reader Info",
   "config.jade.plugin_ic2.thermometer": "Thermometer Info",
   "config.jade.plugin_ic2.crop": "Crop Analyzer Info",
-  "config.jade.plugin_ic2.remove_renders_fluid": "Use custom tank render for IC2 Tanks",
+  "config.jade.plugin_ic2.remove_renders_fluid": "Use custom style for IC2 Tanks",
   "config.jade.plugin_ic2.remove_modid": "Remove Mod Name",
   "config.jade.plugin_ic2.relocate_modid": "Relocate Mod Name",
 

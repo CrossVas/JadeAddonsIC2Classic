@@ -1,0 +1,26 @@
+{
+  "config.jade.plugin_ic2.wrenchable_info": "렌치블 정보",
+  "config.jade.plugin_ic2.eu_storage_info": "EU 보관 정보",
+  "config.jade.plugin_ic2.eu_reader": "EU 측정기 정보",
+  "config.jade.plugin_ic2.thermometer": "온도계 정보",
+  "config.jade.plugin_ic2.crop": "작물 분석기 정보",
+  "config.jade.plugin_ic2.remove_renders_fluid": "IC2 탱크에 맞춤 스타일 사용",
+  "config.jade.plugin_ic2.remove_modid": "모드 이름 제거",
+  "config.jade.plugin_ic2.relocate_modid": "모드 이름 재배치",
+
+  "ic2.probe.wrenchable.drop_chance.info": "드롭 확률",
+  "ic2.probe.wrenchable.info": "렌치블 블록",
+  "ic2.tube.round_robin.info": "라운드 로빈 규칙",
+  "ic2.tube.directional.info": "방향: %s",
+  "ic2.tube.filter.info": "필터:",
+  "ic2.tube.meta_filter.info": "메타 필터:",
+  "ic2.tube.extraction_filter_whitelist.info": "화이트리스트:",
+  "ic2.tube.teleport.info": "네트워크 ID: ",
+  "ic2.tube.pickup.info": "넓은 반경: ",
+
+  "ic2.barrel.info.water": "물: %sk / %sk mB",
+  "ic2.barrel.info.fluid": "%s: %s / %sk mB",
+  "ic2.barrel.info.age": "숙성: %s",
+  "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
+  "ic2.probe.transformer.inverted": "역행: "
+}

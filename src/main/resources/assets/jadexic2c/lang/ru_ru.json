@@ -8,7 +8,7 @@
   "config.jade.plugin_ic2.remove_modid": "Удалить имя мода",
   "config.jade.plugin_ic2.relocate_modid": "Переместить имя мода",
 
-  "ic2.probe.wrenchable.drop_chance.info": "шанс выпадания",
+  "ic2.probe.wrenchable.drop_chance.info": "Шанс выпадения",
   "ic2.probe.wrenchable.info": "Съемный блок",
   "ic2.tube.round_robin.info": "Правила цикличности",
   "ic2.tube.directional.info": "Направление: %s",
@@ -20,7 +20,7 @@
 
   "ic2.barrel.info.water": "Вода: %sк / %sк мВ",
   "ic2.barrel.info.fluid": "%s: %s / %sк мВ",
-  "ic2.barrel.info.age": "Возраст: %s",
+  "ic2.barrel.info.age": "Выдержка: %s",
   "ic2.probe.eu.storage.full.name": "Энергия: %s/%s EU",
   "ic2.probe.transformer.inverted": "Инвертированный: "
 }
