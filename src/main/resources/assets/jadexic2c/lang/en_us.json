@@ -22,7 +22,5 @@
   "ic2.barrel.info.fluid": "%s: %s / %sk mB",
   "ic2.barrel.info.age": "Age: %s",
   "ic2.probe.eu.storage.full.name": "Energy: %s/%s EU",
-  "ic2.probe.transformer.inverted": "Inverted: ",
-
-  "config.jade.plugin_ic2.base_generator": "Basic Generators"
+  "ic2.probe.transformer.inverted": "Inverted: "
 }
