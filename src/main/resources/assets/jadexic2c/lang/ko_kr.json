@@ -20,7 +20,6 @@
 
   "ic2.barrel.info.water": "물: %sk / %sk mB",
   "ic2.barrel.info.fluid": "%s: %s / %sk mB",
-  "ic2.barrel.info.age": "숙성: %s",
   "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
   "ic2.probe.transformer.inverted": "역행: "
 }

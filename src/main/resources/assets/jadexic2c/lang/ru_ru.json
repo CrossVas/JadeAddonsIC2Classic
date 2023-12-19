@@ -20,7 +20,6 @@
 
   "ic2.barrel.info.water": "Вода: %sк / %sк мВ",
   "ic2.barrel.info.fluid": "%s: %s / %sк мВ",
-  "ic2.barrel.info.age": "Выдержка: %s",
   "ic2.probe.eu.storage.full.name": "Энергия: %s/%s EU",
   "ic2.probe.transformer.inverted": "Инвертированный: "
 }
