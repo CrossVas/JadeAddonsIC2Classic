@@ -1,0 +1,25 @@
+{
+  "config.jade.plugin_ic2.wrenchable_info": "Інформація від ключа",
+  "config.jade.plugin_ic2.eu_storage_info": "Інформація про енергосховища",
+  "config.jade.plugin_ic2.eu_reader": "Інформація від EU-метра",
+  "config.jade.plugin_ic2.thermometer": "Інформація від термометра",
+  "config.jade.plugin_ic2.crop": "Інформація від аграрного аналізатора",
+  "config.jade.plugin_ic2.remove_renders_fluid": "Стиль ємностей IC2",
+  "config.jade.plugin_ic2.remove_modid": "Видалити ім'я модифікації'",
+  "config.jade.plugin_ic2.relocate_modid": "Перемістити ім'я модифікації",
+
+  "ic2.probe.wrenchable.drop_chance.info": "Шанс випадення",
+  "ic2.probe.wrenchable.info": "З'ємний",
+  "ic2.tube.round_robin.info": "Правила циклічності",
+  "ic2.tube.directional.info": "Напрямок: %s",
+  "ic2.tube.filter.info": "Фільтр:",
+  "ic2.tube.meta_filter.info": "Мета-Фільтр:",
+  "ic2.tube.extraction_filter_whitelist.info": "Білий список:",
+  "ic2.tube.teleport.info": "Ідентифікатор мережі: ",
+  "ic2.tube.pickup.info": "Великий радіус: ",
+
+  "ic2.barrel.info.water": "Води: %sk / %sk мБ",
+  "ic2.barrel.info.fluid": "%s: %s / %sk мБ",
+  "ic2.probe.eu.storage.full.name": "Енергії: %s/%s EU",
+  "ic2.probe.transformer.inverted": "Інвертований: "
+}
