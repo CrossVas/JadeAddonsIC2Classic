@@ -10,7 +10,6 @@ import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
 import ic2.core.inventory.filter.SpecialFilters;
-import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
@@ -21,8 +20,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
-import snownee.jade.api.IBlockComponentProvider;
-import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
@@ -67,7 +64,7 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
     }
 
     public static void addToTooltip(ITooltip tooltip, BlockEntity tile, BlockAccessor blockAccessor) {
-        if (/*StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER) && */INSTANCE.canHandle(blockAccessor)) {
+        if (INSTANCE.canHandle(blockAccessor)) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
                     Helpers.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));
