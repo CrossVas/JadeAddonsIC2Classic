@@ -1,5 +1,3 @@
-**<font size="6">Jade Plugin For IC2Classic - Minecraft 1.19.2</font>**
-
 <a href="https://www.curseforge.com/minecraft/mc-mods/jade-addons-ic2classic"><img src="http://cf.way2muchnoise.eu/versions/932859.svg" style="max-width:100%;"></a>
 <img src="https://cf.way2muchnoise.eu/932859.svg" style="max-width:100%;"></a>
 
