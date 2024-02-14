@@ -39,13 +39,13 @@ public enum WaveGenInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof WaveGenTileEntity waveGen) {
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("production", waveGen.getEUProduction());
+                compoundTag.put("WaveGenInfo", tag);
             }
         }
-        compoundTag.put("WaveGenInfo", tag);
     }
 
     @Override

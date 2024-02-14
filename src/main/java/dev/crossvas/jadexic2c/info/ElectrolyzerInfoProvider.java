@@ -63,8 +63,8 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
+            CompoundTag tag = new CompoundTag();
             if (tile instanceof ElectrolyzerTileEntity ele) {
                 tag.putInt("energy", ele.energy);
                 tag.putInt("maxEnergy", ele.maxEnergy);
@@ -78,8 +78,8 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
                 tag.putBoolean("canPowerC", ele.canPower());
                 tag.putBoolean("shouldDrainC", ele.shouldDrain());
             }
+            compoundTag.put("ElectrolyzerInfo", tag);
         }
-        compoundTag.put("ElectrolyzerInfo", tag);
     }
 
     @Override

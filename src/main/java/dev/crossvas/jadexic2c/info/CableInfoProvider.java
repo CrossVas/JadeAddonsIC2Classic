@@ -59,17 +59,17 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof CableTileEntity cable) {
+                CompoundTag tag = new CompoundTag();
                 EnergyContainer result = getContainer(cable);
                 if (result.getAverageOut() > 0) {
                     tag.putInt("averageOut", result.getAverageOut());
                     tag.putInt("packetOut", result.getPacketsOut());
                 }
+                compoundTag.put("CableInfo", tag);
             }
         }
-        compoundTag.put("CableInfo", tag);
     }
 
     @Override

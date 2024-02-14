@@ -64,9 +64,9 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("providedEnergy", energyStorage.getProvidedEnergy());
 
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(energyStorage);
@@ -74,9 +74,9 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
                 tag.putLong("averageOut", result.getAverageOut());
                 tag.putLong("packetsIn", result.getPacketsIn());
                 tag.putLong("packetsOut", result.getPacketsOut());
+                compoundTag.put("EnergyStorageInfo", tag);
             }
         }
-        compoundTag.put("EnergyStorageInfo", tag);
     }
 
     @Override

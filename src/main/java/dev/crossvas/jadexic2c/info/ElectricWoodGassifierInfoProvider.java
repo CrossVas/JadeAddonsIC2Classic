@@ -45,14 +45,14 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof WoodGassifierTileEntity gas) {
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("progress", gas.getProgress());
                 Helpers.loadTankData(compoundTag, gas);
+                compoundTag.put("GassificatorInfo", tag);
             }
         }
-        compoundTag.put("GassificatorInfo", tag);
     }
 
     @Override

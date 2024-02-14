@@ -3,7 +3,6 @@ package dev.crossvas.jadexic2c.utils;
 import ic2.core.utils.math.ColorUtils;
 
 public enum ColorMix {
-    MONO_BLUE(0xFF1E396F),
     MONO_GREEN(0xFF0CA21D),
     MONO_LIME(0xFF00FF07),
     MONO_AQUA(0xFF00F2F2),

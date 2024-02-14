@@ -64,9 +64,9 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseGeneratorTileEntity generator) {
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("euProduction", generator.getEUProduction());
                 tag.putInt("fuel", generator.fuel);
                 if (generator instanceof SolarTurbineTileEntity solarTurbine) {
@@ -80,9 +80,9 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
                 } else if (generator instanceof LiquidFuelGenTileEntity liquidGen) {
                     Helpers.loadTankData(compoundTag, liquidGen);
                 }
+                compoundTag.put("BaseGeneratorInfo", tag);
             }
         }
-        compoundTag.put("BaseGeneratorInfo", tag);
     }
 
     @Override

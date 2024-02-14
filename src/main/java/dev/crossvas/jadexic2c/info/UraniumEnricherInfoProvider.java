@@ -62,18 +62,18 @@ public enum UraniumEnricherInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof UraniumEnchricherTileEntity enricher) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("mainProgress", enricher.mainProgress);
                 tag.putInt("secondaryProgress", enricher.secondaryProgress);
                 tag.putInt("storedPoints", enricher.storedPoints);
                 if (enricher.storedType != null) {
                     tag.putString("storedType", enricher.storedType.toString());
                 }
+                compoundTag.put("EnricherInfo", tag);
             }
         }
-        compoundTag.put("EnricherInfo", tag);
     }
 
     @Override

@@ -46,12 +46,12 @@ public enum EUStorageInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof IEUStorage storage) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("storedEnergy", storage.getStoredEU());
+                compoundTag.put("EUStorageInfo", tag);
             }
         }
-        compoundTag.put("EUStorageInfo", tag);
     }
 }

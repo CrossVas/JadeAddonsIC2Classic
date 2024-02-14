@@ -15,7 +15,4 @@ public class CustomBox extends BoxStyle {
         this.borderColor = 0xFFFFFFFF;
         this.bgColor = backColor;
     }
-
-    public static CustomBox BLACK_WHITE = new CustomBox(0xFFFFFFFF, 0xFF000000);
-
 }

@@ -88,8 +88,8 @@ public enum StoneMachineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
+            CompoundTag tag = new CompoundTag();
             if (tile instanceof StoneBasicMachineTileEntity stone) {
                 tag.putInt("stoneFuel", stone.getFuel());
                 tag.putInt("stoneMaxFuel", stone.getMaxFuel());
@@ -107,8 +107,8 @@ public enum StoneMachineInfoProvider implements IHelper<BlockEntity> {
                 tag.putFloat("canProgress", canner.getProgress());
                 tag.putFloat("canMaxProgress", canner.getMaxProgress());
             }
+            compoundTag.put("StoneMachineInfo", tag);
         }
-        compoundTag.put("StoneMachineInfo", tag);
     }
 
     @Override

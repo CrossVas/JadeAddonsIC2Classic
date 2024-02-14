@@ -42,15 +42,15 @@ public enum OceanGenInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof OceanGeneratorTileEntity gen) {
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("production", gen.getEUProduction());
                 tag.putInt("water", gen.waterFound);
                 tag.putInt("coral", gen.coralsFound);
+                compoundTag.put("OceanGenInfo", tag);
             }
         }
-        compoundTag.put("OceanGenInfo", tag);
     }
 
     @Override

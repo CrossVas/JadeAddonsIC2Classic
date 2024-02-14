@@ -1,6 +1,9 @@
+<a href="https://www.curseforge.com/minecraft/mc-mods/jade"><img src="https://img.shields.io/badge/Addon%20for-Jade-1f425f.svg" style="max-width:100%;"></a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/ic2-classic"><img src="https://img.shields.io/badge/Addon%20for-IC2Classic-1f425f.svg" style="max-width:100%;"></a>
+
 <a href="https://www.curseforge.com/minecraft/mc-mods/jade-addons-ic2classic">![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/932859?label=Version)
-<a href="https://www.curseforge.com/minecraft/mc-mods/jade-addons-ic2classic/files/5021539">![CurseForge Downloads](https://img.shields.io/curseforge/dt/932859?label=Downloads)
+
+<a href="https://www.curseforge.com/minecraft/mc-mods/jade-addons-ic2classic/files/5021539">![CurseForge Downloads](https://img.shields.io/curseforge/dt/932859?label=Download+Latest)
 
 
 **<font size="5">Qui quaerit, reperit...</font>**

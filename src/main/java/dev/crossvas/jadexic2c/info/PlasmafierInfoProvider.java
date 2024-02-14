@@ -48,16 +48,15 @@ public enum PlasmafierInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof PlasmafierTileEntity plasma) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("plasma", plasma.getPumpProgress());
                 tag.putInt("maxPlasma", plasma.getPumpMaxProgress());
                 tag.putInt("uuMatter", plasma.uuMatter);
-
+                compoundTag.put("PlasmaInfo", tag);
             }
         }
-        compoundTag.put("PlasmaInfo", tag);
     }
 
     @Override

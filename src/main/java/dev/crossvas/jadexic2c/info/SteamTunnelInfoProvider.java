@@ -64,8 +64,8 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
+            CompoundTag tag = new CompoundTag();
             if (tile instanceof BaseMultiBlockTileEntity multi) {
                 if (multi instanceof SteamTunnelTileEntity tunnel) {
                     tag.putFloat("energyProduction", tunnel.getEUProduction());
@@ -81,8 +81,8 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
                 Helpers.loadTankData(compoundTag, linking);
                 tag.put("LinkingBlockInfo", linkingTag);
             }
+            compoundTag.put("SteamTunnelInfo", tag);
         }
-        compoundTag.put("SteamTunnelInfo", tag);
     }
 
     @Override

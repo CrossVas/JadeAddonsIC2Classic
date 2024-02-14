@@ -51,18 +51,18 @@ public enum ChargePadInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof BaseChargePadTileEntity pad) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("maxInput", pad.maxInput);
                 tag.putInt("transferLimit", pad.transferLimit);
                 tag.putFloat("range", pad.range);
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(pad);
                 tag.putInt("averageIn", result.getAverageIn());
                 tag.putInt("packetsIn", result.getPacketsIn());
+                compoundTag.put("ChargePadInfo", tag);
             }
         }
-        compoundTag.put("ChargePadInfo", tag);
     }
 
     @Override

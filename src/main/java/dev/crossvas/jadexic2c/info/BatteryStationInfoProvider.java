@@ -64,16 +64,16 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseBatteryStationTileEntity station) {
+                CompoundTag tag = new CompoundTag();
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(station);
                 tag.putInt("averageOut", result.getAverageOut());
                 tag.putInt("packetsOut", result.getPacketsOut());
                 tag.putInt("missingEnergy", station.getMissingEnergy().getIntKey());
+                compoundTag.put("BatteryStationInfo", tag);
             }
         }
-        compoundTag.put("BatteryStationInfo", tag);
     }
 
     @Override

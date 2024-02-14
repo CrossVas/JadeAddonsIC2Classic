@@ -56,14 +56,14 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof FuelBoilerTileEntity boiler) {
+            CompoundTag tag = new CompoundTag();
             tag.putInt("fuel", boiler.getFuel());
             tag.putInt("maxFuel", boiler.getMaxFuel());
             tag.putInt("heat", boiler.getHeat());
             Helpers.loadTankData(compoundTag, boiler);
+            compoundTag.put("FuelBoilerInfo", tag);
         }
-        compoundTag.put("FuelBoilerInfo", tag);
     }
 
     @Override

@@ -67,8 +67,8 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
+            CompoundTag tag = new CompoundTag();
             if (tile instanceof RocketMinerTileEntity rocket) {
                 tag.putByte("finished", (byte) rocket.finished);
                 tag.putBoolean("refueling", rocket.isRefueling());
@@ -78,8 +78,8 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
                 tag.putBoolean("isStuck", miner.isStuck());
                 tag.putBoolean("isOperating", miner.isOperating());
             }
+            compoundTag.put("MinerInfo", tag);
         }
-        compoundTag.put("MinerInfo", tag);
     }
 
     @Override

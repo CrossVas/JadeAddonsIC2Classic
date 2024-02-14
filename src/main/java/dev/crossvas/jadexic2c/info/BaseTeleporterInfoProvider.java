@@ -53,14 +53,14 @@ public enum BaseTeleporterInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof BaseTeleporterTileEntity tp) {
+                CompoundTag tag = new CompoundTag();
                 tag.putString("name", tp.name);
                 tag.putString("networkID", tp.networkID);
+                compoundTag.put("BaseTeleporterInfo", tag);
             }
         }
-        compoundTag.put("BaseTeleporterInfo", tag);
     }
 
     @Override

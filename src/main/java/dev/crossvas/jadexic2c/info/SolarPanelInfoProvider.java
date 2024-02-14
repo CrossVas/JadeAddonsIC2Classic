@@ -40,14 +40,14 @@ public enum SolarPanelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof SolarPanelTileEntity solar) {
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("production", solar.getEUProduction());
                 tag.putInt("maxProduction", solar.getMaxEnergyOutput());
+                compoundTag.put("SolarPanelInfo", tag);
             }
         }
-        compoundTag.put("SolarPanelInfo", tag);
     }
 
     @Override

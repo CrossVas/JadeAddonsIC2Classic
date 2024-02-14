@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.utils.removals;
 
+import dev.crossvas.jadexic2c.JadeXIC2C;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import snownee.jade.api.*;
@@ -14,7 +15,7 @@ public enum TankRender implements IBlockComponentProvider {
     public static final ResourceLocation FORGE_FLUID = new ResourceLocation("fluid");
     public static final List<Block> TANK_REMOVAL = new ArrayList<>();
 
-    public static final ResourceLocation ID = new ResourceLocation("ic2", "remove_renders_fluid");
+    public static final ResourceLocation ID = JadeXIC2C.rl("remove_renders_fluid");
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

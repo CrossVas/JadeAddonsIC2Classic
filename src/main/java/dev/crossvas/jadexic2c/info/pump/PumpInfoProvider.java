@@ -48,14 +48,14 @@ public enum PumpInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof PumpTileEntity pump) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("progress", pump.getPumpProgress());
                 Helpers.loadTankData(pump.tank, compoundTag);
+                compoundTag.put("PumpInfo", tag);
             }
         }
-        compoundTag.put("PumpInfo", tag);
     }
 
     @Override

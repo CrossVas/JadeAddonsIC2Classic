@@ -50,18 +50,18 @@ public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof AdjustableTransformerTileEntity transformer) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("energyPacket", transformer.energyPacket);
                 tag.putInt("packetCount", transformer.packetCount);
 
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(transformer);
                 tag.putLong("averageOut", result.getAverageOut());
                 tag.putLong("packetsOut", result.getPacketsOut());
+                compoundTag.put("AdjTransformerInfo", tag);
             }
         }
-        compoundTag.put("AdjTransformerInfo", tag);
     }
 
     @Override

@@ -1,11 +1,8 @@
 package dev.crossvas.jadexic2c.utils;
 
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
-import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.utils.math.ColorUtils;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -22,14 +19,19 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElementHelper;
 import snownee.jade.api.ui.IProgressStyle;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Helpers {
 
     public static void space_y(ITooltip tooltip, int y) {
         tooltip.add(tooltip.getElementHelper().spacer(1, y));
+    }
+
+    public static void addTank(ITooltip tooltip, FluidStack fluidStack, int capacity) {
+        IElementHelper helper = tooltip.getElementHelper();
+        IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluidStack));
+        tooltip.add(helper.progress((float) fluidStack.getAmount() / capacity, Component.translatable("ic2.barrel.info.fluid", fluidStack.getDisplayName(), Formatter.formatInt(fluidStack.getAmount(), String.valueOf(capacity).length() - 1), capacity / 1000).withStyle(ChatFormatting.WHITE), progressStyle,
+                new CustomBox(fluidStack.getFluid() == Fluids.LAVA ? ColorUtils.doubleDarker(-29925) : ColorUtils.doubleDarker(IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor())), true));
     }
 
     public static void barLiteral(ITooltip tooltip, int current, int max, Component text, ColorMix color) {

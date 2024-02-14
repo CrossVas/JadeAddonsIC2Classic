@@ -46,15 +46,15 @@ public enum ElectricLoaderInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof BaseElectricLoaderTileEntity loader) {
+                CompoundTag tag = new CompoundTag();
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(loader);
                 tag.putInt("averageIn", result.getAverageIn());
                 tag.putInt("packetsIn", result.getPacketsIn());
+                compoundTag.put("ElectricLoaderInfo", tag);
             }
         }
-        compoundTag.put("ElectricLoaderInfo", tag);
     }
 
     @Override

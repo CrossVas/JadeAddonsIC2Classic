@@ -70,13 +70,13 @@ import snownee.jade.api.*;
 
 import java.util.stream.Stream;
 
-@WailaPlugin("ic2")
+@WailaPlugin(JadeXIC2C.ID_IC2)
 public class JadeIC2CPluginHandler implements IWailaPlugin {
 
-    public static final ResourceLocation EU_READER_INFO = new ResourceLocation("ic2", "eu_reader");
-    public static final ResourceLocation THERMOMETER_INFO = new ResourceLocation("ic2", "thermometer");
-    public static final ResourceLocation CROP_INFO = new ResourceLocation("ic2", "crop");
-    public static final ResourceLocation EU_STORAGE_INFO = new ResourceLocation("ic2", "eu_storage_info");
+    public static final ResourceLocation EU_READER_INFO = JadeXIC2C.rl("eu_reader");
+    public static final ResourceLocation THERMOMETER_INFO = JadeXIC2C.rl("thermometer");
+    public static final ResourceLocation CROP_INFO = JadeXIC2C.rl("crop");
+    public static final ResourceLocation EU_STORAGE_INFO = JadeXIC2C.rl("eu_storage_info");
 
     /**
      * {@link IC2Blocks}

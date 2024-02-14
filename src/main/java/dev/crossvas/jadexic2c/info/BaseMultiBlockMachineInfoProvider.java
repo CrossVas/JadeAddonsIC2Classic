@@ -65,18 +65,18 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseMultiElectricTileEntity tile) {
             if (tile instanceof BaseMultiMachineTileEntity multiTile) {
+                CompoundTag tag = new CompoundTag();
                 Helpers.loadTankData(compoundTag, multiTile);
                 tag.putInt("energyPerTick", multiTile.getEnergyPerTick());
 
                 if (multiTile instanceof PressureAlloyFurnaceTileEntity furnace) {
                     tag.putInt("speed", furnace.getSpeed());
                 }
+                compoundTag.put("BaseMultBlockInfo", tag);
             }
         }
-        compoundTag.put("BaseMultBlockInfo", tag);
     }
 
     @Override

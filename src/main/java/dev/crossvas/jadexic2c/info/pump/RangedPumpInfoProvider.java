@@ -43,14 +43,14 @@ public enum RangedPumpInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof RangedPumpTileEntity pump) {
+                CompoundTag tag = new CompoundTag();
                 tag.putBoolean("isOperating", pump.isOperating());
                 Helpers.loadTankData(compoundTag, pump);
+                compoundTag.put("RangedPumpInfo", tag);
             }
         }
-        compoundTag.put("RangedPumpInfo", tag);
     }
 
     @Override

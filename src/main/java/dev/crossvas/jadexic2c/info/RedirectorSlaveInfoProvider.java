@@ -48,13 +48,13 @@ public enum RedirectorSlaveInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof RedirectorSlaveTileEntity slave) {
+            CompoundTag tag = new CompoundTag();
             CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(slave);
             tag.putInt("averageOut", result.getAverageOut());
             tag.putInt("packetsOut", result.getPacketsOut());
+            compoundTag.put("RedirectorSlaveInfo", tag);
         }
-        compoundTag.put("RedirectorSlaveInfo", tag);
     }
 
     @Override

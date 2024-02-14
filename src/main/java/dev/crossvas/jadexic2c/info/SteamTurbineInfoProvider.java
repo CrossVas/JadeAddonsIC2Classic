@@ -38,14 +38,14 @@ public enum SteamTurbineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag  = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof SteamTurbineTileEntity turbine) {
+                CompoundTag tag  = new CompoundTag();
                 tag.putFloat("production", turbine.getEUProduction());
                 Helpers.loadTankData(compoundTag, turbine);
+                compoundTag.put("SteamTurbineInfo", tag);
             }
         }
-        compoundTag.put("SteamTurbineInfo", tag);
     }
 
     @Override

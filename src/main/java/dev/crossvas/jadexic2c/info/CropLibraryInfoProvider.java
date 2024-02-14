@@ -69,9 +69,9 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseCropLibraryTileEntity lib) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("cropCount", lib.syncer.getCropCount());
                 tag.putInt("statCount", lib.syncer.getStatCount());
                 tag.putInt("sizeLimit", lib.storage.getSizeLimit());
@@ -87,9 +87,9 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
                 if (!itemsList.isEmpty()) {
                     tag.put("items", itemsList);
                 }
+                compoundTag.put("CropLibraryInfo", tag);
             }
         }
-        compoundTag.put("CropLibraryInfo", tag);
     }
 
     @Override

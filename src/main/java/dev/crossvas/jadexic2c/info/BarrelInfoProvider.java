@@ -13,6 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
@@ -43,9 +45,11 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
             int age;
             double maxValue;
             double current;
+            int maxFluidCapacity = BarrelTileEntity.FLUID_CAPACITY;
+            int maxPotionCapacity = BarrelTileEntity.POTION_FLUID_CAPACITY;
 
             DecimalFormat format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.US));
-            String water = "ic2.barrel.info.water";
+            FluidStack waterStack = new FluidStack(Fluids.WATER, fluidAmount);
 
             int brewType = tag.getInt("brewType");
             switch (brewType) {
@@ -67,7 +71,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, wheatAmount, 64, "ic2.probe.barrel.beer.wheat.name", ColorMix.YELLOW);
                     Helpers.bar(iTooltip, hopsAmount, 64, "ic2.probe.barrel.beer.hops.name", ColorMix.GREEN);
-                    Helpers.monoBar(iTooltip, fluidAmount / 1000, 32000 / 1000, water, ColorMix.MONO_BLUE);
+                    Helpers.addTank(iTooltip, waterStack, maxFluidCapacity);
 
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, brewQuality, 5, "ic2.probe.barrel.beer.quality." + brewQuality + ".name", ColorMix.BLUE);
@@ -76,12 +80,11 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     Helpers.barLiteral(iTooltip, age, (int) maxValue, format.format(current) + "%", ColorMix.BLUE);
                     break;
                 case 2:
-                    int sugarCaneAmount = tag.getInt("fluidAmount");
                     maxValue = tag.getInt("timeNeededForRum");
                     age = (int) Math.min(tag.getInt("age"), maxValue);
                     Helpers.text(iTooltip, getBrewType(brewType));
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
-                    Helpers.bar(iTooltip, sugarCaneAmount / 1000, 32, "ic2.probe.barrel.beer.sugar_cane.name", ColorMix.GREEN);
+                    Helpers.bar(iTooltip, fluidAmount / 1000, 32, "ic2.probe.barrel.beer.sugar_cane.name", ColorMix.GREEN);
                     Helpers.barLiteral(iTooltip, age, (int) maxValue, format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%", ColorMix.BLUE);
                     break;
                 case 5:
@@ -91,7 +94,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     Helpers.text(iTooltip, getBrewType(brewType));
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, hopsAmount, 16, "ic2.probe.barrel.whisky.grist.name", ColorMix.GREEN);
-                    Helpers.monoBar(iTooltip, fluidAmount / 1000, 32000 / 1000, water, ColorMix.MONO_BLUE);
+                    Helpers.addTank(iTooltip, waterStack, maxFluidCapacity);
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, Math.min(brewQuality, 50), 50, "ic2.probe.barrel.whisky.years.name", ColorMix.BLUE);
                     Helpers.barLiteral(iTooltip, (int) ageWhisky, 1728000, format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%", ColorMix.BLUE);
@@ -101,7 +104,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
                     Helpers.bar(iTooltip, wheatAmount, 20, "ic2.probe.barrel.beer.redstone.name", ColorMix.RED);
                     Helpers.bar(iTooltip, hopsAmount, 20, "ic2.probe.barrel.beer.glowstone.name", ColorMix.YELLOW);
-                    Helpers.monoBar(iTooltip, fluidAmount / 1000, 3000 / 1000, water, ColorMix.MONO_BLUE);
+                    Helpers.addTank(iTooltip, waterStack, maxPotionCapacity);
                     Helpers.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
                     int brewedPotion = tag.getInt("brewedPotion");
                     Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : MobEffect.byId(brewedPotion).getDisplayName();
@@ -131,20 +134,17 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
             tag.putInt("wheatAmount", tile.wheatAmount);
             tag.putInt("hopsAmount", tile.hopsAmount);
             tag.putInt("fluidAmount", tile.fluidAmount);
-
             // 2
             tag.putInt("timeNeededForRum", tile.timeNeededForRum());
             // 5
             tag.putInt("whiskBrewTime", tile.getWhiskBrewTime());
             // 10
             tag.putInt("brewedPotion", MobEffect.getId(tile.potionType));
-
             // common
             tag.putInt("brewQuality", tile.beerQuality);
             tag.putInt("alcoholLevel", tile.getAlcoholLevel());
             tag.putInt("solidRatio", tile.getSolidRatio());
             tag.putInt("age", tile.age);
-
 
             compoundTag.put("BarrelInfo", tag);
         }

@@ -44,14 +44,14 @@ public enum OreScannerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof OreScannerTileEntity scanner) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("blocks", scanner.blocks);
                 tag.putInt("maxBlocks", scanner.maxBlocks);
+                compoundTag.put("OreScannerInfo", tag);
             }
         }
-        compoundTag.put("OreScannerInfo", tag);
     }
 
     @Override

@@ -62,16 +62,16 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             if (tile instanceof BaseChargingBenchTileEntity bench) {
+                CompoundTag tag = new CompoundTag();
                 tag.putInt("missingEnergy", bench.getMissingEnergy().getIntKey());
                 CableInfoProvider.EnergyContainer result = CableInfoProvider.getContainer(bench);
                 tag.putInt("averageIn", result.getAverageIn());
                 tag.putInt("packetsIn", result.getPacketsIn());
+                compoundTag.put("ChargingBenchInfo", tag);
             }
         }
-        compoundTag.put("ChargingBenchInfo", tag);
     }
 
     @Override

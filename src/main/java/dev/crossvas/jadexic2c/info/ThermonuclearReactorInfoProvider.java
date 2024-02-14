@@ -49,8 +49,8 @@ public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseTileEntity tile) {
+            CompoundTag tag = new CompoundTag();
             if (tile instanceof BaseMultiBlockTileEntity multi) {
                 if (multi instanceof FusionReactorTileEntity tunnel) {
                     Helpers.loadTankData(compoundTag, tunnel);
@@ -58,8 +58,9 @@ public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
             } else if (tile instanceof BaseLinkingTileEntity linking) {
                 Helpers.loadTankData(compoundTag, linking);
             }
+            compoundTag.put("FusionReactorInfo", tag);
         }
-        compoundTag.put("FusionReactorInfo", tag);
+
     }
 
     @Override
