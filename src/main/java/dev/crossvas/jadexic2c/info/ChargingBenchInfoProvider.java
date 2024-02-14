@@ -36,12 +36,6 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseChargingBenchTileEntity bench) {
                 Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
                 Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", bench.getMaxInput());
-                int averageIn = tag.getInt("averageIn");
-                int packetsIn = tag.getInt("packetsIn");
-                if (averageIn > 0) {
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
-                }
 
                 int missingEnergy = tag.getInt("missingEnergy");
                 int benchAverageOut = tag.getInt("benchTransferOut");
@@ -58,6 +52,14 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
                     int dischargeEnergy =  Math.min(transferLimit, toDischargeEnergy);
                     Helpers.barLiteral(iTooltip, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                             DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                }
+
+                int averageIn = tag.getInt("averageIn");
+                int packetsIn = tag.getInt("packetsIn");
+                if (averageIn > 0) {
+                    Helpers.space_y(iTooltip, 3);
+                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
+                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

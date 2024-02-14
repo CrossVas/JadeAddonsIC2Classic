@@ -36,13 +36,6 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseBatteryStationTileEntity station) {
                 Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
                 Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
-                int averageOut = tag.getInt("averageOut");
-                int packetsOut = tag.getInt("packetsOut");
-                if (averageOut > 0) {
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
-                }
-
                 long missingEnergy = tag.getLong("missingEnergy");
                 int maxTransfer = tag.getInt("maxTransfer");
 
@@ -60,6 +53,14 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
                     int dischargeEnergy = (int) Math.min(averageIn, capacity);
                     Helpers.barLiteral(iTooltip, (int) capacity, (int) maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                             DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (capacity / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                }
+
+                int averageOut = tag.getInt("averageOut");
+                int packetsOut = tag.getInt("packetsOut");
+                if (averageOut > 0) {
+                    Helpers.space_y(iTooltip, 3);
+                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }
