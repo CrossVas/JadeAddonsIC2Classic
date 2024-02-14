@@ -18,7 +18,6 @@
   "ic2.tube.teleport.info": "Ідентифікатор мережі: ",
   "ic2.tube.pickup.info": "Великий радіус: ",
 
-  "ic2.barrel.info.water": "Води: %sk / %sk мБ",
   "ic2.barrel.info.fluid": "%s: %s / %sk мБ",
   "ic2.probe.eu.storage.full.name": "Енергії: %s/%s EU",
   "ic2.probe.transformer.inverted": "Інвертований: "

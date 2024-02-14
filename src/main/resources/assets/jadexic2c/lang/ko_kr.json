@@ -18,7 +18,6 @@
   "ic2.tube.teleport.info": "네트워크 ID: ",
   "ic2.tube.pickup.info": "넓은 반경: ",
 
-  "ic2.barrel.info.water": "물: %sk / %sk mB",
   "ic2.barrel.info.fluid": "%s: %s / %sk mB",
   "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
   "ic2.probe.transformer.inverted": "역행: "
