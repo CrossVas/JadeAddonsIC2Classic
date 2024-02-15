@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c.utils.removals;
 
 import dev.crossvas.jadexic2c.JadeXIC2C;
+import ic2.core.block.base.IToolProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.*;
@@ -8,8 +9,6 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.util.ModIdentification;
 
 public class ModNameRender {
-
-    public static final String NAME = "IC2 Classic";
 
     public static final ResourceLocation REMOVER = JadeXIC2C.rl("remove_modid");
     public static final ResourceLocation RELOCATE = JadeXIC2C.rl("relocate_modid");
@@ -30,15 +29,17 @@ public class ModNameRender {
 
         @Override
         public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-            if (getUid() == REMOVER) {
-                if (ModIdentification.getModName(blockAccessor.getBlock()).equals(NAME)) {
-                    iTooltip.remove(Identifiers.CORE_MOD_NAME);
-                }
-            } else if (getUid() == RELOCATE) {
-                // TODO: make sure to relocate addons name as well
-                if (ModIdentification.getModName(blockAccessor.getBlock()).equals(NAME)) {
-                    String modName = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), NAME);
-                    iTooltip.add(Component.literal(modName));
+            // Dirty check for IC2Classic addons, assuming they are using instances if IC2Block for their blocks
+            // Checking for IToolProvider because I can't seem to be able to check for abstract class IC2Block directly
+            if (blockAccessor.getBlock() instanceof IToolProvider) {
+                String MOD_NAME = ModIdentification.getModName(blockAccessor.getBlock());
+                if (ModIdentification.getModName(blockAccessor.getBlock()).equals(MOD_NAME)) {
+                    if (getUid() == REMOVER) {
+                        iTooltip.remove(Identifiers.CORE_MOD_NAME);
+                    } else if (getUid() == RELOCATE) {
+                        String modName = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), MOD_NAME);
+                        iTooltip.add(Component.literal(modName));
+                    }
                 }
             }
         }

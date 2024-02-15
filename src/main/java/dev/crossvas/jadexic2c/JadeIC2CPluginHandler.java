@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
 import dev.crossvas.jadexic2c.info.tubes.*;
 import dev.crossvas.jadexic2c.utils.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.removals.TankRender;
+import ic2.core.block.base.IC2Block;
 import ic2.core.block.base.blocks.BaseTexturedBlock;
 import ic2.core.block.base.blocks.ValveBlock;
 import ic2.core.block.base.features.multiblock.IStructureListener;

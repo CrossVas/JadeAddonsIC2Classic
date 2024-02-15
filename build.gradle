@@ -114,6 +114,8 @@ dependencies {
 
     runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.1.663")
     runtimeOnly fg.deobf("curse.maven:rei-addons-ic2classic-947865:5035657")
+
+    runtimeOnly fg.deobf("curse.maven:advanced-solars-classic-314835:4856232")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
