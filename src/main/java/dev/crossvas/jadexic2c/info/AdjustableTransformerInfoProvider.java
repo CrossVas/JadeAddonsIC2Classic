@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.storage.tiles.transformer.AdjustableTransformerTileEntity;
@@ -33,16 +34,16 @@ public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
                 int energyPacket = tag.getInt("energyPacket");
                 int packetCount = tag.getInt("packetCount");
 
-                Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
-                Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", energyPacket);
-                Helpers.text(iTooltip,"ic2.probe.transformer.packets.name", packetCount);
+                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
+                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", energyPacket);
+                TextHelper.text(iTooltip,"ic2.probe.transformer.packets.name", packetCount);
 
                 long averageOut = tag.getLong("averageOut");
                 long packetsOut = tag.getLong("packetsOut");
 
                 if (averageOut > 0) {
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

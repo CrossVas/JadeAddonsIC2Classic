@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.recipes.misc.EnrichRecipe;
@@ -37,24 +38,24 @@ public enum UraniumEnricherInfoProvider implements IHelper<BlockEntity> {
             int storedPoints = tag.getInt("storedPoints");
             ResourceLocation storedType = new ResourceLocation(tag.getString("storedType"));
 
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
             EnrichRecipe currentRecipe = null;
             if (storedType != null && storedPoints > 0) {
                 currentRecipe = tile.getRecipeList().getRecipe(storedType);
             }
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", currentRecipe != null ? currentRecipe.getEnergyCost() + 100 : 100);
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", currentRecipe != null ? currentRecipe.getEnergyCost() + 100 : 100);
 
             if (mainProgress > 0) {
-                Helpers.barLiteral(iTooltip, mainProgress / 20, 1000 / 20,
+                BarHelper.bar(iTooltip, mainProgress / 20, 1000 / 20,
                         Component.translatable("ic2.probe.progress.full.name", mainProgress / 20, 1000 / 20).append(" s").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
             }
             if (secondaryProgress > 0) {
-                Helpers.barLiteral(iTooltip, secondaryProgress, 100,
+                BarHelper.bar(iTooltip, secondaryProgress, 100,
                         Component.translatable("ic2.probe.progress.secondary.full.name", secondaryProgress, 100).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
             }
             if (storedPoints > 0) {
-                Helpers.barLiteral(iTooltip, storedPoints, 1000, Component.translatable("ic2.probe.uranium.type.name",
+                BarHelper.bar(iTooltip, storedPoints, 1000, Component.translatable("ic2.probe.uranium.type.name",
                         SanityHelper.toPascalCase(currentRecipe.getId().getPath()), storedPoints, 1000).withStyle(ChatFormatting.WHITE), currentRecipe.getColor());
             }
         }

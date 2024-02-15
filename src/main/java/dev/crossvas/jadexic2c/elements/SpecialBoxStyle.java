@@ -1,16 +1,16 @@
-package dev.crossvas.jadexic2c.utils;
+package dev.crossvas.jadexic2c.elements;
 
 import snownee.jade.api.ui.BoxStyle;
 
-public class CustomBox extends BoxStyle {
+public class SpecialBoxStyle extends BoxStyle {
 
-    public CustomBox(int borderColor, int backColor) {
+    public SpecialBoxStyle(int borderColor, int backColor) {
         this.borderWidth = 1.0F;
         this.borderColor = borderColor;
         this.bgColor = backColor;
     }
 
-    public CustomBox(int backColor) {
+    public SpecialBoxStyle(int backColor) {
         this.borderWidth = 1.0F;
         this.borderColor = 0xFFFFFFFF;
         this.bgColor = backColor;

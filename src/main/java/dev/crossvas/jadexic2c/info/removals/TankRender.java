@@ -1,4 +1,4 @@
-package dev.crossvas.jadexic2c.utils.removals;
+package dev.crossvas.jadexic2c.info.removals;
 
 import dev.crossvas.jadexic2c.JadeXIC2C;
 import net.minecraft.resources.ResourceLocation;

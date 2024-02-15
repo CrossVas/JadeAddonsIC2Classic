@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.DirectionalTubeTileEntity;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.ChatFormatting;
@@ -30,11 +31,11 @@ public class DirectionalTubeInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "DirectionalTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof DirectionalTubeTileEntity) {
-            Helpers.space_y(iTooltip, 3);
+            PluginHelper.spacerY(iTooltip, 3);
             String directionName = tag.getString("direction");
             int direction3DDataValue = tag.getInt("3DDataValue");
             String facingName = SanityHelper.toPascalCase(directionName);
-            Helpers.text(iTooltip, Component.translatable("ic2.tube.directional.info").withStyle(ChatFormatting.GOLD).append(Helpers.getColor(direction3DDataValue) + facingName));
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.directional.info").withStyle(ChatFormatting.GOLD).append(PluginHelper.getColor(direction3DDataValue) + facingName));
         }
     }
 

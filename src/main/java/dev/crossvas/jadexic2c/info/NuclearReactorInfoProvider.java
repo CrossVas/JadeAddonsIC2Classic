@@ -1,10 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
@@ -47,12 +46,12 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof IReactor tile) {
             if (tile instanceof ISteamReactor steamReactor) {
-                Helpers.loadTankData(compoundTag, (BlockEntity) steamReactor);
+                TankHelper.loadTankData(compoundTag, (BlockEntity) steamReactor);
             }
         } else if (blockEntity instanceof IReactorChamber chamber) {
             BlockEntity tile = (BlockEntity) chamber.getReactor();
             if (tile instanceof ISteamReactor steamReactor) {
-                Helpers.loadTankData(compoundTag, (BlockEntity) steamReactor);
+                TankHelper.loadTankData(compoundTag, (BlockEntity) steamReactor);
             }
         }
         compoundTag.put("NuclearReactorInfo", tag);
@@ -67,18 +66,18 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
         if (INSTANCE.canHandle(blockAccessor)) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
-                    Helpers.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));
-                    Helpers.text(tooltip, "ic2.probe.reactor.breeding.name", reactor.getHeat() / 3000 + 1);
+                    TextHelper.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));
+                    TextHelper.text(tooltip, "ic2.probe.reactor.breeding.name", reactor.getHeat() / 3000 + 1);
                 } else if (tile instanceof ISteamReactor steamReactor) {
-                    Helpers.text(tooltip, "ic2.probe.steam.output.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
-                    Helpers.text(tooltip, "ic2.probe.water.consumption.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
-                    Helpers.text(tooltip, "ic2.probe.pump.pressure", 100);
-                    Helpers.text(tooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(20000L));
-                    Helpers.addClientTankFromTag(tooltip, blockAccessor);
+                    TextHelper.text(tooltip, "ic2.probe.steam.output.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
+                    TextHelper.text(tooltip, "ic2.probe.water.consumption.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
+                    TextHelper.text(tooltip, "ic2.probe.pump.pressure", 100);
+                    TextHelper.text(tooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(20000L));
+                    TankHelper.addClientTankFromTag(tooltip, blockAccessor);
                 }
 
                 if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.THERMOMETER)) {
-                    Helpers.barLiteral(tooltip, reactorTile.getHeat(), reactorTile.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
+                    BarHelper.bar(tooltip, reactorTile.getHeat(), reactorTile.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
                             reactorTile.getHeat(), Formatters.EU_READER_FORMAT.format((double) reactorTile.getMaxHeat() / 1000.0)).append("k").withStyle(ChatFormatting.WHITE), getReactorColor(reactorTile.getHeat(), reactorTile.getMaxHeat()));
                 }
             }

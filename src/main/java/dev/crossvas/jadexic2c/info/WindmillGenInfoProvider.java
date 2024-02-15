@@ -1,9 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.generators.tiles.WindmillTileEntity;
@@ -29,9 +29,9 @@ public enum WindmillGenInfoProvider implements IHelper<BlockEntity> {
 
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof WindmillTileEntity windmill) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(windmill.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 5));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", windmill.getMaxEnergyOutput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(windmill.getSourceTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", windmill.getMaxEnergyOutput());
             }
         }
     }

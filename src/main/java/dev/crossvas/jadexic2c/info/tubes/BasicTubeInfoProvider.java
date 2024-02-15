@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
@@ -50,8 +50,8 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
                     stack.setCount(itemTag.getInt("count"));
                     transportedList.add(stack);
                 });
-                Helpers.space_y(iTooltip, 3);
-                Helpers.grid(iTooltip, "ic2.probe.tube.transported", ChatFormatting.GOLD, transportedList);
+                PluginHelper.spacerY(iTooltip, 3);
+                PluginHelper.grid(iTooltip, "ic2.probe.tube.transported", ChatFormatting.GOLD, transportedList);
             }
         }
     }

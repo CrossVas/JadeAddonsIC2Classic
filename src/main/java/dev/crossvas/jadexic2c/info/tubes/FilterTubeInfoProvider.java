@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.FilterTubeTileEntity;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.ChatFormatting;
@@ -46,7 +47,7 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
                 }
             });
             if (!filteredList.isEmpty()) {
-                Helpers.space_y(iTooltip, 3);
+                PluginHelper.spacerY(iTooltip, 3);
                 Object2ObjectOpenHashMap<Component, List<FilterTubeTileEntity.FilterEntry>> mappedFilter = new Object2ObjectOpenHashMap<>();
                 for (FilterTubeTileEntity.FilterEntry filterEntry : filteredList) {
                     Component side = getSides(filterEntry);
@@ -60,13 +61,13 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
                 }
 
                 mappedFilter.keySet().forEach(side -> {
-                    Helpers.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                    TextHelper.text(iTooltip, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
                     for (FilterTubeTileEntity.FilterEntry entry : mappedFilter.get(side)) {
                         iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()).translate(new Vec2(0, -5)));
                     }
                     iTooltip.append(iTooltip.getElementHelper().spacer(3, 0));
-                    Helpers.appendText(iTooltip, "→ ");
-                    Helpers.appendText(iTooltip, side);
+                    TextHelper.appendText(iTooltip, Component.literal("→ ").withStyle(ChatFormatting.WHITE));
+                    TextHelper.appendText(iTooltip, side);
                 });
             }
         }

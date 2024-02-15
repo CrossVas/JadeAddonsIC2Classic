@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseEnergyStorageTileEntity;
@@ -30,9 +31,9 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "EnergyStorageInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.name", tag.getInt("providedEnergy"));
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.name", tag.getInt("providedEnergy"));
 
                 long averageIn = tag.getLong("averageIn");
                 long averageOut = tag.getLong("averageOut");
@@ -43,19 +44,19 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
 
                 if (averageIn > 0 || averageOut > 0) {
                     if (averageIn > 0) {
-                        Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (averageOut > 0) {
-                        Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (packetsIn > 0) {
-                        Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (packetsOut > 0) {
-                        Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
                     }
                 }
             }

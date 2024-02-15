@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.core.block.transport.item.tubes.StackingTubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
@@ -44,7 +44,7 @@ public class StackingTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(stackedTag.getInt("count"));
                 cachedList.add(stack);
             });
-            Helpers.grid(iTooltip, "ic2.probe.tube.cached", ChatFormatting.GOLD, cachedList);
+            PluginHelper.grid(iTooltip, "ic2.probe.tube.cached", ChatFormatting.GOLD, cachedList);
         }
     }
 

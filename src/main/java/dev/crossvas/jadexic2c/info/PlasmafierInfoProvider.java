@@ -1,13 +1,15 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.PlasmafierTileEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -27,20 +29,20 @@ public enum PlasmafierInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "PlasmaInfo");
         if (blockAccessor.getBlockEntity() instanceof PlasmafierTileEntity tile) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 10240);
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 10240);
 
             int plasma = tag.getInt("plasma");
             int maxPlasma = tag.getInt("maxPlasma");
             int uuMatter = tag.getInt("uuMatter");
 
             if (plasma > 0) {
-                Helpers.bar(iTooltip, plasma, maxPlasma, "ic2.probe.plasma.name", ColorMix.PURPLE);
+                BarHelper.bar(iTooltip, plasma, maxPlasma, Component.translatable("ic2.probe.plasma.name", plasma, maxPlasma), ColorMix.PURPLE);
             }
 
             if (uuMatter > 0) {
-                Helpers.bar(iTooltip, uuMatter, 150, "ic2.probe.matter.name", ColorMix.PURPLE);
+                BarHelper.bar(iTooltip, uuMatter, 150, Component.translatable("ic2.probe.matter.name", uuMatter, 150), ColorMix.PURPLE);
             }
 
         }

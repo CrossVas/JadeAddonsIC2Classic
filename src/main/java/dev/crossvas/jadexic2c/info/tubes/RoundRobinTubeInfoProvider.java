@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.RoundRobinTubeTileEntity;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.ChatFormatting;
@@ -31,14 +32,14 @@ public class RoundRobinTubeInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "RoundRobinTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof RoundRobinTubeTileEntity) {
-            Helpers.space_y(iTooltip, 3);
-            Helpers.text(iTooltip, Component.translatable("ic2.tube.round_robin.info").withStyle(ChatFormatting.GOLD));
+            PluginHelper.spacerY(iTooltip, 3);
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.round_robin.info").withStyle(ChatFormatting.GOLD));
             int[] size = tag.getIntArray("size");
             for (int i = 0; i < size.length; i++) {
                 int count = size[i];
                 if (count > 0) {
                     Direction side = Direction.from3DDataValue(i);
-                    Helpers.text(iTooltip, Component.literal( SanityHelper.toPascalCase(side.getName()) + ": " + count).withStyle(Helpers.getColor(i)));
+                    TextHelper.text(iTooltip, Component.literal( SanityHelper.toPascalCase(side.getName()) + ": " + count).withStyle(PluginHelper.getColor(i)));
                 }
             }
         }

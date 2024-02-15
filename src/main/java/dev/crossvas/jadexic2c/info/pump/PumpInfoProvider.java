@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info.pump;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.lv.PumpTileEntity;
@@ -30,19 +29,19 @@ public enum PumpInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "PumpInfo");
         if (blockAccessor.getBlockEntity() instanceof PumpTileEntity pump) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pump.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", pump.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", pump.getPumpCost());
-            Helpers.text(iTooltip, "ic2.probe.pump.pressure", 100);
-            Helpers.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(800L));
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pump.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", pump.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", pump.getPumpCost());
+            TextHelper.text(iTooltip, "ic2.probe.pump.pressure", 100);
+            TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(800L));
 
             int pumpProgress = tag.getInt("progress");
 
             if (pumpProgress > 0) {
-                Helpers.barLiteral(iTooltip, pumpProgress, pump.getPumpMaxProgress(),
+                BarHelper.bar(iTooltip, pumpProgress, pump.getPumpMaxProgress(),
                         Component.translatable("ic2.probe.progress.full.name", pumpProgress, pump.getPumpMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
             }
-            Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+            TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
         }
     }
 
@@ -52,7 +51,7 @@ public enum PumpInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof PumpTileEntity pump) {
                 CompoundTag tag = new CompoundTag();
                 tag.putInt("progress", pump.getPumpProgress());
-                Helpers.loadTankData(pump.tank, compoundTag);
+                TankHelper.loadTankData(pump.tank, compoundTag);
                 compoundTag.put("PumpInfo", tag);
             }
         }

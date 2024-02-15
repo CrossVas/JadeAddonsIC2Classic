@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
@@ -35,11 +36,11 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
                 int transfer = tag.getInt("transferRate");
                 int energy = tag.getInt("energy");
                 int maxEnergy = tag.getInt("maxEnergy");
-                Helpers.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
-                Helpers.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
+                TextHelper.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
+                TextHelper.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
 
                 if (energy > 0) {
-                    Helpers.barLiteral(iTooltip, energy, maxEnergy,
+                    BarHelper.bar(iTooltip, energy, maxEnergy,
                             Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
                 }
             }
@@ -50,11 +51,11 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
                 int transfer = tag.getInt("transferRateC");
                 int energy = tag.getInt("energyC");
                 int maxEnergy = tag.getInt("maxEnergyC");
-                Helpers.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
-                Helpers.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
+                TextHelper.text(iTooltip, "ic2.probe.electrolyzer.transferrate.name", transfer);
+                TextHelper.text(iTooltip, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
 
                 if (energy > 0) {
-                    Helpers.barLiteral(iTooltip, energy, maxEnergy,
+                    BarHelper.bar(iTooltip, energy, maxEnergy,
                             Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
                 }
             }

@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseGeneratorTileEntity;
@@ -33,30 +32,30 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseGeneratorTileEntity gen) {
                 float euProduction = tag.getFloat("euProduction");
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
 
-                Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
                 if (gen instanceof SolarTurbineTileEntity) {
                     int heat = tag.getInt("heat");
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F))).withStyle(ChatFormatting.WHITE));
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F))).withStyle(ChatFormatting.WHITE));
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof ThermalGeneratorTileEntity) {
                     float subProduction = tag.getFloat("subProduction");
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction)).withStyle(ChatFormatting.WHITE));
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction)).withStyle(ChatFormatting.WHITE));
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof GeoGenTileEntity) {
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof LiquidFuelGenTileEntity) {
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
 
                 int fuel = tag.getInt("fuel");
                 if ((gen instanceof SlagGenTileEntity || gen instanceof FuelGenTileEntity) && fuel > 0) {
-                    Helpers.barLiteral(iTooltip, fuel, gen.getMaxFuel(), Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
+                    BarHelper.bar(iTooltip, fuel, gen.getMaxFuel(), Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
                 }
             }
         }
@@ -70,15 +69,15 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
                 tag.putFloat("euProduction", generator.getEUProduction());
                 tag.putInt("fuel", generator.fuel);
                 if (generator instanceof SolarTurbineTileEntity solarTurbine) {
-                    Helpers.loadTankData(compoundTag, solarTurbine);
+                    TankHelper.loadTankData(compoundTag, solarTurbine);
                     tag.putInt("heat", solarTurbine.heat);
                 } else if (generator instanceof ThermalGeneratorTileEntity thermal) {
-                    Helpers.loadTankData(compoundTag, thermal);
+                    TankHelper.loadTankData(compoundTag, thermal);
                     tag.putFloat("subProduction", thermal.subProduction.getProduction(2000.0F));
                 } else if (generator instanceof GeoGenTileEntity geothermal) {
-                    Helpers.loadTankData(compoundTag, geothermal);
+                    TankHelper.loadTankData(compoundTag, geothermal);
                 } else if (generator instanceof LiquidFuelGenTileEntity liquidGen) {
-                    Helpers.loadTankData(compoundTag, liquidGen);
+                    TankHelper.loadTankData(compoundTag, liquidGen);
                 }
                 compoundTag.put("BaseGeneratorInfo", tag);
             }

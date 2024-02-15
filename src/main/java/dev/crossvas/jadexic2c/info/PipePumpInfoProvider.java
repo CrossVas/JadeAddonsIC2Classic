@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
 import ic2.core.block.transport.fluid.tiles.SimplePipePumpTileEntity;
@@ -29,11 +29,11 @@ public enum PipePumpInfoProvider implements IHelper<BlockEntity> {
 
         if (blockAccessor.getBlockEntity() instanceof SimplePipePumpTileEntity pump) {
             if (pump instanceof ElectricPipePumpTileEntity electricPump) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(electricPump.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(electricPump.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(electricPump.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(electricPump.getTier()));
             }
-            Helpers.text(iTooltip, "ic2.probe.pump.pressure", pump.getPressure());
-            Helpers.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format((long)(tag.getInt("drainAmount") / 20)));
+            TextHelper.text(iTooltip, "ic2.probe.pump.pressure", pump.getPressure());
+            TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format((long)(tag.getInt("drainAmount") / 20)));
         }
 
 

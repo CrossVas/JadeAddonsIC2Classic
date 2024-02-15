@@ -1,9 +1,11 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
@@ -34,14 +36,14 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "BatteryStationInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseBatteryStationTileEntity station) {
-                Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
-                Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
+                TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
+                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
                 long missingEnergy = tag.getLong("missingEnergy");
                 int maxTransfer = tag.getInt("maxTransfer");
 
                 if (missingEnergy > 0) {
                     int chargeEnergy = (int) Math.min(maxTransfer, missingEnergy);
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.chargingBench.eta.name",
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.chargingBench.eta.name",
                             DurationFormatUtils.formatDuration(chargeEnergy <= 0 ? 0L : (missingEnergy / chargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.GOLD));
                 }
 
@@ -51,16 +53,16 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
 
                 if (capacity > 0) {
                     int dischargeEnergy = (int) Math.min(averageIn, capacity);
-                    Helpers.barLiteral(iTooltip, (int) capacity, (int) maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
+                    BarHelper.bar(iTooltip, (int) capacity, (int) maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                             DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (capacity / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
                 }
 
                 int averageOut = tag.getInt("averageOut");
                 int packetsOut = tag.getInt("packetsOut");
                 if (averageOut > 0) {
-                    Helpers.space_y(iTooltip, 3);
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
+                    PluginHelper.spacerY(iTooltip, 3);
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

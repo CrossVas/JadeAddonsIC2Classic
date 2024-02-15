@@ -1,4 +1,4 @@
-package dev.crossvas.jadexic2c.utils;
+package dev.crossvas.jadexic2c.elements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -15,7 +15,7 @@ import snownee.jade.overlay.OverlayRenderer;
 
 import java.util.Objects;
 
-public class CustomStyle extends ProgressStyle {
+public class SpecialProgressStyle extends ProgressStyle {
 
     @Override
     public void render(PoseStack matrixStack, float x, float y, float width, float height, float progress, Component text) {

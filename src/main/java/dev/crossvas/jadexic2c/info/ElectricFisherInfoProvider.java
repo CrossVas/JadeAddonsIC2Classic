@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.ElectricFisherTileEntity;
@@ -32,17 +33,17 @@ public enum ElectricFisherInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "ElectricFisherInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseMultiElectricTileEntity tile) {
             if (tile instanceof ElectricFisherTileEntity fisher) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(fisher.getSinkTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", fisher.getMaxInput());
-                Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 150);
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(fisher.getSinkTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", fisher.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 150);
                 int progress = (int) tag.getFloat("progress");
                 int max = (int) fisher.getMaxProgress();
-                Helpers.barLiteral(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), ColorMix.BLUE);
+                BarHelper.bar(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), ColorMix.BLUE);
             }
 
             if (!tile.isValid || tile.isDynamic()) {
                 long time = tile.clockTime(512);
-                Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+                BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
             }
         }
     }

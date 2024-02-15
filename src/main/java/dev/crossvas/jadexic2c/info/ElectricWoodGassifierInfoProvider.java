@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.lv.WoodGassifierTileEntity;
@@ -28,16 +27,16 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "GassificatorInfo");
         if (blockAccessor.getBlockEntity() instanceof WoodGassifierTileEntity gas) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gas.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", gas.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 1);
-            Helpers.text(iTooltip, "ic2.probe.pump.pressure", 25);
-            Helpers.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(1800L));
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gas.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", gas.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 1);
+            TextHelper.text(iTooltip, "ic2.probe.pump.pressure", 25);
+            TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(1800L));
             float progress = tag.getFloat("progress");
             if (progress > 0) {
-                Helpers.bar(iTooltip, (int) progress, (int) gas.getMaxProgress(), "ic2.probe.progress.full.name", ColorMix.BLUE);
+                BarHelper.bar(iTooltip, (int) progress, (int) gas.getMaxProgress(), "ic2.probe.progress.full.name", ColorMix.BLUE);
             }
-            Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+            TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
         }
     }
 
@@ -49,7 +48,7 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof WoodGassifierTileEntity gas) {
                 CompoundTag tag = new CompoundTag();
                 tag.putFloat("progress", gas.getProgress());
-                Helpers.loadTankData(compoundTag, gas);
+                TankHelper.loadTankData(compoundTag, gas);
                 compoundTag.put("GassificatorInfo", tag);
             }
         }

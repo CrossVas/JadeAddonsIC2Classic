@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
 import ic2.core.platform.player.PlayerHandler;
@@ -41,16 +42,16 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
         int fuel = tag.getInt("fuel");
         int maxFuel = tag.getInt("maxFuel");
         int heat = tag.getInt("heat");
-        Helpers.barLiteral(iTooltip, fuel, maxFuel, Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
+        BarHelper.bar(iTooltip, fuel, maxFuel, Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
 
         if (PlayerHandler.getHandler(accessor.getPlayer()).hasThermometer()) {
-            Helpers.barLiteral(iTooltip, heat, boiler.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
+            BarHelper.bar(iTooltip, heat, boiler.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
                     heat / 30, Formatters.EU_READER_FORMAT.format((double) boiler.getMaxHeat() / 30)).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
         }
-        Helpers.addClientTankFromTag(iTooltip, accessor);
+        TankHelper.addClientTankFromTag(iTooltip, accessor);
         if (!boiler.isValid) {
             long time = boiler.clockTime(512);
-            Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+            BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
         }
     }
 
@@ -61,7 +62,7 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
             tag.putInt("fuel", boiler.getFuel());
             tag.putInt("maxFuel", boiler.getMaxFuel());
             tag.putInt("heat", boiler.getHeat());
-            Helpers.loadTankData(compoundTag, boiler);
+            TankHelper.loadTankData(compoundTag, boiler);
             compoundTag.put("FuelBoilerInfo", tag);
         }
     }

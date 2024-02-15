@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.TeleportTubeTileEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -30,8 +31,8 @@ public class TeleportTubeInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "TeleportTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof TeleportTubeTileEntity) {
             String freq = tag.getString("freq");
-            Helpers.space_y(iTooltip, 3);
-            Helpers.text(iTooltip, Component.translatable( "ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
+            PluginHelper.spacerY(iTooltip, 3);
+            TextHelper.text(iTooltip, Component.translatable( "ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
         }
     }
 

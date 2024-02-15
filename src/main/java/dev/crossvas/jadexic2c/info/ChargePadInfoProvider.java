@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.BaseChargePadTileEntity;
@@ -34,16 +35,16 @@ public enum ChargePadInfoProvider implements IHelper<BlockEntity> {
                 int transferLimit = tag.getInt("transferLimit");
                 float range = tag.getFloat("range");
 
-                Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pad.getSinkTier()));
-                Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", maxInput);
-                Helpers.text(iTooltip,"ic2.probe.chargepad.transferrate.name", transferLimit);
-                Helpers.text(iTooltip,"ic2.probe.chargepad.radius.name", range + 1.0F);
+                TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pad.getSinkTier()));
+                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", maxInput);
+                TextHelper.text(iTooltip,"ic2.probe.chargepad.transferrate.name", transferLimit);
+                TextHelper.text(iTooltip,"ic2.probe.chargepad.radius.name", range + 1.0F);
 
                 int averageIn = tag.getInt("averageIn");
                 int packetsIn = tag.getInt("packetsIn");
                 if (averageIn > 0) {
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

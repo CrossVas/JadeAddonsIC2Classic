@@ -1,9 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.tiles.teleporter.TeleporterTarget;
 import ic2.core.IC2;
 import ic2.core.block.base.tiles.BaseTileEntity;
@@ -35,37 +35,37 @@ public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
 
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof TeleporterTileEntity teleport) {
-                Helpers.text(iTooltip, Component.translatable("ic2.probe.teleporter.type", Component.translatable("ic2.probe.teleporter.type." + teleport.getProbeSendType().name().toLowerCase())).withStyle(ChatFormatting.WHITE));
+                TextHelper.text(iTooltip, Component.translatable("ic2.probe.teleporter.type", Component.translatable("ic2.probe.teleporter.type." + teleport.getProbeSendType().name().toLowerCase())).withStyle(ChatFormatting.WHITE));
                 TeleporterTarget target = TeleporterTarget.read(tag.getCompound("TeleportTarget"));
                 int baseCost = tag.getInt("cost");
                 long availableEnergy = tag.getLong("availableEnergy");
                 boolean noTarget = tag.getBoolean("no_target");
                 if (noTarget) {
-                    Helpers.text(iTooltip,"ic2.probe.teleporter.no_target");
+                    TextHelper.text(iTooltip,"ic2.probe.teleporter.no_target");
                 } else if (!tag.getBoolean("isMathching")) {
-                    Helpers.text(iTooltip,"ic2.probe.teleporter.invalid_target");
+                    TextHelper.text(iTooltip,"ic2.probe.teleporter.invalid_target");
                 } else {
-                    Helpers.text(iTooltip,"ic2.probe.teleporter.target", SanityHelper.toPascalCase(target.getDimension().location().getPath()), target.getTargetPosition().getX(), target.getTargetPosition().getY(), target.getTargetPosition().getZ());
+                    TextHelper.text(iTooltip,"ic2.probe.teleporter.target", SanityHelper.toPascalCase(target.getDimension().location().getPath()), target.getTargetPosition().getX(), target.getTargetPosition().getY(), target.getTargetPosition().getZ());
                 }
 
                 if (baseCost > 0) {
                     switch (teleport.getProbeSendType()) {
                         case ENTITY:
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(TeleportUtil.getWeightOfEntity(blockAccessor.getPlayer(), IC2.CONFIG.teleporterKeepItems.get()) * baseCost * 5)));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(TeleportUtil.getWeightOfEntity(blockAccessor.getPlayer(), IC2.CONFIG.teleporterKeepItems.get()) * baseCost * 5)));
                             break;
                         case ENERGY:
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
                             break;
                         case FLUID:
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", Formatter.formatNumber((double)(availableEnergy / (long)baseCost * 10L), 6)));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", Formatter.formatNumber((double)(availableEnergy / (long)baseCost * 10L), 6)));
                             break;
                         case ITEM:
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", Formatter.formatNumber((double)(availableEnergy / (long)baseCost / 100L * 64L), 6)));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", Formatter.formatNumber((double)(availableEnergy / (long)baseCost / 100L * 64L), 6)));
                             break;
                         case SPAWNER:
-                            Helpers.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(baseCost * 25000)));
+                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(baseCost * 25000)));
                     }
                 }
             }

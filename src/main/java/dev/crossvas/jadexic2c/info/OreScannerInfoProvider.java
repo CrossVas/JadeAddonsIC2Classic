@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.OreScannerTileEntity;
@@ -29,15 +30,15 @@ public enum OreScannerInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "OreScannerInfo");
         if (blockAccessor.getBlockEntity() instanceof OreScannerTileEntity tile) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 1000);
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 1000);
 
             int blocks = tag.getInt("blocks");
             int maxBlocks = tag.getInt("maxBlocks");
 
             if (blocks > 0) {
-                Helpers.barLiteral(iTooltip, blocks, maxBlocks, Component.translatable("ic2.probe.progress.full.name", blocks / 25 / 20, maxBlocks / 25 / 20).append("s").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                BarHelper.bar(iTooltip, blocks, maxBlocks, Component.translatable("ic2.probe.progress.full.name", blocks / 25 / 20, maxBlocks / 25 / 20).append("s").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
             }
         }
     }

@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.hv.VillagerOMatTileEntity;
 import ic2.core.utils.math.ColorUtils;
@@ -28,11 +29,11 @@ public enum VillagerOMatInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "VillagerOMatInfo");
         if (blockAccessor.getBlockEntity() instanceof VillagerOMatTileEntity oMat) {
-            Helpers.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(oMat.getTier()));
-            Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", oMat.getMaxInput());
-            Helpers.text(iTooltip,"ic2.probe.villager_o_mat.usage", tag.getInt("activeTrades") * 6000);
+            TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(oMat.getTier()));
+            TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", oMat.getMaxInput());
+            TextHelper.text(iTooltip,"ic2.probe.villager_o_mat.usage", tag.getInt("activeTrades") * 6000);
 
-            Helpers.barLiteral(iTooltip, (int) (1200 - oMat.clockTime(1200)), 1200, Component.translatable("ic2.probe.villager_o_mat.next", oMat.clockTime(1200)).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+            BarHelper.bar(iTooltip, (int) (1200 - oMat.clockTime(1200)), 1200, Component.translatable("ic2.probe.villager_o_mat.next", oMat.clockTime(1200)).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
         }
 
 

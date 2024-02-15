@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.core.block.transport.item.tubes.RequestTubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -47,7 +47,7 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(requestsTag.getInt("count"));
                 requestsList.add(stack);
             });
-            Helpers.grid(iTooltip, "ic2.probe.tube.requests", ChatFormatting.GOLD, requestsList);
+            PluginHelper.grid(iTooltip, "ic2.probe.tube.requests", ChatFormatting.GOLD, requestsList);
 
             // missing
             ListTag missingItemTag = tag.getList("MissingItems", Tag.TAG_COMPOUND);
@@ -58,7 +58,7 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(missingTag.getInt("count"));
                 missingList.add(stack);
             });
-            Helpers.grid(iTooltip, "ic2.probe.tube.missing", ChatFormatting.GOLD, missingList);
+            PluginHelper.grid(iTooltip, "ic2.probe.tube.missing", ChatFormatting.GOLD, missingList);
 
             // requested
             ListTag requestedItemTag = tag.getList("RequestedItems", Tag.TAG_COMPOUND);
@@ -69,7 +69,7 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(requestedTag.getInt("count"));
                 requestedList.add(stack);
             });
-            Helpers.grid(iTooltip, "ic2.probe.tube.requesting", ChatFormatting.GOLD, requestedList);
+            PluginHelper.grid(iTooltip, "ic2.probe.tube.requesting", ChatFormatting.GOLD, requestedList);
 
             // insertion
             ListTag insertionItemTag = tag.getList("InsertionItems", Tag.TAG_COMPOUND);
@@ -80,7 +80,7 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(insertionTag.getInt("count"));
                 insertionList.add(stack);
             });
-            Helpers.grid(iTooltip, "ic2.probe.tube.stuck", ChatFormatting.GOLD, insertionList);
+            PluginHelper.grid(iTooltip, "ic2.probe.tube.stuck", ChatFormatting.GOLD, insertionList);
         }
     }
 

@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
@@ -37,15 +36,15 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
             // check for multiblock tiles
             if (tile instanceof BaseMultiMachineTileEntity multiTile) {
                 addMultiInfo(multiTile, iTooltip, tag);
-                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
         }
     }
 
     public static void addMultiInfo(BaseMultiMachineTileEntity blockEntity, ITooltip iTooltip, CompoundTag tag) {
-        Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(blockEntity.getTier()));
-        Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", blockEntity.getMaxInput());
-        Helpers.text(iTooltip, "ic2.probe.eu.usage.name", tag.getInt("energyPerTick"));
+        TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(blockEntity.getTier()));
+        TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", blockEntity.getMaxInput());
+        TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", tag.getInt("energyPerTick"));
 
         if (blockEntity instanceof PressureAlloyFurnaceTileEntity furnace) {
             int speed = tag.getInt("speed");
@@ -53,13 +52,13 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
             Component speedName = furnace.getSpeedName();
             double scaledProgress = (double) speed / maxSpeed;
             if (speed > 0) {
-                Helpers.barLiteral(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
+                BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
             }
         }
 
         if (!blockEntity.isValid) {
             long time = blockEntity.clockTime(512);
-            Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+            BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
         }
     }
 
@@ -68,7 +67,7 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
         if (blockEntity instanceof BaseMultiElectricTileEntity tile) {
             if (tile instanceof BaseMultiMachineTileEntity multiTile) {
                 CompoundTag tag = new CompoundTag();
-                Helpers.loadTankData(compoundTag, multiTile);
+                TankHelper.loadTankData(compoundTag, multiTile);
                 tag.putInt("energyPerTick", multiTile.getEnergyPerTick());
 
                 if (multiTile instanceof PressureAlloyFurnaceTileEntity furnace) {

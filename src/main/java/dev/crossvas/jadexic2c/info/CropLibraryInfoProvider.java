@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
@@ -37,9 +38,9 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseCropLibraryTileEntity lib) {
                 if (lib instanceof IEnergySink sink) {
-                    Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(sink.getSinkTier()));
-                    Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(sink.getSinkTier()));
-                    Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 1);
+                    TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(sink.getSinkTier()));
+                    TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(sink.getSinkTier()));
+                    TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 1);
                 }
 
                 int cropCount = tag.getInt("cropCount");
@@ -49,9 +50,9 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
                 int statLimit = tag.getInt("statLimit");
 
                 if (typeLimit != -1) {
-                    Helpers.text(iTooltip, "ic2.probe.crop_library.type.name", cropCount, typeLimit);
-                    Helpers.text(iTooltip, "ic2.probe.crop_library.stat.name", statCount, statLimit * typeLimit);
-                    Helpers.text(iTooltip, "ic2.probe.crop_library.size.name", sizeLimit);
+                    TextHelper.text(iTooltip, "ic2.probe.crop_library.type.name", cropCount, typeLimit);
+                    TextHelper.text(iTooltip, "ic2.probe.crop_library.stat.name", statCount, statLimit * typeLimit);
+                    TextHelper.text(iTooltip, "ic2.probe.crop_library.size.name", sizeLimit);
                 }
 
                 ListTag itemsTagList = tag.getList("items", Tag.TAG_COMPOUND);
@@ -62,7 +63,7 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
                     stack.setCount(itemTag.getInt("count"));
                     stackList.add(stack);
                 });
-                Helpers.grid(iTooltip, "ic2.probe.crop_library.name", ChatFormatting.YELLOW, stackList);
+                PluginHelper.grid(iTooltip, "ic2.probe.crop_library.name", ChatFormatting.YELLOW, stackList);
             }
         }
     }

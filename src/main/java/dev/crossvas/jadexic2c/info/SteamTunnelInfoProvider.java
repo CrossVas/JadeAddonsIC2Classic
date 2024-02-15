@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
@@ -35,12 +34,12 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseMultiBlockTileEntity multiBlock) {
                 if (multiBlock instanceof SteamTunnelTileEntity tunnel) {
                     addInfo(tunnel, iTooltip, tag);
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
 
                 if (!multiBlock.isValid || multiBlock.isDynamic()) {
                     long time = tile.clockTime(512);
-                    Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+                    BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
                 }
             }
 
@@ -49,7 +48,7 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
                 BlockEntity master = linking.getMaster();
                 if (master instanceof SteamTunnelTileEntity tunnel) {
                     addInfo(tunnel, iTooltip, linkingTag);
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
             }
         }
@@ -57,9 +56,9 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
 
     public void addInfo(SteamTunnelTileEntity tunnel, ITooltip iTooltip, CompoundTag tag) {
         float energyProduction = tag.getFloat("energyProduction");
-        Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tunnel.getSourceTier()));
-        Helpers.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double)energyProduction, 5));
-        Helpers.text(iTooltip, "ic2.probe.eu.output.max.name", tunnel.getMaxEnergyOutput());
+        TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tunnel.getSourceTier()));
+        TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double)energyProduction, 5));
+        TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", tunnel.getMaxEnergyOutput());
     }
 
     @Override
@@ -69,7 +68,7 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseMultiBlockTileEntity multi) {
                 if (multi instanceof SteamTunnelTileEntity tunnel) {
                     tag.putFloat("energyProduction", tunnel.getEUProduction());
-                    Helpers.loadTankData(compoundTag, tunnel);
+                    TankHelper.loadTankData(compoundTag, tunnel);
                 }
 
             } else if (tile instanceof BaseLinkingTileEntity linking) {
@@ -78,7 +77,7 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
                 if (master instanceof SteamTunnelTileEntity tunnel) {
                     linkingTag.putFloat("energyProduction", tunnel.getEUProduction());
                 }
-                Helpers.loadTankData(compoundTag, linking);
+                TankHelper.loadTankData(compoundTag, linking);
                 tag.put("LinkingBlockInfo", linkingTag);
             }
             compoundTag.put("SteamTunnelInfo", tag);

@@ -1,9 +1,11 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
@@ -34,14 +36,14 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "ChargingBenchInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseElectricTileEntity tile) {
             if (tile instanceof BaseChargingBenchTileEntity bench) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", bench.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", bench.getMaxInput());
 
                 int missingEnergy = tag.getInt("missingEnergy");
                 int benchAverageOut = tag.getInt("benchTransferOut");
                 if (missingEnergy > 0) {
                     int i = Math.min(benchAverageOut, missingEnergy);
-                    Helpers.text(iTooltip, Component.translatable("ic2.probe.chargingBench.eta.name",
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.chargingBench.eta.name",
                             DurationFormatUtils.formatDuration(i <= 0 ? 0L : (missingEnergy / i * 50L), "HH:mm:ss")).withStyle(ChatFormatting.GOLD));
                 }
 
@@ -50,16 +52,16 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
                 int maxCapacity = tag.getInt("maxCapacity");
                 if (toDischargeEnergy > 0) {
                     int dischargeEnergy =  Math.min(transferLimit, toDischargeEnergy);
-                    Helpers.barLiteral(iTooltip, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
+                    BarHelper.bar(iTooltip, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                             DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
                 }
 
                 int averageIn = tag.getInt("averageIn");
                 int packetsIn = tag.getInt("packetsIn");
                 if (averageIn > 0) {
-                    Helpers.space_y(iTooltip, 3);
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
+                    PluginHelper.spacerY(iTooltip, 3);
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

@@ -1,7 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeXIC2C;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.items.readers.IWrenchTool;
 import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.block.base.features.multiblock.IStructureListener;
@@ -44,13 +45,13 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
                 showInfo = actualRate > 0;
             }
             if (showInfo) {
-                Helpers.space_y(iTooltip, 3);
+                PluginHelper.spacerY(iTooltip, 3);
                 iTooltip.add(wrenchIcon);
                 if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                     double dropChance = tool.getActualLoss(handHeldStack, tile.getDropRate(player));
-                    Helpers.appendText(iTooltip, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")).withStyle(ChatFormatting.GRAY));
+                    TextHelper.appendText(iTooltip, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")).withStyle(ChatFormatting.GRAY));
                 } else {
-                    Helpers.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                    TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                 }
             }
         }

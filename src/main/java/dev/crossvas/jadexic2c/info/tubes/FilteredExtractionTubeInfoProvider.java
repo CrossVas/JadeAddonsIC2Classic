@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.FilteredExtractionTubeTileEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -35,7 +36,7 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
 
         CompoundTag tag = getData(blockAccessor, "FilteredExtractionTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof FilteredExtractionTubeTileEntity) {
-            Helpers.space_y(iTooltip, 3);
+            PluginHelper.spacerY(iTooltip, 3);
             ListTag extractionFilteredItemsTagList = tag.getList("ExtractionFilteredItems", Tag.TAG_COMPOUND);
             List<FilteredExtractionTubeTileEntity.FilterEntry> extractionFilteredList = new ArrayList<>();
             extractionFilteredItemsTagList.forEach(filter -> {
@@ -67,7 +68,7 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
                     boolean checkFluid = (filter.getFlags() & 128) != 0;
                     boolean checkDurability = (filter.getFlags() & 256) != 0;
                     int keepItem = filter.getKeepItems();
-                    Helpers.text(iTooltip, Component.translatable("ic2.tube.meta_filter.info").withStyle(ChatFormatting.GOLD));
+                    TextHelper.text(iTooltip, Component.translatable("ic2.tube.meta_filter.info").withStyle(ChatFormatting.GOLD));
                     iTooltip.append(iTooltip.getElementHelper().item(filter.getStack()).translate(new Vec2(0, -5)));
                     iTooltip.append(iTooltip.getElementHelper().text(Component.literal(" ")
                             .append(checkNBT ? ChatFormatting.GREEN + "*nbt " : "")
@@ -78,7 +79,7 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
             }
 
             boolean whitelist = tag.getBoolean("whitelist");
-            Helpers.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
                     .append((whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)));
         }
     }
@@ -118,19 +119,19 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
         int counter = 0;
         int size = 7;
         if (!entryList.isEmpty()) {
-            Helpers.text(iTooltip, Component.translatable(text).withStyle(style));
-            Helpers.space_y(iTooltip, 2);
+            TextHelper.text(iTooltip, Component.translatable(text).withStyle(style));
+            PluginHelper.spacerY(iTooltip, 2);
             for (FilteredExtractionTubeTileEntity.FilterEntry entry : entryList) {
                 if (counter <= size) {
                     iTooltip.append(iTooltip.getElementHelper().item(entry.getStack()));
                     counter++;
                     if (counter == size) {
                         counter = 0;
-                        Helpers.text(iTooltip, "");
+                        TextHelper.text(iTooltip, "");
                     }
                 }
             }
-            Helpers.space_y(iTooltip, 2);
+            PluginHelper.spacerY(iTooltip, 2);
         }
     }
 }

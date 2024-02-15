@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.BaseTransformerTileEntity;
 import ic2.core.utils.helpers.Formatters;
@@ -33,19 +33,19 @@ public enum TransformerInfoProvider implements IHelper<BlockEntity> {
                 int highOutput = tag.getInt("highOut");
                 boolean isActive = tag.getBoolean("isActive");
 
-                Helpers.text(iTooltip, Component.translatable("ic2.probe.transformer.inverted").withStyle(ChatFormatting.GOLD).
+                TextHelper.text(iTooltip, Component.translatable("ic2.probe.transformer.inverted").withStyle(ChatFormatting.GOLD).
                         append((isActive ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(isActive)));
 
-                Helpers.text(iTooltip,"ic2.probe.eu.max_in.name", isActive ? lowOutput : highOutput);
-                Helpers.text(iTooltip,"ic2.probe.eu.output.max.name", isActive ? highOutput : lowOutput);
-                Helpers.text(iTooltip,"ic2.probe.transformer.packets.name", isActive ? 1 : 4);
+                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", isActive ? lowOutput : highOutput);
+                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", isActive ? highOutput : lowOutput);
+                TextHelper.text(iTooltip,"ic2.probe.transformer.packets.name", isActive ? 1 : 4);
 
                 long averageOut = tag.getLong("averageOut");
                 long packetsOut = tag.getLong("packetsOut");
 
                 if (averageOut > 0) {
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
-                    Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

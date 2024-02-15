@@ -1,10 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import dev.crossvas.jadexic2c.utils.Formatter;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseFluxGeneratorTileEntity;
@@ -45,63 +44,63 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "BaseElectricMachine");
         if (blockAccessor.getBlockEntity() instanceof BaseElectricTileEntity tile) {
             if (tile instanceof ChunkloaderTileEntity chunk) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(chunk.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", chunk.getMaxInput());
-                Helpers.text(iTooltip, "ic2.probe.eu.usage.name", ChunkloaderTileEntity.POWER_COST[tag.getInt("radius")] * (tag.getBoolean("doesChunkProcessing") ? 2 : 1));
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(chunk.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", chunk.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", ChunkloaderTileEntity.POWER_COST[tag.getInt("radius")] * (tag.getBoolean("doesChunkProcessing") ? 2 : 1));
             }
             if (tile instanceof MonitorTileEntity monitor) {
                 if (monitor.isMaster()) {
-                    Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(monitor.getTier()));
-                    Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", monitor.getMaxInput());
-                    Helpers.text(iTooltip, "ic2.probe.eu.usage.name", tag.getBoolean("isActive") ? Math.max(tag.getInt("width"), tag.getInt("height")) : 0);
+                    TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(monitor.getTier()));
+                    TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", monitor.getMaxInput());
+                    TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", tag.getBoolean("isActive") ? Math.max(tag.getInt("width"), tag.getInt("height")) : 0);
                 }
             }
             if (tile instanceof CrafterTileEntity crafter) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(crafter.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", crafter.getMaxInput());
-                Helpers.text(iTooltip, "ic2.probe.crafter.usage", 25);
-                Helpers.text(iTooltip, "ic2.probe.crafter.delay", tag.getInt("speed"));
-                Helpers.text(iTooltip, "ic2.probe.crafter.crafts", tag.getInt("crafts"));
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(crafter.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", crafter.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.crafter.usage", 25);
+                TextHelper.text(iTooltip, "ic2.probe.crafter.delay", tag.getInt("speed"));
+                TextHelper.text(iTooltip, "ic2.probe.crafter.crafts", tag.getInt("crafts"));
             }
             if (tile instanceof TerraformerTileEntity || tile instanceof ReactorPlannerTileEntity || tile instanceof BaseFluxGeneratorTileEntity || tile instanceof CropHarvesterTileEntity ||
                     tile instanceof MachineBufferTileEntity || tile instanceof MagnetizerTileEntity || tile instanceof TeslaCoilTileEntity || tile instanceof TeleporterHubTileEntity) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
             }
             if (tile instanceof MachineTankTileEntity tank) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tank.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tank.getMaxInput());
-                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tank.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tank.getMaxInput());
+                TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
 
             if (tile instanceof CropMatronTileEntity cropmatron) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(cropmatron.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", cropmatron.getMaxInput());
-                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(cropmatron.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", cropmatron.getMaxInput());
+                TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
 
             if (tile instanceof ElectricEnchanterTileEntity enchanter) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
-                Helpers.text(iTooltip, "ic2.probe.eu.usage.name", 500);
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 500);
                 int storedXP = tag.getInt("storedXP");
                 float progress = tag.getFloat("progress");
-                Helpers.monoBarLiteral(iTooltip, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorMix.MONO_GREEN);
+                BarHelper.monoBar(iTooltip, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorMix.MONO_GREEN);
                 if (progress > 0.0F) {
-                    Helpers.barLiteral(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                    BarHelper.bar(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
                 }
             }
 
             if (tile instanceof MassFabricatorTileEntity massFab) {
-                Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(massFab.getTier()));
-                Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", massFab.getMaxInput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(massFab.getTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", massFab.getMaxInput());
                 float progress = tag.getFloat("uuProgress");
                 if (progress > 0.0F) {
-                    Helpers.barLiteral(iTooltip, (int) progress, (int) massFab.getMaxProgress(), Component.translatable("ic2.probe.progress.moderate.name",
+                    BarHelper.bar(iTooltip, (int) progress, (int) massFab.getMaxProgress(), Component.translatable("ic2.probe.progress.moderate.name",
                             Formatter.THERMAL_GEN.format((double) (progress / massFab.getMaxProgress()) * 100.0)), ColorMix.PURPLE);
                 }
                 if (tag.getInt("scrap") > 0) {
-                    Helpers.barLiteral(iTooltip, tag.getInt("scrap"), tag.getInt("scrapValue") * 2, Component.translatable("ic2.probe.matter.amplifier.name",
+                    BarHelper.bar(iTooltip, tag.getInt("scrap"), tag.getInt("scrapValue") * 2, Component.translatable("ic2.probe.matter.amplifier.name",
                             tag.getInt("scrap")), ColorMix.BROWN);
                 }
             }
@@ -137,10 +136,10 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
                 tag.putInt("scrap", massFab.getScrap());
                 tag.putInt("scrapValue", massFab.getLastScrap());
             } else if (tile instanceof MachineTankTileEntity tank) {
-                Helpers.loadTankData(compoundTag, tank);
-                Helpers.loadTankData(tank.tank, compoundTag);
+                TankHelper.loadTankData(compoundTag, tank);
+                TankHelper.loadTankData(tank.tank, compoundTag);
             } else if (tile instanceof CropMatronTileEntity cropmatron) {
-                Helpers.loadTankData(compoundTag, cropmatron);
+                TankHelper.loadTankData(compoundTag, cropmatron);
             }
             compoundTag.put("BaseElectricMachine", tag);
         }

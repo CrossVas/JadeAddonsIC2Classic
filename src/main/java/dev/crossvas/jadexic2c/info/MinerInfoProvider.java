@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
@@ -29,9 +28,9 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "MinerInfo");
         if (blockAccessor.getBlockEntity() instanceof MinerTileEntity miner) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", miner.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", miner.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
 
             byte finished = tag.getByte("finished");
             float progress = tag.getFloat("progress");
@@ -42,26 +41,26 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             if (miner instanceof RocketMinerTileEntity) {
                 switch (finished) {
                     case 0:
-                        Helpers.text(iTooltip, refueling ? "ic2.probe.miner.refuel.name" : "ic2.probe.miner.mining.name");
+                        TextHelper.text(iTooltip, refueling ? "ic2.probe.miner.refuel.name" : "ic2.probe.miner.mining.name");
                         break;
                     case 1:
-                        Helpers.text(iTooltip, "ic2.probe.miner.retracting.name");
+                        TextHelper.text(iTooltip, "ic2.probe.miner.retracting.name");
                     case 3:
-                        Helpers.text(iTooltip, "ic2.probe.miner.power.name");
+                        TextHelper.text(iTooltip, "ic2.probe.miner.power.name");
                 }
-                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             } else {
-                Helpers.text(iTooltip, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
+                TextHelper.text(iTooltip, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
             }
 
             if (!isStuck && progress > 0) {
                 float scaledOp = Math.min(6.0E7F, progress);
                 float scaledMaxOp = Math.min(6.0E7F, miner.getMaxProgress());
-                Helpers.barLiteral(iTooltip, (int) scaledOp, (int) scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", (int) scaledOp, (int) scaledMaxOp), ColorMix.BLUE);
+                BarHelper.bar(iTooltip, (int) scaledOp, (int) scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", (int) scaledOp, (int) scaledMaxOp), ColorMix.BLUE);
             }
 
             int y = miner.getPipeTip().getY();
-            Helpers.barLiteral(iTooltip, y, miner.getPosition().getY(), Component.translatable("ic2.probe.miner.progress.name", y), ColorMix.BROWN);
+            BarHelper.bar(iTooltip, y, miner.getPosition().getY(), Component.translatable("ic2.probe.miner.progress.name", y), ColorMix.BROWN);
         }
     }
 
@@ -72,7 +71,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof RocketMinerTileEntity rocket) {
                 tag.putByte("finished", (byte) rocket.finished);
                 tag.putBoolean("refueling", rocket.isRefueling());
-                Helpers.loadTankData(rocket.tank, compoundTag);
+                TankHelper.loadTankData(rocket.tank, compoundTag);
             } else if (tile instanceof MinerTileEntity miner) {
                 tag.putFloat("progress", miner.getProgress());
                 tag.putBoolean("isStuck", miner.isStuck());

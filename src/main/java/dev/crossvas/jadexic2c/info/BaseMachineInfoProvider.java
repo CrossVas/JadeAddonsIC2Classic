@@ -1,9 +1,8 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.*;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Helpers;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.machine.single.BaseAdvMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
@@ -37,14 +36,14 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "BaseMachineInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseMachineTileEntity tile) {
-            Helpers.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
-            Helpers.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
-            Helpers.text(iTooltip, "ic2.probe.eu.usage.name", tile.getEnergyPerTick());
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", tile.getEnergyPerTick());
             if (tile instanceof SlowGrinderTileEntity grinder) {
-                Helpers.text(iTooltip, "ic2.probe.scrap.chance.name", grinder.getChance(0.25F) * 100.0F);
+                TextHelper.text(iTooltip, "ic2.probe.scrap.chance.name", grinder.getChance(0.25F) * 100.0F);
             }
             if (tile instanceof RefineryTileEntity) {
-                Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
 
             int speed;
@@ -54,7 +53,6 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
             float progress = tag.getFloat("progress");
             float maxProgress = tag.getFloat("maxProgress");
             float progressPerTick = tag.getFloat("progressPerTick");
-            boolean isActive = tag.getBoolean("isActive");
 
             if (tile instanceof BaseAdvMachineTileEntity advancedTile) {
                 if (tag.getInt("speed") > 0) {
@@ -62,7 +60,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = advancedTile.getMaxSpeed();
                     speedName = advancedTile.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    Helpers.barLiteral(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
                 }
             }
             if (tile instanceof VacuumCannerTileEntity vacuum) {
@@ -71,19 +69,19 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = vacuum.getMaxSpeed();
                     speedName = vacuum.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    Helpers.barLiteral(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
                 }
             }
 
             if (tile instanceof RareEarthExtractorTileEntity) {
                 float material = tag.getFloat("material");
                 if (material > 0.0F) {
-                    Helpers.barLiteral(iTooltip, (int) material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), ColorMix.PURPLE);
+                    BarHelper.bar(iTooltip, (int) material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), ColorMix.PURPLE);
                 }
             } else if (tile instanceof RareEarthCentrifugeTileEntity extractor) {
                 float material = tag.getFloat("material");
                 if (material > 0.0F) {
-                    Helpers.barLiteral(iTooltip, (int) material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), ColorMix.PURPLE);
+                    BarHelper.bar(iTooltip, (int) material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), ColorMix.PURPLE);
                 }
 
                 if (tag.getInt("speed") > 0) {
@@ -91,13 +89,13 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = extractor.getMaxSpeed();
                     speedName = extractor.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    Helpers.barLiteral(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
                 }
             }
             if (progress > 0.0F) {
                 int scaledOp = (int) Math.min(6.0E7F, progress / progressPerTick);
                 int scaledMaxOp = (int) Math.min(6.0E7F, maxProgress / progressPerTick);
-                Helpers.barLiteral(iTooltip, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                BarHelper.bar(iTooltip, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
             }
         }
     }
@@ -111,7 +109,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
             tag.putFloat("maxProgress", tile.getMaxProgress());
             tag.putFloat("progressPerTick", tile.progressPerTick);
             if (tile instanceof RefineryTileEntity refinery) {
-                Helpers.loadTankData(compoundTag, refinery);
+                TankHelper.loadTankData(compoundTag, refinery);
             }
         }
         if (blockEntity instanceof BaseAdvMachineTileEntity tile) {

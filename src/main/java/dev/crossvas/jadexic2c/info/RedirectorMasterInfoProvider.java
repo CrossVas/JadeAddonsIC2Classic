@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.util.DirectionList;
 import ic2.core.block.storage.tiles.RedirectorMasterTileEntity;
 import ic2.core.utils.helpers.Formatters;
@@ -33,7 +34,7 @@ public enum RedirectorMasterInfoProvider implements IHelper<BlockEntity> {
             for (Direction side : DirectionList.ALL) {
                 int value = master.shares[side.get3DDataValue()];
                 if (value > 0) {
-                    Helpers.text(iTooltip, DirectionList.getName(side).append(": " + value + "%").withStyle(ChatFormatting.WHITE));
+                    TextHelper.text(iTooltip, DirectionList.getName(side).append(": " + value + "%").withStyle(ChatFormatting.WHITE));
                 }
             }
 
@@ -41,9 +42,9 @@ public enum RedirectorMasterInfoProvider implements IHelper<BlockEntity> {
             int packetsIn = tag.getInt("packetsIn");
 
             if (averageIn > 0) {
-                Helpers.space_y(iTooltip, 5);
-                Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
-                Helpers.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                PluginHelper.spacerY(iTooltip, 5);
+                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
+                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
             }
         }
     }

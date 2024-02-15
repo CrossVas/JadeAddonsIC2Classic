@@ -1,8 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.utils.Helpers;
+import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.TankHelper;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
@@ -32,12 +33,12 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseMultiBlockTileEntity multiBlock) {
                 if (multiBlock instanceof TankTileEntity) {
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
 
                 if (!multiBlock.isValid || multiBlock.isDynamic()) {
                     long time = tile.clockTime(512);
-                    Helpers.barLiteral(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+                    BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
                 }
             }
         }
@@ -46,7 +47,7 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
             if (linking instanceof BaseValveTileEntity) {
                 BlockEntity master = linking.getMaster();
                 if (master instanceof TankTileEntity) {
-                    Helpers.addClientTankFromTag(iTooltip, blockAccessor);
+                    TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
             }
         }
@@ -58,13 +59,13 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseMultiBlockTileEntity multi) {
                 if (multi instanceof TankTileEntity tank) {
-                    Helpers.loadTankData(compoundTag, tank);
+                    TankHelper.loadTankData(compoundTag, tank);
                 }
             }
         } else if (blockEntity instanceof BaseLinkingTileEntity linking) {
             BlockEntity master = linking.getMaster();
             if (master instanceof TankTileEntity) {
-                Helpers.loadTankData(compoundTag, linking);
+                TankHelper.loadTankData(compoundTag, linking);
             }
         }
         compoundTag.put("DynamicTankInfo", tag);

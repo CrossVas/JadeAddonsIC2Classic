@@ -1,5 +1,6 @@
-package dev.crossvas.jadexic2c;
+package dev.crossvas.jadexic2c.helpers;
 
+import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
