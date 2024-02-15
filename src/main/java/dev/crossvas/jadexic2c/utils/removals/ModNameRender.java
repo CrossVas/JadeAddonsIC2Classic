@@ -14,47 +14,43 @@ public class ModNameRender {
     public static final ResourceLocation REMOVER = JadeXIC2C.rl("remove_modid");
     public static final ResourceLocation RELOCATE = JadeXIC2C.rl("relocate_modid");
 
-    public enum ModNameRemover implements IBlockComponentProvider {
-        INSTANCE;
+    public static final ModNameRelocator MOD_NAME_REMOVER = new ModNameRelocator(REMOVER, TooltipPosition.TAIL);
+    public static final ModNameRelocator MOD_NAME_RELOCATOR = new ModNameRelocator(RELOCATE, TooltipPosition.HEAD);
 
+
+    public static class ModNameRelocator implements IBlockComponentProvider {
+
+        ResourceLocation ID;
+        int PRIORITY;
+
+        public ModNameRelocator(ResourceLocation id, int priority) {
+            this.ID = id;
+            this.PRIORITY = priority;
+        }
 
         @Override
         public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-            if (ModIdentification.getModName(blockAccessor.getBlock()).equals(NAME)) {
-                iTooltip.remove(Identifiers.CORE_MOD_NAME);
+            if (getUid() == REMOVER) {
+                if (ModIdentification.getModName(blockAccessor.getBlock()).equals(NAME)) {
+                    iTooltip.remove(Identifiers.CORE_MOD_NAME);
+                }
+            } else if (getUid() == RELOCATE) {
+                // TODO: make sure to relocate addons name as well
+                if (ModIdentification.getModName(blockAccessor.getBlock()).equals(NAME)) {
+                    String modName = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), NAME);
+                    iTooltip.add(Component.literal(modName));
+                }
             }
         }
 
         @Override
         public ResourceLocation getUid() {
-            return REMOVER;
+            return this.ID;
         }
 
         @Override
         public int getDefaultPriority() {
-            return TooltipPosition.TAIL;
-        }
-    }
-
-    public enum ModNameRelocator implements IBlockComponentProvider {
-        INSTANCE;
-
-        @Override
-        public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-            if (ModIdentification.getModName(accessor.getBlock()).equals(NAME)) {
-                String modName = String.format(config.getWailaConfig().getFormatting().getModName(), NAME);
-                tooltip.add(Component.literal(modName));
-            }
-        }
-
-        @Override
-        public ResourceLocation getUid() {
-            return RELOCATE;
-        }
-
-        @Override
-        public int getDefaultPriority() {
-            return TooltipPosition.HEAD;
+            return this.PRIORITY;
         }
     }
 }

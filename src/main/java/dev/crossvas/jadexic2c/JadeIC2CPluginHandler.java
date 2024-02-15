@@ -210,8 +210,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
 
         // remove builtin fluid tank render for IC2 FluidHandlers. We use our own style.
         registration.registerBlockComponent(TankRender.INSTANCE, Block.class);
-        registration.registerBlockComponent(ModNameRender.ModNameRemover.INSTANCE, Block.class);
-        registration.registerBlockComponent(ModNameRender.ModNameRelocator.INSTANCE, Block.class);
+        registration.registerBlockComponent(ModNameRender.MOD_NAME_REMOVER, Block.class);
+        registration.registerBlockComponent(ModNameRender.MOD_NAME_RELOCATOR, Block.class);
         registration.registerBlockComponent(EUStorageInfoProvider.INSTANCE, Block.class);
     }
 
