@@ -3,7 +3,10 @@ package dev.crossvas.jadexic2c.info.removals;
 import dev.crossvas.jadexic2c.JadeXIC2C;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import snownee.jade.api.*;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.TooltipPosition;
 import snownee.jade.api.config.IPluginConfig;
 
 import java.util.ArrayList;

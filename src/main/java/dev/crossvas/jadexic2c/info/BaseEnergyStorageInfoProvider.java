@@ -1,8 +1,7 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;

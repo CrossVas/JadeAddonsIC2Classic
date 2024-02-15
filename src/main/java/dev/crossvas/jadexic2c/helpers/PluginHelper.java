@@ -16,6 +16,7 @@ public class PluginHelper {
     public static void spacerY(ITooltip tooltip, int y) {
         tooltip.add(tooltip.getElementHelper().spacer(0, y));
     }
+
     public static void spacerXY(ITooltip tooltip, int x, int y) {
         tooltip.add(tooltip.getElementHelper().spacer(x, y));
     }
