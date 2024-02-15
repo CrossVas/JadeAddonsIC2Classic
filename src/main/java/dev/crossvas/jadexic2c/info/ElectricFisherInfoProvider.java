@@ -43,7 +43,7 @@ public enum ElectricFisherInfoProvider implements IHelper<BlockEntity> {
 
             if (!tile.isValid || tile.isDynamic()) {
                 long time = tile.clockTime(512);
-                BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+                BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
             }
         }
     }

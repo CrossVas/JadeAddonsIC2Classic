@@ -58,7 +58,7 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
 
         if (!blockEntity.isValid) {
             long time = blockEntity.clockTime(512);
-            BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+            BarHelper.bar(iTooltip, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
         }
     }
 
