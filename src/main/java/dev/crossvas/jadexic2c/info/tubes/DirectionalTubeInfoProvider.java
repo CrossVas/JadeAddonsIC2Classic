@@ -21,7 +21,8 @@ public class DirectionalTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static DirectionalTubeInfoProvider INSTANCE = new DirectionalTubeInfoProvider();
 
-    public DirectionalTubeInfoProvider() {}
+    public DirectionalTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

@@ -31,7 +31,8 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static BasicTubeInfoProvider INSTANCE = new BasicTubeInfoProvider();
 
-    public BasicTubeInfoProvider() {}
+    public BasicTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -66,7 +67,7 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
                 Object2IntLinkedOpenCustomHashMap<ItemStack> mapped = new Object2IntLinkedOpenCustomHashMap<>(ItemStackStrategy.INSTANCE);
                 int i = 0;
 
-                for(int m = tube.items.size(); i < m; ++i) {
+                for (int m = tube.items.size(); i < m; ++i) {
                     TransportedItem item = tube.items.get(i);
                     mapped.addTo(StackUtil.copyWithSize(item.getServerStack(), 1), item.getServerStack().getCount());
                 }

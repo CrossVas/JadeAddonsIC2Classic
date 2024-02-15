@@ -20,7 +20,8 @@ public class TeleportTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static TeleportTubeInfoProvider INSTANCE = new TeleportTubeInfoProvider();
 
-    public TeleportTubeInfoProvider() {}
+    public TeleportTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -32,7 +33,7 @@ public class TeleportTubeInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof TeleportTubeTileEntity) {
             String freq = tag.getString("freq");
             PluginHelper.spacerY(iTooltip, 3);
-            TextHelper.text(iTooltip, Component.translatable( "ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
         }
     }
 

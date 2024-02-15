@@ -33,9 +33,9 @@ public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
                 int energyPacket = tag.getInt("energyPacket");
                 int packetCount = tag.getInt("packetCount");
 
-                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
-                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", energyPacket);
-                TextHelper.text(iTooltip,"ic2.probe.transformer.packets.name", packetCount);
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", energyPacket);
+                TextHelper.text(iTooltip, "ic2.probe.transformer.packets.name", packetCount);
 
                 long averageOut = tag.getLong("averageOut");
                 long packetsOut = tag.getLong("packetsOut");

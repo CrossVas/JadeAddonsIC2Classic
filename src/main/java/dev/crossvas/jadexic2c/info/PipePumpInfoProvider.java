@@ -33,7 +33,7 @@ public enum PipePumpInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(electricPump.getTier()));
             }
             TextHelper.text(iTooltip, "ic2.probe.pump.pressure", pump.getPressure());
-            TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format((long)(tag.getInt("drainAmount") / 20)));
+            TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format((long) (tag.getInt("drainAmount") / 20)));
         }
 
 

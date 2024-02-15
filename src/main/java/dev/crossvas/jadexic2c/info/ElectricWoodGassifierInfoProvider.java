@@ -44,7 +44,6 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper<BlockEntity> {
     }
 
 
-
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         if (blockEntity instanceof BaseElectricTileEntity tile) {

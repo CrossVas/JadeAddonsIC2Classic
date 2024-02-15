@@ -43,16 +43,16 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "CableInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CableTileEntity cable) {
-                TextHelper.text(iTooltip,"tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
-                TextHelper.text(iTooltip,"tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
+                TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
+                TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
 
                 int averageOut = tag.getInt("averageOut");
                 int averageOutPacket = tag.getInt("packetOut");
 
                 if (averageOut > 0) {
                     PluginHelper.spacerY(iTooltip, 10);
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)averageOutPacket)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long) averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long) averageOutPacket)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }
@@ -94,9 +94,9 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
     }
 
     /**
-     *  Straight copy-paste of {@link ic2.probeplugin.info.transport.CableProvider.EnergyContainer}
-     *  © IC2Classic Dev
-     * */
+     * Straight copy-paste of {@link ic2.probeplugin.info.transport.CableProvider.EnergyContainer}
+     * © IC2Classic Dev
+     */
 
     public static class EnergyContainer {
         LongAverager energyIn = new LongAverager(5);
@@ -144,8 +144,8 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
             long result = 0L;
             int i = 0;
 
-            for(int m = stats.size(); i < m; ++i) {
-                PacketStats stat = (PacketStats)stats.get(i);
+            for (int m = stats.size(); i < m; ++i) {
+                PacketStats stat = (PacketStats) stats.get(i);
                 if (stat.isAccepting() != in) {
                     result += stat.getPackets();
                 }
@@ -155,19 +155,19 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
         }
 
         public int getPacketsIn() {
-            return (int)this.packetsIn.getAverage();
+            return (int) this.packetsIn.getAverage();
         }
 
         public int getPacketsOut() {
-            return (int)this.packetsOut.getAverage();
+            return (int) this.packetsOut.getAverage();
         }
 
         public int getAverageIn() {
-            return (int)this.energyIn.getAverage();
+            return (int) this.energyIn.getAverage();
         }
 
         public int getAverageOut() {
-            return (int)this.energyOut.getAverage();
+            return (int) this.energyOut.getAverage();
         }
     }
 }

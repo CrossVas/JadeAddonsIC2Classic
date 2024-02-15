@@ -20,7 +20,8 @@ public class PickupTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static PickupTubeInfoProvider INSTANCE = new PickupTubeInfoProvider();
 
-    public PickupTubeInfoProvider() {}
+    public PickupTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -32,7 +33,7 @@ public class PickupTubeInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof PickupTubeTileEntity) {
             boolean largeRadius = tag.getBoolean("largeRadius");
             PluginHelper.spacerY(iTooltip, 3);
-            TextHelper.text(iTooltip, Component.translatable( "ic2.tube.pickup.info").withStyle(ChatFormatting.GOLD).append((largeRadius ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(largeRadius)));
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.pickup.info").withStyle(ChatFormatting.GOLD).append((largeRadius ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(largeRadius)));
         }
     }
 

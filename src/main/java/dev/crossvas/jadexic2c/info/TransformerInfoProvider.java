@@ -36,16 +36,16 @@ public enum TransformerInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, Component.translatable("ic2.probe.transformer.inverted").withStyle(ChatFormatting.GOLD).
                         append((isActive ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(isActive)));
 
-                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", isActive ? lowOutput : highOutput);
-                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", isActive ? highOutput : lowOutput);
-                TextHelper.text(iTooltip,"ic2.probe.transformer.packets.name", isActive ? 1 : 4);
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", isActive ? lowOutput : highOutput);
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", isActive ? highOutput : lowOutput);
+                TextHelper.text(iTooltip, "ic2.probe.transformer.packets.name", isActive ? 1 : 4);
 
                 long averageOut = tag.getLong("averageOut");
                 long packetsOut = tag.getLong("packetsOut");
 
                 if (averageOut > 0) {
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long) averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long) packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

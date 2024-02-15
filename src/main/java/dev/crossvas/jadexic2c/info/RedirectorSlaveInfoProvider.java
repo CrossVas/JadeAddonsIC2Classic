@@ -41,8 +41,8 @@ public enum RedirectorSlaveInfoProvider implements IHelper<BlockEntity> {
 
             if (averageOut > 0) {
                 PluginHelper.spacerY(iTooltip, 5);
-                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
-                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long) averageOut)).withStyle(ChatFormatting.AQUA));
+                TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long) packetsOut)).withStyle(ChatFormatting.AQUA));
             }
         }
     }

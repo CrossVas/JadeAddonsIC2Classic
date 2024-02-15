@@ -29,9 +29,9 @@ public enum VillagerOMatInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "VillagerOMatInfo");
         if (blockAccessor.getBlockEntity() instanceof VillagerOMatTileEntity oMat) {
-            TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(oMat.getTier()));
-            TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", oMat.getMaxInput());
-            TextHelper.text(iTooltip,"ic2.probe.villager_o_mat.usage", tag.getInt("activeTrades") * 6000);
+            TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(oMat.getTier()));
+            TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", oMat.getMaxInput());
+            TextHelper.text(iTooltip, "ic2.probe.villager_o_mat.usage", tag.getInt("activeTrades") * 6000);
 
             BarHelper.bar(iTooltip, (int) (1200 - oMat.clockTime(1200)), 1200, Component.translatable("ic2.probe.villager_o_mat.next", oMat.clockTime(1200)).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
         }

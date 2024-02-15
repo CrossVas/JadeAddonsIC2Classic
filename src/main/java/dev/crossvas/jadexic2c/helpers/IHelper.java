@@ -25,6 +25,7 @@ public interface IHelper<T> extends IBlockComponentProvider, IServerDataProvider
     default boolean canHandle(BlockAccessor accessor) {
         return StackUtil.hasHotbarItems(accessor.getPlayer(), getFilter(getUid()));
     }
+
     default boolean hasData(BlockAccessor accessor, String tagName) {
         return accessor.getServerData().contains(tagName);
     }

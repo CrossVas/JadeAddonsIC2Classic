@@ -60,7 +60,7 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
     public void addInfo(SteamTunnelTileEntity tunnel, ITooltip iTooltip, CompoundTag tag) {
         float energyProduction = tag.getFloat("energyProduction");
         TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tunnel.getSourceTier()));
-        TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double)energyProduction, 5));
+        TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) energyProduction, 5));
         TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", tunnel.getMaxEnergyOutput());
     }
 

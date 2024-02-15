@@ -26,7 +26,8 @@ public class StackingTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static StackingTubeInfoProvider INSTANCE = new StackingTubeInfoProvider();
 
-    public StackingTubeInfoProvider() {}
+    public StackingTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

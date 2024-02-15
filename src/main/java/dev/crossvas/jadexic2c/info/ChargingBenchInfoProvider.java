@@ -51,7 +51,7 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
                 int transferLimit = tag.getInt("transferLimit");
                 int maxCapacity = tag.getInt("maxCapacity");
                 if (toDischargeEnergy > 0) {
-                    int dischargeEnergy =  Math.min(transferLimit, toDischargeEnergy);
+                    int dischargeEnergy = Math.min(transferLimit, toDischargeEnergy);
                     BarHelper.bar(iTooltip, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                             DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
                 }

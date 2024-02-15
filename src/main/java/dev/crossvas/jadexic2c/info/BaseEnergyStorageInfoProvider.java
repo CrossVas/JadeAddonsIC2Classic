@@ -40,22 +40,21 @@ public enum BaseEnergyStorageInfoProvider implements IHelper<BlockEntity> {
                 long packetsOut = tag.getLong("packetsOut");
 
 
-
                 if (averageIn > 0 || averageOut > 0) {
                     if (averageIn > 0) {
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (averageOut > 0) {
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (packetsIn > 0) {
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long) packetsIn)).withStyle(ChatFormatting.AQUA));
                     }
 
                     if (packetsOut > 0) {
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long) packetsOut)).withStyle(ChatFormatting.AQUA));
                     }
                 }
             }

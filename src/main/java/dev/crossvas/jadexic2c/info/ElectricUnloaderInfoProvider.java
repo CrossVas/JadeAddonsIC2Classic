@@ -37,8 +37,8 @@ public enum ElectricUnloaderInfoProvider implements IHelper<BlockEntity> {
                 int averageOut = tag.getInt("averageOut");
                 int packetsOut = tag.getInt("packetsOut");
                 if (averageOut > 0) {
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long)averageOut)).withStyle(ChatFormatting.AQUA));
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format((long)packetsOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format((long) packetsOut)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

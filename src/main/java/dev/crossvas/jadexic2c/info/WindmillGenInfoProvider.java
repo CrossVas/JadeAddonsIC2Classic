@@ -22,7 +22,7 @@ public enum WindmillGenInfoProvider implements IHelper<BlockEntity> {
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (!shouldAddInfo(blockAccessor, "WindmillInfo")) {
-             return;
+            return;
         }
 
         CompoundTag tag = getData(blockAccessor, "WindmillInfo");

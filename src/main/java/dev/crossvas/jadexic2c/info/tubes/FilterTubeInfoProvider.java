@@ -28,7 +28,8 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static FilterTubeInfoProvider INSTANCE = new FilterTubeInfoProvider();
 
-    public FilterTubeInfoProvider() {}
+    public FilterTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

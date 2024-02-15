@@ -28,7 +28,8 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static RequestTubeInfoProvider INSTANCE = new RequestTubeInfoProvider();
 
-    public RequestTubeInfoProvider() {}
+    public RequestTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

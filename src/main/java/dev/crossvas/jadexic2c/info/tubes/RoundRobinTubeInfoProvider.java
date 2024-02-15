@@ -22,7 +22,8 @@ public class RoundRobinTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static RoundRobinTubeInfoProvider INSTANCE = new RoundRobinTubeInfoProvider();
 
-    public RoundRobinTubeInfoProvider() {}
+    public RoundRobinTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -39,7 +40,7 @@ public class RoundRobinTubeInfoProvider implements IHelper<BlockEntity> {
                 int count = size[i];
                 if (count > 0) {
                     Direction side = Direction.from3DDataValue(i);
-                    TextHelper.text(iTooltip, Component.literal( SanityHelper.toPascalCase(side.getName()) + ": " + count).withStyle(PluginHelper.getColor(i)));
+                    TextHelper.text(iTooltip, Component.literal(SanityHelper.toPascalCase(side.getName()) + ": " + count).withStyle(PluginHelper.getColor(i)));
                 }
             }
         }

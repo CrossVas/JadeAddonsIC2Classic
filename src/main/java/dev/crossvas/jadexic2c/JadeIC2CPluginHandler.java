@@ -3,9 +3,9 @@ package dev.crossvas.jadexic2c;
 import dev.crossvas.jadexic2c.info.*;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
-import dev.crossvas.jadexic2c.info.tubes.*;
 import dev.crossvas.jadexic2c.info.removals.ModNameRender;
 import dev.crossvas.jadexic2c.info.removals.TankRender;
+import dev.crossvas.jadexic2c.info.tubes.*;
 import ic2.core.block.base.blocks.BaseTexturedBlock;
 import ic2.core.block.base.blocks.ValveBlock;
 import ic2.core.block.base.features.multiblock.IStructureListener;
@@ -82,7 +82,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
      * {@link IC2Blocks}
      * {@link IC2Tiles}
      * for quick access
-     * */
+     */
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {

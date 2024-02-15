@@ -41,31 +41,31 @@ public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
                 long availableEnergy = tag.getLong("availableEnergy");
                 boolean noTarget = tag.getBoolean("no_target");
                 if (noTarget) {
-                    TextHelper.text(iTooltip,"ic2.probe.teleporter.no_target");
+                    TextHelper.text(iTooltip, "ic2.probe.teleporter.no_target");
                 } else if (!tag.getBoolean("isMathching")) {
-                    TextHelper.text(iTooltip,"ic2.probe.teleporter.invalid_target");
+                    TextHelper.text(iTooltip, "ic2.probe.teleporter.invalid_target");
                 } else {
-                    TextHelper.text(iTooltip,"ic2.probe.teleporter.target", SanityHelper.toPascalCase(target.getDimension().location().getPath()), target.getTargetPosition().getX(), target.getTargetPosition().getY(), target.getTargetPosition().getZ());
+                    TextHelper.text(iTooltip, "ic2.probe.teleporter.target", SanityHelper.toPascalCase(target.getDimension().location().getPath()), target.getTargetPosition().getX(), target.getTargetPosition().getY(), target.getTargetPosition().getZ());
                 }
 
                 if (baseCost > 0) {
                     switch (teleport.getProbeSendType()) {
                         case ENTITY:
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(TeleportUtil.getWeightOfEntity(blockAccessor.getPlayer(), IC2.CONFIG.teleporterKeepItems.get()) * baseCost * 5)));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long) (TeleportUtil.getWeightOfEntity(blockAccessor.getPlayer(), IC2.CONFIG.teleporterKeepItems.get()) * baseCost * 5)));
                             break;
                         case ENERGY:
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long) baseCost));
                             break;
                         case FLUID:
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", Formatter.formatNumber((double)(availableEnergy / (long)baseCost * 10L), 6)));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long) baseCost));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.fluid", Formatter.formatNumber((double) (availableEnergy / (long) baseCost * 10L), 6)));
                             break;
                         case ITEM:
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)baseCost));
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", Formatter.formatNumber((double)(availableEnergy / (long)baseCost / 100L * 64L), 6)));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long) baseCost));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.capacity", Component.translatable("ic2.probe.teleporter.capacity.item", Formatter.formatNumber((double) (availableEnergy / (long) baseCost / 100L * 64L), 6)));
                             break;
                         case SPAWNER:
-                            TextHelper.text(iTooltip,"ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long)(baseCost * 25000)));
+                            TextHelper.text(iTooltip, "ic2.probe.teleporter.cost", Formatters.EU_FORMAT.format((long) (baseCost * 25000)));
                     }
                 }
             }

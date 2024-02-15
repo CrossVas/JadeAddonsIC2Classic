@@ -32,7 +32,7 @@ public class SpecialProgressStyle extends ProgressStyle {
                 this.overlay.size(size);
                 this.overlay.render(matrixStack, x, progressY, size.x, size.y);
             } else {
-                int alpha = (int)((float)(this.color >> 24 & 255) * 0.7F);
+                int alpha = (int) ((float) (this.color >> 24 & 255) * 0.7F);
                 color = this.color & 16777215 | alpha << 24;
                 float half = choose(true, height, width) / 2.0F;
                 DisplayHelper.INSTANCE.drawGradientRect(matrixStack, x, progressY, this.choose(true, progress, half), this.choose(false, progress, half), color, this.color, this.vertical);
@@ -41,12 +41,12 @@ public class SpecialProgressStyle extends ProgressStyle {
                     float yy;
                     float fy;
                     if (this.vertical) {
-                        for(yy = y + height; yy > progressY; yy -= 2.0F) {
+                        for (yy = y + height; yy > progressY; yy -= 2.0F) {
                             fy = Math.max(progressY, yy + 1.0F);
                             DisplayHelper.fill(matrixStack, x, yy, x + width, fy, this.color2);
                         }
                     } else {
-                        for(yy = x + 1.0F; yy < x + progress; yy += 2.0F) {
+                        for (yy = x + 1.0F; yy < x + progress; yy += 2.0F) {
                             fy = Math.min(x + width, yy + 1.0F);
                             DisplayHelper.fill(matrixStack, yy, y, fy, y + height, this.color2);
                         }
@@ -73,7 +73,7 @@ public class SpecialProgressStyle extends ProgressStyle {
                 if (9.0F < progress) {
                     y -= progress;
                     Objects.requireNonNull(font);
-                    y += (float)(9 + 2);
+                    y += (float) (9 + 2);
                 }
             }
 
@@ -100,18 +100,18 @@ public class SpecialProgressStyle extends ProgressStyle {
         int b = rgb & 255;
         int max = Math.max(r, Math.max(g, b));
         int min = Math.min(r, Math.min(g, b));
-        float v = (float)max;
-        float delta = (float)(max - min);
+        float v = (float) max;
+        float delta = (float) (max - min);
         float h;
         float s;
         if (max != 0) {
-            s = delta / (float)max;
+            s = delta / (float) max;
             if (r == max) {
-                h = (float)(g - b) / delta;
+                h = (float) (g - b) / delta;
             } else if (g == max) {
-                h = 2.0F + (float)(b - r) / delta;
+                h = 2.0F + (float) (b - r) / delta;
             } else {
-                h = 4.0F + (float)(r - g) / delta;
+                h = 4.0F + (float) (r - g) / delta;
             }
 
             h /= 6.0F;

@@ -8,7 +8,7 @@ public class Formatter {
 
     /**
      * Stolen from IC2Classic - The One Probe Module
-     * */
+     */
 
     public static final DecimalFormatSymbols US;
     public static final DecimalFormat THERMAL_GEN;
@@ -25,16 +25,16 @@ public class Formatter {
     }
 
     public static String formatInt(int number, int digits, boolean fixedLength) {
-        return formatNumber((double)number, digits, fixedLength);
+        return formatNumber((double) number, digits, fixedLength);
     }
 
     public static String formatNumber(double number, int digits, boolean fixedLength) {
         String suffix = "";
-        boolean allow = (number >= 1.0E9 ? String.valueOf((long)number) : String.valueOf(number)).length() > digits;
+        boolean allow = (number >= 1.0E9 ? String.valueOf((long) number) : String.valueOf(number)).length() > digits;
         double outputNumber = number;
 
         int actualDigits;
-        for(actualDigits = 0; actualDigits < "kmbt".length() && outputNumber >= 1000.0 && allow; ++actualDigits) {
+        for (actualDigits = 0; actualDigits < "kmbt".length() && outputNumber >= 1000.0 && allow; ++actualDigits) {
             outputNumber /= 1000.0;
             suffix = Character.toString("kmbt".charAt(actualDigits));
         }
@@ -44,11 +44,11 @@ public class Formatter {
             ++actualDigits;
         }
 
-        int naturalLength = NATURAL.format((long)((int)outputNumber)).length();
-        int decimalLength = DECIMAL.format(outputNumber - (double)((int)outputNumber)).length();
+        int naturalLength = NATURAL.format((long) ((int) outputNumber)).length();
+        int decimalLength = DECIMAL.format(outputNumber - (double) ((int) outputNumber)).length();
         StringBuilder patternBuilder = new StringBuilder();
 
-        for(int i = 1; actualDigits > 1 && naturalLength > 1; ++i) {
+        for (int i = 1; actualDigits > 1 && naturalLength > 1; ++i) {
             patternBuilder.insert(0, "#");
             --actualDigits;
             --naturalLength;
@@ -68,7 +68,7 @@ public class Formatter {
             patternBuilder.append(".");
             --actualDigits;
 
-            while(actualDigits > 0 && decimalLength > 0) {
+            while (actualDigits > 0 && decimalLength > 0) {
                 patternBuilder.append("#");
                 --actualDigits;
                 --decimalLength;
@@ -80,7 +80,7 @@ public class Formatter {
         String fill = "";
         int length = output.length();
         if (fixedLength && output.length() < digits) {
-            for(int i = 0; i < digits - length; ++i) {
+            for (int i = 0; i < digits - length; ++i) {
                 fill = fill.concat(" ");
             }
 

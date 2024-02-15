@@ -30,8 +30,8 @@ public enum SteamTurbineInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof SteamTurbineTileEntity turbine) {
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(turbine.getSourceTier()));
-                TextHelper.text(iTooltip,"ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 5));
-                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", turbine.getMaxEnergyOutput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", turbine.getMaxEnergyOutput());
                 TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
         }
@@ -41,7 +41,7 @@ public enum SteamTurbineInfoProvider implements IHelper<BlockEntity> {
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         if (blockEntity instanceof BaseTileEntity tile) {
             if (tile instanceof SteamTurbineTileEntity turbine) {
-                CompoundTag tag  = new CompoundTag();
+                CompoundTag tag = new CompoundTag();
                 tag.putFloat("production", turbine.getEUProduction());
                 TankHelper.loadTankData(compoundTag, turbine);
                 compoundTag.put("SteamTurbineInfo", tag);

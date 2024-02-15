@@ -89,9 +89,9 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
 
     public static ColorMix getReactorColor(int current, int max) {
         float progress = (float) current / max;
-        if ((double)progress < 0.25) {
+        if ((double) progress < 0.25) {
             return ColorMix.GREEN;
-        } else if ((double)progress < 0.5) {
+        } else if ((double) progress < 0.5) {
             return ColorMix.YELLOW;
         } else {
             return (double) progress < 0.75 ? ColorMix.ORANGE : ColorMix.RED;

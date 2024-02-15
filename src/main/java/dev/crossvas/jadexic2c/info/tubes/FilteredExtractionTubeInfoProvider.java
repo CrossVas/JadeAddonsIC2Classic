@@ -26,7 +26,8 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
 
     public static FilteredExtractionTubeInfoProvider INSTANCE = new FilteredExtractionTubeInfoProvider();
 
-    public FilteredExtractionTubeInfoProvider() {}
+    public FilteredExtractionTubeInfoProvider() {
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

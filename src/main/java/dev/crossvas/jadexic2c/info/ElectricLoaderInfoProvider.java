@@ -36,8 +36,8 @@ public enum ElectricLoaderInfoProvider implements IHelper<BlockEntity> {
                 int averageIn = tag.getInt("averageIn");
                 int packetsIn = tag.getInt("packetsIn");
                 if (averageIn > 0) {
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long) packetsIn)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

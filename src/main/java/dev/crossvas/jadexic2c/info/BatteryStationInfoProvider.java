@@ -36,8 +36,8 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "BatteryStationInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseBatteryStationTileEntity station) {
-                TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
-                TextHelper.text(iTooltip,"ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
                 long missingEnergy = tag.getLong("missingEnergy");
                 int maxTransfer = tag.getInt("maxTransfer");
 

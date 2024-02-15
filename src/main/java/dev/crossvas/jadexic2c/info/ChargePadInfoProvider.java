@@ -34,16 +34,16 @@ public enum ChargePadInfoProvider implements IHelper<BlockEntity> {
                 int transferLimit = tag.getInt("transferLimit");
                 float range = tag.getFloat("range");
 
-                TextHelper.text(iTooltip,"ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pad.getSinkTier()));
-                TextHelper.text(iTooltip,"ic2.probe.eu.max_in.name", maxInput);
-                TextHelper.text(iTooltip,"ic2.probe.chargepad.transferrate.name", transferLimit);
-                TextHelper.text(iTooltip,"ic2.probe.chargepad.radius.name", range + 1.0F);
+                TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pad.getSinkTier()));
+                TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", maxInput);
+                TextHelper.text(iTooltip, "ic2.probe.chargepad.transferrate.name", transferLimit);
+                TextHelper.text(iTooltip, "ic2.probe.chargepad.radius.name", range + 1.0F);
 
                 int averageIn = tag.getInt("averageIn");
                 int packetsIn = tag.getInt("packetsIn");
                 if (averageIn > 0) {
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long)averageIn)).withStyle(ChatFormatting.AQUA));
-                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long)packetsIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format((long) packetsIn)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }
