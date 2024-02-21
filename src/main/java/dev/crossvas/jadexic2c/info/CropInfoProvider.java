@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.crops.ICrop;
@@ -14,10 +15,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.Vec2;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
+import snownee.jade.api.Identifiers;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElement;
 
 public enum CropInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
@@ -54,13 +56,14 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
             ICrop crop = tile.getCrop();
             if (crop != null) {
+                iTooltip.remove(Identifiers.CORE_OBJECT_NAME);
                 if (scanLevel < 4 && currentStage < maxStage) {
-                    iTooltip.add(Component.literal("Crop: ").append("Unknown").withStyle(ChatFormatting.WHITE));
+                    iTooltip.add(0, Component.translatable("info.crop.ic2.data.unknown").withStyle(ChatFormatting.WHITE));
                     BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
                 } else {
-                    iTooltip.add(Component.literal("Crop: ").append(crop.getName()).withStyle(ChatFormatting.WHITE));
-                    iTooltip.append(iTooltip.getElementHelper().item(crop.getDisplayItem()).translate(new Vec2(0, -5)));
-                    TextHelper.text(iTooltip, Component.literal("by " + crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE));
+                    iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
+                    iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE)));
+                    PluginHelper.item(iTooltip, crop.getDisplayItem(), 17, 4, IElement.Align.RIGHT, false);
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.growth").withStyle(ChatFormatting.YELLOW), true);
                     if (currentStage < maxStage) {
                         BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage", currentStage, maxStage).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);

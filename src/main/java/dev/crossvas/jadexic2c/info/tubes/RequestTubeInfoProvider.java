@@ -26,7 +26,7 @@ import java.util.List;
 
 public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
 
-    public static RequestTubeInfoProvider INSTANCE = new RequestTubeInfoProvider();
+    public static final RequestTubeInfoProvider INSTANCE = new RequestTubeInfoProvider();
 
     public RequestTubeInfoProvider() {
     }

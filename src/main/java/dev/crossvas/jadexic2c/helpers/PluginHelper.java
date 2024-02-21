@@ -1,9 +1,12 @@
 package dev.crossvas.jadexic2c.helpers;
 
+import dev.crossvas.jadexic2c.elements.SpecialItemStackElement;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec2;
 import snownee.jade.api.ITooltip;
+import snownee.jade.api.ui.IElement;
 
 import java.util.List;
 
@@ -19,6 +22,14 @@ public class PluginHelper {
 
     public static void spacerXY(ITooltip tooltip, int x, int y) {
         tooltip.add(tooltip.getElementHelper().spacer(x, y));
+    }
+
+    public static void item(ITooltip tooltip, ItemStack stack, int x, int y, IElement.Align align, boolean centered) {
+        tooltip.add(new SpecialItemStackElement(stack, align, x, y).centered(centered).size(new Vec2(0, 0)));
+    }
+
+    public static void itemCentered(ITooltip tooltip, ItemStack stack, int y) {
+        tooltip.add(new SpecialItemStackElement(stack, IElement.Align.LEFT, 0, y).centered(true).size(new Vec2(0, 0)));
     }
 
     public static void grid(ITooltip iTooltip, String text, ChatFormatting style, List<ItemStack> stackList) {
