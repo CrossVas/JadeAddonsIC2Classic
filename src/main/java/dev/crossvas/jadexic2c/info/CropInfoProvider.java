@@ -7,7 +7,9 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.crops.ICrop;
+import ic2.api.crops.ICropRegistry;
 import ic2.api.crops.ICropTile;
+import ic2.core.platform.registries.IC2Items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -57,13 +59,17 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
             ICrop crop = tile.getCrop();
             if (crop != null) {
                 iTooltip.remove(Identifiers.CORE_OBJECT_NAME);
-                if (scanLevel < 4 && currentStage < maxStage) {
+                if (scanLevel < 1 && currentStage < maxStage && crop != ICropRegistry.WEED && crop != ICropRegistry.SEA_WEED) {
+                    PluginHelper.item(iTooltip, IC2Items.CROP_SEED.getDefaultInstance(), 17, 4, IElement.Align.RIGHT, false);
                     iTooltip.add(0, Component.translatable("info.crop.ic2.data.unknown").withStyle(ChatFormatting.WHITE));
-                    BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
                 } else {
                     iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
                     iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE)));
                     PluginHelper.item(iTooltip, crop.getDisplayItem(), 17, 4, IElement.Align.RIGHT, false);
+                }
+                if (scanLevel < 4 && currentStage < maxStage) {
+                    BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+                } else {
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.growth").withStyle(ChatFormatting.YELLOW), true);
                     if (currentStage < maxStage) {
                         BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage", currentStage, maxStage).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
