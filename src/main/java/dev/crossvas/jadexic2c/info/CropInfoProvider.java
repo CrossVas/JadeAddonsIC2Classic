@@ -37,6 +37,7 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "CropInfo");
         if (blockAccessor.getBlockEntity() instanceof ICropTile tile) {
+            iTooltip.remove(Identifiers.MC_HARVEST_TOOL);
             // growth info
             int maxStage = tag.getInt("growthSteps");
             int currentStage = tag.getInt("growthStage");
