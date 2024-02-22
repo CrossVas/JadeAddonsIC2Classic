@@ -1,10 +1,12 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.elements.SpecialItemStackElement;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
+import dev.crossvas.jadexic2c.info.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropRegistry;
@@ -17,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec2;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.Identifiers;
@@ -60,7 +63,9 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
             if (crop != null) {
                 iTooltip.remove(Identifiers.CORE_OBJECT_NAME);
                 if (scanLevel < 1 && currentStage < maxStage && crop != ICropRegistry.WEED && crop != ICropRegistry.SEA_WEED) {
-                    PluginHelper.item(iTooltip, IC2Items.CROP_SEED.getDefaultInstance(), 17, 4, IElement.Align.RIGHT, false);
+                    int xPos = !iPluginConfig.get(ModNameRender.RELOCATE) ? 9 : 17;
+                    float scale = !iPluginConfig.get(ModNameRender.RELOCATE) ? 0.5f : 1f;
+                    iTooltip.add(new SpecialItemStackElement(IC2Items.CROP_SEED.getDefaultInstance(), IElement.Align.RIGHT, xPos, 4).scale(scale).size(new Vec2(0, 0)));
                     iTooltip.add(0, Component.translatable("info.crop.ic2.data.unknown").withStyle(ChatFormatting.WHITE));
                 } else {
                     iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
