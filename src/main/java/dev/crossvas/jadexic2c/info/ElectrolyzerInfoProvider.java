@@ -45,7 +45,7 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
                 }
             }
 
-            if (tile instanceof ChargedElectrolyzerTileEntity ele) {
+            if (tile instanceof ChargedElectrolyzerTileEntity) {
                 boolean discharging = tag.getBoolean("canPowerC");
                 boolean charging = tag.getBoolean("shouldDrainC");
                 int transfer = tag.getInt("transferRateC");

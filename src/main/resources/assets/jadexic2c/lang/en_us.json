@@ -17,8 +17,9 @@
   "ic2.tube.extraction_filter_whitelist.info": "Whitelist:",
   "ic2.tube.teleport.info": "Network ID: ",
   "ic2.tube.pickup.info": "Large Radius: ",
+  "ic2.probe.pipe.transported": "Fluids:",
 
-  "ic2.barrel.info.fluid": "%s: %s/%sk mB",
+  "ic2.barrel.info.fluid": "%s: %s/%s mB",
   "ic2.probe.eu.storage.full.name": "Energy: %s/%s EU",
   "ic2.probe.transformer.inverted": "Inverted: "
 }

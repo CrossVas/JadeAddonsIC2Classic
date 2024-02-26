@@ -61,7 +61,7 @@ public class TankHelper {
                 FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(tank);
                 if (fluidStack.getAmount() > 0) {
                     IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluidStack));
-                    tooltip.add(helper.progress((float) fluidStack.getAmount() / capacity, Component.translatable("ic2.barrel.info.fluid", fluidStack.getDisplayName(), Formatter.formatInt(fluidStack.getAmount(), String.valueOf(capacity).length() - 1), capacity / 1000).withStyle(ChatFormatting.WHITE), progressStyle,
+                    tooltip.add(helper.progress((float) fluidStack.getAmount() / capacity, Component.translatable("ic2.barrel.info.fluid", fluidStack.getDisplayName(), Formatter.formatNumber(fluidStack.getAmount(), String.valueOf(fluidStack.getAmount()).length() - 1), Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)).withStyle(ChatFormatting.WHITE), progressStyle,
                             new SpecialBoxStyle(fluidStack.getFluid() == Fluids.LAVA ? ColorUtils.doubleDarker(-29925) : ColorUtils.doubleDarker(IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor())), false));
                 }
             }

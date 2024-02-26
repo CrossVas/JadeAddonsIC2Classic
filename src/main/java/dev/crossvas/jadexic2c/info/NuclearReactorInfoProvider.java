@@ -81,7 +81,7 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
 
                 if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.THERMOMETER)) {
                     BarHelper.bar(tooltip, reactorTile.getHeat(), reactorTile.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
-                            reactorTile.getHeat(), Formatters.EU_READER_FORMAT.format((double) reactorTile.getMaxHeat() / 1000.0)).append("k").withStyle(ChatFormatting.WHITE), getReactorColor(reactorTile.getHeat(), reactorTile.getMaxHeat()));
+                            Formatter.formatNumber(reactorTile.getHeat(), 4), Formatter.formatNumber(reactorTile.getMaxHeat(), 2)).withStyle(ChatFormatting.WHITE), getReactorColor(reactorTile.getHeat(), reactorTile.getMaxHeat()));
                 }
             }
         }
