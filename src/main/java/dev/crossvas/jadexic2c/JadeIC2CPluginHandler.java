@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c;
 
 import dev.crossvas.jadexic2c.info.*;
+import dev.crossvas.jadexic2c.info.pipes.BasicPipeInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
 import dev.crossvas.jadexic2c.info.removals.ModNameRender;
@@ -53,6 +54,7 @@ import ic2.core.block.storage.tiles.transformer.AdjustableTransformerTileEntity;
 import ic2.core.block.transport.fluid.PipeBlock;
 import ic2.core.block.transport.fluid.PumpBlock;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
+import ic2.core.block.transport.fluid.tiles.PipeTileEntity;
 import ic2.core.block.transport.item.TubeBlock;
 import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.block.transport.item.tubes.*;
@@ -145,9 +147,9 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 BasicTubeInfoProvider.INSTANCE
         );
 
-//        registerProvidersForBlock(registration, PipeBlock.class,
-//                BasicPipeInfoProvider.INSTANCE
-//        );
+        registerProvidersForBlock(registration, PipeBlock.class,
+                BasicPipeInfoProvider.INSTANCE
+        );
 
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
                 BaseMachineBlock.class,
@@ -287,7 +289,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(InsertionTubInfoProvider.INSTANCE, InsertionTubeTileEntity.class);
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
 
-//        registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, PipeTileEntity.class);
+        registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, PipeTileEntity.class);
     }
 
     @SafeVarargs
