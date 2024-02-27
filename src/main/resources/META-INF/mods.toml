@@ -28,6 +28,6 @@ Qui quaerit, reperit - you know.
 [[dependencies.jadexic2c]]
     modId="ic2"
     mandatory=true
-    versionRange="[1.19.2-2.0.0,)"
+    versionRange="[1.19.2-2.0.9,)"
     ordering="AFTER"
     side="BOTH"
