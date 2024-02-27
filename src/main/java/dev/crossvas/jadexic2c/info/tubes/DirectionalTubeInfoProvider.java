@@ -37,6 +37,8 @@ public class DirectionalTubeInfoProvider implements IHelper<BlockEntity> {
             int direction3DDataValue = tag.getInt("3DDataValue");
             String facingName = SanityHelper.toPascalCase(directionName);
             TextHelper.text(iTooltip, Component.translatable("ic2.tube.directional.info").withStyle(ChatFormatting.GOLD).append(PluginHelper.getColor(direction3DDataValue) + facingName));
+            boolean outputBlocked = tag.getBoolean("blocked");
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.blocked").withStyle(ChatFormatting.DARK_AQUA).append((outputBlocked ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(outputBlocked)));
         }
     }
 
@@ -46,6 +48,7 @@ public class DirectionalTubeInfoProvider implements IHelper<BlockEntity> {
             CompoundTag tag = new CompoundTag();
             tag.putString("direction", directional.getFacing().toString());
             tag.putInt("3DDataValue", directional.getFacing().get3DDataValue());
+            tag.putBoolean("blocked", directional.isBlocked());
             compoundTag.put("DirectionalTubeInfo", tag);
         }
     }

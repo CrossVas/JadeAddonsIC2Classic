@@ -105,7 +105,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3965693")
     implementation fg.deobf("mekanism:Mekanism:1.19.2-10.3.8.477")
 
-    implementation fg.deobf("curse.maven:ic2-classic-242942:4879119")
+    implementation fg.deobf("curse.maven:ic2-classic-242942:5137503")
     implementation fg.deobf("curse.maven:jade-324717:4914105")
     runtimeOnly fg.deobf("curse.maven:jade-addons-583345:4850581")
 

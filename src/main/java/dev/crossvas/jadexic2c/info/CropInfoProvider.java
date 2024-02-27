@@ -1,12 +1,9 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.elements.SpecialItemStackElement;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.info.removals.ModNameRender;
 import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropRegistry;
@@ -17,17 +14,39 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.Vec2;
+import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.Identifiers;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElement;
+import snownee.jade.api.ui.IElementHelper;
 
 public enum CropInfoProvider implements IHelper<BlockEntity> {
     INSTANCE;
+
+    @Override
+    public @Nullable IElement getIcon(BlockAccessor accessor, IPluginConfig config, IElement currentIcon) {
+        ItemStack iconStack = ItemStack.EMPTY;
+        if (accessor.getBlockEntity() instanceof ICropTile cropTile) {
+            CompoundTag tag = getData(accessor, "CropInfo");
+            int maxStage = tag.getInt("growthSteps");
+            int currentStage = tag.getInt("growthStage");
+            int scanLevel = tag.getInt("scanLevel");
+            if (cropTile.getCrop() != null) {
+                boolean condition = scanLevel < 1 && currentStage < maxStage && cropTile.getCrop() != ICropRegistry.WEED && cropTile.getCrop() != ICropRegistry.SEA_WEED;
+                if (condition) {
+                    iconStack = IC2Items.CROP_SEED.getDefaultInstance();
+                } else {
+                    iconStack = cropTile.getCrop().getDisplayItem();
+                }
+            }
+        }
+        return IElementHelper.get().item(iconStack);
+    }
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -37,7 +56,6 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "CropInfo");
         if (blockAccessor.getBlockEntity() instanceof ICropTile tile) {
-            iTooltip.remove(Identifiers.MC_HARVEST_TOOL);
             // growth info
             int maxStage = tag.getInt("growthSteps");
             int currentStage = tag.getInt("growthStage");
@@ -64,14 +82,10 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
             if (crop != null) {
                 iTooltip.remove(Identifiers.CORE_OBJECT_NAME);
                 if (scanLevel < 1 && currentStage < maxStage && crop != ICropRegistry.WEED && crop != ICropRegistry.SEA_WEED) {
-                    int xPos = !iPluginConfig.get(ModNameRender.RELOCATE) ? 9 : 17;
-                    float scale = !iPluginConfig.get(ModNameRender.RELOCATE) ? 0.5f : 1f;
-                    iTooltip.add(new SpecialItemStackElement(IC2Items.CROP_SEED.getDefaultInstance(), IElement.Align.RIGHT, xPos, 4).scale(scale).size(new Vec2(0, 0)));
                     iTooltip.add(0, Component.translatable("info.crop.ic2.data.unknown").withStyle(ChatFormatting.WHITE));
                 } else {
                     iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
                     iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE)));
-                    PluginHelper.item(iTooltip, crop.getDisplayItem(), 17, 4, IElement.Align.RIGHT, false);
                 }
                 if (scanLevel < 4 && currentStage < maxStage) {
                     BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);

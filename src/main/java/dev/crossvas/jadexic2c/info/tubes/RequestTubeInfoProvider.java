@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.info.tubes;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.RequestTubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -12,6 +13,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -39,6 +41,9 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "RequestTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof RequestTubeTileEntity) {
+            // general
+            boolean redstoneControl = tag.getBoolean("redstoneControl");
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.redstone.control").withStyle(ChatFormatting.GOLD).append((redstoneControl ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(redstoneControl)));
             // requests
             ListTag requestsItemTag = tag.getList("RequestsItem", Tag.TAG_COMPOUND);
             List<ItemStack> requestsList = new ArrayList<>();
@@ -91,6 +96,7 @@ public class RequestTubeInfoProvider implements IHelper<BlockEntity> {
             CompoundTag tag = new CompoundTag();
             ListTag itemsList = new ListTag();
             NonNullList<ItemStack> list = NonNullList.create();
+            tag.putBoolean("redstoneControl", requestTube.redstoneRequest);
             for (RequestTubeTileEntity.RequestEntry requestEntry : requestTube.filters) {
                 list.add(StackUtil.copyWithSize(requestEntry.getStack(), requestEntry.getAmount()));
             }

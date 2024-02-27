@@ -80,8 +80,16 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
             }
 
             boolean whitelist = tag.getBoolean("whitelist");
+            boolean redstoneControl = tag.getBoolean("sensitive");
             TextHelper.text(iTooltip, Component.translatable("ic2.tube.extraction_filter_whitelist.info").withStyle(ChatFormatting.GOLD).append(" ")
                     .append((whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)));
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.redstone.control").withStyle(ChatFormatting.GOLD).append((redstoneControl ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(redstoneControl)));
+            if (redstoneControl) {
+                boolean comparatorMode = tag.getBoolean("comparator");
+                boolean redstonePulse = tag.getBoolean("pulse");
+                TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.redstone.comparator").withStyle(ChatFormatting.LIGHT_PURPLE).append((comparatorMode ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(comparatorMode)));
+                TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.redstone.pulse").withStyle(ChatFormatting.LIGHT_PURPLE).append((redstonePulse ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(redstonePulse)));
+            }
         }
     }
 
@@ -98,6 +106,9 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
             if (!itemsList.isEmpty()) {
                 tag.put("ExtractionFilteredItems", itemsList);
             }
+            tag.putBoolean("sensitive", filteredExtractionTube.sensitive);
+            tag.putBoolean("comparator", filteredExtractionTube.comparator);
+            tag.putBoolean("pulse", filteredExtractionTube.pulse);
             tag.putBoolean("whitelist", filteredExtractionTube.whitelist);
             compoundTag.put("FilteredExtractionTubeInfo", tag);
         }

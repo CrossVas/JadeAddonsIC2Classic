@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.info.tubes;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
@@ -10,10 +11,12 @@ import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenCustomHashMap;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -43,6 +46,14 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "BasicTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof TubeTileEntity) {
+                int priority = tag.getInt("priorityDirection");
+                if (priority > 0) {
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.direction.prio").withStyle(ChatFormatting.GOLD)
+                            .append(Component.translatable("misc.ic2.side." + Direction.from3DDataValue(priority - 1)).withStyle(PluginHelper.getColor(priority - 1))));
+                }
+                if (!tag.getBoolean("sync")) {
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.invisible").withStyle(ChatFormatting.RED));
+                }
                 ListTag itemsList = tag.getList("TransportItems", Tag.TAG_COMPOUND);
                 List<ItemStack> transportedList = new ArrayList<>();
                 itemsList.forEach(listTag -> {
@@ -63,6 +74,8 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
             CompoundTag tag = new CompoundTag();
             ListTag itemsList = new ListTag();
             NonNullList<ItemStack> list = NonNullList.create();
+            tag.putInt("priorityDirection", tube.getPrioritySide());
+            tag.putBoolean("sync", tube.synchronize);
             if (!tube.items.isEmpty()) {
                 Object2IntLinkedOpenCustomHashMap<ItemStack> mapped = new Object2IntLinkedOpenCustomHashMap<>(ItemStackStrategy.INSTANCE);
                 int i = 0;

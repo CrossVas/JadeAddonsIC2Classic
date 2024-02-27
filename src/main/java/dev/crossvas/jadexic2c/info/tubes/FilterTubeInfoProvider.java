@@ -28,9 +28,6 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
 
     public static FilterTubeInfoProvider INSTANCE = new FilterTubeInfoProvider();
 
-    public FilterTubeInfoProvider() {
-    }
-
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (!shouldAddInfo(blockAccessor, "FilterTubeInfo")) {
@@ -39,6 +36,8 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "FilterTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof FilterTubeTileEntity) {
+            boolean invPrio = tag.getBoolean("invPrio");
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.inv_priority").withStyle(ChatFormatting.GOLD).append((invPrio ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(invPrio)));
             ListTag filteredItemsTagList = tag.getList("FilteredItems", Tag.TAG_COMPOUND);
             List<FilterTubeTileEntity.FilterEntry> filteredList = new ArrayList<>();
             filteredItemsTagList.forEach(filter -> {
@@ -87,6 +86,7 @@ public class FilterTubeInfoProvider implements IHelper<BlockEntity> {
             if (!itemsList.isEmpty()) {
                 tag.put("FilteredItems", itemsList);
             }
+            tag.putBoolean("invPrio", filterTube.invPriority);
             compoundTag.put("FilterTubeInfo", tag);
         }
     }

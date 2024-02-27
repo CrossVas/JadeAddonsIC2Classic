@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.info.tubes;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.TeleportTubeTileEntity;
 import net.minecraft.ChatFormatting;
@@ -32,8 +31,14 @@ public class TeleportTubeInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "TeleportTubeInfo");
         if (blockAccessor.getBlockEntity() instanceof TeleportTubeTileEntity) {
             String freq = tag.getString("freq");
-            PluginHelper.spacerY(iTooltip, 3);
-            TextHelper.text(iTooltip, Component.translatable("ic2.tube.teleport.info").withStyle(ChatFormatting.GOLD).append(ChatFormatting.YELLOW + freq));
+            int state = tag.getInt("state");
+            boolean isPrivate = (state & 4) != 0;
+            boolean canSend = (state & 1) != 0;
+            boolean canReceive = (state & 2) != 0;
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.teleport.private").withStyle(ChatFormatting.GOLD).append((isPrivate ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(isPrivate)));
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.teleport.send").withStyle(ChatFormatting.GOLD).append((canSend ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(canSend)));
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.teleport.receive").withStyle(ChatFormatting.GOLD).append((canReceive ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(canReceive)));
+            TextHelper.text(iTooltip, Component.translatable("ic2.tube.teleport.info").withStyle(ChatFormatting.LIGHT_PURPLE).append(ChatFormatting.YELLOW + freq));
         }
     }
 
@@ -42,6 +47,7 @@ public class TeleportTubeInfoProvider implements IHelper<BlockEntity> {
         if (blockEntity instanceof TeleportTubeTileEntity teleportTube) {
             CompoundTag tag = new CompoundTag();
             tag.putString("freq", teleportTube.frequency);
+            tag.putInt("state", teleportTube.state);
             compoundTag.put("TeleportTubeInfo", tag);
         }
     }

@@ -41,9 +41,7 @@ public class PickupTubeInfoProvider implements IHelper<BlockEntity> {
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         if (blockEntity instanceof PickupTubeTileEntity pickup) {
             CompoundTag tag = new CompoundTag();
-            CompoundTag internalTag = new CompoundTag();
-            pickup.saveAdditional(internalTag);
-            tag.putBoolean("largeRadius", internalTag.getBoolean("large"));
+            tag.putBoolean("largeRadius", pickup.largeRadius);
             compoundTag.put("PickupTubeInfo", tag);
         }
     }

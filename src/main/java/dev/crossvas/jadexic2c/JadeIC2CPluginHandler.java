@@ -88,6 +88,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(WrenchableInfoProvider.INSTANCE, Block.class);
         registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
+        registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
 
         registerProvidersForBlock(registration, BaseMachineBlock.class,
@@ -137,8 +138,16 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 TeleportTubeInfoProvider.INSTANCE,
                 FilterTubeInfoProvider.INSTANCE,
                 FilteredExtractionTubeInfoProvider.INSTANCE,
+                ExtractionTubeInfoProvider.INSTANCE,
+                InsertionTubInfoProvider.INSTANCE,
+                ColorFilterTubeInfoProvider.INSTANCE,
+                LimiterTubeInfoProvider.INSTANCE,
                 BasicTubeInfoProvider.INSTANCE
         );
+
+//        registerProvidersForBlock(registration, PipeBlock.class,
+//                BasicPipeInfoProvider.INSTANCE
+//        );
 
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
                 BaseMachineBlock.class,
@@ -271,10 +280,14 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(DirectionalTubeInfoProvider.INSTANCE, DirectionalTubeTileEntity.class);
         registration.registerBlockDataProvider(PickupTubeInfoProvider.INSTANCE, PickupTubeTileEntity.class);
         registration.registerBlockDataProvider(TeleportTubeInfoProvider.INSTANCE, TeleportTubeTileEntity.class);
+        registration.registerBlockDataProvider(ColorFilterTubeInfoProvider.INSTANCE, ColorFilterTubeTileEntity.class);
         registration.registerBlockDataProvider(FilterTubeInfoProvider.INSTANCE, FilterTubeTileEntity.class);
         registration.registerBlockDataProvider(FilteredExtractionTubeInfoProvider.INSTANCE, FilteredExtractionTubeTileEntity.class);
-
+        registration.registerBlockDataProvider(LimiterTubeInfoProvider.INSTANCE, LimiterTubeTileEntity.class);
+        registration.registerBlockDataProvider(InsertionTubInfoProvider.INSTANCE, InsertionTubeTileEntity.class);
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
+
+//        registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, PipeTileEntity.class);
     }
 
     @SafeVarargs

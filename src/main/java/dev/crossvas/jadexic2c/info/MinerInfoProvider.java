@@ -10,6 +10,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
 import ic2.core.block.machines.tiles.lv.MinerTileEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,22 +36,14 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", miner.getMaxInput());
             TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
 
-            byte finished = tag.getByte("finished");
             float progress = tag.getFloat("progress");
-            boolean refueling = tag.getBoolean("refueling");
             boolean isStuck = tag.getBoolean("isStuck");
+            int minerState = tag.getInt("minerState");
             boolean isOperating = tag.getBoolean("isOperating");
 
             if (miner instanceof RocketMinerTileEntity) {
-                switch (finished) {
-                    case 0:
-                        TextHelper.text(iTooltip, refueling ? "ic2.probe.miner.refuel.name" : "ic2.probe.miner.mining.name");
-                        break;
-                    case 1:
-                        TextHelper.text(iTooltip, "ic2.probe.miner.retracting.name");
-                    case 3:
-                        TextHelper.text(iTooltip, "ic2.probe.miner.power.name");
-                }
+                RocketMinerTileEntity.MinerState state = RocketMinerTileEntity.MinerState.byId(minerState);
+                TextHelper.text(iTooltip, state.getState().plainCopy().withStyle(ChatFormatting.WHITE));
                 TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             } else {
                 TextHelper.text(iTooltip, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
@@ -63,7 +56,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             }
 
             int y = miner.getPipeTip().getY();
-            BarHelper.bar(iTooltip, y, miner.getPosition().getY(), Component.translatable("ic2.probe.miner.progress.name", y), ColorMix.BROWN);
+            BarHelper.bar(iTooltip, y - miner.getWorldObj().getMinBuildHeight(), miner.getPosition().getY() - miner.getWorldObj().getMinBuildHeight(), Component.translatable("ic2.probe.miner.progress.name", y), ColorMix.BROWN);
         }
     }
 
@@ -72,8 +65,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
         if (blockEntity instanceof BaseElectricTileEntity tile) {
             CompoundTag tag = new CompoundTag();
             if (tile instanceof RocketMinerTileEntity rocket) {
-                tag.putByte("finished", (byte) rocket.finished);
-                tag.putBoolean("refueling", rocket.isRefueling());
+                tag.putInt("minerState", rocket.state.ordinal());
                 TankHelper.loadTankData(rocket.tank, compoundTag);
             } else if (tile instanceof MinerTileEntity miner) {
                 tag.putFloat("progress", miner.getProgress());

@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.info.tubes;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.StackingTubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
@@ -10,6 +11,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +47,9 @@ public class StackingTubeInfoProvider implements IHelper<BlockEntity> {
                 stack.setCount(stackedTag.getInt("count"));
                 cachedList.add(stack);
             });
+            boolean ignoreColored = tag.getBoolean("ignoreColored");
+            TextHelper.text(iTooltip, Component.translatable("ic2.probe.tube.stacking.color").withStyle(ChatFormatting.GOLD)
+                    .append((ignoreColored ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(ignoreColored)));
             PluginHelper.grid(iTooltip, "ic2.probe.tube.cached", ChatFormatting.GOLD, cachedList);
         }
     }
@@ -66,6 +71,8 @@ public class StackingTubeInfoProvider implements IHelper<BlockEntity> {
                     stackedTag.putInt("count", stack.getCount());
                     itemsList.add(stackedTag);
                 }
+                tag.putBoolean("ignoreColored", stacking.ignoreColors);
+                tag.putInt("stackingNumber", stacking.stacking);
                 tag.put("StackedItems", itemsList);
             }
             compoundTag.put("StackingTubeInfo", tag);
