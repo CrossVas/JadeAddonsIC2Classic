@@ -10,6 +10,9 @@ import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.tiles.PipeTileEntity;
 import ic2.core.utils.collection.LongAverager;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2LongMap;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +30,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
@@ -44,7 +48,6 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof PipeTileEntity) {
             ListTag fluidTagList = tag.getList("FluidStacks", Tag.TAG_COMPOUND);
             Object2IntOpenHashMap<Fluid> mappedFluid = new Object2IntOpenHashMap<>();
-            TextHelper.text(iTooltip, Component.translatable("ic2.probe.pipe.transported").withStyle(ChatFormatting.GOLD));
             for (Tag fluidTag : fluidTagList) {
                 CompoundTag fluidStackTag = (CompoundTag) fluidTag;
                 Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidStackTag.getString("fluid")));
@@ -54,18 +57,17 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
                 }
             }
 
-            PluginHelper.spacerY(iTooltip, 0);
-            mappedFluid.object2IntEntrySet().forEach(entry -> {
-                Fluid fluid = entry.getKey();
-                int avr = entry.getIntValue();
-                System.out.println(entry);
-                TextHelper.text(iTooltip, ForgeRegistries.FLUIDS.getKey(fluid).toString());
-                if (avr > 0) {
-
-                    iTooltip.add(iTooltip.getElementHelper().fluid(new FluidStack(fluid, 1000)));
-                    TextHelper.text(iTooltip, Component.literal("Average: " + avr));
-                }
-            });
+            if (!mappedFluid.object2IntEntrySet().isEmpty()) {
+                PluginHelper.spacerY(iTooltip, 0);
+                TextHelper.text(iTooltip, Component.translatable("ic2.probe.pipe.transported").withStyle(ChatFormatting.GOLD));
+                mappedFluid.object2IntEntrySet().forEach(entry -> {
+                    Fluid fluid = entry.getKey();
+                    int avr = entry.getIntValue();
+                    if (avr > 0) {
+                        iTooltip.add(iTooltip.getElementHelper().fluid(new FluidStack(fluid, 1000)));
+                    }
+                });
+            }
         }
     }
 
@@ -103,44 +105,45 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
     public static class FluidContainer {
 
-        Object2IntOpenHashMap<Fluid> mappedFluids = new Object2IntOpenHashMap<>();
-        LongAverager fluidIn = new LongAverager(5);
-        Fluid fluid;
+        Object2LongMap<Fluid> lastFluids = new Object2LongOpenHashMap<>();
+        Map<Fluid, LongAverager> averages = new Object2ObjectLinkedOpenHashMap<>();
 
-        long lastTime;
-        long lastIn;
+        long lastTimeIn = -1;
 
-        public FluidContainer(Fluid fluid) {
-            this.fluid = fluid;
-        }
+        public FluidContainer() {}
 
         public static FluidContainer getContainer(PipeTileEntity tile, Fluid fluid) {
             FluidContainer result = CACHE.getIfPresent(tile.getPosition());
             if (result == null) {
-                result = new FluidContainer(fluid);
+                result = new FluidContainer();
                 CACHE.put(tile.getPosition(), result);
             }
 
-            result.tick(tile.getWorldObj().getGameTime(), tile, fluid);
+            result.process(tile);
             return result;
         }
 
-        public void tick(long time, PipeTileEntity pipe, Fluid fluid) {
-            FluidNet.TransportStats stat = FluidNet.INSTANCE.getStats(pipe);
-            if (this.lastTime != 0L) {
-                long diff = time - this.lastTime;
-                if (diff <= 0L) {
-                    return;
-                }
-                this.fluidIn.addEntry((stat.getTransfered().getLong(fluid) - this.lastIn) / diff);
+        public void process(PipeTileEntity pipe) {
+            long currentTime = pipe.getLevel().getGameTime();
+            FluidNet.TransportStats stats = FluidNet.INSTANCE.getStats(pipe);
+            if(lastTimeIn == -1) {
+                lastFluids.putAll(stats.getTransfered());
+                lastTimeIn = currentTime;
+                return;
             }
-            this.lastTime = time;
-            this.lastIn = stat.getTransfered().getLong(fluid);
-            this.mappedFluids.put(fluid, (int) fluidIn.getAverage());
+            double diff = currentTime - lastTimeIn;
+            if(diff <= 0) return;
+            lastTimeIn = currentTime;
+            for(Object2LongMap.Entry<Fluid> entry : stats.getTransfered().object2LongEntrySet()) {
+                Fluid fluid = entry.getKey();
+                long current = entry.getLongValue();
+                averages.computeIfAbsent(fluid, T -> new LongAverager(20)).addEntry((int)((current - lastFluids.getLong(fluid)) / diff));
+                lastFluids.put(fluid, current);
+            }
         }
 
         public int getAverage(Fluid fluid) {
-            return this.mappedFluids.getInt(fluid);
+            return (int) this.averages.get(fluid).getAverage();
         }
     }
 }
