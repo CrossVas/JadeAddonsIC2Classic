@@ -5,6 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.fluids.FluidStack;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElement;
 
@@ -12,8 +13,12 @@ import java.util.List;
 
 public class PluginHelper {
 
-    public static void spacerX(ITooltip tooltip, int x) {
-        tooltip.add(tooltip.getElementHelper().spacer(x, 0));
+    public static void spacerX(ITooltip tooltip, int x, boolean append) {
+        if (append) {
+            tooltip.append(tooltip.getElementHelper().spacer(x, 0));
+        } else {
+            tooltip.add(tooltip.getElementHelper().spacer(x, 0));
+        }
     }
 
     public static void spacerY(ITooltip tooltip, int y) {
@@ -43,7 +48,27 @@ public class PluginHelper {
                     counter++;
                     if (counter == 6) {
                         counter = 0;
-                        TextHelper.text(iTooltip, Component.empty());
+                        spacerY(iTooltip, 0);
+                    }
+                }
+            }
+            PluginHelper.spacerY(iTooltip, 2);
+        }
+    }
+
+    public static void gridFluid(ITooltip iTooltip, String text, ChatFormatting style, List<FluidStack> stackList) {
+        int counter = 0;
+        if (!stackList.isEmpty()) {
+            TextHelper.text(iTooltip, Component.translatable(text).withStyle(style));
+            PluginHelper.spacerY(iTooltip, 2);
+            for (FluidStack stack : stackList) {
+                if (counter < 7) {
+                    iTooltip.append(iTooltip.getElementHelper().fluid(stack));
+                    spacerX(iTooltip, 3, true);
+                    counter++;
+                    if (counter == 6) {
+                        counter = 0;
+                        spacerY(iTooltip, 0);
                     }
                 }
             }

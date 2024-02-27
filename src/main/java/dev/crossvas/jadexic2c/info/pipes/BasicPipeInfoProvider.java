@@ -5,20 +5,18 @@ import com.google.common.cache.CacheBuilder;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
-import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.tiles.PipeTileEntity;
 import ic2.core.utils.collection.LongAverager;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -30,6 +28,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -47,27 +46,17 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
         CompoundTag tag = getData(blockAccessor, "BasicPipeInfo");
         if (blockAccessor.getBlockEntity() instanceof PipeTileEntity) {
             ListTag fluidTagList = tag.getList("FluidStacks", Tag.TAG_COMPOUND);
-            Object2IntOpenHashMap<Fluid> mappedFluid = new Object2IntOpenHashMap<>();
+            List<FluidStack> fluidToDisplay = new ObjectArrayList<>();
             for (Tag fluidTag : fluidTagList) {
                 CompoundTag fluidStackTag = (CompoundTag) fluidTag;
                 Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidStackTag.getString("fluid")));
                 int avr = fluidStackTag.getInt("average");
-                if (avr > 0) {
-                    mappedFluid.put(fluid, avr);
+                if (avr > 0 && fluid != null) {
+                    fluidToDisplay.add(new FluidStack(fluid, 1000));
                 }
             }
 
-            if (!mappedFluid.object2IntEntrySet().isEmpty()) {
-                PluginHelper.spacerY(iTooltip, 0);
-                TextHelper.text(iTooltip, Component.translatable("ic2.probe.pipe.transported").withStyle(ChatFormatting.GOLD));
-                mappedFluid.object2IntEntrySet().forEach(entry -> {
-                    Fluid fluid = entry.getKey();
-                    int avr = entry.getIntValue();
-                    if (avr > 0) {
-                        iTooltip.add(iTooltip.getElementHelper().fluid(new FluidStack(fluid, 1000)));
-                    }
-                });
-            }
+            PluginHelper.gridFluid(iTooltip, "ic2.probe.pipe.transported", ChatFormatting.GOLD, fluidToDisplay);
         }
     }
 
@@ -79,7 +68,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
             ListTag fluidTagList = new ListTag();
             for (Fluid fluid : stats.getTransfered().keySet()) {
                 if (fluid != null) {
-                    FluidContainer container = FluidContainer.getContainer(pipe, fluid);
+                    FluidContainer container = FluidContainer.getContainer(pipe);
                     CompoundTag fluidStackTag = new CompoundTag();
                     fluidStackTag.putString("fluid", ForgeRegistries.FLUIDS.getKey(fluid).toString());
                     fluidStackTag.putInt("average", container.getAverage(fluid));
@@ -112,7 +101,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
         public FluidContainer() {}
 
-        public static FluidContainer getContainer(PipeTileEntity tile, Fluid fluid) {
+        public static FluidContainer getContainer(PipeTileEntity tile) {
             FluidContainer result = CACHE.getIfPresent(tile.getPosition());
             if (result == null) {
                 result = new FluidContainer();
