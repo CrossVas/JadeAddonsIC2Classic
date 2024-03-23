@@ -5,6 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.info.removals.TankRender;
 import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.tiles.PipeTileEntity;
 import ic2.core.utils.collection.LongAverager;
@@ -45,6 +46,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "BasicPipeInfo");
         if (blockAccessor.getBlockEntity() instanceof PipeTileEntity) {
+            TankRender.TANK_REMOVAL.add(blockAccessor.getBlock());
             ListTag fluidTagList = tag.getList("FluidStacks", Tag.TAG_COMPOUND);
             List<FluidStack> fluidToDisplay = new ObjectArrayList<>();
             for (Tag fluidTag : fluidTagList) {
