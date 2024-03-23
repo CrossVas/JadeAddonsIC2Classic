@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
@@ -28,7 +27,7 @@ public enum TreetapAndBucketInfoProvider implements IBlockComponentProvider {
             BlockState state = blockAccessor.getBlockState();
             int current = state.getValue(TreeTapAndBucketBlock.FILL_STAGE);
             if (current > 0) {
-                BarHelper.bar(iTooltip, current, 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE), ColorMix.BROWN);
+                BarHelper.bar(iTooltip, current, 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE), -10996205);
             }
         }
     }

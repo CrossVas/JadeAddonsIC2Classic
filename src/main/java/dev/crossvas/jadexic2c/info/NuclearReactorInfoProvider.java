@@ -5,8 +5,7 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Formatter;
+import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
@@ -14,6 +13,7 @@ import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.StackUtil;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -87,14 +87,14 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
         }
     }
 
-    public static ColorMix getReactorColor(int current, int max) {
+    public static int getReactorColor(int current, int max) {
         float progress = (float) current / max;
         if ((double) progress < 0.25) {
-            return ColorMix.GREEN;
+            return ColorUtils.GREEN;
         } else if ((double) progress < 0.5) {
-            return ColorMix.YELLOW;
+            return ColorUtils.YELLOW;
         } else {
-            return (double) progress < 0.75 ? ColorMix.ORANGE : ColorMix.RED;
+            return (double) progress < 0.75 ? ColorUtils.ORANGE : ColorUtils.RED;
         }
     }
 }

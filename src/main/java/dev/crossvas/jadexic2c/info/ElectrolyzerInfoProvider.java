@@ -4,10 +4,10 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -41,7 +41,7 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
 
                 if (energy > 0) {
                     BarHelper.bar(iTooltip, energy, maxEnergy,
-                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorUtils.RED);
                 }
             }
 
@@ -56,7 +56,7 @@ public enum ElectrolyzerInfoProvider implements IHelper<BlockEntity> {
 
                 if (energy > 0) {
                     BarHelper.bar(iTooltip, energy, maxEnergy,
-                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                            Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU").withStyle(ChatFormatting.WHITE), ColorUtils.RED);
                 }
             }
         }

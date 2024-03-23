@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.helpers;
 
 import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
 import dev.crossvas.jadexic2c.info.removals.TankRender;
-import dev.crossvas.jadexic2c.utils.Formatter;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;

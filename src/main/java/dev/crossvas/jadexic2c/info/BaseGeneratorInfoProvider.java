@@ -5,7 +5,7 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.Formatter;
+import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseGeneratorTileEntity;

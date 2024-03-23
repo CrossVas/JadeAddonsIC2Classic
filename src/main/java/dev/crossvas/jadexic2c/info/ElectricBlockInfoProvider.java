@@ -5,8 +5,7 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Formatter;
+import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseFluxGeneratorTileEntity;
@@ -24,6 +23,7 @@ import ic2.core.block.machines.tiles.mv.ChunkloaderTileEntity;
 import ic2.core.block.machines.tiles.mv.CropHarvesterTileEntity;
 import ic2.core.block.machines.tiles.mv.ReactorPlannerTileEntity;
 import ic2.core.block.machines.tiles.mv.TeslaCoilTileEntity;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -88,9 +88,9 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 500);
                 int storedXP = tag.getInt("storedXP");
                 float progress = tag.getFloat("progress");
-                BarHelper.monoBar(iTooltip, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorMix.MONO_GREEN);
+                BarHelper.bar(iTooltip, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorUtils.GREEN);
                 if (progress > 0.0F) {
-                    BarHelper.bar(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                    BarHelper.bar(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
                 }
             }
 
@@ -100,11 +100,11 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
                 float progress = tag.getFloat("uuProgress");
                 if (progress > 0.0F) {
                     BarHelper.bar(iTooltip, (int) progress, (int) massFab.getMaxProgress(), Component.translatable("ic2.probe.progress.moderate.name",
-                            Formatter.THERMAL_GEN.format((double) (progress / massFab.getMaxProgress()) * 100.0)), ColorMix.PURPLE);
+                            Formatter.THERMAL_GEN.format((double) (progress / massFab.getMaxProgress()) * 100.0)), -4441721);
                 }
                 if (tag.getInt("scrap") > 0) {
                     BarHelper.bar(iTooltip, tag.getInt("scrap"), tag.getInt("scrapValue") * 2, Component.translatable("ic2.probe.matter.amplifier.name",
-                            tag.getInt("scrap")), ColorMix.BROWN);
+                            tag.getInt("scrap")), -10996205);
                 }
             }
 

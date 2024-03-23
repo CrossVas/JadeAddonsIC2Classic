@@ -5,11 +5,11 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.lv.WoodGassifierTileEntity;
 import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,7 +37,7 @@ public enum ElectricWoodGassifierInfoProvider implements IHelper<BlockEntity> {
             TextHelper.text(iTooltip, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(1800L));
             float progress = tag.getFloat("progress");
             if (progress > 0) {
-                BarHelper.bar(iTooltip, (int) progress, (int) gas.getMaxProgress(), "ic2.probe.progress.full.name", ColorMix.BLUE);
+                BarHelper.bar(iTooltip, (int) progress, (int) gas.getMaxProgress(), "ic2.probe.progress.full.name", ColorUtils.BLUE);
             }
             TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
         }

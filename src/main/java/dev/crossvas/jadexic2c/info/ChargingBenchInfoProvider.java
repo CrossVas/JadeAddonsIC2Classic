@@ -5,12 +5,12 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseChargingBenchTileEntity;
 import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -53,7 +53,7 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
                 if (toDischargeEnergy > 0) {
                     int dischargeEnergy = Math.min(transferLimit, toDischargeEnergy);
                     BarHelper.bar(iTooltip, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
-                            DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                            DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
                 }
 
                 int averageIn = tag.getInt("averageIn");

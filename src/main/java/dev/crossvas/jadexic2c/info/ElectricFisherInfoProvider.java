@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.ElectricFisherTileEntity;
@@ -38,7 +37,7 @@ public enum ElectricFisherInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 150);
                 int progress = (int) tag.getFloat("progress");
                 int max = (int) fisher.getMaxProgress();
-                BarHelper.bar(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), ColorMix.BLUE);
+                BarHelper.bar(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), ColorUtils.BLUE);
             }
 
             if (!tile.isValid || tile.isDynamic()) {

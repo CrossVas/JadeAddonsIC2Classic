@@ -5,7 +5,6 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
@@ -55,7 +54,7 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
             Component speedName = furnace.getSpeedName();
             double scaledProgress = (double) speed / maxSpeed;
             if (speed > 0) {
-                BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorMix.ORANGE);
+                BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorUtils.ORANGE);
             }
         }
 

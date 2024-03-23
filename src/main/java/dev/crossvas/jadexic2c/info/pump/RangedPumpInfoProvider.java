@@ -5,7 +5,6 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.mv.RangedPumpTileEntity;
@@ -38,7 +37,7 @@ public enum RangedPumpInfoProvider implements IHelper<BlockEntity> {
             boolean isOperating = tag.getBoolean("isOperating");
             TextHelper.text(iTooltip, isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
             int y = pump.getPipeTip().getY();
-            BarHelper.bar(iTooltip, y, pump.getPosition().getY(), Component.translatable("ic2.probe.pump.progress.name", y).withStyle(ChatFormatting.WHITE), ColorMix.BROWN);
+            BarHelper.bar(iTooltip, y, pump.getPosition().getY(), Component.translatable("ic2.probe.pump.progress.name", y).withStyle(ChatFormatting.WHITE), -10996205);
             TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
         }
     }

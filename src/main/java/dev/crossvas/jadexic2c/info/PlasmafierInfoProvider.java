@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.PlasmafierTileEntity;
@@ -38,11 +37,11 @@ public enum PlasmafierInfoProvider implements IHelper<BlockEntity> {
             int uuMatter = tag.getInt("uuMatter");
 
             if (plasma > 0) {
-                BarHelper.bar(iTooltip, plasma, maxPlasma, Component.translatable("ic2.probe.plasma.name", plasma, maxPlasma), ColorMix.PURPLE);
+                BarHelper.bar(iTooltip, plasma, maxPlasma, Component.translatable("ic2.probe.plasma.name", plasma, maxPlasma), -5829955);
             }
 
             if (uuMatter > 0) {
-                BarHelper.bar(iTooltip, uuMatter, 150, Component.translatable("ic2.probe.matter.name", uuMatter, 150), ColorMix.PURPLE);
+                BarHelper.bar(iTooltip, uuMatter, 150, Component.translatable("ic2.probe.matter.name", uuMatter, 150), -5829955);
             }
 
         }

@@ -5,7 +5,6 @@ import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.machines.tiles.nv.StoneBasicMachineTileEntity;
 import ic2.core.block.machines.tiles.nv.StoneCannerTileEntity;
@@ -51,7 +50,7 @@ public enum StoneMachineInfoProvider implements IHelper<BlockEntity> {
                 }
                 if (progress > 0) {
                     BarHelper.bar(iTooltip, (int) progress, (int) maxProgress,
-                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
                 }
             }
 
@@ -67,7 +66,7 @@ public enum StoneMachineInfoProvider implements IHelper<BlockEntity> {
                 }
                 if (progress > 0) {
                     BarHelper.bar(iTooltip, (int) progress, (int) maxProgress,
-                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
                 }
                 TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             }
@@ -82,7 +81,7 @@ public enum StoneMachineInfoProvider implements IHelper<BlockEntity> {
                 }
                 if (progress > 0) {
                     BarHelper.bar(iTooltip, (int) progress, (int) maxProgress,
-                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorMix.BLUE);
+                            Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) maxProgress).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
                 }
             }
         }

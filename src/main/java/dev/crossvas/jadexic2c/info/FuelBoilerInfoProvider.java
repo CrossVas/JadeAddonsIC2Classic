@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
 import ic2.core.platform.player.PlayerHandler;
@@ -46,7 +45,7 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
 
         if (PlayerHandler.getHandler(accessor.getPlayer()).hasThermometer()) {
             BarHelper.bar(iTooltip, heat, boiler.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
-                    heat / 30, Formatters.EU_READER_FORMAT.format((double) boiler.getMaxHeat() / 30)).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+                    heat / 30, Formatters.EU_READER_FORMAT.format((double) boiler.getMaxHeat() / 30)).withStyle(ChatFormatting.WHITE), ColorUtils.GREEN);
         }
         TankHelper.addClientTankFromTag(iTooltip, accessor);
         if (!boiler.isValid) {

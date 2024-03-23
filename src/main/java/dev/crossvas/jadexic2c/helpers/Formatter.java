@@ -1,4 +1,4 @@
-package dev.crossvas.jadexic2c.utils;
+package dev.crossvas.jadexic2c.helpers;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

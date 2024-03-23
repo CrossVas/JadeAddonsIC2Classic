@@ -4,11 +4,11 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropRegistry;
 import ic2.api.crops.ICropTile;
 import ic2.core.platform.registries.IC2Items;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -88,44 +88,44 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
                     iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE)));
                 }
                 if (scanLevel < 4 && currentStage < maxStage) {
-                    BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+                    BarHelper.bar(iTooltip, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4).withStyle(ChatFormatting.WHITE), ColorUtils.GREEN);
                 } else {
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.growth").withStyle(ChatFormatting.YELLOW), true);
                     if (currentStage < maxStage) {
-                        BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage", currentStage, maxStage).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
-                        BarHelper.bar(iTooltip, points, maxPoints, Component.translatable("ic2.probe.crop.info.points", points, maxPoints).withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+                        BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage", currentStage, maxStage).withStyle(ChatFormatting.WHITE), ColorUtils.GREEN);
+                        BarHelper.bar(iTooltip, points, maxPoints, Component.translatable("ic2.probe.crop.info.points", points, maxPoints).withStyle(ChatFormatting.WHITE), ColorUtils.GREEN);
                         if (tag.getBoolean("canGrow") && tag.getBoolean("isWaterlogCompatible")) {
                             TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.grow.rate", growthSpeed).withStyle(ChatFormatting.GOLD), true);
                         } else {
                             TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.grow.not").withStyle(ChatFormatting.RED), true);
                         }
                     } else {
-                        BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage_done").withStyle(ChatFormatting.WHITE), ColorMix.GREEN);
+                        BarHelper.bar(iTooltip, currentStage, maxStage, Component.translatable("ic2.probe.crop.info.stage_done").withStyle(ChatFormatting.WHITE), ColorUtils.GREEN);
                     }
 
                     if (scanLevel >= 4) {
                         TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.stats").withStyle(ChatFormatting.YELLOW), true); // title
-                        BarHelper.bar(iTooltip, growth, 31, Component.translatable("ic2.probe.crop.info.growth", growth, 31), ColorMix.AQUA);
-                        BarHelper.bar(iTooltip, gain, 31, Component.translatable("ic2.probe.crop.info.gain", gain, 31), ColorMix.PURPLE);
-                        BarHelper.bar(iTooltip, resistance, 31, Component.translatable("ic2.probe.crop.info.resistance", resistance, 31), ColorMix.GOLD);
+                        BarHelper.bar(iTooltip, growth, 31, Component.translatable("ic2.probe.crop.info.growth", growth, 31), ColorUtils.rgb(0, 170, 170));
+                        BarHelper.bar(iTooltip, gain, 31, Component.translatable("ic2.probe.crop.info.gain", gain, 31), ColorUtils.rgb(170, 0, 170));
+                        BarHelper.bar(iTooltip, resistance, 31, Component.translatable("ic2.probe.crop.info.resistance", resistance, 31), ColorUtils.rgb(255, 170, 0));
 
                         int stress = (crop.getProperties().getTier() - 1) * 4 + growth + gain + resistance;
                         int maxStress = crop.getStatInfluence(tile, humidity, nutrients, env) * 5;
-                        BarHelper.bar(iTooltip, stress, maxStress, Component.translatable("ic2.probe.crop.info.needs", stress, maxStress), ColorMix.AQUA);
+                        BarHelper.bar(iTooltip, stress, maxStress, Component.translatable("ic2.probe.crop.info.needs", stress, maxStress), ColorUtils.darker(ColorUtils.rgb(85, 255, 255)));
                     }
                 }
             }
 
             TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.storage").withStyle(ChatFormatting.YELLOW), true); // title
-            BarHelper.bar(iTooltip, fertilizer, 300, Component.translatable("ic2.probe.crop.info.fertilizer", fertilizer, 300), ColorMix.BROWN);
-            BarHelper.bar(iTooltip, water, 200, Component.translatable("ic2.probe.crop.info.water", water, 200), ColorMix.CORNFLOWER);
-            BarHelper.bar(iTooltip, weedex, 150, Component.translatable("ic2.probe.crop.info.weedex", weedex, 150), ColorMix.PINK);
+            BarHelper.bar(iTooltip, fertilizer, 300, Component.translatable("ic2.probe.crop.info.fertilizer", fertilizer, 300), ColorUtils.rgb(86, 54, 36));
+            BarHelper.bar(iTooltip, water, 200, Component.translatable("ic2.probe.crop.info.water", water, 200), ColorUtils.rgb(93, 105, 255));
+            BarHelper.bar(iTooltip, weedex, 150, Component.translatable("ic2.probe.crop.info.weedex", weedex, 150), ColorUtils.PINK);
 
             TextHelper.text(iTooltip, Component.translatable("ic2.probe.crop.env").withStyle(ChatFormatting.YELLOW), true); // title
-            BarHelper.monoBar(iTooltip, nutrients, 20, Component.translatable("ic2.probe.crop.info.nutrients", nutrients, 20).withStyle(ChatFormatting.WHITE), ColorMix.MONO_LIME);
-            BarHelper.bar(iTooltip, humidity, 20, Component.translatable("ic2.probe.crop.info.humidity", humidity, 20).withStyle(ChatFormatting.WHITE), ColorMix.CORNFLOWER);
-            BarHelper.monoBar(iTooltip, env, 10, Component.translatable("ic2.probe.crop.info.env", env, 10).withStyle(ChatFormatting.WHITE), ColorMix.MONO_AQUA);
-            BarHelper.monoBar(iTooltip, light, 15, Component.translatable("ic2.probe.crop.info.light", light, 15).withStyle(ChatFormatting.WHITE), ColorMix.MONO_YELLOW);
+            BarHelper.bar(iTooltip, nutrients, 20, Component.translatable("ic2.probe.crop.info.nutrients", nutrients, 20).withStyle(ChatFormatting.WHITE), ColorUtils.rgb(0, 255, 5));
+            BarHelper.bar(iTooltip, humidity, 20, Component.translatable("ic2.probe.crop.info.humidity", humidity, 20).withStyle(ChatFormatting.WHITE), ColorUtils.rgb(93, 105, 255));
+            BarHelper.bar(iTooltip, env, 10, Component.translatable("ic2.probe.crop.info.env", env, 10).withStyle(ChatFormatting.WHITE), ColorUtils.rgb(85, 255, 255));
+            BarHelper.bar(iTooltip, light, 15, Component.translatable("ic2.probe.crop.info.light", light, 15).withStyle(ChatFormatting.WHITE), ColorUtils.YELLOW);
         }
     }
 

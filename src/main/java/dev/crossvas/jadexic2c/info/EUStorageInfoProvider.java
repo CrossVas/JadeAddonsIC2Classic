@@ -3,13 +3,13 @@ package dev.crossvas.jadexic2c.info;
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Formatter;
+import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.tiles.readers.IEUStorage;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
 import ic2.core.block.storage.tiles.CreativeSourceTileEntity;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -34,9 +34,9 @@ public enum EUStorageInfoProvider implements IHelper<BlockEntity> {
         int stored = tag.getInt("storedEnergy");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CreativeSourceTileEntity) {
-                BarHelper.bar(iTooltip, 1, 1, Component.translatable("ic2.probe.eu.storage.name", "Infinite").withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                BarHelper.bar(iTooltip, 1, 1, Component.translatable("ic2.probe.eu.storage.name", "Infinite").withStyle(ChatFormatting.WHITE), ColorUtils.RED);
             } else if (tile instanceof IEUStorage storage && !(tile instanceof ElectrolyzerTileEntity || tile instanceof ChargedElectrolyzerTileEntity)) {
-                BarHelper.bar(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.full.name", Formatter.formatNumber(stored, 4), Formatter.formatNumber(storage.getMaxEU(), 4)).withStyle(ChatFormatting.WHITE), ColorMix.RED);
+                BarHelper.bar(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.full.name", Formatter.formatNumber(stored, 4), Formatter.formatNumber(storage.getMaxEU(), 4)).withStyle(ChatFormatting.WHITE), ColorUtils.RED);
             }
         }
     }

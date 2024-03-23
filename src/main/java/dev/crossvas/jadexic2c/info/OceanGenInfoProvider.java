@@ -4,11 +4,11 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.utils.ColorMix;
-import dev.crossvas.jadexic2c.utils.Formatter;
+import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.OceanGeneratorTileEntity;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -39,8 +39,8 @@ public enum OceanGenInfoProvider implements IHelper<BlockEntity> {
                 int water = Integer.parseInt(Formatter.formatInt(tag.getInt("water"), 4));
                 int coral = Integer.parseInt(Formatter.formatInt(tag.getInt("coral"), 4));
 
-                BarHelper.bar(iTooltip, water, 1000, Component.translatable("ic2.probe.water.full.name", water, 1000), ColorMix.BLUE);
-                BarHelper.bar(iTooltip, coral, 50, Component.translatable("ic2.probe.corals.full.name", coral, 50), ColorMix.PURPLE);
+                BarHelper.bar(iTooltip, water, 1000, Component.translatable("ic2.probe.water.full.name", water, 1000), ColorUtils.BLUE);
+                BarHelper.bar(iTooltip, coral, 50, Component.translatable("ic2.probe.corals.full.name", coral, 50), -5829955);
             }
         }
     }
