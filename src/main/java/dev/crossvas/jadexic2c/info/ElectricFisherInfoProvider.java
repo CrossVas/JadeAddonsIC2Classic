@@ -37,7 +37,7 @@ public enum ElectricFisherInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", 150);
                 int progress = (int) tag.getFloat("progress");
                 int max = (int) fisher.getMaxProgress();
-                BarHelper.bar(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), ColorUtils.BLUE);
+                BarHelper.bar(iTooltip, progress, max, Component.translatable("ic2.probe.progress.full.name", Formatters.EU_READER_FORMAT.format(progress), max), -16733185);
             }
 
             if (!tile.isValid || tile.isDynamic()) {

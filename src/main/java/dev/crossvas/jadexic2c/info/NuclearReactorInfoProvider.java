@@ -1,11 +1,7 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.helpers.IHelper;
-import dev.crossvas.jadexic2c.helpers.TankHelper;
-import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.helpers.Formatter;
+import dev.crossvas.jadexic2c.helpers.*;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
@@ -92,9 +88,9 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
         if ((double) progress < 0.25) {
             return ColorUtils.GREEN;
         } else if ((double) progress < 0.5) {
-            return ColorUtils.YELLOW;
+            return -1189115;
         } else {
-            return (double) progress < 0.75 ? ColorUtils.ORANGE : ColorUtils.RED;
+            return (double) progress < 0.75 ? -1203707 : ColorUtils.RED;
         }
     }
 }

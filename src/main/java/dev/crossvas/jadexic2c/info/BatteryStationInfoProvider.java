@@ -10,7 +10,6 @@ import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseBatteryStationTileEntity;
 import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -54,7 +53,7 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
                 if (capacity > 0) {
                     int dischargeEnergy = (int) Math.min(averageIn, capacity);
                     BarHelper.bar(iTooltip, (int) capacity, (int) maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
-                            DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (capacity / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                            DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (capacity / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), -16733185);
                 }
 
                 int averageOut = tag.getInt("averageOut");

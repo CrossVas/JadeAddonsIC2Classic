@@ -9,7 +9,6 @@ import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.recipes.misc.EnrichRecipe;
 import ic2.core.block.machines.tiles.hv.UraniumEnchricherTileEntity;
 import ic2.core.utils.helpers.SanityHelper;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -48,11 +47,11 @@ public enum UraniumEnricherInfoProvider implements IHelper<BlockEntity> {
 
             if (mainProgress > 0) {
                 BarHelper.bar(iTooltip, mainProgress / 20, 1000 / 20,
-                        Component.translatable("ic2.probe.progress.full.name", mainProgress / 20, 1000 / 20).append(" s").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                        Component.translatable("ic2.probe.progress.full.name", mainProgress / 20, 1000 / 20).append(" s").withStyle(ChatFormatting.WHITE), -16733185);
             }
             if (secondaryProgress > 0) {
                 BarHelper.bar(iTooltip, secondaryProgress, 100,
-                        Component.translatable("ic2.probe.progress.secondary.full.name", secondaryProgress, 100).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                        Component.translatable("ic2.probe.progress.secondary.full.name", secondaryProgress, 100).append(" t").withStyle(ChatFormatting.WHITE), -16733185);
             }
             if (storedPoints > 0) {
                 BarHelper.bar(iTooltip, storedPoints, 1000, Component.translatable("ic2.probe.uranium.type.name",

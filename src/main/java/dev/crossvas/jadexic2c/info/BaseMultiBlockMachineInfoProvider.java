@@ -54,7 +54,7 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
             Component speedName = furnace.getSpeedName();
             double scaledProgress = (double) speed / maxSpeed;
             if (speed > 0) {
-                BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorUtils.ORANGE);
+                BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), -295680);
             }
         }
 

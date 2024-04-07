@@ -9,7 +9,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
 import ic2.core.block.machines.tiles.lv.MinerTileEntity;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -54,7 +53,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             if (!isStuck && progress > 0) {
                 float scaledOp = Math.min(6.0E7F, progress);
                 float scaledMaxOp = Math.min(6.0E7F, miner.getMaxProgress());
-                BarHelper.bar(iTooltip, (int) scaledOp, (int) scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", (int) scaledOp, (int) scaledMaxOp), ColorUtils.BLUE);
+                BarHelper.bar(iTooltip, (int) scaledOp, (int) scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", (int) scaledOp, (int) scaledMaxOp), -16733185);
             }
         }
     }

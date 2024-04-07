@@ -76,10 +76,10 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     TankHelper.addTank(iTooltip, waterStack, maxFluidCapacity);
 
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW), true);
-                    BarHelper.bar(iTooltip, brewQuality, 5, "ic2.probe.barrel.beer.quality." + brewQuality + ".name", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, brewQuality, 5, "ic2.probe.barrel.beer.quality." + brewQuality + ".name", -16733185);
                     BarHelper.bar(iTooltip, alcoholLevel, 6, "ic2.probe.barrel.beer.alc." + alcoholLevel + ".name", ColorUtils.GREEN);
                     BarHelper.bar(iTooltip, solidRatio, 6, "ic2.probe.barrel.beer.solid." + solidRatio + ".name", ColorUtils.YELLOW);
-                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(current) + "%", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(current) + "%", -16733185);
                     break;
                 case 2:
                     maxValue = tag.getInt("timeNeededForRum");
@@ -87,7 +87,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     TextHelper.text(iTooltip, getBrewType(brewType));
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW), true);
                     BarHelper.bar(iTooltip, fluidAmount / 1000, 32, "ic2.probe.barrel.beer.sugar_cane.name", ColorUtils.GREEN);
-                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%", -16733185);
                     break;
                 case 5:
                     double ageWhisky = tag.getInt("age");
@@ -98,8 +98,8 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     BarHelper.bar(iTooltip, hopsAmount, 16, "ic2.probe.barrel.whisky.grist.name", ColorUtils.GREEN);
                     TankHelper.addTank(iTooltip, waterStack, maxFluidCapacity);
                     TextHelper.text(iTooltip, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW), true);
-                    BarHelper.bar(iTooltip, Math.min(brewQuality, 50), 50, "ic2.probe.barrel.whisky.years.name", ColorUtils.BLUE);
-                    BarHelper.bar(iTooltip, (int) ageWhisky, 1728000, format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, Math.min(brewQuality, 50), 50, "ic2.probe.barrel.whisky.years.name", -16733185);
+                    BarHelper.bar(iTooltip, (int) ageWhisky, 1728000, format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%", -16733185);
                     break;
                 case 10:
                     TextHelper.text(iTooltip, getBrewType(brewType));
@@ -111,12 +111,12 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
                     int brewedPotion = tag.getInt("brewedPotion");
                     Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : MobEffect.byId(brewedPotion).getDisplayName();
                     TextHelper.text(iTooltip, "ic2.probe.barrel.status.output.name", potionID);
-                    BarHelper.bar(iTooltip, brewQuality, 6, "ic2.probe.barrel.potion.quality." + brewQuality + ".name", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, brewQuality, 6, "ic2.probe.barrel.potion.quality." + brewQuality + ".name", -16733185);
 
                     age = tag.getInt("age");
                     maxValue = 5000.0 * Math.pow(3.0, brewQuality);
                     current = age / maxValue;
-                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(current * 100.0) + "%", ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, age, (int) maxValue, format.format(current * 100.0) + "%", -16733185);
                     break;
             }
         }

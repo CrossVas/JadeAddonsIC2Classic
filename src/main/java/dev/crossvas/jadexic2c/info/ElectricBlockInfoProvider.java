@@ -1,11 +1,7 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.helpers.IHelper;
-import dev.crossvas.jadexic2c.helpers.TankHelper;
-import dev.crossvas.jadexic2c.helpers.TextHelper;
-import dev.crossvas.jadexic2c.helpers.Formatter;
+import dev.crossvas.jadexic2c.helpers.*;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseFluxGeneratorTileEntity;
@@ -90,7 +86,7 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
                 float progress = tag.getFloat("progress");
                 BarHelper.bar(iTooltip, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorUtils.GREEN);
                 if (progress > 0.0F) {
-                    BarHelper.bar(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                    BarHelper.bar(iTooltip, (int) progress, (int) enchanter.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) progress, (int) enchanter.getMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), -16733185);
                 }
             }
 

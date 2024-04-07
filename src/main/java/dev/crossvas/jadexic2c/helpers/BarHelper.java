@@ -10,7 +10,7 @@ import snownee.jade.api.ITooltip;
 public class BarHelper {
 
     public static void bar(ITooltip tooltip, int current, int max, String text, int mainColor) {
-        tooltip.add(tooltip.getElementHelper().progress((float) current / max, Component.translatable(text).withStyle(ChatFormatting.WHITE), new SpecialProgressStyle().color(mainColor, ColorUtils.darker(mainColor)), new SpecialBoxStyle(ColorUtils.doubleDarker(mainColor)), true));
+        tooltip.add(tooltip.getElementHelper().progress((float) current / max, Component.translatable(text, current).withStyle(ChatFormatting.WHITE), new SpecialProgressStyle().color(mainColor, ColorUtils.darker(mainColor)), new SpecialBoxStyle(ColorUtils.doubleDarker(mainColor)), true));
     }
 
     public static void bar(ITooltip tooltip, int current, int max, Component text, int mainColor) {

@@ -7,7 +7,6 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.OreScannerTileEntity;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -38,7 +37,7 @@ public enum OreScannerInfoProvider implements IHelper<BlockEntity> {
             int maxBlocks = tag.getInt("maxBlocks");
 
             if (blocks > 0) {
-                BarHelper.bar(iTooltip, blocks, maxBlocks, Component.translatable("ic2.probe.progress.full.name", blocks / 25 / 20, maxBlocks / 25 / 20).append("s").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                BarHelper.bar(iTooltip, blocks, maxBlocks, Component.translatable("ic2.probe.progress.full.name", blocks / 25 / 20, maxBlocks / 25 / 20).append("s").withStyle(ChatFormatting.WHITE), -16733185);
             }
         }
     }

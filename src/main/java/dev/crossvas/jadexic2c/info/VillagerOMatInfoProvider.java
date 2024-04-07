@@ -6,7 +6,6 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.hv.VillagerOMatTileEntity;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,7 +32,7 @@ public enum VillagerOMatInfoProvider implements IHelper<BlockEntity> {
             TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", oMat.getMaxInput());
             TextHelper.text(iTooltip, "ic2.probe.villager_o_mat.usage", tag.getInt("activeTrades") * 6000);
 
-            BarHelper.bar(iTooltip, (int) (1200 - oMat.clockTime(1200)), 1200, Component.translatable("ic2.probe.villager_o_mat.next", oMat.clockTime(1200)).withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+            BarHelper.bar(iTooltip, (int) (1200 - oMat.clockTime(1200)), 1200, Component.translatable("ic2.probe.villager_o_mat.next", oMat.clockTime(1200)).withStyle(ChatFormatting.WHITE), -16733185);
         }
 
 

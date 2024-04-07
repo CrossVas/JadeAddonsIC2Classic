@@ -14,7 +14,6 @@ import ic2.core.block.machines.tiles.mv.RefineryTileEntity;
 import ic2.core.block.machines.tiles.mv.SlowGrinderTileEntity;
 import ic2.core.block.machines.tiles.mv.VacuumCannerTileEntity;
 import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -63,7 +62,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = advancedTile.getMaxSpeed();
                     speedName = advancedTile.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorUtils.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), -295680);
                 }
             }
             if (tile instanceof VacuumCannerTileEntity vacuum) {
@@ -72,7 +71,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = vacuum.getMaxSpeed();
                     speedName = vacuum.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorUtils.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), -295680);
                 }
             }
 
@@ -92,13 +91,13 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
                     maxSpeed = extractor.getMaxSpeed();
                     speedName = extractor.getSpeedName();
                     scaledProgress = (double) speed / maxSpeed;
-                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), ColorUtils.ORANGE);
+                    BarHelper.bar(iTooltip, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%").withStyle(ChatFormatting.WHITE), -295680);
                 }
             }
             if (progress > 0.0F) {
                 int scaledOp = (int) Math.min(6.0E7F, progress / progressPerTick);
                 int scaledMaxOp = (int) Math.min(6.0E7F, maxProgress / progressPerTick);
-                BarHelper.bar(iTooltip, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                BarHelper.bar(iTooltip, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append(" t").withStyle(ChatFormatting.WHITE), -16733185);
             }
         }
     }

@@ -9,7 +9,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.lv.PumpTileEntity;
 import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -42,7 +41,7 @@ public enum PumpInfoProvider implements IHelper<BlockEntity> {
 
             if (pumpProgress > 0) {
                 BarHelper.bar(iTooltip, pumpProgress, pump.getPumpMaxProgress(),
-                        Component.translatable("ic2.probe.progress.full.name", pumpProgress, pump.getPumpMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), ColorUtils.BLUE);
+                        Component.translatable("ic2.probe.progress.full.name", pumpProgress, pump.getPumpMaxProgress()).append(" t").withStyle(ChatFormatting.WHITE), -16733185);
             }
             TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
         }
