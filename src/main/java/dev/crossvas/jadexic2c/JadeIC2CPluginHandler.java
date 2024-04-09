@@ -1,6 +1,10 @@
 package dev.crossvas.jadexic2c;
 
 import dev.crossvas.jadexic2c.info.*;
+import dev.crossvas.jadexic2c.info.expansions.FluidExpansionInfoProvider;
+import dev.crossvas.jadexic2c.info.expansions.MemoryExpansionInfoProvider;
+import dev.crossvas.jadexic2c.info.expansions.StorageExpansionInfoProvider;
+import dev.crossvas.jadexic2c.info.expansions.UUMExpansionInfoProvider;
 import dev.crossvas.jadexic2c.info.pipes.BasicPipeInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.PumpInfoProvider;
 import dev.crossvas.jadexic2c.info.pump.RangedPumpInfoProvider;
@@ -28,6 +32,7 @@ import ic2.core.block.generators.*;
 import ic2.core.block.generators.tiles.*;
 import ic2.core.block.machines.BaseMachineBlock;
 import ic2.core.block.machines.NoStateMachineBlock;
+import ic2.core.block.machines.customBlocks.FluidExpansionBlock;
 import ic2.core.block.machines.customBlocks.TeleporterBlock;
 import ic2.core.block.machines.customBlocks.VillagerOMatBlock;
 import ic2.core.block.machines.tiles.ev.ElectricFisherTileEntity;
@@ -40,6 +45,7 @@ import ic2.core.block.machines.tiles.lv.MinerTileEntity;
 import ic2.core.block.machines.tiles.lv.PumpTileEntity;
 import ic2.core.block.machines.tiles.lv.WoodGassifierTileEntity;
 import ic2.core.block.machines.tiles.mv.RangedPumpTileEntity;
+import ic2.core.block.machines.tiles.nv.*;
 import ic2.core.block.misc.BarrelBlock;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
@@ -88,7 +94,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerBlockComponent(WrenchableInfoProvider.INSTANCE, Block.class);
         registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
@@ -194,6 +199,10 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(VillagerOMatInfoProvider.INSTANCE, VillagerOMatBlock.class);
         registration.registerBlockComponent(FluidOMatInfoProvider.INSTANCE, PersonalBlock.class);
         registration.registerBlockComponent(TreetapAndBucketInfoProvider.INSTANCE, TreeTapAndBucketBlock.class);
+        registration.registerBlockComponent(UUMExpansionInfoProvider.INSTANCE, NoStateMachineBlock.class);
+        registration.registerBlockComponent(FluidExpansionInfoProvider.INSTANCE, FluidExpansionBlock.class);
+        registration.registerBlockComponent(MemoryExpansionInfoProvider.INSTANCE, NoStateMachineBlock.class);
+        registration.registerBlockComponent(StorageExpansionInfoProvider.INSTANCE, NoStateMachineBlock.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
@@ -219,11 +228,12 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
             return accessor;
         });
 
-        // remove builtin fluid tank render for IC2 FluidHandlers. We use our own style.
+        // common tooltips keep last
         registration.registerBlockComponent(TankRender.INSTANCE, Block.class);
         registration.registerBlockComponent(ModNameRender.MOD_NAME_REMOVER, Block.class);
         registration.registerBlockComponent(ModNameRender.MOD_NAME_RELOCATOR, Block.class);
         registration.registerBlockComponent(EUStorageInfoProvider.INSTANCE, Block.class);
+        registration.registerBlockComponent(WrenchableInfoProvider.INSTANCE, Block.class); // keep very last
     }
 
     @Override
@@ -290,6 +300,11 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
 
         registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, PipeTileEntity.class);
+        registration.registerBlockDataProvider(UUMExpansionInfoProvider.INSTANCE, UUMatterExpansionTileEntity.class);
+        registration.registerBlockDataProvider(FluidExpansionInfoProvider.INSTANCE, TankExpansionTileEntity.class);
+        registration.registerBlockDataProvider(MemoryExpansionInfoProvider.INSTANCE, MemoryExpansionTileEntity.class);
+        registration.registerBlockDataProvider(StorageExpansionInfoProvider.INSTANCE, BufferStorageExpansionTileEntity.class);
+        registration.registerBlockDataProvider(StorageExpansionInfoProvider.INSTANCE, StorageExpansionTileEntity.class);
     }
 
     @SafeVarargs
