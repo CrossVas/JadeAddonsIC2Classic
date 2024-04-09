@@ -22,7 +22,6 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public enum MemoryExpansionInfoProvider implements IHelper<BlockEntity> {
@@ -36,15 +35,7 @@ public enum MemoryExpansionInfoProvider implements IHelper<BlockEntity> {
 
         CompoundTag tag = getData(blockAccessor, "MemoryExpansionInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseExpansionTileEntity base) {
-            if (base instanceof MemoryExpansionTileEntity memory) {
-                ListTag itemsTagList = tag.getList("items", Tag.TAG_COMPOUND);
-                List<ItemStack> stackList = new ArrayList<>();
-                itemsTagList.forEach(stackTag -> {
-                    CompoundTag itemTag = (CompoundTag) stackTag;
-                    ItemStack stack = ItemStack.of(itemTag.getCompound("stack"));
-                    stackList.add(stack);
-                });
-
+            if (base instanceof MemoryExpansionTileEntity) {
                 ListTag craftsTagList = tag.getList("crafts", Tag.TAG_COMPOUND);
                 List<ItemStack> firstStick = new ObjectArrayList<>();
                 List<ItemStack> secondStick = new ObjectArrayList<>();
