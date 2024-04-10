@@ -17,6 +17,7 @@
   "ic2.tube.extraction_filter_whitelist.info": "Білий список:",
   "ic2.tube.teleport.info": "Ідентифікатор мережі: ",
   "ic2.tube.pickup.info": "Великий радіус: ",
+  "ic2.probe.pipe.transported": "Рідини:",
 
   "ic2.barrel.info.fluid": "%s: %s / %s мБ",
   "ic2.probe.eu.storage.full.name": "Енергії: %s/%s EU",

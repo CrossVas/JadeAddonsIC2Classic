@@ -17,6 +17,7 @@
   "ic2.tube.extraction_filter_whitelist.info": "화이트리스트:",
   "ic2.tube.teleport.info": "네트워크 ID: ",
   "ic2.tube.pickup.info": "넓은 반경: ",
+  "ic2.probe.pipe.transported": "유체:",
 
   "ic2.barrel.info.fluid": "%s: %s / %s mB",
   "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
