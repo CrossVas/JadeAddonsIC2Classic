@@ -20,5 +20,10 @@
 
   "ic2.barrel.info.fluid": "%s: %s / %s мБ",
   "ic2.probe.eu.storage.full.name": "Енергії: %s/%s EU",
-  "ic2.probe.transformer.inverted": "Інвертований: "
+  "ic2.probe.transformer.inverted": "Інвертований: ",
+  "ic2.probe.uum.providing.name": "Забезпечує:",
+  "ic2.probe.memory_expansion.name": "Пам'ять: %s/%s рецепти",
+  "ic2.probe.memory_expansion.can_craft.name": "Рецепти:",
+  "ic2.probe.storage_expansion.slot.name": "Сховище:",
+  "ic2.probe.uum_expansion.missing": "Потрібна UU(УП) Матерія!"
 }

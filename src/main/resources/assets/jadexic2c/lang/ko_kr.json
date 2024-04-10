@@ -20,5 +20,10 @@
 
   "ic2.barrel.info.fluid": "%s: %s / %s mB",
   "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
-  "ic2.probe.transformer.inverted": "역행: "
+  "ic2.probe.transformer.inverted": "역행: ",
+  "ic2.probe.uum.providing.name": "제공:",
+  "ic2.probe.memory_expansion.name": "메모리: %s/%s 레시피",
+  "ic2.probe.memory_expansion.can_craft.name": "레시피:",
+  "ic2.probe.storage_expansion.slot.name": "보관소:",
+  "ic2.probe.uum_expansion.missing": "UU물질 필요!"
 }
