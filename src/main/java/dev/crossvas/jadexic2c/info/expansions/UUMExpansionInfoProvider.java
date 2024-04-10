@@ -4,12 +4,14 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.base.tiles.impls.BaseExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.UUMatterExpansionTileEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -36,8 +38,11 @@ public enum UUMExpansionInfoProvider implements IHelper<BlockEntity> {
             if (base instanceof UUMatterExpansionTileEntity) {
                 int currentUUM = tag.getInt("uumLvl");
                 int maxUUM = tag.getInt("uumMaxLvl");
-                BarHelper.bar(iTooltip, currentUUM, maxUUM, "UU: " + currentUUM / 1000 + " / " + maxUUM / 1000, -5829955);
-
+                if (currentUUM > 0) {
+                    BarHelper.bar(iTooltip, currentUUM, maxUUM, "UU: " + currentUUM / 1000 + " / " + maxUUM / 1000, -5829955);
+                } else {
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.uum_expansion.missing").withStyle(ChatFormatting.RED));
+                }
                 ListTag itemsTagList = tag.getList("items", Tag.TAG_COMPOUND);
                 List<ItemStack> stackList = new ArrayList<>();
                 itemsTagList.forEach(stackTag -> {

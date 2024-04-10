@@ -127,9 +127,11 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
             lastTimeIn = currentTime;
             for(Object2LongMap.Entry<Fluid> entry : stats.getTransfered().object2LongEntrySet()) {
                 Fluid fluid = entry.getKey();
-                long current = entry.getLongValue();
-                averages.computeIfAbsent(fluid, T -> new LongAverager(20)).addEntry((int)((current - lastFluids.getLong(fluid)) / diff));
-                lastFluids.put(fluid, current);
+                if (fluid != null) {
+                    long current = entry.getLongValue();
+                    averages.computeIfAbsent(fluid, T -> new LongAverager(20)).addEntry((int)((current - lastFluids.getLong(fluid)) / diff));
+                    lastFluids.put(fluid, current);
+                }
             }
         }
 
