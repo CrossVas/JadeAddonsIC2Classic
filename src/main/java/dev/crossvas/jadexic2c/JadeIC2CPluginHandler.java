@@ -152,9 +152,9 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                 BasicTubeInfoProvider.INSTANCE
         );
 
-        registerProvidersForBlock(registration, PipeBlock.class,
-                BasicPipeInfoProvider.INSTANCE
-        );
+        registerBlocks(registration, BasicPipeInfoProvider.INSTANCE,
+                PipeBlock.class,
+                TubeBlock.class);
 
         registerBlocks(registration, ElectricBlockInfoProvider.INSTANCE,
                 BaseMachineBlock.class,
@@ -300,6 +300,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockDataProvider(EUStorageInfoProvider.INSTANCE, BaseTileEntity.class);
 
         registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, PipeTileEntity.class);
+        registration.registerBlockDataProvider(BasicPipeInfoProvider.INSTANCE, FluidTubeTileEntity.class);
         registration.registerBlockDataProvider(UUMExpansionInfoProvider.INSTANCE, UUMatterExpansionTileEntity.class);
         registration.registerBlockDataProvider(FluidExpansionInfoProvider.INSTANCE, TankExpansionTileEntity.class);
         registration.registerBlockDataProvider(MemoryExpansionInfoProvider.INSTANCE, MemoryExpansionTileEntity.class);

@@ -7,7 +7,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.info.removals.TankRender;
 import ic2.core.block.transport.fluid.graph.FluidNet;
-import ic2.core.block.transport.fluid.tiles.PipeTileEntity;
+import ic2.core.block.transport.fluid.graph.IFluidPipe;
 import ic2.core.utils.collection.LongAverager;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
@@ -45,7 +45,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
         }
 
         CompoundTag tag = getData(blockAccessor, "BasicPipeInfo");
-        if (blockAccessor.getBlockEntity() instanceof PipeTileEntity) {
+        if (blockAccessor.getBlockEntity() instanceof IFluidPipe) {
             TankRender.TANK_REMOVAL.add(blockAccessor.getBlock());
             ListTag fluidTagList = tag.getList("FluidStacks", Tag.TAG_COMPOUND);
             List<FluidStack> fluidToDisplay = new ObjectArrayList<>();
@@ -64,7 +64,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
-        if (blockEntity instanceof PipeTileEntity pipe) {
+        if (blockEntity instanceof IFluidPipe pipe) {
             CompoundTag tag = new CompoundTag();
             FluidNet.TransportStats stats = FluidNet.INSTANCE.getStats(pipe);
             ListTag fluidTagList = new ListTag();
@@ -103,7 +103,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
         public FluidContainer() {}
 
-        public static FluidContainer getContainer(PipeTileEntity tile) {
+        public static FluidContainer getContainer(IFluidPipe tile) {
             FluidContainer result = CACHE.getIfPresent(tile.getPosition());
             if (result == null) {
                 result = new FluidContainer();
@@ -114,8 +114,8 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
             return result;
         }
 
-        public void process(PipeTileEntity pipe) {
-            long currentTime = pipe.getLevel().getGameTime();
+        public void process(IFluidPipe pipe) {
+            long currentTime = pipe.getWorldObj().getGameTime();
             FluidNet.TransportStats stats = FluidNet.INSTANCE.getStats(pipe);
             if(lastTimeIn == -1) {
                 lastFluids.putAll(stats.getTransfered());
