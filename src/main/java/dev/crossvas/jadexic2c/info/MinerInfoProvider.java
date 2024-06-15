@@ -41,8 +41,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
             boolean isOperating = tag.getBoolean("isOperating");
 
             if (miner instanceof RocketMinerTileEntity) {
-                RocketMinerTileEntity.MinerState state = RocketMinerTileEntity.MinerState.byId(minerState);
-                TextHelper.text(iTooltip, state.getState().plainCopy().withStyle(ChatFormatting.WHITE));
+                TextHelper.text(iTooltip, getCompFromState(minerState));
                 TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
             } else {
                 TextHelper.text(iTooltip, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
@@ -77,5 +76,25 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
     @Override
     public ResourceLocation getUid() {
         return JadeIC2CPluginHandler.EU_READER_INFO;
+    }
+
+    // using this instead of IC2C's own MiningState, because apparently jade doesn't like it... wat?
+    public Component getCompFromState(int stateValue) {
+        String state = "";
+        String base = "ic2.probe.rocket_miner.state.";
+        switch (stateValue) {
+            case 0 -> state = "idle";
+            case 1 -> state = "working";
+            case 2 -> state = "moving";
+            case 3 -> state = "stuck";
+            case 4 -> state = "power";
+            case 5 -> state = "full";
+            case 6 -> state = "no_work";
+            case 7 -> state = "refuel";
+            case 8 -> state = "no_refuel";
+            case 9 -> state = "no_scanner";
+            case 10 -> state = "reset";
+        }
+        return Component.translatable(base + state).withStyle(ChatFormatting.WHITE);
     }
 }
