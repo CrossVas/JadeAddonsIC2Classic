@@ -48,6 +48,7 @@ import ic2.core.block.machines.tiles.mv.RangedPumpTileEntity;
 import ic2.core.block.machines.tiles.nv.*;
 import ic2.core.block.misc.BarrelBlock;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
+import ic2.core.block.misc.textured.TexturedBlockBlock;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.block.personal.PersonalBlock;
 import ic2.core.block.personal.tile.FluidOMatTileEntity;
@@ -223,6 +224,17 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
                                 .blockEntity(master)
                                 .build();
                     }
+                }
+            }
+            return accessor;
+        });
+
+        registration.addRayTraceCallback((hitResult, accessor, original) -> {
+            if (accessor instanceof BlockAccessor blockAccessor) {
+                Block block = blockAccessor.getBlock();
+                if (block instanceof TexturedBlockBlock textured) {
+                    return registration.blockAccessor().from(blockAccessor).fakeBlock(textured.getCloneItemStack(blockAccessor.getBlockState(),
+                            blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer())).build();
                 }
             }
             return accessor;
