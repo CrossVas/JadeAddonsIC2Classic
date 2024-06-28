@@ -10,6 +10,7 @@
 
   "ic2.probe.wrenchable.drop_chance.info": "Drop Chance",
   "ic2.probe.wrenchable.info": "Wrenchable Block",
+  "ic2.probe.wrenchable.optional.info": " (optional)",
   "ic2.tube.round_robin.info": "Round Robin Rules",
   "ic2.tube.directional.info": "Direction: %s",
   "ic2.tube.filter.info": "Filter:",

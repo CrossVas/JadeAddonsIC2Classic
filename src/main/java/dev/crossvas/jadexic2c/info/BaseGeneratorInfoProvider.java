@@ -32,7 +32,7 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof BaseGeneratorTileEntity gen) {
                 float euProduction = tag.getFloat("euProduction");
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber(euProduction, 3));
 
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
                 if (gen instanceof SolarTurbineTileEntity) {

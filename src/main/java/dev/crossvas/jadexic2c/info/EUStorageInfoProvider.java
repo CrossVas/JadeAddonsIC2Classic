@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.Formatter;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import ic2.api.tiles.readers.IEUStorage;
 import ic2.core.block.base.tiles.BaseTileEntity;
+import ic2.core.block.machines.tiles.hv.MassFabricatorTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
 import ic2.core.block.storage.tiles.CreativeSourceTileEntity;
@@ -35,7 +36,7 @@ public enum EUStorageInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CreativeSourceTileEntity) {
                 BarHelper.bar(iTooltip, 1, 1, Component.translatable("ic2.probe.eu.storage.name", "Infinite").withStyle(ChatFormatting.WHITE), ColorUtils.RED);
-            } else if (tile instanceof IEUStorage storage && !(tile instanceof ElectrolyzerTileEntity || tile instanceof ChargedElectrolyzerTileEntity)) {
+            } else if (tile instanceof IEUStorage storage && !(tile instanceof ElectrolyzerTileEntity || tile instanceof ChargedElectrolyzerTileEntity || tile instanceof MassFabricatorTileEntity)) {
                 BarHelper.bar(iTooltip, stored, storage.getMaxEU(), Component.translatable("ic2.probe.eu.storage.full.name", Formatter.formatNumber(stored, 4), Formatter.formatNumber(storage.getMaxEU(), 4)).withStyle(ChatFormatting.WHITE), ColorUtils.RED);
             }
         }

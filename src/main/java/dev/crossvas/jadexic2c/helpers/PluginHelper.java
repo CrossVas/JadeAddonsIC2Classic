@@ -87,4 +87,24 @@ public class PluginHelper {
             default -> ChatFormatting.WHITE;
         };
     }
+
+    public static ChatFormatting getTextColorFromDropChance(int dropChance) {
+        ChatFormatting color = ChatFormatting.GRAY;
+        if (dropChance >= 90) {
+            color = ChatFormatting.GREEN;
+        }
+        if (dropChance <= 90 && dropChance > 75) {
+            color = ChatFormatting.YELLOW;
+        }
+        if (dropChance <= 75 && dropChance > 50) {
+            color = ChatFormatting.GOLD;
+        }
+        if (dropChance <= 50 && dropChance > 35) {
+            color = ChatFormatting.RED;
+        }
+        if (dropChance <= 35) {
+            color = ChatFormatting.DARK_RED;
+        }
+        return color;
+    }
 }
