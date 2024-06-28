@@ -39,7 +39,6 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(VillagerOMatInfo.THIS);
         INFO_PROVIDERS.add(WaveGenInfo.THIS);
         INFO_PROVIDERS.add(WindmillGenInfo.THIS);
-        INFO_PROVIDERS.add(WrenchInfo.THIS); // keep last
     }
 
     public static BlockEntity getMultiBlockController(Level level, BlockPos pos) {

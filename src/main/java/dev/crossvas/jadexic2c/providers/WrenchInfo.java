@@ -1,56 +1,73 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.items.readers.IWrenchTool;
 import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.block.base.features.multiblock.IStructureListener;
-import ic2.core.inventory.filter.IFilter;
 import ic2.core.platform.registries.IC2Items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec2;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.TooltipPosition;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElement;
 
-public class WrenchInfo implements IInfoProvider {
+public class WrenchInfo implements IBlockComponentProvider {
 
     public static final WrenchInfo THIS = new WrenchInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        BlockEntity blockEntity = blockAccessor.getBlockEntity();
+        Player player = blockAccessor.getPlayer();
         ItemStack handHeldStack = player.getMainHandItem();
-        ItemStack wrenchStack = IC2Items.WRENCH.getDefaultInstance();
         boolean showInfo;
-        if (blockEntity instanceof IWrenchableTile wrenchableTile) {
-            double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(wrenchStack, wrenchableTile.getDropRate(player));
-            if (wrenchableTile instanceof IStructureListener) {
-                CompoundTag structureTag = helper.getServerData().getCompound("StructureData");
+        IElement wrenchIcon = iTooltip.getElementHelper().item(IC2Items.WRENCH.getDefaultInstance()).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
+        if (blockEntity instanceof IWrenchableTile tile) {
+            // drop rate with regular wrench
+            double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
+            if (tile instanceof IStructureListener) {
+                CompoundTag structureTag = blockAccessor.getServerData().getCompound("structureData");
                 showInfo = !structureTag.getBoolean("isStructure") && actualRate > 0;
             } else {
                 showInfo = actualRate > 0;
             }
             if (showInfo) {
-                if (wrenchableTile.isHarvestWrenchRequired(player)) {
+                PluginHelper.spacerY(iTooltip, 3);
+                iTooltip.add(wrenchIcon);
+                if (tile.isHarvestWrenchRequired(player)) {
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
-                        int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, wrenchableTile.getDropRate(player)) * 100.0);
+                        int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0);
                         if (dropChance > 100) dropChance = 100;
-                        helper.addItemElement(wrenchStack, Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
+                        TextHelper.appendText(iTooltip, Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
                     } else {
-                        helper.addItemElement(wrenchStack, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                        TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                     }
                 } else {
-                    helper.addItemElement(wrenchStack, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)).append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA)));
+                    TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)).append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA)));
                 }
             }
         }
     }
 
     @Override
-    public IFilter getFilter() {
-        return ALWAYS;
+    public ResourceLocation getUid() {
+        return JadeTags.INFO_RENDERER;
+    }
+
+    @Override
+    public int getDefaultPriority() {
+        return TooltipPosition.TAIL;
     }
 }

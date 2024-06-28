@@ -25,7 +25,7 @@ import snownee.jade.impl.ui.ProgressStyle;
 
 import java.util.List;
 
-public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComponentProvider {
+public class JadeTooltipRenderer implements IBlockComponentProvider {
 
     public static final JadeTooltipRenderer INSTANCE = new JadeTooltipRenderer();
 
@@ -35,11 +35,11 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
     }
 
     @Override
-    public void appendTooltip(ITooltip iTooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-        appendTooltips(iTooltip, entityAccessor);
+    public int getDefaultPriority() {
+        return TooltipPosition.HEAD + 100;
     }
 
-    private void appendTooltips(ITooltip tooltip, Accessor<?> accessor) {
+    private void appendTooltips(ITooltip tooltip, BlockAccessor accessor) {
         CompoundTag serverData = accessor.getServerData();
         IElementHelper helper = tooltip.getElementHelper();
         if (serverData.contains(JadeTags.TAG_DATA, Tag.TAG_LIST)) {
@@ -85,10 +85,8 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                     }
                 }
                 if (serverTag.contains(JadeTags.TAG_FLUID)) {
-                    if (accessor instanceof BlockAccessor blockAccessor) {
-                        Block block = blockAccessor.getBlock();
-                        JadeCommonHandler.TANK_REMOVAL.add(block);
-                    }
+                    Block block = accessor.getBlock();
+                    JadeCommonHandler.TANK_REMOVAL.add(block);
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(serverTag.getCompound(JadeTags.TAG_FLUID));
                     int max = serverTag.getInt(JadeTags.TAG_MAX);
                     if (fluid.getAmount() > 0) {

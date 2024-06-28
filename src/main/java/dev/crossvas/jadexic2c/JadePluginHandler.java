@@ -1,10 +1,10 @@
 package dev.crossvas.jadexic2c;
 
-import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
 import dev.crossvas.jadexic2c.providers.TreetapAndBucketInfo;
+import dev.crossvas.jadexic2c.providers.WrenchInfo;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
@@ -42,9 +42,6 @@ public class JadePluginHandler implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(TOP_STYLE, true);
         registration.addConfig(TANK_RENDER, true);
-        registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
-        registration.registerBlockComponent(JadeTankInfoRenderer.INSTANCE, Block.class);
-        registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
@@ -55,12 +52,9 @@ public class JadePluginHandler implements IWailaPlugin {
                 IStructureListener listener = StructureManager.INSTANCE.getListener(level, pos);
                 if (listener instanceof BlockEntity master) {
                     if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
-                        IJadeHelper helper = new JadeHelper();
                         CompoundTag structureTag = new CompoundTag();
-                        CompoundTag serverData = new CompoundTag();
                         structureTag.putBoolean("isStructure", true);
-                        serverData.put("StructureData", structureTag);
-                        helper.setServerData(serverData);
+                        blockAccessor.getServerData().put("structureData", structureTag);
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .hit(blockHitResult.withPosition(master.getBlockPos()))
@@ -83,6 +77,13 @@ public class JadePluginHandler implements IWailaPlugin {
             }
             return accessor;
         });
+
+        registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
+        registration.registerBlockComponent(JadeTankInfoRenderer.INSTANCE, Block.class);
+        registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
+
+        // we handle this here because we need to send/receive server data directly
+        registration.registerBlockComponent(WrenchInfo.THIS, Block.class);
 //        registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);

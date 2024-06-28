@@ -18,7 +18,5 @@ public interface IJadeHelper {
     void addFluidElement(FluidStack stored, int maxCapacity);
     void addFluidGridElement(List<FluidStack> fluids, Component component, ChatFormatting formatting);
     void addPaddingElement(int x, int y);
-    CompoundTag getServerData();
-    IJadeHelper setServerData(CompoundTag serverData);
-    void transferData();
+    void transferData(CompoundTag serverData);
 }

@@ -107,21 +107,9 @@ public class JadeHelper implements IJadeHelper {
     }
 
     @Override
-    public CompoundTag getServerData() {
-        return this.SERVER_DATA;
-    }
-
-    @Override
-    public IJadeHelper setServerData(CompoundTag serverData) {
-        this.SERVER_DATA = serverData;
-        return this;
-    }
-
-
-    @Override
-    public void transferData() {
+    public void transferData(CompoundTag serverData) {
         if (!this.DATA.isEmpty()) {
-            getServerData().put(JadeTags.TAG_DATA, this.DATA);
+            serverData.put(JadeTags.TAG_DATA, this.DATA);
         }
     }
 }
