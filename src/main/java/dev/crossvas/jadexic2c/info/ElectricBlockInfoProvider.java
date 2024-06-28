@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.*;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
@@ -109,7 +109,7 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 
     @Override

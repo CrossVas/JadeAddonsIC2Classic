@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.inventory.filter.SpecialFilters;
@@ -34,6 +34,6 @@ public enum TreetapAndBucketInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 }

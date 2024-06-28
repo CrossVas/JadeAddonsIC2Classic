@@ -2,7 +2,7 @@ package dev.crossvas.jadexic2c.info.pipes;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.info.removals.TankRender;
@@ -92,7 +92,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 
     static {

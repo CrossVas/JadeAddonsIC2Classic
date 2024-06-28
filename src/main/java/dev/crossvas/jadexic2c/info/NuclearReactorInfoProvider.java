@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.*;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
@@ -58,7 +58,7 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 
     public static void addToTooltip(ITooltip tooltip, BlockEntity tile, BlockAccessor blockAccessor) {

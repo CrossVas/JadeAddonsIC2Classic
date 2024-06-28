@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
@@ -40,7 +40,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseMachineTileEntity tile) {
             TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
             TextHelper.text(iTooltip, "ic2.probe.eu.max_in.name", tile.getMaxInput());
-            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", tile.getEnergyPerTick());
+            TextHelper.text(iTooltip, "ic2.probe.eu.usage.name", tag.getInt("energyPerTick"));
             if (tile instanceof SlowGrinderTileEntity grinder) {
                 TextHelper.text(iTooltip, "ic2.probe.scrap.chance.name", grinder.getChance(0.25F) * 100.0F);
             }
@@ -106,6 +106,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         CompoundTag tag = new CompoundTag();
         if (blockEntity instanceof BaseMachineTileEntity tile) {
+            tag.putInt("energyPerTick", tile.getEnergyPerTick());
             tag.putFloat("progress", tile.getProgress());
             tag.putBoolean("isActive", tile.isActive());
             tag.putFloat("maxProgress", tile.getMaxProgress());
@@ -128,7 +129,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 
 }

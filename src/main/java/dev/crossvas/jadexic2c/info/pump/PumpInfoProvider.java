@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info.pump;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
@@ -61,6 +61,6 @@ public enum PumpInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 }

@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
@@ -95,6 +95,6 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 }

@@ -47,11 +47,16 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
             if (showInfo) {
                 PluginHelper.spacerY(iTooltip, 3);
                 iTooltip.add(wrenchIcon);
-                if (handHeldStack.getItem() instanceof IWrenchTool tool) {
-                    double dropChance = tool.getActualLoss(handHeldStack, tile.getDropRate(player));
-                    TextHelper.appendText(iTooltip, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")).withStyle(ChatFormatting.GRAY));
+                if (tile.isHarvestWrenchRequired(player)) {
+                    if (handHeldStack.getItem() instanceof IWrenchTool tool) {
+                        int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0);
+                        if (dropChance > 100) dropChance = 100;
+                        TextHelper.appendText(iTooltip, Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
+                    } else {
+                        TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                    }
                 } else {
-                    TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                    TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)).append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA)));
                 }
             }
         }

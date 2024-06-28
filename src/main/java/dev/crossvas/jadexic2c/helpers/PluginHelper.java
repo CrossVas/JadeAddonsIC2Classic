@@ -4,7 +4,9 @@ import dev.crossvas.jadexic2c.elements.SpecialItemStackElement;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec2;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.ui.IElement;
@@ -12,6 +14,10 @@ import snownee.jade.api.ui.IElement;
 import java.util.List;
 
 public class PluginHelper {
+
+    public static int getColorForFluid(FluidStack fluid) {
+        return fluid.getFluid() == Fluids.LAVA ? -29925 : IClientFluidTypeExtensions.of(fluid.getFluid()).getTintColor() | -16777216;
+    }
 
     public static void spacerX(ITooltip tooltip, int x, boolean append) {
         if (append) {
@@ -86,5 +92,25 @@ public class PluginHelper {
             case 5 -> ChatFormatting.GREEN;
             default -> ChatFormatting.WHITE;
         };
+    }
+
+    public static ChatFormatting getTextColorFromDropChance(int dropChance) {
+        ChatFormatting color = ChatFormatting.GRAY;
+        if (dropChance >= 90) {
+            color = ChatFormatting.GREEN;
+        }
+        if (dropChance <= 90 && dropChance > 75) {
+            color = ChatFormatting.YELLOW;
+        }
+        if (dropChance <= 75 && dropChance > 50) {
+            color = ChatFormatting.GOLD;
+        }
+        if (dropChance <= 50 && dropChance > 35) {
+            color = ChatFormatting.RED;
+        }
+        if (dropChance <= 35) {
+            color = ChatFormatting.DARK_RED;
+        }
+        return color;
     }
 }

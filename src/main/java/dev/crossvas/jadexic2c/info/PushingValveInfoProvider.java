@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.storage.tiles.tank.PushingValveTileEntity;
 import ic2.core.inventory.filter.SpecialFilters;
@@ -29,6 +29,6 @@ public enum PushingValveInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadePluginHandler.EU_READER_INFO;
     }
 }

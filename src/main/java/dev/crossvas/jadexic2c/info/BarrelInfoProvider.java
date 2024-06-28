@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
-import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
@@ -124,7 +124,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.THERMOMETER_INFO;
+        return JadePluginHandler.THERMOMETER_INFO;
     }
 
     @Override

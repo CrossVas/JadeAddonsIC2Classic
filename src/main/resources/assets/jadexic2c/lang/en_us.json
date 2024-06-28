@@ -1,4 +1,5 @@
 {
+  "config.jade.plugin_ic2.renderer": "Tooltip Renderer",
   "config.jade.plugin_ic2.wrenchable_info": "Wrenchable Info",
   "config.jade.plugin_ic2.eu_storage_info": "EU Storage Info",
   "config.jade.plugin_ic2.eu_reader": "EU-Reader Info",
@@ -7,9 +8,11 @@
   "config.jade.plugin_ic2.remove_renders_fluid": "Use custom style for IC2 Tanks",
   "config.jade.plugin_ic2.remove_modid": "Remove Mod Name",
   "config.jade.plugin_ic2.relocate_modid": "Relocate Mod Name",
+  "config.jade.plugin_ic2.force_top_style": "Force TOP Style",
 
   "ic2.probe.wrenchable.drop_chance.info": "Drop Chance",
   "ic2.probe.wrenchable.info": "Wrenchable Block",
+  "ic2.probe.wrenchable.optional.info": " (optional)",
   "ic2.tube.round_robin.info": "Round Robin Rules",
   "ic2.tube.directional.info": "Direction: %s",
   "ic2.tube.filter.info": "Filter:",
