@@ -1,15 +1,24 @@
 package dev.crossvas.jadexic2c;
 
+import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
 import dev.crossvas.jadexic2c.providers.TreetapAndBucketInfo;
+import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
+import ic2.core.block.misc.textured.TexturedBlockBlock;
+import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
+import ic2.core.platform.events.StructureManager;
 import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
 import snownee.jade.api.*;
 
 @WailaPlugin(JadeXIC2C.ID_IC2)
@@ -36,6 +45,44 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(JadeTankInfoRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
+
+        // multiblock handler
+        registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
+            if (accessor instanceof BlockAccessor blockAccessor) {
+                Level level = blockAccessor.getLevel();
+                BlockPos pos = blockAccessor.getPosition();
+                BlockHitResult blockHitResult = blockAccessor.getHitResult();
+                IStructureListener listener = StructureManager.INSTANCE.getListener(level, pos);
+                if (listener instanceof BlockEntity master) {
+                    if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
+                        IJadeHelper helper = new JadeHelper();
+                        CompoundTag structureTag = new CompoundTag();
+                        CompoundTag serverData = new CompoundTag();
+                        structureTag.putBoolean("isStructure", true);
+                        serverData.put("StructureData", structureTag);
+                        helper.setServerData(serverData);
+                        return registration.blockAccessor()
+                                .from(blockAccessor)
+                                .hit(blockHitResult.withPosition(master.getBlockPos()))
+                                .blockState(level.getBlockState(master.getBlockPos()))
+                                .blockEntity(master)
+                                .build();
+                    }
+                }
+            }
+            return accessor;
+        });
+
+        registration.addRayTraceCallback((hitResult, accessor, original) -> {
+            if (accessor instanceof BlockAccessor blockAccessor) {
+                Block block = blockAccessor.getBlock();
+                if (block instanceof TexturedBlockBlock textured) {
+                    return registration.blockAccessor().from(blockAccessor).fakeBlock(textured.getCloneItemStack(blockAccessor.getBlockState(),
+                            blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer())).build();
+                }
+            }
+            return accessor;
+        });
 //        registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
@@ -146,40 +193,6 @@ public class JadePluginHandler implements IWailaPlugin {
 //        registration.registerBlockComponent(MemoryExpansionInfoProvider.INSTANCE, NoStateMachineBlock.class);
 //        registration.registerBlockComponent(StorageExpansionInfoProvider.INSTANCE, NoStateMachineBlock.class);
 //
-//        // multiblock handler
-//        registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
-//            if (accessor instanceof BlockAccessor blockAccessor) {
-//                Level level = blockAccessor.getLevel();
-//                BlockPos pos = blockAccessor.getPosition();
-//                BlockHitResult blockHitResult = blockAccessor.getHitResult();
-//                IStructureListener listener = StructureManager.INSTANCE.getListener(level, pos);
-//                if (listener instanceof BlockEntity master) {
-//                    if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
-//                        CompoundTag structureTag = new CompoundTag();
-//                        structureTag.putBoolean("isStructure", true);
-//                        blockAccessor.getServerData().put("structureData", structureTag);
-//                        return registration.blockAccessor()
-//                                .from(blockAccessor)
-//                                .hit(blockHitResult.withPosition(master.getBlockPos()))
-//                                .blockState(level.getBlockState(master.getBlockPos()))
-//                                .blockEntity(master)
-//                                .build();
-//                    }
-//                }
-//            }
-//            return accessor;
-//        });
-//
-//        registration.addRayTraceCallback((hitResult, accessor, original) -> {
-//            if (accessor instanceof BlockAccessor blockAccessor) {
-//                Block block = blockAccessor.getBlock();
-//                if (block instanceof TexturedBlockBlock textured) {
-//                    return registration.blockAccessor().from(blockAccessor).fakeBlock(textured.getCloneItemStack(blockAccessor.getBlockState(),
-//                            blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer())).build();
-//                }
-//            }
-//            return accessor;
-//        });
 //
 //        // common tooltips keep last
 //        registration.registerBlockComponent(TankRender.INSTANCE, Block.class);

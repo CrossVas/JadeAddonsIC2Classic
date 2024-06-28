@@ -17,8 +17,9 @@ public class JadeBlockEntityDataProvider implements IServerDataProvider<BlockEnt
     @Override
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         JadeHelper helper = new JadeHelper();
+        helper.setServerData(compoundTag);
         JadeCommonHandler.addInfo(helper, blockEntity, serverPlayer);
-        helper.transferData(compoundTag);
+        helper.transferData();
     }
 
     @Override

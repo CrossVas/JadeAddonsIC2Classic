@@ -14,6 +14,8 @@ public class JadeHelper implements IJadeHelper {
 
     private final ListTag DATA = new ListTag();
 
+    public CompoundTag SERVER_DATA;
+
     @Override
     public void addItemElement(ItemStack stack, Component component) {
         CompoundTag stackData = new CompoundTag();
@@ -105,9 +107,21 @@ public class JadeHelper implements IJadeHelper {
     }
 
     @Override
-    public void transferData(CompoundTag serverData) {
+    public CompoundTag getServerData() {
+        return this.SERVER_DATA;
+    }
+
+    @Override
+    public IJadeHelper setServerData(CompoundTag serverData) {
+        this.SERVER_DATA = serverData;
+        return this;
+    }
+
+
+    @Override
+    public void transferData() {
         if (!this.DATA.isEmpty()) {
-            serverData.put(JadeTags.TAG_DATA, this.DATA);
+            getServerData().put(JadeTags.TAG_DATA, this.DATA);
         }
     }
 }
