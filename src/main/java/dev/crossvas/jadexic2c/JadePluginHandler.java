@@ -43,6 +43,8 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.addConfig(TOP_STYLE, true);
         registration.addConfig(TANK_RENDER, true);
 
+        registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
+
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
             if (accessor instanceof BlockAccessor blockAccessor) {
@@ -78,7 +80,6 @@ public class JadePluginHandler implements IWailaPlugin {
             return accessor;
         });
 
-        registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(JadeTankInfoRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
 

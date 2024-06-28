@@ -31,6 +31,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        iTooltip.remove(Identifiers.UNIVERSAL_ITEM_STORAGE);
         appendTooltips(iTooltip, blockAccessor);
     }
 
