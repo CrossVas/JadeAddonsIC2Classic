@@ -31,7 +31,7 @@ public enum WaveGenInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof WaveGenTileEntity waveGen) {
                 float production = tag.getFloat("production");
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(waveGen.getSourceTier()));
-                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber(production, 3));
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", waveGen.getMaxEnergyOutput());
             }
         }

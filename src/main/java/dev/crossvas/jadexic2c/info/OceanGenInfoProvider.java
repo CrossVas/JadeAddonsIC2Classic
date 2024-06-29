@@ -32,7 +32,7 @@ public enum OceanGenInfoProvider implements IHelper<BlockEntity> {
             if (tile instanceof OceanGeneratorTileEntity gen) {
                 float production = tag.getFloat("production");
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 3));
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
 
                 int water = Integer.parseInt(Formatter.formatInt(tag.getInt("water"), 4));

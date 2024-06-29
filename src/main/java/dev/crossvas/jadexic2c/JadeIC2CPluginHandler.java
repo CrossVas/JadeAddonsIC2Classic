@@ -87,6 +87,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
     public static final ResourceLocation CROP_INFO = JadeXIC2C.rl("crop");
     public static final ResourceLocation EU_STORAGE_INFO = JadeXIC2C.rl("eu_storage_info");
 
+    public static final ResourceLocation TOOLTIP_RENDERER = JadeXIC2C.rl("info_renderer");
+
     /**
      * {@link IC2Blocks}
      * {@link IC2Tiles}
@@ -95,6 +97,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
+        registration.addConfig(TOOLTIP_RENDERER, true);
         registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
@@ -191,6 +194,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(NuclearReactorInfoProvider.INSTANCE, ReactorChamberBlock.class);
         registration.registerBlockComponent(BaseEnergyStorageInfoProvider.INSTANCE, EnergyStorageBlock.class);
         registration.registerBlockComponent(CableInfoProvider.INSTANCE, CableBlock.class);
+        registration.registerBlockComponent(CableInfoSpecialProvider.INSTANCE, CableBlock.class);
         registration.registerBlockComponent(BatteryStationInfoProvider.INSTANCE, BaseTexturedBlock.class);
         registration.registerBlockComponent(ChargePadInfoProvider.INSTANCE, ChargePadBlock.class);
         registration.registerBlockComponent(ChargingBenchInfoProvider.INSTANCE, ChargingBenchBlock.class);
@@ -239,6 +243,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
             }
             return accessor;
         });
+        registration.registerBlockComponent(TexturedBlockInfoProvider.INSTANCE, TexturedBlockBlock.class);
 
         // common tooltips keep last
         registration.registerBlockComponent(TankRender.INSTANCE, Block.class);

@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
+import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.JadeXIC2C;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
@@ -46,8 +47,8 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
             }
             if (showInfo) {
                 PluginHelper.spacerY(iTooltip, 3);
-                iTooltip.add(wrenchIcon);
                 if (tile.isHarvestWrenchRequired(player)) {
+                    iTooltip.add(wrenchIcon);
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                         int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0);
                         if (dropChance > 100) dropChance = 100;
@@ -56,7 +57,11 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
                         TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                     }
                 } else {
-                    TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)).append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA)));
+                    TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
+                    IElement air = iTooltip.getElementHelper().item(ItemStack.EMPTY).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
+                    PluginHelper.spacerY(iTooltip, 3);
+                    iTooltip.add(wrenchIcon);
+                    TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
                 }
             }
         }
@@ -69,6 +74,6 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return ID;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

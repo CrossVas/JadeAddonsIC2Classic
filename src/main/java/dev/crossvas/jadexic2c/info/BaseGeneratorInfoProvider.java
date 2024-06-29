@@ -37,12 +37,12 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
                 if (gen instanceof SolarTurbineTileEntity) {
                     int heat = tag.getInt("heat");
-                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F))).withStyle(ChatFormatting.WHITE));
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.heat.name", Formatter.THERMAL_GEN.format((float) heat / 240.0F)).withStyle(ChatFormatting.WHITE));
                     TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof ThermalGeneratorTileEntity) {
                     float subProduction = tag.getFloat("subProduction");
-                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction)).withStyle(ChatFormatting.WHITE));
+                    TextHelper.text(iTooltip, Component.translatable("ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format(subProduction)).withStyle(ChatFormatting.WHITE));
                     TankHelper.addClientTankFromTag(iTooltip, blockAccessor);
                 }
                 if (gen instanceof GeoGenTileEntity) {

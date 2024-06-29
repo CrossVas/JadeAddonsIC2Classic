@@ -1,4 +1,5 @@
 {
+  "config.jade.plugin_ic2.info_renderer": "Render Tooltips",
   "config.jade.plugin_ic2.wrenchable_info": "Wrenchable Info",
   "config.jade.plugin_ic2.eu_storage_info": "EU Storage Info",
   "config.jade.plugin_ic2.eu_reader": "EU-Reader Info",

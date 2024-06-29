@@ -30,7 +30,7 @@ public enum WindmillGenInfoProvider implements IHelper<BlockEntity> {
         if (blockAccessor.getBlockEntity() instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof WindmillTileEntity windmill) {
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(windmill.getSourceTier()));
-                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) tag.getFloat("production"), 3));
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", windmill.getMaxEnergyOutput());
             }
         }

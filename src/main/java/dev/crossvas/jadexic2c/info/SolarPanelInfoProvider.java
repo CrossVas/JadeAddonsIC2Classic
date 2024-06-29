@@ -32,7 +32,7 @@ public enum SolarPanelInfoProvider implements IHelper<BlockEntity> {
                 float production = tag.getFloat("production");
                 int maxProduction = tag.getInt("maxProduction");
                 TextHelper.text(iTooltip, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(panel.getSourceTier()));
-                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) production, 5));
+                TextHelper.text(iTooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber(production, 3));
                 TextHelper.text(iTooltip, "ic2.probe.eu.output.max.name", maxProduction);
             }
         }
