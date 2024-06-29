@@ -42,7 +42,7 @@ public enum RedirectorMasterInfoProvider implements IHelper<BlockEntity> {
             int packetsIn = tag.getInt("packetsIn");
 
             if (averageIn > 0) {
-                PluginHelper.spacerY(iTooltip, 5);
+                PluginHelper.spacerY(iTooltip, 3);
                 TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format((long) averageIn)).withStyle(ChatFormatting.AQUA));
                 TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format((long) packetsIn)).withStyle(ChatFormatting.AQUA));
             }
