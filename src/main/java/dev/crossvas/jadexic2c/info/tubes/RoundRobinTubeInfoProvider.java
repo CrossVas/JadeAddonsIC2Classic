@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.util.DirectionList;
 import ic2.core.block.transport.item.tubes.RoundRobinTubeTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -28,7 +29,7 @@ public class RoundRobinTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "RoundRobinTubeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "RoundRobinTubeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -67,6 +68,6 @@ public class RoundRobinTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

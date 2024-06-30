@@ -73,7 +73,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import snownee.jade.api.*;
@@ -82,11 +81,6 @@ import java.util.stream.Stream;
 
 @WailaPlugin(JadeXIC2C.ID_IC2)
 public class JadeIC2CPluginHandler implements IWailaPlugin {
-
-    public static final ResourceLocation EU_READER_INFO = JadeXIC2C.rl("eu_reader");
-    public static final ResourceLocation THERMOMETER_INFO = JadeXIC2C.rl("thermometer");
-    public static final ResourceLocation CROP_INFO = JadeXIC2C.rl("crop");
-    public static final ResourceLocation EU_STORAGE_INFO = JadeXIC2C.rl("eu_storage_info");
 
     public static final ResourceLocation TOOLTIP_RENDERER = JadeXIC2C.rl("info_renderer");
 

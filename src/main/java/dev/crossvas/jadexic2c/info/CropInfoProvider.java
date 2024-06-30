@@ -131,7 +131,7 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.CROP_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     @Override

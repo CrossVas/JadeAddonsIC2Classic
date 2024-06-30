@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.storage.tiles.transformer.AdjustableTransformerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +25,7 @@ public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "AdjTransformerInfo")) {
+        if (!shouldAddInfo(blockAccessor, "AdjTransformerInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -68,6 +69,6 @@ public enum AdjustableTransformerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

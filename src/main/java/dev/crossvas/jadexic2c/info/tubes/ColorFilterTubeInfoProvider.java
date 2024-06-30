@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.util.DirectionList;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.transport.item.tubes.ColorFilterTubeTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
@@ -37,7 +38,7 @@ public class ColorFilterTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "ColorTubeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ColorTubeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -116,7 +117,7 @@ public class ColorFilterTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     public static Component getSides(FilterEntry entry) {

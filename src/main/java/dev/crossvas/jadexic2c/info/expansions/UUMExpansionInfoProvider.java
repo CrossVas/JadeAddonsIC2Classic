@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.base.tiles.impls.BaseExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.UUMatterExpansionTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -29,7 +30,7 @@ public enum UUMExpansionInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if(!shouldAddInfo(blockAccessor, "UUMExpansionInfo")) {
+        if(!shouldAddInfo(blockAccessor, "UUMExpansionInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -83,6 +84,6 @@ public enum UUMExpansionInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

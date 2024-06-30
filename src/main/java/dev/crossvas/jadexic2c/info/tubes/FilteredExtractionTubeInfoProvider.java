@@ -5,6 +5,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.FilteredExtractionTubeTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -31,7 +32,7 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "FilteredExtractionTubeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "FilteredExtractionTubeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -116,7 +117,7 @@ public class FilteredExtractionTubeInfoProvider implements IHelper<BlockEntity> 
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     public static boolean hasFlags(FilteredExtractionTubeTileEntity.FilterEntry entry) {

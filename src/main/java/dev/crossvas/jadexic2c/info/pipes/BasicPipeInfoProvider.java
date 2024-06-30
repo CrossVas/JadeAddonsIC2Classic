@@ -8,6 +8,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.info.removals.TankRender;
 import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.graph.IFluidPipe;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.collection.LongAverager;
 import ic2.core.utils.math.ColorUtils;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
@@ -43,7 +44,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BasicPipeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BasicPipeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -92,7 +93,7 @@ public class BasicPipeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     static {

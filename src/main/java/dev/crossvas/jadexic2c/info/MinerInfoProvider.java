@@ -75,7 +75,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     // using this instead of IC2C's own MiningState, because apparently jade doesn't like it... wat?

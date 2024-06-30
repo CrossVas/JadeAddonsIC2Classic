@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.core.block.base.tiles.impls.BaseExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.BufferStorageExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.StorageExpansionTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -27,7 +28,7 @@ public enum StorageExpansionInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "StorageExpansionInfo")) {
+        if (!shouldAddInfo(blockAccessor, "StorageExpansionInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -83,6 +84,6 @@ public enum StorageExpansionInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

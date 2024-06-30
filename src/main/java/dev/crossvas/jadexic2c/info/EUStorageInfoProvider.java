@@ -44,7 +44,7 @@ public enum EUStorageInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_STORAGE_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     @Override

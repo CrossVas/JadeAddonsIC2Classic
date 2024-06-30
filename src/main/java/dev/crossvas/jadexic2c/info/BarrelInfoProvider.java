@@ -124,7 +124,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.THERMOMETER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 
     @Override

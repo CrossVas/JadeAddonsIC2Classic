@@ -8,6 +8,7 @@ import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
 import ic2.core.block.transport.item.TubeTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenCustomHashMap;
 import net.minecraft.ChatFormatting;
@@ -39,7 +40,7 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BasicTubeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BasicTubeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -108,6 +109,6 @@ public class BasicTubeInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }

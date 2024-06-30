@@ -5,6 +5,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.transport.item.tubes.InsertionTubeTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,7 @@ public class InsertionTubInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "InsertionTubeInfo")) {
+        if (!shouldAddInfo(blockAccessor, "InsertionTubeInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
@@ -48,6 +49,6 @@ public class InsertionTubInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.EU_READER_INFO;
+        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
     }
 }
