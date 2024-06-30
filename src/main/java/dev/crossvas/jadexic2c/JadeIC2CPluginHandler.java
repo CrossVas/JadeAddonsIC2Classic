@@ -93,8 +93,6 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.addConfig(TOOLTIP_RENDERER, true);
-        registration.addConfig(WRENCHABLE, registration.getConfig().getPlugin().get(TOOLTIP_RENDERER));
         registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
