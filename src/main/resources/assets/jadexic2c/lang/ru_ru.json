@@ -1,15 +1,13 @@
 {
-  "config.jade.plugin_ic2.wrenchable_info": "Информация от ключа",
-  "config.jade.plugin_ic2.eu_storage_info": "Информация об энергохранилищах",
-  "config.jade.plugin_ic2.eu_reader": "Информация от Ваттметра",
-  "config.jade.plugin_ic2.thermometer": "Информация от Термометра",
-  "config.jade.plugin_ic2.crop": "Информация от Агроанализатора",
+  "config.jade.plugin_ic2.info_renderer": "Показывать информацию",
+  "config.jade.plugin_ic2.wrenchable": "Информация от ключа",
   "config.jade.plugin_ic2.remove_renders_fluid": "Стиль резервуаров IC2",
   "config.jade.plugin_ic2.remove_modid": "Удалить имя мода",
   "config.jade.plugin_ic2.relocate_modid": "Переместить имя мода",
 
   "ic2.probe.wrenchable.drop_chance.info": "Шанс выпадения",
   "ic2.probe.wrenchable.info": "Съемный блок",
+  "ic2.probe.wrenchable.optional.info": " (необязательно)",
   "ic2.tube.round_robin.info": "Правила цикличности",
   "ic2.tube.directional.info": "Направление: %s",
   "ic2.tube.filter.info": "Фильтр:",

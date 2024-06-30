@@ -16,10 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec2;
-import snownee.jade.api.BlockAccessor;
-import snownee.jade.api.IBlockComponentProvider;
-import snownee.jade.api.ITooltip;
-import snownee.jade.api.TooltipPosition;
+import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElement;
 
@@ -71,6 +68,6 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return JadeIC2CPluginHandler.TOOLTIP_RENDERER;
+        return JadeIC2CPluginHandler.WRENCHABLE;
     }
 }

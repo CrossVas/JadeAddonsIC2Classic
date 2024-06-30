@@ -83,6 +83,7 @@ import java.util.stream.Stream;
 public class JadeIC2CPluginHandler implements IWailaPlugin {
 
     public static final ResourceLocation TOOLTIP_RENDERER = JadeXIC2C.rl("info_renderer");
+    public static final ResourceLocation WRENCHABLE = JadeXIC2C.rl("wrenchable");
 
     /**
      * {@link IC2Blocks}
@@ -93,6 +94,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(TOOLTIP_RENDERER, true);
+        registration.addConfig(WRENCHABLE, registration.getConfig().getPlugin().get(TOOLTIP_RENDERER));
         registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
         registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);

@@ -1,5 +1,5 @@
 {
-  "config.jade.plugin_ic2.wrenchable_info": "Інформація від ключа",
+  "config.jade.plugin_ic2.wrenchable": "Інформація від ключа",
   "config.jade.plugin_ic2.eu_storage_info": "Інформація про енергосховища",
   "config.jade.plugin_ic2.eu_reader": "Інформація від EU-метра",
   "config.jade.plugin_ic2.thermometer": "Інформація від термометра",

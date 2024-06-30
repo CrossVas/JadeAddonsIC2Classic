@@ -1,15 +1,13 @@
 {
-  "config.jade.plugin_ic2.wrenchable_info": "렌치블 정보",
-  "config.jade.plugin_ic2.eu_storage_info": "EU 보관 정보",
-  "config.jade.plugin_ic2.eu_reader": "EU 측정기 정보",
-  "config.jade.plugin_ic2.thermometer": "온도계 정보",
-  "config.jade.plugin_ic2.crop": "작물 분석기 정보",
+  "config.jade.plugin_ic2.info_renderer": "툴팁 렌더",
+  "config.jade.plugin_ic2.wrenchable": "렌치블 정보",
   "config.jade.plugin_ic2.remove_renders_fluid": "IC2 탱크에 맞춤 스타일 사용",
   "config.jade.plugin_ic2.remove_modid": "모드 이름 제거",
   "config.jade.plugin_ic2.relocate_modid": "모드 이름 재배치",
 
   "ic2.probe.wrenchable.drop_chance.info": "드롭 확률",
   "ic2.probe.wrenchable.info": "렌치블 블록",
+  "ic2.probe.wrenchable.optional.info": " (선택)",
   "ic2.tube.round_robin.info": "라운드 로빈 규칙",
   "ic2.tube.directional.info": "방향: %s",
   "ic2.tube.filter.info": "필터:",
@@ -26,5 +24,5 @@
   "ic2.probe.memory_expansion.name": "메모리: %s/%s 레시피",
   "ic2.probe.memory_expansion.can_craft.name": "레시피:",
   "ic2.probe.storage_expansion.slot.name": "보관소:",
-  "ic2.probe.uum_expansion.missing": "UU물질 필요!"
+  "ic2.probe.uum_expansion.missing": "UU-물질 필요!"
 }
