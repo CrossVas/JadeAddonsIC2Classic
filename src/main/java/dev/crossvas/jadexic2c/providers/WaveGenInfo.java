@@ -16,7 +16,7 @@ public class WaveGenInfo extends EUReaderInfoProvider {
         if (blockEntity instanceof WaveGenTileEntity waveGen) {
             text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(waveGen.getSourceTier()));
             text(helper, "ic2.probe.eu.output.current.name", Formatter.formatNumber(waveGen.getEUProduction(), 3));
-            text(helper, "ic2.probe.eu.tier.name", "ic2.probe.eu.output.max.name", waveGen.getMaxEnergyOutput());
+            text(helper, "ic2.probe.eu.output.max.name", waveGen.getMaxEnergyOutput());
         }
     }
 }
