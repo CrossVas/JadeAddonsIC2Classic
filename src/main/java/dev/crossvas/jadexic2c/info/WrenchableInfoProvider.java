@@ -25,6 +25,9 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+        if (!iPluginConfig.get(JadeIC2CPluginHandler.TOOLTIP_RENDERER)) {
+            return;
+        }
         BlockEntity blockEntity = blockAccessor.getBlockEntity();
         Player player = blockAccessor.getPlayer();
         ItemStack handHeldStack = player.getMainHandItem();
