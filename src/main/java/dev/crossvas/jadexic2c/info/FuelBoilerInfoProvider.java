@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.math.ColorUtils;
@@ -25,7 +26,7 @@ public enum FuelBoilerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "FuelBoilerInfo")) {
+        if (!shouldAddInfo(blockAccessor, "FuelBoilerInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

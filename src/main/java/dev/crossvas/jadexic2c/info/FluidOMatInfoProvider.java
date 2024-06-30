@@ -4,6 +4,7 @@ import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
 import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import ic2.core.block.personal.tile.FluidOMatTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,7 +19,7 @@ public enum FluidOMatInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!canHandle(blockAccessor)) {
+        if (!canHandle(blockAccessor, SpecialFilters.EU_READER)) {
             return;
         }
 

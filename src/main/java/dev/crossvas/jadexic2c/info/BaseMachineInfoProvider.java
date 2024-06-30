@@ -13,6 +13,7 @@ import ic2.core.block.machines.tiles.mv.RareEarthCentrifugeTileEntity;
 import ic2.core.block.machines.tiles.mv.RefineryTileEntity;
 import ic2.core.block.machines.tiles.mv.SlowGrinderTileEntity;
 import ic2.core.block.machines.tiles.mv.VacuumCannerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +33,7 @@ public enum BaseMachineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BaseMachineInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BaseMachineInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

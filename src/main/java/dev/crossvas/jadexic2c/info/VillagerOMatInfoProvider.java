@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.hv.VillagerOMatTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,7 @@ public enum VillagerOMatInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "VillagerOMatInfo")) {
+        if (!shouldAddInfo(blockAccessor, "VillagerOMatInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

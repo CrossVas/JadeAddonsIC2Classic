@@ -8,6 +8,7 @@ import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.tiles.luv.FusionReactorTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,7 @@ public enum ThermonuclearReactorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "FusionReactorInfo")) {
+        if (!shouldAddInfo(blockAccessor, "FusionReactorInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

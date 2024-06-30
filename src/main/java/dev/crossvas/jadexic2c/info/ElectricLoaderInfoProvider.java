@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseElectricLoaderTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +25,7 @@ public enum ElectricLoaderInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "ElectricLoaderInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ElectricLoaderInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

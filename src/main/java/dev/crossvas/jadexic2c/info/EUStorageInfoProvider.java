@@ -10,6 +10,7 @@ import ic2.core.block.machines.tiles.hv.MassFabricatorTileEntity;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
 import ic2.core.block.storage.tiles.CreativeSourceTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -27,7 +28,7 @@ public enum EUStorageInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "EUStorageInfo")) {
+        if (!shouldAddInfo(blockAccessor, "EUStorageInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.util.DirectionList;
 import ic2.core.block.storage.tiles.RedirectorMasterTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -24,7 +25,7 @@ public enum RedirectorMasterInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "RedirectorMasterInfo")) {
+        if (!shouldAddInfo(blockAccessor, "RedirectorMasterInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

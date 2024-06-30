@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +31,7 @@ public enum BarrelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BarrelInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BarrelInfo", SpecialFilters.THERMOMETER)) {
             return;
         }
 

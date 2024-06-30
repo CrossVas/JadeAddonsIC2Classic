@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.WaveGenTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,7 +22,7 @@ public enum WaveGenInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "WaveGenInfo")) {
+        if (!shouldAddInfo(blockAccessor, "WaveGenInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

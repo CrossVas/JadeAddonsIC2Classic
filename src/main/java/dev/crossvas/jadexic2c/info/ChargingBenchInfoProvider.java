@@ -9,6 +9,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.base.tiles.impls.BaseChargingBenchTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +29,7 @@ public enum ChargingBenchInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "ChargingBenchInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ChargingBenchInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -82,25 +82,23 @@ public enum CableInfoProvider implements IHelper<BlockEntity> {
             }
         }
 
-        if (!hasData(blockAccessor, "CableInfo")) {
+        if (!shouldAddInfo(blockAccessor, "CableInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
         CompoundTag tag = getData(blockAccessor, "CableInfo");
         if (blockAccessor.getBlockEntity() instanceof BaseTileEntity tile) {
             if (tile instanceof CableTileEntity cable) {
-                if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
-                    TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
-                    TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
+                TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
+                TextHelper.text(iTooltip, "tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
 
-                    int averageOut = tag.getInt("averageOut");
-                    int averageOutPacket = tag.getInt("packetOut");
+                int averageOut = tag.getInt("averageOut");
+                int averageOutPacket = tag.getInt("packetOut");
 
-                    if (averageOut > 0) {
-                        PluginHelper.spacerY(iTooltip, 3);
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-                        TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(averageOutPacket)).withStyle(ChatFormatting.AQUA));
-                    }
+                if (averageOut > 0) {
+                    PluginHelper.spacerY(iTooltip, 3);
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+                    TextHelper.text(iTooltip, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(averageOutPacket)).withStyle(ChatFormatting.AQUA));
                 }
             }
         }

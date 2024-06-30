@@ -7,6 +7,7 @@ import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.SteamTunnelTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +25,7 @@ public enum SteamTunnelInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "SteamTunnelInfo")) {
+        if (!shouldAddInfo(blockAccessor, "SteamTunnelInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

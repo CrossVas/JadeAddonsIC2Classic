@@ -8,6 +8,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseCropLibraryTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +31,7 @@ public enum CropLibraryInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "CropLibraryInfo")) {
+        if (!shouldAddInfo(blockAccessor, "CropLibraryInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

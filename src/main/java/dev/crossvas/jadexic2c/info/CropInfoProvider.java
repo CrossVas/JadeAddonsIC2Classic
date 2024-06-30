@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropRegistry;
 import ic2.api.crops.ICropTile;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.registries.IC2Items;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -50,7 +51,7 @@ public enum CropInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "CropInfo")) {
+        if (!shouldAddInfo(blockAccessor, "CropInfo", SpecialFilters.CROP_SCANNER)) {
             return;
         }
 

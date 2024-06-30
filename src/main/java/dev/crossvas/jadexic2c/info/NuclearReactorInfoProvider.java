@@ -62,7 +62,7 @@ public enum NuclearReactorInfoProvider implements IHelper<BlockEntity> {
     }
 
     public static void addToTooltip(ITooltip tooltip, BlockEntity tile, BlockAccessor blockAccessor) {
-        if (INSTANCE.canHandle(blockAccessor)) {
+        if (INSTANCE.canHandle(blockAccessor, SpecialFilters.EU_READER)) {
             if (tile instanceof IReactor reactorTile) {
                 if (tile instanceof ElectricNuclearReactorTileEntity reactor) {
                     TextHelper.text(tooltip, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) reactor.getProvidedEnergy(), 5));

@@ -8,6 +8,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.generators.tiles.OceanGeneratorTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +24,7 @@ public enum OceanGenInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "OceanGenInfo")) {
+        if (!shouldAddInfo(blockAccessor, "OceanGenInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

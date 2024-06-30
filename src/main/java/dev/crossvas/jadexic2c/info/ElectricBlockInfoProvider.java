@@ -19,6 +19,7 @@ import ic2.core.block.machines.tiles.mv.ChunkloaderTileEntity;
 import ic2.core.block.machines.tiles.mv.CropHarvesterTileEntity;
 import ic2.core.block.machines.tiles.mv.ReactorPlannerTileEntity;
 import ic2.core.block.machines.tiles.mv.TeslaCoilTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -36,7 +37,7 @@ public enum ElectricBlockInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BaseElectricMachine")) {
+        if (!shouldAddInfo(blockAccessor, "BaseElectricMachine", SpecialFilters.EU_READER)) {
             return;
         }
 

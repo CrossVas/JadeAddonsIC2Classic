@@ -8,6 +8,7 @@ import ic2.api.tiles.teleporter.TeleporterTarget;
 import ic2.core.IC2;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.machines.tiles.hv.TeleporterTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.SanityHelper;
 import ic2.core.utils.helpers.TeleportUtil;
@@ -27,7 +28,7 @@ public enum TeleporterInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "TeleporterInfo")) {
+        if (!shouldAddInfo(blockAccessor, "TeleporterInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.transport.fluid.tiles.ElectricPipePumpTileEntity;
 import ic2.core.block.transport.fluid.tiles.SimplePipePumpTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,7 @@ public enum PipePumpInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "PipePumpInfo")) {
+        if (!shouldAddInfo(blockAccessor, "PipePumpInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.machines.tiles.ev.ElectricFisherTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -25,7 +26,7 @@ public enum ElectricFisherInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "ElectricFisherInfo")) {
+        if (!shouldAddInfo(blockAccessor, "ElectricFisherInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

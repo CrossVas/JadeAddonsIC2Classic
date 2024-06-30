@@ -9,6 +9,7 @@ import ic2.api.tiles.readers.IEUStorage;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.cables.luminator.ConstructionLightTileEntity;
 import ic2.core.block.cables.luminator.LuminatorTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,7 +24,7 @@ public enum LuminatorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "LuminatorInfo")) {
+        if (!shouldAddInfo(blockAccessor, "LuminatorInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -6,6 +6,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseGeneratorTileEntity;
 import ic2.core.block.generators.tiles.*;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +24,7 @@ public enum BaseGeneratorInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BaseGeneratorInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BaseGeneratorInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -8,6 +8,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.recipes.misc.EnrichRecipe;
 import ic2.core.block.machines.tiles.hv.UraniumEnchricherTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,7 @@ public enum UraniumEnricherInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "EnricherInfo")) {
+        if (!shouldAddInfo(blockAccessor, "EnricherInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

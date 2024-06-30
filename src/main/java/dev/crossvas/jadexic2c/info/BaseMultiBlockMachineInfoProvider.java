@@ -10,6 +10,7 @@ import ic2.core.block.base.tiles.BaseMultiElectricTileEntity;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseMultiMachineTileEntity;
 import ic2.core.block.machines.tiles.hv.PressureAlloyFurnaceTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -29,7 +30,7 @@ public enum BaseMultiBlockMachineInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BaseMultBlockInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BaseMultBlockInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

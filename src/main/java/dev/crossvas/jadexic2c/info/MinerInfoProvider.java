@@ -9,6 +9,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
 import ic2.core.block.machines.tiles.lv.MinerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,7 +26,7 @@ public enum MinerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "MinerInfo")) {
+        if (!shouldAddInfo(blockAccessor, "MinerInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

@@ -9,6 +9,7 @@ import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.base.tiles.BaseMultiBlockTileEntity;
 import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
 import ic2.core.block.storage.tiles.tank.TankTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +27,7 @@ public enum DynamicTankInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "DynamicTankInfo")) {
+        if (!shouldAddInfo(blockAccessor, "DynamicTankInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

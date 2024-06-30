@@ -1,7 +1,6 @@
 package dev.crossvas.jadexic2c.info;
 
 import dev.crossvas.jadexic2c.JadeIC2CPluginHandler;
-import dev.crossvas.jadexic2c.JadeXIC2C;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.items.readers.IWrenchTool;
@@ -26,8 +25,6 @@ import snownee.jade.api.ui.IElement;
 
 public enum WrenchableInfoProvider implements IBlockComponentProvider {
     INSTANCE;
-
-    public final ResourceLocation ID = JadeXIC2C.rl("wrenchable_info");
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

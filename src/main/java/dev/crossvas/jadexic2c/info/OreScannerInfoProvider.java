@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseElectricTileEntity;
 import ic2.core.block.machines.tiles.hv.OreScannerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -23,7 +24,7 @@ public enum OreScannerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "OreScannerInfo")) {
+        if (!shouldAddInfo(blockAccessor, "OreScannerInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

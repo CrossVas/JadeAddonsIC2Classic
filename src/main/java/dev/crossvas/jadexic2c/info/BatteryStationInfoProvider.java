@@ -9,6 +9,7 @@ import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
 import ic2.core.block.base.tiles.BaseInventoryTileEntity;
 import ic2.core.block.base.tiles.impls.BaseBatteryStationTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +29,7 @@ public enum BatteryStationInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "BatteryStationInfo")) {
+        if (!shouldAddInfo(blockAccessor, "BatteryStationInfo", SpecialFilters.EU_READER)) {
             return;
         }
 

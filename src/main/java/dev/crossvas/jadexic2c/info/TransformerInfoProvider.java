@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.base.tiles.BaseTileEntity;
 import ic2.core.block.base.tiles.impls.BaseTransformerTileEntity;
+import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +24,7 @@ public enum TransformerInfoProvider implements IHelper<BlockEntity> {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!shouldAddInfo(blockAccessor, "TransformerInfo")) {
+        if (!shouldAddInfo(blockAccessor, "TransformerInfo", SpecialFilters.EU_READER)) {
             return;
         }
 
