@@ -61,7 +61,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     ItemStack stack = ItemStack.of(serverTag.getCompound(JadeTags.TAG_ITEM));
                     Component text = Component.Serializer.fromJson(serverTag.getCompound(JadeTags.TAG_ITEM).getString("stackText"));
                     tooltip.add(helper.spacer(0, 3));
-                    tooltip.add(helper.item(stack).align(IElement.Align.LEFT).translate(new Vec2(-2, -5)));
+                    tooltip.add(helper.item(stack).align(IElement.Align.LEFT).translate(new Vec2(-2, -5)).size(new Vec2(16, 16)));
                     if (text != null) {
                         tooltip.append(text);
                     }
