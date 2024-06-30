@@ -14,8 +14,6 @@ public class JadeHelper implements IJadeHelper {
 
     private final ListTag DATA = new ListTag();
 
-    public CompoundTag SERVER_DATA;
-
     @Override
     public void addItemElement(ItemStack stack, Component component) {
         CompoundTag stackData = new CompoundTag();

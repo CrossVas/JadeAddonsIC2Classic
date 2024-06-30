@@ -31,13 +31,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        iTooltip.remove(Identifiers.UNIVERSAL_ITEM_STORAGE);
         appendTooltips(iTooltip, blockAccessor);
-    }
-
-    @Override
-    public int getDefaultPriority() {
-        return TooltipPosition.HEAD + 100;
     }
 
     private void appendTooltips(ITooltip tooltip, BlockAccessor accessor) {

@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
 import dev.crossvas.jadexic2c.providers.TreetapAndBucketInfo;
-import dev.crossvas.jadexic2c.providers.WrenchInfo;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
@@ -41,7 +40,6 @@ public class JadePluginHandler implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(TOP_STYLE, true);
-        registration.addConfig(TANK_RENDER, true);
 
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
 
@@ -84,7 +82,7 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
 
         // we handle this here because we need to send/receive server data directly
-        registration.registerBlockComponent(WrenchInfo.THIS, Block.class);
+//        registration.registerBlockComponent(WrenchInfo.THIS, Block.class);
 //        registration.registerBlockComponent(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockIcon(CropInfoProvider.INSTANCE, CropBlock.class);
 //        registration.registerBlockComponent(BarrelInfoProvider.INSTANCE, BarrelBlock.class);
