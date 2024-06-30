@@ -73,6 +73,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import snownee.jade.api.*;
@@ -194,7 +195,7 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(NuclearReactorInfoProvider.INSTANCE, ReactorChamberBlock.class);
         registration.registerBlockComponent(BaseEnergyStorageInfoProvider.INSTANCE, EnergyStorageBlock.class);
         registration.registerBlockComponent(CableInfoProvider.INSTANCE, CableBlock.class);
-        registration.registerBlockComponent(CableInfoSpecialProvider.INSTANCE, CableBlock.class);
+        registration.registerBlockIcon(CableInfoProvider.INSTANCE, CableBlock.class);
         registration.registerBlockComponent(BatteryStationInfoProvider.INSTANCE, BaseTexturedBlock.class);
         registration.registerBlockComponent(ChargePadInfoProvider.INSTANCE, ChargePadBlock.class);
         registration.registerBlockComponent(ChargingBenchInfoProvider.INSTANCE, ChargingBenchBlock.class);
@@ -233,17 +234,8 @@ public class JadeIC2CPluginHandler implements IWailaPlugin {
             return accessor;
         });
 
-        registration.addRayTraceCallback((hitResult, accessor, original) -> {
-            if (accessor instanceof BlockAccessor blockAccessor) {
-                Block block = blockAccessor.getBlock();
-                if (block instanceof TexturedBlockBlock textured) {
-                    return registration.blockAccessor().from(blockAccessor).fakeBlock(textured.getCloneItemStack(blockAccessor.getBlockState(),
-                            blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer())).build();
-                }
-            }
-            return accessor;
-        });
         registration.registerBlockComponent(TexturedBlockInfoProvider.INSTANCE, TexturedBlockBlock.class);
+        registration.registerBlockIcon(TexturedBlockInfoProvider.INSTANCE, TexturedBlockBlock.class);
 
         // common tooltips keep last
         registration.registerBlockComponent(TankRender.INSTANCE, Block.class);
