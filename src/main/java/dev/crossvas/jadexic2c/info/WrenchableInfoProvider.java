@@ -55,7 +55,6 @@ public enum WrenchableInfoProvider implements IBlockComponentProvider {
                     }
                 } else {
                     TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
-                    IElement air = iTooltip.getElementHelper().item(ItemStack.EMPTY).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
                     PluginHelper.spacerY(iTooltip, 3);
                     iTooltip.add(wrenchIcon);
                     TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
