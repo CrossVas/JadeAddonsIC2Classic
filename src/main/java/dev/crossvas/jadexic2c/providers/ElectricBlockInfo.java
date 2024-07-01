@@ -82,7 +82,7 @@ public class ElectricBlockInfo implements IInfoProvider {
                     helper.addBarElement(storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorUtils.GREEN);
                 }
                 if (progress > 0) {
-                    helper.addBarElement(progress, maxProgress, Component.translatable("ic2.probe.progress.full.name", progress, maxProgress).append("t").withStyle(ChatFormatting.WHITE), -16733185);
+                    helper.addBarElement(progress, maxProgress, Component.translatable("ic2.probe.progress.full.name", progress, maxProgress).append("t"), -16733185);
                 }
             }
             if (baseTile instanceof MassFabricatorTileEntity massFab) {
