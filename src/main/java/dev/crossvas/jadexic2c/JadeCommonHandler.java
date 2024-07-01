@@ -29,6 +29,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
 
+        INFO_PROVIDERS.add(MinerInfo.THIS);
         INFO_PROVIDERS.add(NuclearInfo.THIS);
         INFO_PROVIDERS.add(OceanGenInfo.THIS);
         INFO_PROVIDERS.add(OreScannerInfo.THIS);
