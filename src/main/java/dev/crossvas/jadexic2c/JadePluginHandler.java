@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
 import dev.crossvas.jadexic2c.providers.CropInfo;
-import dev.crossvas.jadexic2c.providers.NewCropInfo;
 import dev.crossvas.jadexic2c.providers.TreetapAndBucketInfo;
 import dev.crossvas.jadexic2c.providers.WrenchInfo;
 import ic2.core.block.base.features.multiblock.IStructureListener;
@@ -46,8 +45,8 @@ public class JadePluginHandler implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(TOP_STYLE, true);
 
-        registration.registerBlockComponent(NewCropInfo.CropIcon.THIS, CropBlock.class);
-        registration.registerBlockIcon(NewCropInfo.CropIcon.THIS, CropBlock.class);
+        registration.registerBlockComponent(CropInfo.CropIcon.THIS, CropBlock.class);
+        registration.registerBlockIcon(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
 
         // multiblock handler
@@ -95,6 +94,6 @@ public class JadePluginHandler implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(JadeBlockEntityDataProvider.INSTANCE, BlockEntity.class);
-        registration.registerBlockDataProvider(CropInfo.INSTANCE, CropTileEntity.class);
+        registration.registerBlockDataProvider(CropInfo.CropIcon.THIS, CropTileEntity.class);
     }
 }
