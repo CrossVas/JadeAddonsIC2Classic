@@ -1,7 +1,9 @@
 package dev.crossvas.jadexic2c.base;
 
+import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
+import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -83,5 +85,61 @@ public interface IInfoProvider {
 
     default void text(IJadeHelper helper, boolean append, boolean centered, Component text) {
         helper.addTextElement(text, ChatFormatting.WHITE, append, centered);
+    }
+
+    default void addAveragesFull(IJadeHelper helper, EnergyContainer container) {
+        addAverages(helper, container, true, true, true, true);
+    }
+
+    /**
+     * common: energyIn, packetIn
+     * */
+    default void addAveragesIn(IJadeHelper helper, EnergyContainer container) {
+        addAverages(helper, container, true, false, true, false);
+    }
+
+    /**
+     * common: energyOut, packetOut
+     * */
+    default void addAveragesOut(IJadeHelper helper, EnergyContainer container) {
+        addAverages(helper, container, false, true, false, true);
+    }
+
+    default void addCableAverages(IJadeHelper helper, int energyFlow, int packetFlow) {
+        helper.addPaddingElement(0, 3);
+        if (energyFlow > 0) {
+            text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(energyFlow)));
+        }
+        if (packetFlow > 0) {
+            text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)));
+        }
+    }
+
+    default void addAverages(IJadeHelper helper, EnergyContainer container, boolean energyIn, boolean energyOut, boolean packetIn, boolean packetOut) {
+        int avrIn = container.getAverageIn();
+        int avrOut = container.getAverageOut();
+        int pIn = container.getPacketsIn();
+        int pOut = container.getPacketsOut();
+        helper.addPaddingElement(0, 3);
+        if (energyIn) {
+            if (avrIn > 0) {
+                text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(avrIn)));
+            }
+        }
+        if (energyOut) {
+            if (avrOut > 0) {
+                text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(avrOut)));
+            }
+        }
+        if (packetIn) {
+            if (pIn > 0) {
+                text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(pIn)));
+            }
+        }
+        if (packetOut) {
+            if (pOut > 0) {
+                text(helper, ChatFormatting.AQUA, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(pOut)));
+            }
+        }
     }
 }
