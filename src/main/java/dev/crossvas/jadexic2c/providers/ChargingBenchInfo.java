@@ -40,11 +40,12 @@ public class ChargingBenchInfo implements IInfoProvider {
             ItemStack battery = bench.getStackInSlot(16);
             int toDischargeEnergy = ElectricItem.MANAGER.getCharge(battery);
             int transferLimit = ElectricItem.MANAGER.getTransferLimit(battery);
+            int maxCapacity = ElectricItem.MANAGER.getCapacity(battery);
 
             if (toDischargeEnergy > 0) {
                 int dischargeEnergy = Math.min(transferLimit, toDischargeEnergy);
-                text(helper, ChatFormatting.AQUA, Component.translatable("ic2.probe.discharging.eta.name",
-                        DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")));
+                helper.addBarElement(toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
+                        DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), -16733185);
             }
             EnergyContainer container = EnergyContainer.getContainer(bench);
             addAveragesIn(helper, container);

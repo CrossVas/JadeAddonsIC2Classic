@@ -23,23 +23,33 @@ public class BatteryStationInfo implements IInfoProvider {
             text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
             text(helper, "ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
 
-            ItemStack toCharge = station.getStackInSlot(16);
-            long missingEnergy = ElectricItem.MANAGER.getCapacity(toCharge) - ElectricItem.MANAGER.getCharge(toCharge);
-            int maxTransfer = ElectricItem.MANAGER.getTransferLimit(toCharge);
-
-            if (missingEnergy > 0) {
-                int chargeEnergy = (int) Math.min(maxTransfer, missingEnergy);
-                text(helper, ChatFormatting.GOLD, Component.translatable("ic2.probe.chargingBench.eta.name",
-                        DurationFormatUtils.formatDuration(chargeEnergy <= 0 ? 0L : (missingEnergy / chargeEnergy * 50L), "HH:mm:ss")));
+            int capacity = 0;
+            int maxCapacity = 0;
+            for (int i = 0; i < 16; i++) {
+                ItemStack battery = station.getStackInSlot(i);
+                if (!battery.isEmpty()) {
+                    capacity += ElectricItem.MANAGER.getCharge(battery);
+                    maxCapacity += ElectricItem.MANAGER.getCapacity(battery);
+                }
             }
 
-            int capacity = station.getMissingEnergy().getIntKey();
+            ItemStack battery = station.getStackInSlot(16);
+            long toCharge = ElectricItem.MANAGER.getCapacity(battery) - ElectricItem.MANAGER.getCharge(battery);
+            int maxTransfer = ElectricItem.MANAGER.getTransferLimit(battery);
+
+            if (toCharge > 0) {
+                int chargeEnergy = (int) Math.min(maxTransfer, toCharge);
+                text(helper, ChatFormatting.GOLD, Component.translatable("ic2.probe.chargingBench.eta.name",
+                        DurationFormatUtils.formatDuration(chargeEnergy <= 0 ? 0L : (toCharge / chargeEnergy * 50L), "HH:mm:ss")));
+            }
+
+            int missingEnergy = station.getMissingEnergy().getIntKey();
             int averageIn = station.getMissingEnergy().getIntValue();
 
-            if (capacity > 0) {
-                int dischargeEnergy = Math.min(averageIn, capacity);
-                text(helper, ChatFormatting.AQUA, Component.translatable("ic2.probe.discharging.eta.name",
-                        DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (capacity / dischargeEnergy * 50L), "HH:mm:ss")));
+            if (missingEnergy > 0) {
+                int dischargeEnergy = Math.min(averageIn, missingEnergy);
+                helper.addBarElement(capacity, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
+                        DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (missingEnergy / dischargeEnergy * 50L), "HH:mm:ss")), -16733185);
             }
             EnergyContainer container = EnergyContainer.getContainer(station);
             addAveragesOut(helper, container);
