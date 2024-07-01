@@ -29,6 +29,9 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
 
+        INFO_PROVIDERS.add(ChargePadInfo.THIS);
+        INFO_PROVIDERS.add(BatteryStationInfo.THIS);
+        INFO_PROVIDERS.add(ChargingBenchInfo.THIS);
         INFO_PROVIDERS.add(CropInfo.THIS);
         INFO_PROVIDERS.add(CropLibraryInfo.THIS);
         INFO_PROVIDERS.add(DynamicTankInfo.THIS);
