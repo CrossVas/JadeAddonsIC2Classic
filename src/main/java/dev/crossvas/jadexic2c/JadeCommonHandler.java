@@ -28,6 +28,9 @@ public class JadeCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
+
+        INFO_PROVIDERS.add(RedirectorMasterInfo.THIS);
+        INFO_PROVIDERS.add(RedirectorSlaveInfo.THIS);
         INFO_PROVIDERS.add(SolarPanelInfo.THIS);
         INFO_PROVIDERS.add(SteamTunnelInfo.THIS);
         INFO_PROVIDERS.add(SteamTurbineInfo.THIS);
