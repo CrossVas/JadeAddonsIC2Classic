@@ -30,12 +30,19 @@ public interface IHelper<T> extends IBlockComponentProvider, IServerDataProvider
         return accessor.getServerData().contains(tagName);
     }
 
+    default CompoundTag getData(BlockAccessor accessor, String tagID) {
+        return accessor.getServerData().getCompound(tagID);
+    }
+
     default boolean shouldAddInfo(BlockAccessor accessor, String tagName) {
         return canHandle(accessor) && hasData(accessor, tagName);
     }
 
+    default boolean canHandle(BlockAccessor accessor, IFilter filter) {
+        return StackUtil.hasHotbarItems(accessor.getPlayer(), filter);
+    }
 
-    default CompoundTag getData(BlockAccessor accessor, String tagID) {
-        return accessor.getServerData().getCompound(tagID);
+    default boolean shouldAddInfo(BlockAccessor accessor, String tagName, IFilter filter) {
+        return canHandle(accessor, filter) && hasData(accessor, tagName);
     }
 }

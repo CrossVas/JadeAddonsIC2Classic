@@ -29,6 +29,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
 
+        INFO_PROVIDERS.add(NewCropInfo.THIS);
         INFO_PROVIDERS.add(CropLibraryInfo.THIS);
         INFO_PROVIDERS.add(DynamicTankInfo.THIS);
         INFO_PROVIDERS.add(ElectricBlockInfo.THIS);
@@ -60,7 +61,6 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(VillagerOMatInfo.THIS);
         INFO_PROVIDERS.add(WaveGenInfo.THIS);
         INFO_PROVIDERS.add(WindmillGenInfo.THIS);
-        INFO_PROVIDERS.add(WrenchInfo.THIS);
     }
 
     public static BlockEntity getMultiBlockController(Level level, BlockPos pos) {
