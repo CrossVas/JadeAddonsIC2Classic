@@ -17,7 +17,9 @@ public interface IInfoProvider {
 
     void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player);
 
-    IFilter getFilter();
+    default IFilter getFilter() {
+        return READER;
+    }
 
     default boolean canHandle(Player player) {
         return StackUtil.hasHotbarItems(player, getFilter());

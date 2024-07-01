@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import ic2.core.block.machines.tiles.nv.StoneBasicMachineTileEntity;
 import ic2.core.block.machines.tiles.nv.StoneCannerTileEntity;
@@ -12,7 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class StoneMachineInfo extends EUReaderInfoProvider {
+public class StoneMachineInfo implements IInfoProvider {
 
     public static final StoneMachineInfo THIS = new StoneMachineInfo();
 

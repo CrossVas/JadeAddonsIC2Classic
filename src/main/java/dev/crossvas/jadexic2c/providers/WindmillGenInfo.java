@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.energy.EnergyNet;
@@ -7,7 +8,7 @@ import ic2.core.block.generators.tiles.WindmillTileEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class WindmillGenInfo extends EUReaderInfoProvider {
+public class WindmillGenInfo implements IInfoProvider {
 
     public static final WindmillGenInfo THIS = new WindmillGenInfo();
 

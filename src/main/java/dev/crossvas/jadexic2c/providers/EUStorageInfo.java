@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.tiles.readers.IEUStorage;
@@ -13,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class EUStorageInfo extends EUReaderInfoProvider {
+public class EUStorageInfo implements IInfoProvider {
 
     public static final EUStorageInfo THIS = new EUStorageInfo();
 

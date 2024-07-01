@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.block.cables.CableTileEntity;
@@ -8,7 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class CableInfo extends EUReaderInfoProvider {
+public class CableInfo implements IInfoProvider {
 
     public static final CableInfo THIS = new CableInfo();
 

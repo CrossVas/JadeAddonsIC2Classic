@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.api.util.DirectionList;
@@ -11,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class RedirectorMasterInfo extends EUReaderInfoProvider {
+public class RedirectorMasterInfo implements IInfoProvider {
 
     public static final RedirectorMasterInfo THIS = new RedirectorMasterInfo();
 

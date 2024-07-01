@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.IInfoProvider;
 import dev.crossvas.jadexic2c.base.IJadeHelper;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.machines.tiles.luv.FusionReactorTileEntity;
@@ -10,7 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class ThermonuclearReactorInfo extends EUReaderInfoProvider {
+public class ThermonuclearReactorInfo implements IInfoProvider {
 
     public static final ThermonuclearReactorInfo THIS = new ThermonuclearReactorInfo();
 
