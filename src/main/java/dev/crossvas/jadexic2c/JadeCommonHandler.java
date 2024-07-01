@@ -29,6 +29,8 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
 
+        INFO_PROVIDERS.add(CropLibraryInfo.THIS);
+        INFO_PROVIDERS.add(DynamicTankInfo.THIS);
         INFO_PROVIDERS.add(ElectricBlockInfo.THIS);
         INFO_PROVIDERS.add(ElectricFisherInfo.THIS);
         INFO_PROVIDERS.add(ElectricLoaderInfo.THIS);
