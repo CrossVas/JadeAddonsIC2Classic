@@ -26,5 +26,6 @@
   "ic2.probe.memory_expansion.name": "메모리: %s/%s 레시피",
   "ic2.probe.memory_expansion.can_craft.name": "레시피:",
   "ic2.probe.storage_expansion.slot.name": "보관소:",
-  "ic2.probe.uum_expansion.missing": "UU물질 필요!"
+  "ic2.probe.uum_expansion.missing": "UU물질 필요!",
+  "ic2.probe.enchanter.missing": "XP 필요!"
 }

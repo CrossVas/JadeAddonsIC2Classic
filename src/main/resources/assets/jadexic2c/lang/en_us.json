@@ -29,5 +29,6 @@
   "ic2.probe.memory_expansion.name": "Memory: %s/%s recipes",
   "ic2.probe.memory_expansion.can_craft.name": "Recipes:",
   "ic2.probe.storage_expansion.slot.name": "Storage:",
-  "ic2.probe.uum_expansion.missing": "Requires UU-Matter!"
+  "ic2.probe.uum_expansion.missing": "Requires UU-Matter!",
+  "ic2.probe.enchanter.missing": "Requires XP!"
 }

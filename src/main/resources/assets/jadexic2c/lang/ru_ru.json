@@ -26,5 +26,6 @@
   "ic2.probe.memory_expansion.name": "Память: %s/%s рецептов",
   "ic2.probe.memory_expansion.can_craft.name": "Рецепты:",
   "ic2.probe.storage_expansion.slot.name": "Зранилище:",
-  "ic2.probe.uum_expansion.missing": "Требуется UU-материя!"
+  "ic2.probe.uum_expansion.missing": "Требуется UU-материя!",
+  "ic2.probe.enchanter.missing": "Требуется опыт!"
 }
