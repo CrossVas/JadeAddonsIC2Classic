@@ -1,7 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.hv.RocketMinerTileEntity;
 import ic2.core.block.machines.tiles.lv.MinerTileEntity;
@@ -17,9 +18,9 @@ public class MinerInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof MinerTileEntity miner) {
-            text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
-            text(helper, "ic2.probe.eu.max_in.name", miner.getMaxInput());
-            text(helper, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
+            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
+            defaultText(helper, "ic2.probe.eu.max_in.name", miner.getMaxInput());
+            defaultText(helper, "ic2.probe.eu.usage.name", miner.getEnergyUsage());
 
             float progress = miner.getProgress();
             boolean isStuck = miner.isStuck();
@@ -28,15 +29,16 @@ public class MinerInfo implements IInfoProvider {
             if (miner instanceof RocketMinerTileEntity rocketMiner) {
                 RocketMinerTileEntity.MinerState state = rocketMiner.state;
                 text(helper, getCompFromState(state.ordinal()));
+                JadeCommonHandler.addTankInfo(helper, rocketMiner);
             } else {
-                text(helper, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
+                defaultText(helper, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
             }
 
-            text(helper, ChatFormatting.GOLD, Component.translatable("ic2.probe.miner.progress.name", miner.getPipeTip().getY()));
+            text(helper, Component.translatable("ic2.probe.miner.progress.name", miner.getPipeTip().getY()).withStyle(ChatFormatting.GOLD));
             if (!isStuck && progress > 0) {
                 int scaledOp = (int) Math.min(6.0E7F, progress);
                 int scaledMaxOp = (int) Math.min(6.0E7F, miner.getMaxProgress());
-                helper.addBarElement(scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp), -16733185);
+                bar(helper, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp), -16733185);
             }
         }
     }

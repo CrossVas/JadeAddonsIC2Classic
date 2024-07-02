@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
@@ -37,18 +37,18 @@ public class NuclearInfo implements IInfoProvider {
     public void addTooltips(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof IReactor reactor) {
             if (blockEntity instanceof ElectricNuclearReactorTileEntity nuclearReactor) {
-                text(helper, "ic2.probe.eu.output.current.name", Formatter.formatNumber(nuclearReactor.getProvidedEnergy(), 3));
-                text(helper, "ic2.probe.reactor.breeding.name", reactor.getHeat() / 3000 + 1);
+                defaultText(helper, "ic2.probe.eu.output.current.name", Formatter.formatNumber(nuclearReactor.getProvidedEnergy(), 3));
+                defaultText(helper, "ic2.probe.reactor.breeding.name", reactor.getHeat() / 3000 + 1);
             } else if (blockEntity instanceof ISteamReactor steamReactor) {
-                text(helper, "ic2.probe.steam.output.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
-                text(helper, "ic2.probe.water.consumption.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
-                text(helper, "ic2.probe.pump.pressure", 100);
-                text(helper, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(20000L));
+                defaultText(helper, "ic2.probe.steam.output.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() * 3.200000047683716));
+                defaultText(helper, "ic2.probe.water.consumption.name", Formatter.THERMAL_GEN.format(steamReactor.getEnergyOutput() / 50.0));
+                defaultText(helper, "ic2.probe.pump.pressure", 100);
+                defaultText(helper, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(20000L));
                 JadeCommonHandler.addTankInfo(helper, blockEntity);
             }
 
             if (StackUtil.hasHotbarItems(player, SpecialFilters.THERMOMETER)) {
-                helper.addBarElement(reactor.getHeat(), reactor.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
+                bar(helper, reactor.getHeat(), reactor.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
                         Formatter.formatNumber(reactor.getHeat(), 4), Formatter.formatNumber(reactor.getMaxHeat(), 2)), getReactorColor(reactor.getHeat(), reactor.getMaxHeat()));
             }
         }

@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.api.energy.EnergyNet;
 import ic2.api.items.electric.ElectricItem;
@@ -20,8 +20,8 @@ public class ChargingBenchInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseChargingBenchTileEntity bench) {
-            text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
-            text(helper, "ic2.probe.eu.max_in.name", bench.getMaxInput());
+            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
+            defaultText(helper, "ic2.probe.eu.max_in.name", bench.getMaxInput());
 
             int missingEnergy = 0;
             for (int i = 0; i < 16; i++) {
@@ -33,8 +33,8 @@ public class ChargingBenchInfo implements IInfoProvider {
             int benchAverageOut = bench.getMissingEnergy().getIntValue();
             if (missingEnergy > 0) {
                 int i = Math.min(benchAverageOut, missingEnergy);
-                text(helper, ChatFormatting.GOLD, Component.translatable("ic2.probe.chargingBench.eta.name",
-                        DurationFormatUtils.formatDuration(i <= 0 ? 0L : (missingEnergy / i * 50L), "HH:mm:ss")));
+                text(helper, Component.translatable("ic2.probe.chargingBench.eta.name",
+                        DurationFormatUtils.formatDuration(i <= 0 ? 0L : (missingEnergy / i * 50L), "HH:mm:ss")).withStyle(ChatFormatting.GOLD));
             }
 
             ItemStack battery = bench.getStackInSlot(16);
@@ -44,7 +44,7 @@ public class ChargingBenchInfo implements IInfoProvider {
 
             if (toDischargeEnergy > 0) {
                 int dischargeEnergy = Math.min(transferLimit, toDischargeEnergy);
-                helper.addBarElement(toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
+                bar(helper, toDischargeEnergy, maxCapacity, Component.translatable("ic2.probe.discharging.eta.name",
                         DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), -16733185);
             }
             EnergyContainer container = EnergyContainer.getContainer(bench);

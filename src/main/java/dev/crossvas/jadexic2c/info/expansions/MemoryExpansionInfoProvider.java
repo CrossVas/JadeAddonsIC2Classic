@@ -2,7 +2,7 @@ package dev.crossvas.jadexic2c.info.expansions;
 
 import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.core.block.base.tiles.impls.BaseExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.MemoryExpansionTileEntity;

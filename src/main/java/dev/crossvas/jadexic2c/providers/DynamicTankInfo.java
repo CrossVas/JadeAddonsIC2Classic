@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.storage.tiles.tank.TankTileEntity;
 import ic2.core.utils.math.ColorUtils;
@@ -20,7 +20,7 @@ public class DynamicTankInfo implements IInfoProvider {
             JadeCommonHandler.addTankInfo(helper, tank);
             if (!tank.isValid || tank.isDynamic()) {
                 long time = tank.clockTime(512);
-                helper.addBarElement((int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks"), ColorUtils.GRAY);
+                bar(helper, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks"), ColorUtils.GRAY);
             }
         }
         if (blockEntity instanceof BaseLinkingTileEntity linkingTile) {

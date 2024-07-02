@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.storage.tiles.tank.PushingValveTileEntity;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.world.entity.player.Player;
@@ -14,8 +14,8 @@ public class PushingValveInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof PushingValveTileEntity) {
-            text(helper, "ic2.probe.pump.pressure", 100);
-            text(helper, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(2000L));
+            defaultText(helper, "ic2.probe.pump.pressure", 100);
+            defaultText(helper, "ic2.probe.pump.amount", Formatters.EU_FORMAT.format(2000L));
         }
     }
 }

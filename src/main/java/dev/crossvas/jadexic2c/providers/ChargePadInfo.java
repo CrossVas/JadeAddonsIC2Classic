@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.BaseChargePadTileEntity;
@@ -19,10 +19,10 @@ public class ChargePadInfo implements IInfoProvider {
             int transfer = chargePad.transferLimit;
             float range = chargePad.range;
 
-            text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(chargePad.getSinkTier()));
-            text(helper, "ic2.probe.eu.max_in.name", maxIn);
-            text(helper, "ic2.probe.chargepad.transferrate.name", transfer);
-            text(helper, "ic2.probe.chargepad.radius.name", range + 1.0F);
+            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(chargePad.getSinkTier()));
+            defaultText(helper, "ic2.probe.eu.max_in.name", maxIn);
+            defaultText(helper, "ic2.probe.chargepad.transferrate.name", transfer);
+            defaultText(helper, "ic2.probe.chargepad.radius.name", range + 1.0F);
             EnergyContainer container = EnergyContainer.getContainer(chargePad);
             addAveragesIn(helper, container);
         }

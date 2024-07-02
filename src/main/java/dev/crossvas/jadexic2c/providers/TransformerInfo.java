@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.block.base.tiles.impls.BaseTransformerTileEntity;
 import net.minecraft.ChatFormatting;
@@ -16,13 +16,11 @@ public class TransformerInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseTransformerTileEntity transformer) {
+            text(helper, Component.translatable("ic2.probe.transformer.inverted", (transformer.isActive() ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(transformer.isActive())).withStyle(ChatFormatting.GOLD));
 
-            text(helper, ChatFormatting.GOLD, Component.translatable("ic2.probe.transformer.inverted").
-                    append((transformer.isActive() ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(transformer.isActive())));
-
-            text(helper, "ic2.probe.eu.max_in.name", transformer.isActive() ? transformer.lowOutput : transformer.highOutput);
-            text(helper, "ic2.probe.eu.output.max.name", transformer.isActive() ? transformer.highOutput : transformer.lowOutput);
-            text(helper, "ic2.probe.transformer.packets.name", transformer.isActive() ? 1 : 4);
+            defaultText(helper, "ic2.probe.eu.max_in.name", transformer.isActive() ? transformer.lowOutput : transformer.highOutput);
+            defaultText(helper, "ic2.probe.eu.output.max.name", transformer.isActive() ? transformer.highOutput : transformer.lowOutput);
+            defaultText(helper, "ic2.probe.transformer.packets.name", transformer.isActive() ? 1 : 4);
             EnergyContainer container = EnergyContainer.getContainer(transformer);
             addCableAverages(helper, container.getAverageOut(), container.getPacketsOut());
         }

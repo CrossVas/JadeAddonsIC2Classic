@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.personal.tile.FluidOMatTileEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;

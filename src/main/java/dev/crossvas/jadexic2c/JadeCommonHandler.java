@@ -1,8 +1,10 @@
 package dev.crossvas.jadexic2c;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.elements.CommonFluidBarElement;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.providers.*;
+import dev.crossvas.jadexic2c.providers.transport.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +23,20 @@ public class JadeCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
 
+        INFO_PROVIDERS.add(TeleportTubeInfo.THIS);
+        INFO_PROVIDERS.add(StackingTubeInfo.THIS);
+        INFO_PROVIDERS.add(RoundRobinTubeInfo.THIS);
+        INFO_PROVIDERS.add(RequestTubeInfo.THIS);
+        INFO_PROVIDERS.add(PickupTubeInfo.THIS);
+        INFO_PROVIDERS.add(LimiterTubeInfo.THIS);
+        INFO_PROVIDERS.add(InsertionTubeInfo.THIS);
+        INFO_PROVIDERS.add(FilterTubeInfo.THIS);
+        INFO_PROVIDERS.add(FilteredExtractionTubeInfo.THIS);
+        INFO_PROVIDERS.add(ExtractionTubeInfo.THIS);
+        INFO_PROVIDERS.add(DirectionalTubeInfo.THIS);
+        INFO_PROVIDERS.add(ColorFilterTubeInfo.THIS);
+        INFO_PROVIDERS.add(BasicTubeInfo.THIS);
+        INFO_PROVIDERS.add(BasicPipeInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
         INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
         INFO_PROVIDERS.add(BarrelInfo.THIS);
@@ -89,7 +105,7 @@ public class JadeCommonHandler {
         for (int i = 0; i < fluidHandler.getTanks(); i++) {
             FluidStack fluid = fluidHandler.getFluidInTank(i);
             if (fluid.getAmount() > 0) {
-                helper.addFluidElement(fluid, fluidHandler.getTankCapacity(i));
+                helper.add(new CommonFluidBarElement(fluid, fluidHandler.getTankCapacity(i), false));
             }
         }
     }

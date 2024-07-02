@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.machines.tiles.lv.ElectrolyzerTileEntity;
 import ic2.core.block.machines.tiles.mv.ChargedElectrolyzerTileEntity;
 import ic2.core.utils.math.ColorUtils;
@@ -25,10 +25,10 @@ public class ElectrolyzerInfo implements IInfoProvider {
     }
 
     public void addElectrolyzerInfo(IJadeHelper helper, boolean charging, boolean discharging, int transfer, int energy, int maxEnergy) {
-        text(helper, "ic2.probe.electrolyzer.transferrate.name", transfer);
-        text(helper, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
+        defaultText(helper, "ic2.probe.electrolyzer.transferrate.name", transfer);
+        defaultText(helper, "ic2.probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing")) + ".name");
         if (energy > 0) {
-            helper.addBarElement(energy, maxEnergy, Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU"), ColorUtils.RED);
+            bar(helper, energy, maxEnergy, Component.translatable("ic2.probe.progress.full.name", energy, maxEnergy).append(" EU"), ColorUtils.RED);
         }
     }
 }

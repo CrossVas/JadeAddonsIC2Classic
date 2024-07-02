@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.api.util.DirectionList;
 import ic2.core.block.storage.tiles.RedirectorMasterTileEntity;
@@ -18,7 +18,7 @@ public class RedirectorSlaveInfo implements IInfoProvider {
         if (blockEntity instanceof RedirectorSlaveTileEntity slave) {
             BlockEntity neighborTile = DirectionList.getNeighborTile(slave, slave.getFacing());
             if (neighborTile instanceof RedirectorMasterTileEntity master) {
-                text(helper, "ic2.probe.redirector.slave.info", master.shares[slave.getFacing().getOpposite().get3DDataValue()]);
+                defaultText(helper, "ic2.probe.redirector.slave.info", master.shares[slave.getFacing().getOpposite().get3DDataValue()]);
             }
 
             EnergyContainer container = EnergyContainer.getContainer(slave);

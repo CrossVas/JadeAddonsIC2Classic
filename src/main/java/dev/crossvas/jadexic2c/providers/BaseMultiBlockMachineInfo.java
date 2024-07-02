@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.base.IInfoProvider;
-import dev.crossvas.jadexic2c.base.IJadeHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
+import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseAdvMultiMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseColossalMachineTileEntity;
@@ -25,9 +25,9 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMultiMachineTileEntity multiMachine) {
-            text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
-            text(helper, "ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
-            text(helper, "ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
+            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
+            defaultText(helper, "ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
+            defaultText(helper, "ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
 
             if (multiMachine instanceof BaseAdvMultiMachineTileEntity adv) {
                 int speed = adv.getSpeed();
@@ -35,18 +35,18 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                 Component speedName = adv.getSpeedName();
                 double scaledProgress = (double) speed / maxSpeed;
                 if (speed > 0) {
-                    helper.addBarElement(speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
+                    bar(helper, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
                 }
             }
 
             if (!multiMachine.isValid) {
                 long time = multiMachine.clockTime(512);
-                helper.addBarElement((int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks"), ColorUtils.GRAY);
+                bar(helper, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks"), ColorUtils.GRAY);
             }
 
             if (multiMachine instanceof BasicMultiMachineTileEntity machineTile) {
                 if (multiMachine.isMachineWorking() || machineTile.getProgress() > 0) {
-                    helper.addBarElement((int) machineTile.getProgress(), (int) machineTile.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) machineTile.getProgress() / 1000, (int) machineTile.getMaxProgress() / 1000).append("t"), -16733185);
+                    bar(helper, (int) machineTile.getProgress(), (int) machineTile.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) machineTile.getProgress() / 1000, (int) machineTile.getMaxProgress() / 1000).append("t"), -16733185);
                 }
             }
 
@@ -63,7 +63,7 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                     do {
                         if (!activeSlotsIterator.hasNext()) {
                             for(int i = 0; i < progressFilter.size(); ++i) {
-                                helper.addBarElement(progressFilter.getInt(i), maxProgressFilter.getInt(i), Component.translatable("ic2.probe.progress.full.name", progressFilter.getInt(i) / 1000, maxProgressFilter.getInt(i) / 1000).append("t"), -16733185);
+                                bar(helper, progressFilter.getInt(i), maxProgressFilter.getInt(i), Component.translatable("ic2.probe.progress.full.name", progressFilter.getInt(i) / 1000, maxProgressFilter.getInt(i) / 1000).append("t"), -16733185);
                             }
                             break label38;
                         }

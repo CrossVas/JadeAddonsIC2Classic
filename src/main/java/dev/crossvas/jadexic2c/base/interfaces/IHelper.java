@@ -1,4 +1,4 @@
-package dev.crossvas.jadexic2c.helpers;
+package dev.crossvas.jadexic2c.base.interfaces;
 
 import dev.crossvas.jadexic2c.JadePluginHandler;
 import ic2.core.inventory.filter.IFilter;

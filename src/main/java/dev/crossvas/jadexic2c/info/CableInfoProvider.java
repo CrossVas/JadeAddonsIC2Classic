@@ -3,7 +3,7 @@ package dev.crossvas.jadexic2c.info;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import dev.crossvas.jadexic2c.JadePluginHandler;
-import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;

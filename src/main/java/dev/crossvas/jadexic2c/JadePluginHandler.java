@@ -3,10 +3,10 @@ package dev.crossvas.jadexic2c;
 import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
-import dev.crossvas.jadexic2c.providers.CropInfo;
-import dev.crossvas.jadexic2c.providers.TreetapAndBucketInfo;
-import dev.crossvas.jadexic2c.providers.WrenchInfo;
+import dev.crossvas.jadexic2c.info.removals.ModNameRender;
+import dev.crossvas.jadexic2c.providers.*;
 import ic2.core.block.base.features.multiblock.IStructureListener;
+import ic2.core.block.cables.CableBlock;
 import ic2.core.block.crops.CropBlock;
 import ic2.core.block.crops.CropTileEntity;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
@@ -48,6 +48,9 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockIcon(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
+        registration.registerBlockComponent(new CableInfo.CableIconProvider(), CableBlock.class);
+        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
+        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
@@ -73,20 +76,11 @@ public class JadePluginHandler implements IWailaPlugin {
             return accessor;
         });
 
-        registration.addRayTraceCallback((hitResult, accessor, original) -> {
-            if (accessor instanceof BlockAccessor blockAccessor) {
-                Block block = blockAccessor.getBlock();
-                if (block instanceof TexturedBlockBlock textured) {
-                    return registration.blockAccessor().from(blockAccessor).fakeBlock(textured.getCloneItemStack(blockAccessor.getBlockState(),
-                            blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer())).build();
-                }
-            }
-            return accessor;
-        });
-
         registration.registerBlockComponent(JadeTankInfoRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(TreetapAndBucketInfo.THIS, TreeTapAndBucketBlock.class);
 
+        registration.registerBlockComponent(ModNameRender.MOD_NAME_REMOVER, Block.class);
+        registration.registerBlockComponent(ModNameRender.MOD_NAME_RELOCATOR, Block.class);
         // we handle this here because we need to send/receive server data directly
         registration.registerBlockComponent(WrenchInfo.THIS, Block.class);
     }

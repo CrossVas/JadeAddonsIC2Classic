@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.info.tubes;
 
 import dev.crossvas.jadexic2c.JadePluginHandler;
-import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.core.block.transport.item.tubes.DirectionalTubeTileEntity;

@@ -24,4 +24,13 @@ public class JadeTags {
     public static final ResourceLocation THERMOMETER_INFO = JadeXIC2C.rl("thermometer");
     public static final ResourceLocation CROP_INFO = JadeXIC2C.rl("crop");
     public static final ResourceLocation EU_STORAGE_INFO = JadeXIC2C.rl("eu_storage_info");
+
+    // new tag ids
+
+    public static final String JADE_ADDON_TEXT_TAG = "jade_addon_text";
+    public static final String JADE_ADDON_ITEM_TAG = "jade_addon_item";
+    public static final String JADE_ADDON_FLUID_TAG = "jade_addon_fluid";
+    public static final String JADE_ADDON_BAR_TAG = "jade_addon_bar";
+    public static final String JADE_ADDON_PADDING_TAG = "jade_addon_padding";
+
 }

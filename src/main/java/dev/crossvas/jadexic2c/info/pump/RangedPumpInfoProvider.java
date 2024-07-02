@@ -2,7 +2,7 @@ package dev.crossvas.jadexic2c.info.pump;
 
 import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.helpers.IHelper;
+import dev.crossvas.jadexic2c.base.interfaces.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
 import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.energy.EnergyNet;
