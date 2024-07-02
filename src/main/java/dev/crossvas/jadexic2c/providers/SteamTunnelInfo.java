@@ -23,7 +23,7 @@ public class SteamTunnelInfo implements IInfoProvider {
             addTunnelInfo(helper, steamTunnel);
             if (!steamTunnel.isValid || steamTunnel.isDynamic()) {
                 long time = steamTunnel.clockTime(512);
-                bar(helper, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks").withStyle(ChatFormatting.WHITE), ColorUtils.GRAY);
+                bar(helper, (int) time, 512, Component.translatable("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
             }
         }
         if (blockEntity instanceof BaseLinkingTileEntity linkingTile) {

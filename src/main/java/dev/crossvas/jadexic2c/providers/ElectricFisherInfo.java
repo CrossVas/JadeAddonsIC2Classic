@@ -28,7 +28,7 @@ public class ElectricFisherInfo implements IInfoProvider {
             }
             if (!fisher.isValid || fisher.isDynamic()) {
                 long time = fisher.clockTime(512);
-                bar(helper, (int) time, 512, Component.literal("Next Reform: ").append(String.valueOf(512 - time)).append(" Ticks"), ColorUtils.GRAY);
+                bar(helper, (int) time, 512, Component.translatable("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
             }
         }
     }
