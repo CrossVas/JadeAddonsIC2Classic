@@ -10,7 +10,7 @@ public class CommonPaddingElement extends CommonElement {
     int Y;
 
     public CommonPaddingElement(int x, int y) {
-        super(new Vec2(0, 0), new Vec2(0, 0), "LEFT");
+        super(new Vec2(0, 0), "LEFT");
         this.X = x;
         this.Y = y;
     }

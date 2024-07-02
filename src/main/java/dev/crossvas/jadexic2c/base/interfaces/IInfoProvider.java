@@ -179,32 +179,32 @@ public interface IInfoProvider {
     }
 
     default void item(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), new Vec2(0, -5), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, -5), "LEFT");
         helper.add(stackElement);
     }
 
     default void appendItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), new Vec2(0, -5), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, -5), "LEFT");
         helper.append(stackElement);
     }
 
     default void defaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), new Vec2(0, 0), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), "LEFT");
         helper.add(stackElement);
     }
 
     default void appendDefaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), new Vec2(0, 0), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), "LEFT");
         helper.append(stackElement);
     }
 
-    default void item(IJadeHelper helper, ItemStack stack, Vec2 size, Vec2 translation) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, size, translation, "LEFT");
+    default void item(IJadeHelper helper, ItemStack stack, Vec2 translation) {
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, translation, "LEFT");
         helper.add(stackElement);
     }
 
-    default void appendItem(IJadeHelper helper, ItemStack stack, Vec2 size, Vec2 translation) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, size, translation, "LEFT");
+    default void appendItem(IJadeHelper helper, ItemStack stack, Vec2 translation) {
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, translation, "LEFT");
         helper.append(stackElement);
     }
 

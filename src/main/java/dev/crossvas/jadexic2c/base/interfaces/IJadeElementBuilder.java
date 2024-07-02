@@ -5,8 +5,6 @@ import net.minecraft.world.phys.Vec2;
 
 public interface IJadeElementBuilder {
 
-    IJadeElementBuilder size(Vec2 size);
-
     /**
      * @param side left, right
      *

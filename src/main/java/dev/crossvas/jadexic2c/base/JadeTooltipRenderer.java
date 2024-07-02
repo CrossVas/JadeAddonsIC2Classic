@@ -15,6 +15,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.fluids.FluidStack;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
@@ -60,7 +61,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     CompoundTag elementTag = serverTag.getCompound(JADE_ADDON_TEXT_TAG);
                     CommonTextElement textElement = CommonTextElement.load(elementTag);
                     boolean centered = textElement.isCentered();
-                    IElement jadeElement = new SpecialTextElement(textElement.getText()).centered(centered).size(textElement.getSize()).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
+                    IElement jadeElement = new SpecialTextElement(textElement.getText()).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
                     boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
                     boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
                     if (add) {
@@ -97,7 +98,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     ItemStack stack = stackElement.getStack();
                     boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
                     boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
-                    IElement jadeElement = tooltip.getElementHelper().item(stack).size(stackElement.getSize()).translate(stackElement.getTranslation()).align(IElement.Align.valueOf(stackElement.getSide()));
+                    IElement jadeElement = tooltip.getElementHelper().item(stack).size(new Vec2(16, 16)).translate(stackElement.getTranslation()).align(IElement.Align.valueOf(stackElement.getSide()));
                     if (add) {
                         tooltip.add(jadeElement);
                     }

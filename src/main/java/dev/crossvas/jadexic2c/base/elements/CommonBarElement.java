@@ -13,7 +13,7 @@ public class CommonBarElement extends CommonElement {
     Component TEXT;
 
     public CommonBarElement(int current, int max, Component text, int color) {
-        super(new Vec2(0, 0), new Vec2(0, 0), "LEFT");
+        super(new Vec2(0, 0), "LEFT");
         this.CURRENT = current;
         this.MAX = max;
         this.TEXT = text;
