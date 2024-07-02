@@ -9,7 +9,6 @@ import ic2.core.block.machines.tiles.hv.TeleporterTileEntity;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.SanityHelper;
 import ic2.core.utils.helpers.TeleportUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;

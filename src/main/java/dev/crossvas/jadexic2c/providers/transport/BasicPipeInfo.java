@@ -25,7 +25,7 @@ public class BasicPipeInfo implements IInfoProvider {
                 int avg = container.getAverage(fluid);
                 if (avg <= 0) continue;
                 if (fluid != null) {
-                    fluid(helper, new FluidStack(fluid,1), 1, true);
+                    fluid(helper, new FluidStack(fluid, 1), 1, true);
                 }
             }
         }

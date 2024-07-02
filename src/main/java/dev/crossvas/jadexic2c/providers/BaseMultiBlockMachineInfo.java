@@ -62,7 +62,7 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                     int index;
                     do {
                         if (!activeSlotsIterator.hasNext()) {
-                            for(int i = 0; i < progressFilter.size(); ++i) {
+                            for (int i = 0; i < progressFilter.size(); ++i) {
                                 bar(helper, progressFilter.getInt(i), maxProgressFilter.getInt(i), Component.translatable("ic2.probe.progress.full.name", progressFilter.getInt(i) / 1000, maxProgressFilter.getInt(i) / 1000).append("t"), -16733185);
                             }
                             break label38;

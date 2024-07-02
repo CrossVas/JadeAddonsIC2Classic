@@ -155,7 +155,7 @@ public class ColorFilterTubeInfoProvider implements IHelper<BlockEntity> {
         public CompoundTag write() {
             CompoundTag nbt = new CompoundTag();
             nbt.putString("item", ForgeRegistries.ITEMS.getKey(this.stack.getItem()).toString());
-            nbt.putByte("sides", (byte)this.directions.getCode());
+            nbt.putByte("sides", (byte) this.directions.getCode());
             return nbt;
         }
 
