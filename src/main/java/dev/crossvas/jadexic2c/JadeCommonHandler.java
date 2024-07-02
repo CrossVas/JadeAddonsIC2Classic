@@ -4,6 +4,10 @@ import dev.crossvas.jadexic2c.base.elements.CommonFluidBarElement;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.providers.*;
+import dev.crossvas.jadexic2c.providers.expansions.FluidExpansionInfo;
+import dev.crossvas.jadexic2c.providers.expansions.MemoryExpansionInfo;
+import dev.crossvas.jadexic2c.providers.expansions.StorageExpansionInfo;
+import dev.crossvas.jadexic2c.providers.expansions.UUMExpansionInfo;
 import dev.crossvas.jadexic2c.providers.transport.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +27,10 @@ public class JadeCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
 
+        INFO_PROVIDERS.add(StorageExpansionInfo.THIS);
+        INFO_PROVIDERS.add(UUMExpansionInfo.THIS);
+        INFO_PROVIDERS.add(MemoryExpansionInfo.THIS);
+        INFO_PROVIDERS.add(FluidExpansionInfo.THIS);
         INFO_PROVIDERS.add(RangedPumpInfo.THIS);
         INFO_PROVIDERS.add(PumpInfo.THIS);
         INFO_PROVIDERS.add(TeleportTubeInfo.THIS);

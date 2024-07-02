@@ -208,17 +208,17 @@ public interface IInfoProvider {
         helper.append(stackElement);
     }
 
-    default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component) {
+    default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component, int size) {
         int counter = 0;
         if (!stacks.isEmpty()) {
             paddingY(helper, 5);
             text(helper, component);
             paddingY(helper, 2);
             for (ItemStack stack : stacks) {
-                if (counter < 7) {
+                if (counter < size + 1) {
                     appendDefaultItem(helper, stack);
                     counter++;
-                    if (counter == 6) {
+                    if (counter == size) {
                         counter = 0;
                         padding(helper, 0, 0);
                     }
@@ -226,5 +226,9 @@ public interface IInfoProvider {
             }
             paddingY(helper, 2);
         }
+    }
+
+    default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component) {
+        addGrid(helper, stacks, component, 6);
     }
 }

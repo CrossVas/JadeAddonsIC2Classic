@@ -20,7 +20,7 @@ public class RangedPumpInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.max_in.name", ranged.getMaxInput());
             defaultText(helper, "ic2.probe.eu.usage.name", 10);
 
-            text(helper, Component.translatable(ranged.isOperating() ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name"));
+            defaultText(helper, Component.translatable(ranged.isOperating() ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name"));
             int y = ranged.getPipeTip().getY();
             bar(helper, y, ranged.getPosition().getY(), Component.translatable("ic2.probe.pump.progress.name", y), -10996205);
             JadeCommonHandler.addTankInfo(helper, ranged);
