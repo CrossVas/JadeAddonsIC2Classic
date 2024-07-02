@@ -4,7 +4,7 @@ import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
-import dev.crossvas.jadexic2c.info.removals.ModNameRender;
+import dev.crossvas.jadexic2c.providers.removals.ModNameRender;
 import ic2.core.block.cables.CableBlock;
 import ic2.core.block.cables.CableTileEntity;
 import ic2.core.utils.helpers.Formatters;

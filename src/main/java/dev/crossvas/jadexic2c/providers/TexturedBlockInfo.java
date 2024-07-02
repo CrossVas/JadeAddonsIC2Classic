@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
-import dev.crossvas.jadexic2c.info.removals.ModNameRender;
+import dev.crossvas.jadexic2c.providers.removals.ModNameRender;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

@@ -23,6 +23,8 @@ public class JadeCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
 
+        INFO_PROVIDERS.add(RangedPumpInfo.THIS);
+        INFO_PROVIDERS.add(PumpInfo.THIS);
         INFO_PROVIDERS.add(TeleportTubeInfo.THIS);
         INFO_PROVIDERS.add(StackingTubeInfo.THIS);
         INFO_PROVIDERS.add(RoundRobinTubeInfo.THIS);

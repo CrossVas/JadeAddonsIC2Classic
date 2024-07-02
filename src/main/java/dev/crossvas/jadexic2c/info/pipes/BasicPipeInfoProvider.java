@@ -5,7 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
 import dev.crossvas.jadexic2c.base.interfaces.IHelper;
-import dev.crossvas.jadexic2c.info.removals.TankRender;
+import dev.crossvas.jadexic2c.providers.removals.TankRender;
 import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.graph.IFluidPipe;
 import ic2.core.utils.collection.LongAverager;

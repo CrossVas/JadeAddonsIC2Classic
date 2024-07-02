@@ -3,7 +3,7 @@ package dev.crossvas.jadexic2c.info.expansions;
 import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IHelper;
 import dev.crossvas.jadexic2c.helpers.TankHelper;
-import dev.crossvas.jadexic2c.info.removals.TankRender;
+import dev.crossvas.jadexic2c.providers.removals.TankRender;
 import ic2.core.block.base.tiles.impls.BaseExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.TankExpansionTileEntity;
 import net.minecraft.nbt.CompoundTag;
