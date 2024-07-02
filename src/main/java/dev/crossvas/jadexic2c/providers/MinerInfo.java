@@ -28,7 +28,7 @@ public class MinerInfo implements IInfoProvider {
 
             if (miner instanceof RocketMinerTileEntity rocketMiner) {
                 RocketMinerTileEntity.MinerState state = rocketMiner.state;
-                text(helper, getCompFromState(state.ordinal()));
+                defaultText(helper, getCompFromState(state.ordinal()));
                 JadeCommonHandler.addTankInfo(helper, rocketMiner);
             } else {
                 defaultText(helper, isStuck ? "ic2.probe.miner.stuck.name" : isOperating ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name");
@@ -59,6 +59,6 @@ public class MinerInfo implements IInfoProvider {
             case 9 -> state = "no_scanner";
             case 10 -> state = "reset";
         }
-        return Component.translatable(base + state).withStyle(ChatFormatting.WHITE);
+        return Component.translatable(base + state);
     }
 }
