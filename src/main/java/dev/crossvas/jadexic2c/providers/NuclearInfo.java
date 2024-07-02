@@ -29,9 +29,6 @@ public class NuclearInfo implements IInfoProvider {
         if (blockEntity instanceof IReactorChamber chamber) {
             addTooltips(helper, (BlockEntity) chamber.getReactor(), player);
         }
-        if (blockEntity instanceof ISteamReactorChamber) {
-            JadeCommonHandler.addTankInfo(helper, blockEntity);
-        }
     }
 
     public void addTooltips(IJadeHelper helper, BlockEntity blockEntity, Player player) {

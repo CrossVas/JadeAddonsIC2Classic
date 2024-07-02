@@ -98,7 +98,7 @@ public interface IInfoProvider {
     }
 
     default void defaultCentered(IJadeHelper helper, Component component) {
-        CommonTextElement element = new CommonTextElement(component.copy().withStyle(JadeCommonHelper.getFormattingStyle()), true);
+        CommonTextElement element = new CommonTextElement(component.copy(), true);
         add(helper, element);
     }
 
@@ -117,19 +117,19 @@ public interface IInfoProvider {
     }
 
     default void defaultText(IJadeHelper helper, String translatable, Object... args) {
-        text(helper, Component.translatable(translatable, args).withStyle(JadeCommonHelper.getFormattingStyle()));
+        text(helper, Component.translatable(translatable, args));
     }
 
     default void appendDefaultText(IJadeHelper helper, String translatable, Object... args) {
-        appendText(helper, Component.translatable(translatable, args).withStyle(JadeCommonHelper.getFormattingStyle()));
+        appendText(helper, Component.translatable(translatable, args));
     }
 
     default void defaultText(IJadeHelper helper, Component component) {
-        text(helper, component.copy().withStyle(JadeCommonHelper.getFormattingStyle()));
+        text(helper, component);
     }
 
     default void appendDefaultText(IJadeHelper helper, Component component) {
-        appendText(helper, component.copy().withStyle(JadeCommonHelper.getFormattingStyle()));
+        appendText(helper, component);
     }
 
     default void bar(IJadeHelper helper, int current, int max, Component text, int color) {
@@ -189,12 +189,12 @@ public interface IInfoProvider {
     }
 
     default void defaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, 0), "LEFT");
         helper.add(stackElement);
     }
 
     default void appendDefaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(16, 16), "LEFT");
+        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, 0), "LEFT");
         helper.append(stackElement);
     }
 

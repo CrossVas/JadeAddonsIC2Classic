@@ -23,7 +23,7 @@ public class JadeCommonHelper {
         return forceTopStyle() ? new SpecialProgressStyle().color(color, ColorUtils.darker(color)) : new ProgressStyle().color(color, ColorUtils.darker(color));
     }
 
-    public static ChatFormatting getFormattingStyle() {
-        return forceTopStyle() ? ChatFormatting.WHITE : ChatFormatting.GRAY;
+    public static ChatFormatting getFormattingStyle(boolean forceTopStyle) {
+        return forceTopStyle ? ChatFormatting.WHITE : ChatFormatting.GRAY;
     }
 }

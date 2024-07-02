@@ -20,7 +20,7 @@ public class BasicPipeInfo implements IInfoProvider {
     @Override
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof IFluidPipe fluidPipe && !(blockEntity instanceof PumpTileEntity || blockEntity instanceof RangedPumpTileEntity)) {
-            JadeCommonHandler.TANK_REMOVAL.add(blockEntity.getBlockState().getBlock());
+            JadeCommonHandler.TANK_REMOVAL.add(blockEntity);
             FluidNet.TransportStats stats = FluidNet.INSTANCE.getStats(fluidPipe);
             FluidContainer container = FluidContainer.getContainer(fluidPipe);
             for (Fluid fluid : stats.getTransfered().keySet()) {

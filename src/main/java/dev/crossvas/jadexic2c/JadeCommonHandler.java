@@ -11,7 +11,6 @@ import dev.crossvas.jadexic2c.providers.expansions.UUMExpansionInfo;
 import dev.crossvas.jadexic2c.providers.transport.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
@@ -22,7 +21,7 @@ import java.util.List;
 public class JadeCommonHandler {
 
     public static List<IInfoProvider> INFO_PROVIDERS = new ObjectArrayList<>();
-    public static final List<Block> TANK_REMOVAL = new ObjectArrayList<>();
+    public static final List<BlockEntity> TANK_REMOVAL = new ObjectArrayList<>();
 
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
@@ -102,7 +101,7 @@ public class JadeCommonHandler {
     }
 
     public static void addTankInfo(IJadeHelper helper, BlockEntity blockEntity) {
-        TANK_REMOVAL.add(blockEntity.getBlockState().getBlock());
+        TANK_REMOVAL.add(blockEntity);
         if (blockEntity instanceof IFluidHandler fluidHandler) {
             loadTankData(helper, fluidHandler);
         } else {

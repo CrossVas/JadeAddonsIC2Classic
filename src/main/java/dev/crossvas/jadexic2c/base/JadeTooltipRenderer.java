@@ -1,7 +1,9 @@
 package dev.crossvas.jadexic2c.base;
 
+import com.google.gson.JsonObject;
 import dev.crossvas.jadexic2c.JadeCommonHelper;
 import dev.crossvas.jadexic2c.JadeHelper;
+import dev.crossvas.jadexic2c.JadePluginHandler;
 import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.*;
 import dev.crossvas.jadexic2c.elements.SpecialTextElement;
@@ -22,6 +24,8 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.*;
 import snownee.jade.impl.ui.ProgressStyle;
 
+import java.util.Locale;
+
 import static dev.crossvas.jadexic2c.JadeTags.*;
 
 public class JadeTooltipRenderer implements IBlockComponentProvider {
@@ -30,10 +34,11 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        appendTooltips(iTooltip, blockAccessor);
+        appendTooltips(iTooltip, blockAccessor, iPluginConfig);
     }
 
-    private void appendTooltips(ITooltip tooltip, BlockAccessor accessor) {
+    private void appendTooltips(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+        ChatFormatting defaultFormatting = config.get(JadePluginHandler.TOP_STYLE) ? ChatFormatting.WHITE : ChatFormatting.GRAY;
         CompoundTag serverData = accessor.getServerData();
         IElementHelper helper = tooltip.getElementHelper();
         if (serverData.contains(JadeTags.TAG_DATA, Tag.TAG_LIST)) {
@@ -61,7 +66,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     CompoundTag elementTag = serverTag.getCompound(JADE_ADDON_TEXT_TAG);
                     CommonTextElement textElement = CommonTextElement.load(elementTag);
                     boolean centered = textElement.isCentered();
-                    IElement jadeElement = new SpecialTextElement(textElement.getText()).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
+                    IElement jadeElement = new SpecialTextElement(refreshComponent(textElement.getText(), defaultFormatting)).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
                     boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
                     boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
                     if (add) {
@@ -121,8 +126,8 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
 
                     if (fluidAmount > 0) {
                         if (JadeCommonHelper.forceTopStyle()) {
-                            Component fluidComp = ignoreCapacity ? fluid.getDisplayName().copy().withStyle(JadeCommonHelper.getFormattingStyle()) :
-                                    Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluidAmount, String.valueOf(fluidAmount).length() - 1), Formatter.formatNumber(max, String.valueOf(max).length() - 1)).withStyle(JadeCommonHelper.getFormattingStyle());
+                            Component fluidComp = ignoreCapacity ? fluid.getDisplayName().copy().withStyle(defaultFormatting) :
+                                    Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluidAmount, String.valueOf(fluidAmount).length() - 1), Formatter.formatNumber(max, String.valueOf(max).length() - 1)).withStyle(defaultFormatting);
                             IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluid));
                             tooltip.add(helper.progress((float) fluid.getAmount() / max, fluidComp, progressStyle,
                                     JadeCommonHelper.getStyle(PluginHelper.getColorForFluid(fluid)), true));
@@ -146,6 +151,18 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                 }
             }
         }
+    }
+
+    public static Component refreshComponent(Component component, ChatFormatting defaultFormatting) {
+        ChatFormatting formatting = defaultFormatting;
+        JsonObject json = Component.Serializer.toJsonTree(component).getAsJsonObject();
+        if (json.has("color")) {
+            String color = json.get("color").getAsString();
+            if (!color.isEmpty()) {
+                formatting = ChatFormatting.valueOf(color.toUpperCase(Locale.ROOT));
+            }
+        }
+        return component.copy().withStyle(formatting);
     }
 
     @Override

@@ -88,6 +88,7 @@ public class JadePluginHandler implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(JadeBlockEntityDataProvider.INSTANCE, BlockEntity.class);
+        registration.registerBlockDataProvider(JadeTankInfoRenderer.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(CropInfo.CropIcon.THIS, CropTileEntity.class);
     }
 }
