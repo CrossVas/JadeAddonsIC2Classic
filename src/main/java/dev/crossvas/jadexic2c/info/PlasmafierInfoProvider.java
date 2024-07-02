@@ -42,7 +42,7 @@ public enum PlasmafierInfoProvider implements IHelper<BlockEntity> {
             }
 
             if (uuMatter > 0) {
-                BarHelper.bar(iTooltip, uuMatter, 150, Component.translatable("ic2.probe.matter.name", uuMatter, 150), -5829955);
+                BarHelper.bar(iTooltip, uuMatter, 100, Component.translatable("ic2.probe.matter.name", uuMatter, 100), -5829955);
             }
 
         }
