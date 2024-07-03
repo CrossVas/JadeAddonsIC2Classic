@@ -1,4 +1,4 @@
-package dev.crossvas.jadexic2c.providers.removals;
+package dev.crossvas.jadexic2c.base.removals;
 
 import dev.crossvas.jadexic2c.JadeXIC2C;
 import ic2.core.block.base.IToolProvider;

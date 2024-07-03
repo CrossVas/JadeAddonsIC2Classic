@@ -1,7 +1,8 @@
-package dev.crossvas.jadexic2c.base;
+package dev.crossvas.jadexic2c.base.removals;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
 import dev.crossvas.jadexic2c.JadePluginHandler;
+import dev.crossvas.jadexic2c.JadeTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,7 +27,6 @@ public class JadeTankInfoRenderer implements IBlockComponentProvider, IServerDat
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         if (JadeCommonHandler.TANK_REMOVAL.contains(blockEntity)) {
             CompoundTag tag = new CompoundTag();
-            tag.putBoolean("removeTank", true);
             compoundTag.put("TankRemovals", tag);
         }
     }

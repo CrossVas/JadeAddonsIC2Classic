@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
-import dev.crossvas.jadexic2c.providers.removals.ModNameRender;
+import dev.crossvas.jadexic2c.base.removals.ModNameRender;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
 import ic2.core.block.misc.textured.TexturedSlabBlock;
 import ic2.core.block.misc.textured.TexturedStairsBlock;

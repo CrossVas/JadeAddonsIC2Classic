@@ -1,9 +1,9 @@
 package dev.crossvas.jadexic2c;
 
 import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
-import dev.crossvas.jadexic2c.base.JadeTankInfoRenderer;
+import dev.crossvas.jadexic2c.base.removals.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
-import dev.crossvas.jadexic2c.providers.removals.ModNameRender;
+import dev.crossvas.jadexic2c.base.removals.ModNameRender;
 import dev.crossvas.jadexic2c.providers.*;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.cables.CableBlock;
