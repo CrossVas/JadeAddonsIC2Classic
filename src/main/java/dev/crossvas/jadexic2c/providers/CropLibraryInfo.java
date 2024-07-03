@@ -5,6 +5,7 @@ import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.core.block.base.tiles.impls.BaseCropLibraryTileEntity;
+import ic2.core.block.machines.tiles.ev.UUCropLibraryTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,10 @@ public class CropLibraryInfo implements IInfoProvider {
                 defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(sink.getSinkTier()));
                 defaultText(helper, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(sink.getSinkTier()));
                 defaultText(helper, "ic2.probe.eu.usage.name", 1);
+            }
+
+            if (baseCropLibrary instanceof UUCropLibraryTileEntity uum) {
+                bar(helper, uum.uu_matter, 512, Component.literal("UU Matter: " + uum.uu_matter + " / " + 512), -5829955);
             }
 
             int cropCount = baseCropLibrary.syncer.getCropCount();

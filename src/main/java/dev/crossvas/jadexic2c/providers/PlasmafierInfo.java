@@ -26,7 +26,7 @@ public class PlasmafierInfo implements IInfoProvider {
                 bar(helper, plasma, maxPlasma, Component.translatable("ic2.probe.plasma.name", plasma, maxPlasma), -5829955);
             }
             if (uuMatter > 0) {
-                bar(helper, uuMatter, 150, Component.translatable("ic2.probe.matter.name", uuMatter, 150), -5829955);
+                bar(helper, uuMatter, 100, Component.translatable("ic2.probe.matter.name", uuMatter), -5829955);
             }
         }
     }

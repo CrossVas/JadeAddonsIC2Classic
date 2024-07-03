@@ -11,6 +11,9 @@ import ic2.core.block.crops.CropBlock;
 import ic2.core.block.crops.CropTileEntity;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
+import ic2.core.block.misc.textured.TexturedSlabBlock;
+import ic2.core.block.misc.textured.TexturedStairsBlock;
+import ic2.core.block.misc.textured.TexturedWallBlock;
 import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
 import ic2.core.platform.events.StructureManager;
 import ic2.core.platform.registries.IC2Blocks;
@@ -51,6 +54,12 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(new CableInfo.CableIconProvider(), CableBlock.class);
         registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
         registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
+        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedSlabBlock.class);
+        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedSlabBlock.class);
+        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedWallBlock.class);
+        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedWallBlock.class);
+        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedStairsBlock.class);
+        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedStairsBlock.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
