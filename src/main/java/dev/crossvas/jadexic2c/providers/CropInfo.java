@@ -70,9 +70,6 @@ public class CropInfo implements IInfoProvider {
                 boolean canGrow = crop.canGrow(tile);
                 boolean waterLogCompat = crop.getCropType().isCompatible(tile.isWaterLogged());
 
-//                if (scanLevel < 1 && currentStage < maxStage && crop != ICropRegistry.WEED && crop != ICropRegistry.SEA_WEED) {
-//                    text(helper, "info.crop.ic2.data.unknown");
-//                }
                 if (scanLevel < 4 && currentStage < maxStage) {
                     bar(helper, scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4), ColorUtils.GREEN);
                 } else {

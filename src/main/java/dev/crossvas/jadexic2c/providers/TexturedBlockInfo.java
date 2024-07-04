@@ -33,17 +33,9 @@ public class TexturedBlockInfo implements IBlockComponentProvider {
     public @Nullable IElement getIcon(BlockAccessor blockAccessor, IPluginConfig config, IElement currentIcon) {
         ItemStack icon = ItemStack.EMPTY;
         Block block = blockAccessor.getBlock();
-        if (block instanceof TexturedBlockBlock texturedBlock) {
-            icon = getFakeIcon(texturedBlock, blockAccessor);
-        }
-        if (block instanceof TexturedSlabBlock texturedSlabBlock) {
-            icon = getFakeIcon(texturedSlabBlock, blockAccessor);
-        }
-        if (block instanceof TexturedWallBlock texturedWallBlock) {
-            icon = getFakeIcon(texturedWallBlock, blockAccessor);
-        }
-        if (block instanceof TexturedStairsBlock texturedStairsBlock) {
-            icon = getFakeIcon(texturedStairsBlock, blockAccessor);
+        if (block instanceof TexturedBlockBlock || block instanceof TexturedSlabBlock ||
+                block instanceof TexturedWallBlock || block instanceof TexturedStairsBlock) {
+            icon = getFakeIcon(block, blockAccessor);
         }
         return IElementHelper.get().item(icon);
     }
@@ -55,17 +47,9 @@ public class TexturedBlockInfo implements IBlockComponentProvider {
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         Block block = blockAccessor.getBlock();
-        if (block instanceof TexturedBlockBlock texturedBlockBlock) {
-            addFakeInfo(texturedBlockBlock, iTooltip, blockAccessor, iPluginConfig);
-        }
-        if (block instanceof TexturedSlabBlock texturedSlabBlock) {
-            addFakeInfo(texturedSlabBlock, iTooltip, blockAccessor, iPluginConfig);
-        }
-        if (block instanceof TexturedWallBlock texturedWallBlock) {
-            addFakeInfo(texturedWallBlock, iTooltip, blockAccessor, iPluginConfig);
-        }
-        if (block instanceof TexturedStairsBlock texturedStairsBlock) {
-            addFakeInfo(texturedStairsBlock, iTooltip, blockAccessor, iPluginConfig);
+        if (block instanceof TexturedBlockBlock || block instanceof TexturedSlabBlock ||
+                block instanceof TexturedWallBlock || block instanceof TexturedStairsBlock) {
+            addFakeInfo(block, iTooltip, blockAccessor, iPluginConfig);
         }
     }
 
