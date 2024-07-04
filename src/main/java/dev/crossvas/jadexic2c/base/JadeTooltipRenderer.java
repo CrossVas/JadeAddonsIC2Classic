@@ -54,14 +54,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     int x = paddingElement.getX();
                     int y = paddingElement.getY();
                     IElement jadeElement = tooltip.getElementHelper().spacer(x, y);
-                    boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
-                    boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
-                    if (add) {
-                        tooltip.add(jadeElement);
-                    }
-                    if (append) {
-                        tooltip.append(jadeElement);
-                    }
+                    addElement(tooltip, jadeElement, elementTag);
                 }
                 // text
                 if (serverTag.contains(JADE_ADDON_TEXT_TAG)) {
@@ -69,14 +62,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     CommonTextElement textElement = CommonTextElement.load(elementTag);
                     boolean centered = textElement.isCentered();
                     IElement jadeElement = new SpecialTextElement(refreshComponent(textElement.getText(), defaultFormatting)).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
-                    boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
-                    boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
-                    if (add) {
-                        tooltip.add(jadeElement);
-                    }
-                    if (append) {
-                        tooltip.append(jadeElement);
-                    }
+                    addElement(tooltip, jadeElement, elementTag);
                 }
                 // bar
                 if (serverTag.contains(JADE_ADDON_BAR_TAG)) {
@@ -89,29 +75,15 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     IProgressStyle progressStyle = JadeCommonHelper.forceTopStyle() ? JadeCommonHelper.getProgressStyle(color) : new ProgressStyle().color(color, ColorUtils.darker(color));
                     Component label = barElement.getText();
                     IElement jadeElement = helper.progress((float) current / max, label, progressStyle, boxStyle, true);
-                    boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
-                    boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
-                    if (add) {
-                        tooltip.add(jadeElement);
-                    }
-                    if (append) {
-                        tooltip.append(jadeElement);
-                    }
+                    addElement(tooltip, jadeElement, elementTag);
                 }
                 // item
                 if (serverTag.contains(JADE_ADDON_ITEM_TAG)) {
                     CompoundTag elementTag = serverTag.getCompound(JADE_ADDON_ITEM_TAG);
                     CommonItemStackElement stackElement = CommonItemStackElement.load(elementTag);
                     ItemStack stack = stackElement.getStack();
-                    boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
-                    boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
                     IElement jadeElement = tooltip.getElementHelper().item(stack).size(new Vec2(16, 16)).translate(stackElement.getTranslation()).align(IElement.Align.valueOf(stackElement.getSide()));
-                    if (add) {
-                        tooltip.add(jadeElement);
-                    }
-                    if (append) {
-                        tooltip.append(jadeElement);
-                    }
+                    addElement(tooltip, jadeElement, elementTag);
                 }
                 // fluid
                 if (serverTag.contains(JADE_ADDON_FLUID_TAG)) {
@@ -152,6 +124,17 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     }
                 }
             }
+        }
+    }
+
+    public void addElement(ITooltip iTooltip, IElement jadeElement, CompoundTag elementTag) {
+        boolean add = elementTag.getBoolean(JadeHelper.ADD_TAG);
+        boolean append = elementTag.getBoolean(JadeHelper.APPEND_TAG);
+        if (add) {
+            iTooltip.add(jadeElement);
+        }
+        if (append) {
+            iTooltip.append(jadeElement);
         }
     }
 

@@ -29,7 +29,7 @@ public class BaseMachineInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.max_in.name", baseMachine.getMaxInput());
             defaultText(helper, "ic2.probe.eu.usage.name", baseMachine.getEnergyPerTick());
             if (baseMachine instanceof SlowGrinderTileEntity slowGrinder) {
-                defaultText(helper, "ic2.probe.scrap.chance.name", slowGrinder.getChance(0.25F) * 100.0F);
+                defaultText(helper, "ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(slowGrinder.getChance(0.25F) * 100.0F));
             }
             if (baseMachine instanceof RefineryTileEntity refinery) {
                 JadeCommonHandler.addTankInfo(helper, refinery);
