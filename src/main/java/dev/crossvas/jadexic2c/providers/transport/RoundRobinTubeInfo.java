@@ -23,9 +23,9 @@ public class RoundRobinTubeInfo implements IInfoProvider {
             int[] size = roundRobin.cap;
             int currentIndex = roundRobin.currentIndex;
             int currentItem = roundRobin.currentItem;
+            text(helper, Component.translatable("ic2.tube.round_robin.info").withStyle(ChatFormatting.GOLD));
             text(helper, Component.translatable("ic2.probe.tube.robin.side", DirectionList.getName(Direction.from3DDataValue(currentIndex)).withStyle(PluginHelper.getColor(currentIndex))).withStyle(ChatFormatting.GOLD));
             text(helper, Component.translatable("ic2.probe.tube.robin.count", ChatFormatting.AQUA + String.valueOf(Math.max(0, currentItem))).withStyle(ChatFormatting.GOLD));
-            text(helper, Component.translatable("ic2.tube.round_robin.info").withStyle(ChatFormatting.GOLD));
             for (int i = 0; i < size.length; i++) {
                 int count = size[i];
                 if (count > 0) {
