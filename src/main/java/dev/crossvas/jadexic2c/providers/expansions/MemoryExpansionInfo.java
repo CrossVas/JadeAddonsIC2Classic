@@ -2,8 +2,6 @@ package dev.crossvas.jadexic2c.providers.expansions;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.helpers.BarHelper;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.core.block.machines.tiles.nv.MemoryExpansionTileEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;

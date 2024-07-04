@@ -8,7 +8,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.generators.tiles.SteamTunnelTileEntity;
 import ic2.core.utils.math.ColorUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;

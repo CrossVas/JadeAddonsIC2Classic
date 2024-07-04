@@ -7,7 +7,6 @@ import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
-import ic2.api.reactor.ISteamReactorChamber;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;

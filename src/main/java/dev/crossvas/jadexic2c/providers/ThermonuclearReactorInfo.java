@@ -3,7 +3,6 @@ package dev.crossvas.jadexic2c.providers;
 import dev.crossvas.jadexic2c.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.machines.tiles.luv.FusionReactorTileEntity;
 import ic2.core.platform.player.PlayerHandler;

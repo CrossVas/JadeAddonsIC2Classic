@@ -1,6 +1,5 @@
 package dev.crossvas.jadexic2c.base.interfaces;
 
-import dev.crossvas.jadexic2c.JadeCommonHelper;
 import dev.crossvas.jadexic2c.base.elements.*;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.inventory.filter.IFilter;
