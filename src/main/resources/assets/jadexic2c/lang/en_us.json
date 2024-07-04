@@ -20,6 +20,7 @@
 
   "ic2.barrel.info.fluid": "%s: %s/%s mB",
   "ic2.probe.eu.storage.full.name": "Energy: %s/%s EU",
+  "ic2.progress.material.name": "Material: %s/%s",
   "ic2.probe.transformer.inverted": "Inverted: %s",
   "ic2.probe.uum.providing.name": "Providing:",
   "ic2.probe.memory_expansion.name": "Memory: %s/%s recipes",

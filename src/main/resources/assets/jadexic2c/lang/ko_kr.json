@@ -20,6 +20,7 @@
 
   "ic2.barrel.info.fluid": "%s: %s / %s mB",
   "ic2.probe.eu.storage.full.name": "에너지: %s/%s EU",
+  "ic2.progress.material.name": "재료: %s/%s",
   "ic2.probe.transformer.inverted": "역행: %s",
   "ic2.probe.uum.providing.name": "제공:",
   "ic2.probe.memory_expansion.name": "메모리: %s/%s 레시피",
