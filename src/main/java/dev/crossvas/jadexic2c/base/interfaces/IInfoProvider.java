@@ -210,7 +210,6 @@ public interface IInfoProvider {
     default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component, int size) {
         int counter = 0;
         if (!stacks.isEmpty()) {
-            paddingY(helper, 5);
             text(helper, component);
             paddingY(helper, 2);
             for (ItemStack stack : stacks) {

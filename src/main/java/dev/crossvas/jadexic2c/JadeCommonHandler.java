@@ -33,7 +33,6 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(BaseMultiBlockMachineInfo.THIS);
         INFO_PROVIDERS.add(BaseTeleporterInfo.THIS);
         INFO_PROVIDERS.add(BasicPipeInfo.THIS);
-        INFO_PROVIDERS.add(BasicTubeInfo.THIS);
         INFO_PROVIDERS.add(BatteryStationInfo.THIS);
         INFO_PROVIDERS.add(CableInfo.THIS);
         INFO_PROVIDERS.add(ChargePadInfo.THIS);
@@ -66,6 +65,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(PickupTubeInfo.THIS);
         INFO_PROVIDERS.add(PipePumpInfo.THIS);
         INFO_PROVIDERS.add(PlasmafierInfo.THIS);
+        INFO_PROVIDERS.add(ProviderTubeInfo.THIS);
         INFO_PROVIDERS.add(PumpInfo.THIS);
         INFO_PROVIDERS.add(PushingValveInfo.THIS);
         INFO_PROVIDERS.add(RangedPumpInfo.THIS);
@@ -88,6 +88,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(VillagerOMatInfo.THIS);
         INFO_PROVIDERS.add(WaveGenInfo.THIS);
         INFO_PROVIDERS.add(WindmillGenInfo.THIS);
+        INFO_PROVIDERS.add(BasicTubeInfo.THIS);
     }
 
     public static void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
