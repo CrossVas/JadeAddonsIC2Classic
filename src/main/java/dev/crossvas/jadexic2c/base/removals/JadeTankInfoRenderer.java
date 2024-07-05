@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.base.removals;
 
 import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.JadePluginHandler;
+import dev.crossvas.jadexic2c.JadeTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,6 +37,6 @@ public class JadeTankInfoRenderer implements IBlockComponentProvider, IServerDat
 
     @Override
     public ResourceLocation getUid() {
-        return JadePluginHandler.TANK_RENDER;
+        return JadeTags.TANK_RENDER;
     }
 }

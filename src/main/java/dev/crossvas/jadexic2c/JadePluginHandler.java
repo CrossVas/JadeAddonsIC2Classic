@@ -20,7 +20,6 @@ import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -30,14 +29,6 @@ import snownee.jade.api.*;
 @WailaPlugin(JadeXIC2C.ID_IC2)
 public class JadePluginHandler implements IWailaPlugin {
 
-    public static final ResourceLocation EU_READER_INFO = JadeXIC2C.rl("eu_reader");
-    public static final ResourceLocation THERMOMETER_INFO = JadeXIC2C.rl("thermometer");
-    public static final ResourceLocation CROP_INFO = JadeXIC2C.rl("crop");
-    public static final ResourceLocation EU_STORAGE_INFO = JadeXIC2C.rl("eu_storage_info");
-
-    public static final ResourceLocation TOP_STYLE = JadeXIC2C.rl("force_top_style");
-    public static final ResourceLocation TANK_RENDER = JadeXIC2C.rl("remove_renders_fluid");
-
     /**
      * {@link IC2Blocks}
      * {@link IC2Tiles}
@@ -46,7 +37,7 @@ public class JadePluginHandler implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.addConfig(TOP_STYLE, true);
+        registration.addConfig(JadeTags.TOP_STYLE, true);
 
         registration.registerBlockComponent(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockIcon(CropInfo.CropIcon.THIS, CropBlock.class);

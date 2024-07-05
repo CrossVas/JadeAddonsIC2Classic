@@ -127,7 +127,7 @@ public class JadeCommonHandler {
     }
 
     public static boolean forceTopStyle() {
-        return Jade.CONFIG.get().getPlugin().get(JadePluginHandler.TOP_STYLE);
+        return Jade.CONFIG.get().getPlugin().get(JadeTags.TOP_STYLE);
     }
 
     public static BoxStyle getStyle(int color) {
