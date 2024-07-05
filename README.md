@@ -14,7 +14,5 @@
 
 <img src="images/full.png">
 
-**<font size="3">Almost every aspect of the mod is covered.</font>**
-
 **<font size="3">Make sure to check the Config (NUM0 by default)</font>**
 
