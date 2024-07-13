@@ -1,17 +1,33 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.inventory.filter.IFilter;
+import ic2.core.platform.registries.IC2Blocks;
+import ic2.core.platform.registries.IC2Items;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.Nullable;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.IServerDataProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElement;
+import snownee.jade.api.ui.IElementHelper;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -125,5 +141,38 @@ public class BarrelInfo implements IInfoProvider {
             case 5 -> "ic2.probe.barrel.status.whisky.name";
             case 10 -> "ic2.probe.barrel.status.potion.name";
         };
+    }
+
+    public static class BarrelIconProvider implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+
+        @Override
+        public @Nullable IElement getIcon(BlockAccessor accessor, IPluginConfig config, IElement currentIcon) {
+            ItemStack icon = new ItemStack(IC2Blocks.BARREL);
+            if (accessor.getServerData().contains("BarrelInfo")) {
+                CompoundTag tag = accessor.getServerData().getCompound("BarrelInfo");
+                int brewType = tag.getInt("type");
+                icon.getOrCreateTag().putInt("type", brewType);
+            }
+            return IElementHelper.get().item(icon);
+        }
+
+        @Override
+        public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
+            if (blockEntity instanceof BarrelTileEntity barrel) {
+                CompoundTag tag = new CompoundTag();
+                tag.putInt("type", barrel.brewType);
+                compoundTag.put("BarrelInfo", tag);
+            }
+        }
+
+        @Override
+        public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {}
+
+        @Override
+        public ResourceLocation getUid() {
+            return JadeTags.INFO_RENDERER;
+        }
+
+
     }
 }

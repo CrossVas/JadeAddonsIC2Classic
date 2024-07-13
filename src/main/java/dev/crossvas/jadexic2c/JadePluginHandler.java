@@ -9,11 +9,13 @@ import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.block.cables.CableBlock;
 import ic2.core.block.crops.CropBlock;
 import ic2.core.block.crops.CropTileEntity;
+import ic2.core.block.misc.BarrelBlock;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.block.misc.textured.TexturedBlockBlock;
 import ic2.core.block.misc.textured.TexturedSlabBlock;
 import ic2.core.block.misc.textured.TexturedStairsBlock;
 import ic2.core.block.misc.textured.TexturedWallBlock;
+import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.block.storage.tiles.tank.BaseValveTileEntity;
 import ic2.core.platform.events.StructureManager;
 import ic2.core.platform.registries.IC2Blocks;
@@ -39,6 +41,7 @@ public class JadePluginHandler implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(JadeTags.TOP_STYLE, true);
 
+        registration.registerBlockIcon(new BarrelInfo.BarrelIconProvider(), BarrelBlock.class);
         registration.registerBlockComponent(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockIcon(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
@@ -87,6 +90,7 @@ public class JadePluginHandler implements IWailaPlugin {
 
     @Override
     public void register(IWailaCommonRegistration registration) {
+        registration.registerBlockDataProvider(new BarrelInfo.BarrelIconProvider(), BarrelTileEntity.class);
         registration.registerBlockDataProvider(JadeBlockEntityDataProvider.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(JadeTankInfoRenderer.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(CropInfo.CropIcon.THIS, CropTileEntity.class);
