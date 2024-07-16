@@ -46,14 +46,8 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockIcon(CropInfo.CropIcon.THIS, CropBlock.class);
         registration.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
         registration.registerBlockComponent(new CableInfo.CableIconProvider(), CableBlock.class);
-        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
-        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedBlockBlock.class);
-        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedSlabBlock.class);
-        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedSlabBlock.class);
-        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedWallBlock.class);
-        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedWallBlock.class);
-        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, TexturedStairsBlock.class);
-        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, TexturedStairsBlock.class);
+        registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, Block.class);
+        registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, Block.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
