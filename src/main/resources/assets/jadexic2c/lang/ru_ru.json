@@ -39,5 +39,6 @@
   "ic2.tube.inserter.existing": "Вставлять только существующие: %s",
   "ic2.tube.teleport.private": "Частная сеть: %s",
   "ic2.tube.teleport.send": "Может отправить: %s",
-  "ic2.tube.teleport.receive": "Может принимать: %s"
+  "ic2.tube.teleport.receive": "Может принимать: %s",
+  "ic2.probe.crop.seed_drop": "Режим семян: %s"
 }

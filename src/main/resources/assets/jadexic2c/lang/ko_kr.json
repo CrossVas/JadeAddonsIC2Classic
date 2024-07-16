@@ -39,5 +39,6 @@
   "ic2.tube.inserter.existing": "기존 항목만 삽입: %s",
   "ic2.tube.teleport.private": "사설망: %s",
   "ic2.tube.teleport.send": "보낼 수 있음: %s",
-  "ic2.tube.teleport.receive": "받을 수 있음: %s"
+  "ic2.tube.teleport.receive": "받을 수 있음: %s",
+  "ic2.probe.crop.seed_drop": "씨앗 모드: %s"
 }

@@ -6,6 +6,7 @@ import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.crops.ICrop;
 import ic2.api.crops.ICropRegistry;
 import ic2.api.crops.ICropTile;
+import ic2.api.crops.ISeedCrop;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.registries.IC2Items;
@@ -97,6 +98,11 @@ public class CropInfo implements IInfoProvider {
                         int maxStress = crop.getStatInfluence(tile, humidity, nutrients, env) * 5;
                         bar(helper, stress, maxStress, Component.translatable("ic2.probe.crop.info.needs", stress, maxStress), ColorUtils.CYAN);
                     }
+                }
+
+                if (crop instanceof ISeedCrop seedCrop) {
+                    boolean isDroppingSeed = seedCrop.isDroppingSeeds(tile);
+                    text(helper, Component.translatable("ic2.probe.crop.seed_drop", (isDroppingSeed ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(isDroppingSeed)).withStyle(ChatFormatting.GOLD));
                 }
             }
 
