@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.providers.expansions;
 
-import dev.crossvas.jadexic2c.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.machines.tiles.nv.TankExpansionTileEntity;

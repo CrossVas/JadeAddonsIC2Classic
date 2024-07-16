@@ -1,7 +1,5 @@
 package dev.crossvas.jadexic2c.base;
 
-import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.JadeHelper;
 import dev.crossvas.jadexic2c.JadeTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

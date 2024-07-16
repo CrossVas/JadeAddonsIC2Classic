@@ -1,5 +1,6 @@
-package dev.crossvas.jadexic2c;
+package dev.crossvas.jadexic2c.base;
 
+import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeElementBuilder;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import net.minecraft.nbt.CompoundTag;

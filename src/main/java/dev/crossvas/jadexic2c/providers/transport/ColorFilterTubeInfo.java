@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.helpers.FilterEntry;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import ic2.api.util.DirectionList;
 import ic2.core.block.transport.item.tubes.ColorFilterTubeTileEntity;
@@ -43,7 +42,7 @@ public class ColorFilterTubeInfo implements IInfoProvider {
                 paddingY(helper, 3);
                 Object2ObjectOpenHashMap<Component, List<FilterEntry>> mappedFilters = new Object2ObjectOpenHashMap<>();
                 for (FilterEntry entry : filters) {
-                    Component side = PluginHelper.getSides(entry.getSides());
+                    Component side = PluginHelper.getSides(entry.directions);
                     if (mappedFilters.containsKey(side)) {
                         List<FilterEntry> existing = new ArrayList<>(mappedFilters.get(side));
                         existing.add(entry);
@@ -58,7 +57,7 @@ public class ColorFilterTubeInfo implements IInfoProvider {
                 mappedFilters.keySet().forEach(side -> {
                     text(helper, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
                     for (FilterEntry entry : mappedFilters.get(side)) {
-                        appendItem(helper, entry.getStack());
+                        appendItem(helper, entry.stack);
                     }
                     appendText(helper, Component.literal(" → ").withStyle(ChatFormatting.WHITE));
                     appendText(helper, side);
@@ -66,4 +65,6 @@ public class ColorFilterTubeInfo implements IInfoProvider {
             }
         }
     }
+
+    public record FilterEntry(ItemStack stack, DirectionList directions) {}
 }

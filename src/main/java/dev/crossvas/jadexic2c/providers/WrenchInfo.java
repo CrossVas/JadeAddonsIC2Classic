@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
-import dev.crossvas.jadexic2c.helpers.TextHelper;
 import ic2.api.items.readers.IWrenchTool;
 import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.block.base.features.multiblock.IStructureListener;
@@ -53,15 +52,15 @@ public class WrenchInfo implements IBlockComponentProvider {
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                         int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0);
                         if (dropChance > 100) dropChance = 100;
-                        TextHelper.appendText(iTooltip, Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
+                        iTooltip.append(iTooltip.getElementHelper().text(Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY))));
                     } else {
-                        TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                        iTooltip.append(Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                     }
                 } else {
-                    TextHelper.appendText(iTooltip, Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
+                    iTooltip.append(Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
                     PluginHelper.spacerY(iTooltip, 3);
                     iTooltip.add(wrenchIcon);
-                    TextHelper.appendText(iTooltip, Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
+                    iTooltip.append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
                 }
             }
         }

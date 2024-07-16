@@ -1,8 +1,6 @@
 package dev.crossvas.jadexic2c.base;
 
 import com.google.gson.JsonObject;
-import dev.crossvas.jadexic2c.JadeCommonHandler;
-import dev.crossvas.jadexic2c.JadeHelper;
 import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.*;
 import dev.crossvas.jadexic2c.elements.SpecialTextElement;

@@ -1,5 +1,6 @@
-package dev.crossvas.jadexic2c;
+package dev.crossvas.jadexic2c.base;
 
+import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.CommonFluidBarElement;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;

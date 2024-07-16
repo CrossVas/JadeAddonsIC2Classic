@@ -1,10 +1,12 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
-import dev.crossvas.jadexic2c.helpers.BarHelper;
+import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
+import dev.crossvas.jadexic2c.elements.SpecialProgressStyle;
 import ic2.core.block.misc.TreeTapAndBucketBlock;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
+import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +30,8 @@ public class TreetapAndBucketInfo implements IBlockComponentProvider {
             BlockState state = blockAccessor.getBlockState();
             int current = state.getValue(TreeTapAndBucketBlock.FILL_STAGE);
             if (current > 0) {
-                BarHelper.bar(iTooltip, current, 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE), -10996205);
+                iTooltip.add(iTooltip.getElementHelper().progress((float) current / 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE),
+                        new SpecialProgressStyle().color(-10996205, ColorUtils.darker(-10996205)), new SpecialBoxStyle(ColorUtils.doubleDarker(-10996205)), true));
             }
         }
     }
