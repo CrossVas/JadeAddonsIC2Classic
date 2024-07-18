@@ -34,58 +34,39 @@ public interface IInfoProvider {
     }
 
     default void addAveragesFull(IJadeHelper helper, EnergyContainer container) {
-        addAverages(helper, container, true, true, true, true);
+        addAveragesIn(helper, container);
+        addAveragesOut(helper, container);
     }
 
     /**
      * common: energyIn, packetIn
      * */
     default void addAveragesIn(IJadeHelper helper, EnergyContainer container) {
-        addAverages(helper, container, true, false, true, false);
+        int averageIn = container.getAverageIn();
+        int packetsIn = container.getPacketsOut();
+        if (averageIn > 0) {
+            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
+            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
+        }
     }
 
     /**
      * common: energyOut, packetOut
      * */
     default void addAveragesOut(IJadeHelper helper, EnergyContainer container) {
-        addAverages(helper, container, false, true, false, true);
+        int averageOut = container.getAverageOut();
+        int packetsOut = container.getPacketsOut();
+        if (averageOut > 0) {
+            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
+        }
     }
 
     default void addCableAverages(IJadeHelper helper, int energyFlow, int packetFlow) {
         paddingY(helper, 3);
         if (energyFlow > 0) {
             text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(energyFlow)).withStyle(ChatFormatting.AQUA));
-        }
-        if (packetFlow > 0) {
             text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)).withStyle(ChatFormatting.AQUA));
-        }
-    }
-
-    default void addAverages(IJadeHelper helper, EnergyContainer container, boolean energyIn, boolean energyOut, boolean packetIn, boolean packetOut) {
-        int avrIn = container.getAverageIn();
-        int avrOut = container.getAverageOut();
-        int pIn = container.getPacketsIn();
-        int pOut = container.getPacketsOut();
-        paddingY(helper, 3);
-        if (energyIn) {
-            if (avrIn > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(avrIn)).withStyle(ChatFormatting.AQUA));
-            }
-        }
-        if (energyOut) {
-            if (avrOut > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(avrOut)).withStyle(ChatFormatting.AQUA));
-            }
-        }
-        if (packetIn) {
-            if (pIn > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(pIn)).withStyle(ChatFormatting.AQUA));
-            }
-        }
-        if (packetOut) {
-            if (pOut > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(pOut)).withStyle(ChatFormatting.AQUA));
-            }
         }
     }
 
