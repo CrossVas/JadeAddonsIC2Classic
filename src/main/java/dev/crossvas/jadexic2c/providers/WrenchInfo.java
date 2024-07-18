@@ -46,7 +46,7 @@ public class WrenchInfo implements IBlockComponentProvider {
                 showInfo = actualRate > 0;
             }
             if (showInfo) {
-                PluginHelper.spacerY(iTooltip, 3);
+                PluginHelper.spacerY(iTooltip, 5);
                 if (tile.isHarvestWrenchRequired(player)) {
                     iTooltip.add(wrenchIcon);
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
@@ -57,8 +57,9 @@ public class WrenchInfo implements IBlockComponentProvider {
                         iTooltip.append(Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
                     }
                 } else {
+                    PluginHelper.spacerY(iTooltip, 5);
                     iTooltip.append(Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
-                    PluginHelper.spacerY(iTooltip, 3);
+                    PluginHelper.spacerY(iTooltip, 5);
                     iTooltip.add(wrenchIcon);
                     iTooltip.append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
                 }
