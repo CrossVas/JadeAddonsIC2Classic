@@ -35,7 +35,7 @@ public class WrenchInfo implements IBlockComponentProvider {
         Player player = blockAccessor.getPlayer();
         ItemStack handHeldStack = player.getMainHandItem();
         boolean showInfo;
-        IElement wrenchIcon = iTooltip.getElementHelper().item(IC2Items.WRENCH.getDefaultInstance()).size(new Vec2(16, 16)).align(IElement.Align.LEFT).translate(new Vec2(-2, -5));
+        IElement wrenchIcon = iTooltip.getElementHelper().item(IC2Items.WRENCH.getDefaultInstance()).size(new Vec2(15, 15)).align(IElement.Align.LEFT).translate(new Vec2(0, -5));
         if (blockEntity instanceof IWrenchableTile tile) {
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
