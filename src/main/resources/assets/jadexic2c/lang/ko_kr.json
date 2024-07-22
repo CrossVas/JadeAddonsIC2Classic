@@ -40,5 +40,8 @@
   "ic2.tube.teleport.private": "사설망: %s",
   "ic2.tube.teleport.send": "보낼 수 있음: %s",
   "ic2.tube.teleport.receive": "받을 수 있음: %s",
-  "ic2.probe.crop.seed_drop": "씨앗 모드: %s"
+  "ic2.probe.crop.seed_drop": "씨앗 모드: %s",
+  "ic2.probe.chunkloader.radius": "반지름: %s 청크",
+  "ic2.probe.chunkloader.ticks": "청크 틱: %s",
+  "ic2.probe.personal.owner": "소유자: %s"
 }

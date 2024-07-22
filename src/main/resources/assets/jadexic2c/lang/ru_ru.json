@@ -40,5 +40,8 @@
   "ic2.tube.teleport.private": "Частная сеть: %s",
   "ic2.tube.teleport.send": "Может отправить: %s",
   "ic2.tube.teleport.receive": "Может принимать: %s",
-  "ic2.probe.crop.seed_drop": "Режим семян: %s"
+  "ic2.probe.crop.seed_drop": "Режим семян: %s",
+  "ic2.probe.chunkloader.radius": "Радиус: %s чанк(а)",
+  "ic2.probe.chunkloader.ticks": "Тики чанков: %s",
+  "ic2.probe.personal.owner": "Владелец: %s"
 }

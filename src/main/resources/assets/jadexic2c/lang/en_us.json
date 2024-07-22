@@ -40,5 +40,8 @@
   "ic2.tube.teleport.private": "Private Network: %s",
   "ic2.tube.teleport.send": "Can Send: %s",
   "ic2.tube.teleport.receive": "Can Receive: %s",
-  "ic2.probe.crop.seed_drop": "Seed Mode: %s"
+  "ic2.probe.crop.seed_drop": "Seed Mode: %s",
+  "ic2.probe.chunkloader.radius": "Radius: %s chunk(s)",
+  "ic2.probe.chunkloader.ticks": "Chunk Ticks: %s",
+  "ic2.probe.personal.owner": "Owner: %s"
 }
