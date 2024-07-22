@@ -3,6 +3,8 @@ package dev.crossvas.jadexic2c.base;
 import com.google.gson.JsonObject;
 import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.*;
+import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
+import dev.crossvas.jadexic2c.elements.SpecialProgressStyle;
 import dev.crossvas.jadexic2c.elements.SpecialTextElement;
 import dev.crossvas.jadexic2c.helpers.Formatter;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
@@ -37,6 +39,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
     }
 
     private void appendTooltips(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+        boolean forceTOPStyle = config.get(TOP_STYLE);
         ChatFormatting defaultFormatting = config.get(JadeTags.TOP_STYLE) ? ChatFormatting.WHITE : ChatFormatting.GRAY;
         CompoundTag serverData = accessor.getServerData();
         IElementHelper helper = tooltip.getElementHelper();
@@ -68,8 +71,8 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     int color = barElement.getColor();
                     int current = barElement.getCurrent();
                     int max = barElement.getMax();
-                    BoxStyle boxStyle = JadeCommonHandler.forceTopStyle() ? JadeCommonHandler.getStyle(color) : BoxStyle.DEFAULT;
-                    IProgressStyle progressStyle = JadeCommonHandler.forceTopStyle() ? JadeCommonHandler.getProgressStyle(color) : new ProgressStyle().color(color, ColorUtils.darker(color));
+                    BoxStyle boxStyle = forceTOPStyle ? new SpecialBoxStyle(ColorUtils.doubleDarker(color)) : BoxStyle.DEFAULT;
+                    IProgressStyle progressStyle = forceTOPStyle ? new SpecialProgressStyle().color(color, ColorUtils.darker(color)) : new ProgressStyle().color(color, ColorUtils.darker(color));
                     Component label = barElement.getText();
                     IElement jadeElement = helper.progress((float) current / max, label, progressStyle, boxStyle, true);
                     addElement(tooltip, jadeElement, elementTag);
@@ -96,12 +99,12 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
                     }
 
                     if (fluidAmount > 0) {
-                        if (JadeCommonHandler.forceTopStyle()) {
+                        if (forceTOPStyle) {
                             Component fluidComp = ignoreCapacity ? fluid.getDisplayName().copy().withStyle(defaultFormatting) :
                                     Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluidAmount, String.valueOf(fluidAmount).length() - 1), Formatter.formatNumber(max, String.valueOf(max).length() - 1)).withStyle(defaultFormatting);
                             IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluid));
                             tooltip.add(helper.progress((float) fluid.getAmount() / max, fluidComp, progressStyle,
-                                    JadeCommonHandler.getStyle(PluginHelper.getColorForFluid(fluid)), true));
+                                    new SpecialBoxStyle(ColorUtils.doubleDarker(PluginHelper.getColorForFluid(fluid))), true));
                         } else {
                             String current = IDisplayHelper.get().humanReadableNumber(fluid.getAmount(), "B", true);
                             String maxS = IDisplayHelper.get().humanReadableNumber(max, "B", true);

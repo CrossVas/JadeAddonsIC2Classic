@@ -1,28 +1,20 @@
 package dev.crossvas.jadexic2c.base;
 
-import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.CommonFluidBarElement;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.elements.SpecialBoxStyle;
-import dev.crossvas.jadexic2c.elements.SpecialProgressStyle;
 import dev.crossvas.jadexic2c.providers.*;
 import dev.crossvas.jadexic2c.providers.expansions.FluidExpansionInfo;
 import dev.crossvas.jadexic2c.providers.expansions.MemoryExpansionInfo;
 import dev.crossvas.jadexic2c.providers.expansions.StorageExpansionInfo;
 import dev.crossvas.jadexic2c.providers.expansions.UUMExpansionInfo;
 import dev.crossvas.jadexic2c.providers.transport.*;
-import ic2.core.utils.math.ColorUtils;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import snownee.jade.Jade;
-import snownee.jade.api.ui.BoxStyle;
-import snownee.jade.api.ui.IProgressStyle;
-import snownee.jade.impl.ui.ProgressStyle;
 
 import java.util.List;
 
@@ -70,6 +62,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(NuclearInfo.THIS);
         INFO_PROVIDERS.add(OceanGenInfo.THIS);
         INFO_PROVIDERS.add(OreScannerInfo.THIS);
+        INFO_PROVIDERS.add(PersonalInfo.THIS);
         INFO_PROVIDERS.add(PickupTubeInfo.THIS);
         INFO_PROVIDERS.add(PipePumpInfo.THIS);
         INFO_PROVIDERS.add(PlasmafierInfo.THIS);
@@ -125,17 +118,5 @@ public class JadeCommonHandler {
                 helper.add(new CommonFluidBarElement(fluid, fluidHandler.getTankCapacity(i), false));
             }
         }
-    }
-
-    public static boolean forceTopStyle() {
-        return Jade.CONFIG.get().getPlugin().get(JadeTags.TOP_STYLE);
-    }
-
-    public static BoxStyle getStyle(int color) {
-        return forceTopStyle() ? new SpecialBoxStyle(ColorUtils.doubleDarker(color)) : BoxStyle.DEFAULT;
-    }
-
-    public static IProgressStyle getProgressStyle(int color) {
-        return forceTopStyle() ? new SpecialProgressStyle().color(color, ColorUtils.darker(color)) : new ProgressStyle().color(color, ColorUtils.darker(color));
     }
 }
