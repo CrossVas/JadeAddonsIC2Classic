@@ -38,6 +38,9 @@ public class ElectricBlockInfo implements IInfoProvider {
                 defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(chunkLoader.getTier()));
                 defaultText(helper, "ic2.probe.eu.max_in.name", chunkLoader.getMaxInput());
                 defaultText(helper, "ic2.probe.eu.usage.name", ChunkloaderTileEntity.POWER_COST[chunkLoader.getRadius()] * (chunkLoader.doesChunkProcessing ? 2 : 1));
+                text(helper, Component.translatable("ic2.probe.chunkloader.radius", Component.literal(String.valueOf(chunkLoader.getRadius())).withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GOLD));
+                boolean chunkTicks = chunkLoader.doesChunkProcessing;
+                text(helper, Component.translatable("ic2.probe.chunkloader.ticks", (chunkTicks ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(chunkTicks)).withStyle(ChatFormatting.GOLD));
             }
             if (baseTile instanceof MonitorTileEntity monitor) {
                 if (monitor.isMaster()) {
