@@ -15,11 +15,15 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.fluids.FluidStack;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.*;
@@ -29,7 +33,7 @@ import java.util.Locale;
 
 import static dev.crossvas.jadexic2c.JadeTags.*;
 
-public class JadeTooltipRenderer implements IBlockComponentProvider {
+public class JadeTooltipRenderer implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
     public static final JadeTooltipRenderer INSTANCE = new JadeTooltipRenderer();
 
@@ -153,5 +157,12 @@ public class JadeTooltipRenderer implements IBlockComponentProvider {
     @Override
     public ResourceLocation getUid() {
         return JadeTags.INFO_RENDERER;
+    }
+
+    @Override
+    public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
+        JadeHelper helper = new JadeHelper();
+        JadeCommonHandler.addInfo(helper, blockEntity, serverPlayer);
+        helper.transferData(compoundTag);
     }
 }

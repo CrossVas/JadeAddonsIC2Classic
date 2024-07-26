@@ -1,6 +1,5 @@
 package dev.crossvas.jadexic2c;
 
-import dev.crossvas.jadexic2c.base.JadeBlockEntityDataProvider;
 import dev.crossvas.jadexic2c.base.JadeTooltipRenderer;
 import dev.crossvas.jadexic2c.base.removals.JadeTankInfoRenderer;
 import dev.crossvas.jadexic2c.base.removals.ModNameRender;
@@ -81,7 +80,7 @@ public class JadePluginHandler implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(new BarrelInfo.BarrelIconProvider(), BarrelTileEntity.class);
-        registration.registerBlockDataProvider(JadeBlockEntityDataProvider.INSTANCE, BlockEntity.class);
+        registration.registerBlockDataProvider(JadeTooltipRenderer.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(JadeTankInfoRenderer.INSTANCE, BlockEntity.class);
         registration.registerBlockDataProvider(CropInfo.CropIcon.THIS, CropTileEntity.class);
     }
