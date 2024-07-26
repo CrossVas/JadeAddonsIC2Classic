@@ -2,6 +2,8 @@ package dev.crossvas.jadexic2c.base.removals;
 
 import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.JadeTags;
+import ic2.core.inventory.filter.SpecialFilters;
+import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,9 +18,11 @@ public class JadeTankInfoRenderer implements IBlockComponentProvider, IServerDat
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (blockAccessor.getServerData().contains("TankRemovals")) {
-            iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE);
-            iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE_DETAILED);
+        if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
+            if (blockAccessor.getServerData().contains("TankRemovals")) {
+                iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE);
+                iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE_DETAILED);
+            }
         }
     }
 
