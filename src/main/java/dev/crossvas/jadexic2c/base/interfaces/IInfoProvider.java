@@ -30,7 +30,7 @@ public interface IInfoProvider {
     }
 
     default boolean canHandle(Player player) {
-        return StackUtil.hasHotbarItems(player, getFilter());
+        return StackUtil.hasHotbarItems(player, getFilter()) || player.isCreative();
     }
 
     default void addAveragesFull(IJadeHelper helper, EnergyContainer container) {
