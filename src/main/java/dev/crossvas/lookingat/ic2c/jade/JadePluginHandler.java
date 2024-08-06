@@ -18,7 +18,6 @@ import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Tiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -45,8 +44,6 @@ public class JadePluginHandler implements IWailaPlugin {
         registration.registerBlockComponent(CableIcon.THIS, CableBlock.class);
         registration.registerBlockComponent(TexturedBlockInfo.INSTANCE, Block.class);
         registration.registerBlockIcon(TexturedBlockInfo.INSTANCE, Block.class);
-
-        registration.registerEntityComponent(new HiveProvider(), LivingEntity.class);
 
         // multiblock handler
         registration.addRayTraceCallback((hitResult, accessor, originalAccessor) -> {
