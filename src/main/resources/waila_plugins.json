@@ -1,0 +1,7 @@
+{
+  "ic2:plugin": {
+    "initializer": "dev.crossvas.lookingat.ic2c.waila.WailaPluginHandler",
+    "side": "*",
+    "required": ["ic2"]
+  }
+}
