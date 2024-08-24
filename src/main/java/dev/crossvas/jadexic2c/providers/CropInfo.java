@@ -8,9 +8,7 @@ import ic2.api.crops.ICropRegistry;
 import ic2.api.crops.ICropTile;
 import ic2.api.crops.ISeedCrop;
 import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.registries.IC2Items;
-import ic2.core.utils.helpers.StackUtil;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -147,10 +145,6 @@ public class CropInfo implements IInfoProvider {
 
         @Override
         public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-            if (!StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.CROP_SCANNER)) {
-                return;
-            }
-
             CompoundTag tag = blockAccessor.getServerData().getCompound("CropInfo");
             if (blockAccessor.getBlockEntity() instanceof ICropTile tile) {
                 int maxStage = tag.getInt("growthSteps");

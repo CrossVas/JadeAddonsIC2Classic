@@ -43,7 +43,7 @@ public class NuclearInfo implements IInfoProvider {
                 JadeCommonHandler.addTankInfo(helper, blockEntity);
             }
 
-            if (StackUtil.hasHotbarItems(player, SpecialFilters.THERMOMETER)) {
+            if (StackUtil.hasHotbarItems(player, SpecialFilters.THERMOMETER) || player.isCreative()) {
                 bar(helper, reactor.getHeat(), reactor.getMaxHeat(), Component.translatable("ic2.probe.reactor.heat.name",
                         Formatter.formatNumber(reactor.getHeat(), 4), Formatter.formatNumber(reactor.getMaxHeat(), 2)), getReactorColor(reactor.getHeat(), reactor.getMaxHeat()));
             }

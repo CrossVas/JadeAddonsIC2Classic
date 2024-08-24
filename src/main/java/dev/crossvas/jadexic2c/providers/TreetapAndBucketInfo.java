@@ -22,16 +22,14 @@ public class TreetapAndBucketInfo implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (!StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER)) {
-            return;
-        }
-
-        if (blockAccessor.getBlock() instanceof TreeTapAndBucketBlock) {
-            BlockState state = blockAccessor.getBlockState();
-            int current = state.getValue(TreeTapAndBucketBlock.FILL_STAGE);
-            if (current > 0) {
-                iTooltip.add(iTooltip.getElementHelper().progress((float) current / 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE),
-                        new SpecialProgressStyle().color(-10996205, ColorUtils.darker(-10996205)), new SpecialBoxStyle(ColorUtils.doubleDarker(-10996205)), true));
+        if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER) || blockAccessor.getPlayer().isCreative()) {
+            if (blockAccessor.getBlock() instanceof TreeTapAndBucketBlock) {
+                BlockState state = blockAccessor.getBlockState();
+                int current = state.getValue(TreeTapAndBucketBlock.FILL_STAGE);
+                if (current > 0) {
+                    iTooltip.add(iTooltip.getElementHelper().progress((float) current / 5, Component.translatable("ic2.probe.progress.full.name", current, 5).withStyle(ChatFormatting.WHITE),
+                            new SpecialProgressStyle().color(-10996205, ColorUtils.darker(-10996205)), new SpecialBoxStyle(ColorUtils.doubleDarker(-10996205)), true));
+                }
             }
         }
     }
