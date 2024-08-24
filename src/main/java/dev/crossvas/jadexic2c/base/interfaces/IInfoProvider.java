@@ -8,6 +8,7 @@ import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -49,12 +50,12 @@ public interface IInfoProvider {
     default void addAveragesIn(IJadeHelper helper, EnergyContainer container, int padding) {
         int averageIn = container.getAverageIn();
         int packetsIn = container.getPacketsIn();
+        MutableComponent full = getFullStatus(averageIn, packetsIn);
         if (averageIn > 0) {
             paddingY(helper, padding);
             text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
-            if (packetsIn > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA));
-            }
+            if (packetsIn <= 0) packetsIn = 1;
+            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA)));
         }
     }
 
@@ -69,20 +70,22 @@ public interface IInfoProvider {
     default void addAveragesOut(IJadeHelper helper, EnergyContainer container, int padding) {
         int averageOut = container.getAverageOut();
         int packetsOut = container.getPacketsOut();
+        MutableComponent full = getFullStatus(averageOut, packetsOut);
         if (averageOut > 0) {
             paddingY(helper, padding);
             text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-            if (packetsOut > 0) {
-                text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA));
-            }
+            if (packetsOut <= 0) packetsOut = 1;
+            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA)));
         }
     }
 
     default void addCableAverages(IJadeHelper helper, int energyFlow, int packetFlow) {
         if (energyFlow > 0) {
+            MutableComponent full = getFullStatus(energyFlow, packetFlow);
             paddingY(helper, 3);
             text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(energyFlow)).withStyle(ChatFormatting.AQUA));
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)).withStyle(ChatFormatting.AQUA));
+            if (packetFlow <= 0) packetFlow = 1;
+            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)).withStyle(ChatFormatting.AQUA)));
         }
     }
 
@@ -225,5 +228,9 @@ public interface IInfoProvider {
 
     default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component) {
         addGrid(helper, stacks, component, 6);
+    }
+
+    default MutableComponent getFullStatus(int energy, int packet) {
+        return (energy > 0 && packet <= 0) ? Component.literal("~").withStyle(ChatFormatting.GREEN) : Component.empty();
     }
 }

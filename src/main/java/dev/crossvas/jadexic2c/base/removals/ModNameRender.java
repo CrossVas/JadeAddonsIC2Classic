@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c.base.removals;
 
-import dev.crossvas.jadexic2c.JadeXIC2C;
+import dev.crossvas.jadexic2c.JadeIC2Classic;
 import ic2.core.block.base.IToolProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +10,8 @@ import snownee.jade.util.ModIdentification;
 
 public class ModNameRender {
 
-    public static final ResourceLocation REMOVER = JadeXIC2C.rl("remove_modid");
-    public static final ResourceLocation RELOCATE = JadeXIC2C.rl("relocate_modid");
+    public static final ResourceLocation REMOVER = JadeIC2Classic.rl("remove_modid");
+    public static final ResourceLocation RELOCATE = JadeIC2Classic.rl("relocate_modid");
 
     public static final ModNameRelocator MOD_NAME_REMOVER = new ModNameRelocator(REMOVER, TooltipPosition.TAIL);
     public static final ModNameRelocator MOD_NAME_RELOCATOR = new ModNameRelocator(RELOCATE, TooltipPosition.HEAD);

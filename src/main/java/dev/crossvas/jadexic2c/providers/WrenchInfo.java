@@ -40,7 +40,7 @@ public class WrenchInfo implements IBlockComponentProvider {
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
             if (tile instanceof IStructureListener) {
-                CompoundTag structureTag = blockAccessor.getServerData().getCompound("structureData");
+                CompoundTag structureTag = blockAccessor.getServerData().getCompound(JadeTags.TAG_STRUCTURE);
                 showInfo = !structureTag.getBoolean("isStructure") && actualRate > 0;
             } else {
                 showInfo = actualRate > 0;

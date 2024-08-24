@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import snownee.jade.api.*;
 
-@WailaPlugin(JadeXIC2C.ID_IC2)
+@WailaPlugin(JadeIC2Classic.ID_IC2)
 public class JadePluginHandler implements IWailaPlugin {
 
     /**
@@ -55,7 +55,7 @@ public class JadePluginHandler implements IWailaPlugin {
                     if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
                         CompoundTag structureTag = new CompoundTag();
                         structureTag.putBoolean("isStructure", true);
-                        blockAccessor.getServerData().put("structureData", structureTag);
+                        blockAccessor.getServerData().put(JadeTags.TAG_STRUCTURE, structureTag);
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .hit(blockHitResult.withPosition(master.getBlockPos()))
