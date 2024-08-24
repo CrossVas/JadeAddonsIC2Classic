@@ -1,22 +1,17 @@
 buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven {
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
-            content { includeGroup "org.spongepowered" }
-        }
-        mavenCentral()
-    }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
 
 version = project.mod_version
 group = 'dev.crossvas.mods'
@@ -105,7 +100,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3965693")
     implementation fg.deobf("mekanism:Mekanism:1.19.2-10.3.8.477")
 
-    implementation fg.deobf("curse.maven:ic2-classic-242942:5555152")
+    implementation fg.deobf("curse.maven:ic2-classic-242942:5612597")
     implementation fg.deobf("curse.maven:jade-324717:4914105")
     runtimeOnly fg.deobf("curse.maven:jade-addons-583345:4850581")
 
@@ -153,7 +148,8 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
+    archiveClassifier = "sources"
+    archiveExtension = "zip"
     from sourceSets.main.allSource
 }
 
