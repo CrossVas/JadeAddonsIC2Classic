@@ -54,7 +54,6 @@ public class JadePluginHandler implements IWailaPlugin {
                 if (listener instanceof BlockEntity master) {
                     if (!(blockAccessor.getBlockEntity() instanceof BaseValveTileEntity)) { // we handle each valve individually for each multiblock
                         CompoundTag structureTag = new CompoundTag();
-                        structureTag.putBoolean("isStructure", true);
                         blockAccessor.getServerData().put(JadeTags.TAG_STRUCTURE, structureTag);
                         return registration.blockAccessor()
                                 .from(blockAccessor)

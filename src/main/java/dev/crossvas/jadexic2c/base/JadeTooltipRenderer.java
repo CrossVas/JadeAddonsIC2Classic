@@ -97,11 +97,6 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IServerData
                     int fluidAmount = fluid.getAmount();
                     int max = fluidElement.getMax();
                     boolean ignoreCapacity = fluidElement.ignoreCapacity();
-                    if (ignoreCapacity) {
-                        fluidAmount = 1;
-                        max = 1;
-                    }
-
                     if (fluidAmount > 0) {
                         if (forceTOPStyle) {
                             Component fluidComp = ignoreCapacity ? fluid.getDisplayName().copy().withStyle(defaultFormatting) :

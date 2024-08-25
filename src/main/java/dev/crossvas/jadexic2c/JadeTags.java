@@ -6,6 +6,7 @@ public class JadeTags {
 
     public static final String TAG_DATA = "Data";
     public static final String TAG_STRUCTURE = "Structure";
+    public static final String TAG_TANKS = "TankRemoval";
 
     // info providers
     public static final ResourceLocation INFO_RENDERER = JadeIC2Classic.rl("renderer");

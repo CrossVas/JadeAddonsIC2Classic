@@ -19,7 +19,7 @@ public class JadeTankInfoRenderer implements IBlockComponentProvider, IServerDat
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (StackUtil.hasHotbarItems(blockAccessor.getPlayer(), SpecialFilters.EU_READER) || blockAccessor.getPlayer().isCreative()) {
-            if (blockAccessor.getServerData().contains("TankRemovals")) {
+            if (blockAccessor.getServerData().contains(JadeTags.TAG_TANKS)) {
                 iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE);
                 iTooltip.remove(Identifiers.UNIVERSAL_FLUID_STORAGE_DETAILED);
             }
@@ -30,7 +30,7 @@ public class JadeTankInfoRenderer implements IBlockComponentProvider, IServerDat
     public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level, BlockEntity blockEntity, boolean b) {
         if (JadeCommonHandler.TANK_REMOVAL.contains(blockEntity)) {
             CompoundTag tag = new CompoundTag();
-            compoundTag.put("TankRemovals", tag);
+            compoundTag.put(JadeTags.TAG_TANKS, tag);
         }
     }
 

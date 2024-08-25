@@ -7,7 +7,6 @@ import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.platform.registries.IC2Items;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -40,8 +39,8 @@ public class WrenchInfo implements IBlockComponentProvider {
             // drop rate with regular wrench
             double actualRate = ((IWrenchTool) IC2Items.WRENCH.asItem()).getActualLoss(IC2Items.WRENCH.getDefaultInstance(), tile.getDropRate(player));
             if (tile instanceof IStructureListener) {
-                CompoundTag structureTag = blockAccessor.getServerData().getCompound(JadeTags.TAG_STRUCTURE);
-                showInfo = !structureTag.getBoolean("isStructure") && actualRate > 0;
+                boolean structureTag = blockAccessor.getServerData().contains(JadeTags.TAG_STRUCTURE);
+                showInfo = !structureTag && actualRate > 0;
             } else {
                 showInfo = actualRate > 0;
             }

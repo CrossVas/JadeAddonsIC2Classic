@@ -23,12 +23,13 @@ public class CommonFluidBarElement extends CommonBarElement {
         return this.FLUID;
     }
 
-    public int getCapacity() {
-        return this.CAPACITY;
-    }
-
     public boolean ignoreCapacity() {
         return this.IGNORE_CAPACITY;
+    }
+
+    @Override
+    public int getMax() {
+        return this.ignoreCapacity() ? this.getFluid().getAmount() : super.getMax();
     }
 
     @Override
