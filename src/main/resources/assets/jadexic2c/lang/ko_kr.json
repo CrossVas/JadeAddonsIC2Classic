@@ -43,5 +43,6 @@
   "ic2.probe.crop.seed_drop": "씨앗 모드: %s",
   "ic2.probe.chunkloader.radius": "반지름: %s 청크",
   "ic2.probe.chunkloader.ticks": "청크 틱: %s",
-  "ic2.probe.personal.owner": "소유자: %s"
+  "ic2.probe.personal.owner": "소유자: %s",
+  "ic2.probe.machine.xp": "저장: %s XP"
 }

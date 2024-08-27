@@ -43,5 +43,6 @@
   "ic2.probe.crop.seed_drop": "Режим семян: %s",
   "ic2.probe.chunkloader.radius": "Радиус: %s чанк(а)",
   "ic2.probe.chunkloader.ticks": "Тики чанков: %s",
-  "ic2.probe.personal.owner": "Владелец: %s"
+  "ic2.probe.personal.owner": "Владелец: %s",
+  "ic2.probe.machine.xp": "Хранится: %s опыт"
 }

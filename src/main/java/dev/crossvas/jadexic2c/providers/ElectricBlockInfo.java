@@ -82,7 +82,7 @@ public class ElectricBlockInfo implements IInfoProvider {
                 if (storedXP <= 0) {
                     text(helper, Component.translatable("ic2.probe.enchanter.missing").withStyle(ChatFormatting.RED));
                 } else {
-                    bar(helper, storedXP, 1000, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(storedXP)).append(Component.translatable("ic2.probe.xp.suffix.name")), ColorUtils.GREEN);
+                    bar(helper, storedXP, 1000, Component.translatable("ic2.probe.machine.xp", storedXP), ColorUtils.GREEN);
                 }
                 if (progress > 0) {
                     bar(helper, progress, maxProgress, Component.translatable("ic2.probe.progress.full.name", progress, maxProgress).append("t"), -16733185);

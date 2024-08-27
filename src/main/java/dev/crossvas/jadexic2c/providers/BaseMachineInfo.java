@@ -41,7 +41,7 @@ public class BaseMachineInfo implements IInfoProvider {
             if (baseMachine instanceof IXPMachine xpMachine) {
                 int xp = xpMachine.getCreatedXP(false);
                 if (xp > 0) {
-                    text(helper, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(xp)).append(Component.translatable("ic2.probe.xp.suffix.name")).withStyle(ChatFormatting.GREEN));
+                    text(helper, Component.translatable("ic2.probe.machine.xp", xp).withStyle(ChatFormatting.GREEN));
 
                 }
             }

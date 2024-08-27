@@ -43,5 +43,6 @@
   "ic2.probe.crop.seed_drop": "Seed Mode: %s",
   "ic2.probe.chunkloader.radius": "Radius: %s chunk(s)",
   "ic2.probe.chunkloader.ticks": "Chunk Ticks: %s",
-  "ic2.probe.personal.owner": "Owner: %s"
+  "ic2.probe.personal.owner": "Owner: %s",
+  "ic2.probe.machine.xp": "Stored: %s XP"
 }
