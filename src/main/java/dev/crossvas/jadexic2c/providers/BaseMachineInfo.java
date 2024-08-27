@@ -4,6 +4,7 @@ import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
+import ic2.core.block.base.features.IXPMachine;
 import ic2.core.block.base.tiles.impls.machine.single.BaseAdvMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
 import ic2.core.block.machines.tiles.lv.RareEarthExtractorTileEntity;
@@ -12,6 +13,8 @@ import ic2.core.block.machines.tiles.mv.RefineryTileEntity;
 import ic2.core.block.machines.tiles.mv.SlowGrinderTileEntity;
 import ic2.core.block.machines.tiles.mv.VacuumCannerTileEntity;
 import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.math.ColorUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -33,6 +36,14 @@ public class BaseMachineInfo implements IInfoProvider {
             }
             if (baseMachine instanceof RefineryTileEntity refinery) {
                 JadeCommonHandler.addTankInfo(helper, refinery);
+            }
+
+            if (baseMachine instanceof IXPMachine xpMachine) {
+                int xp = xpMachine.getCreatedXP(false);
+                if (xp > 0) {
+                    text(helper, Component.translatable("ic2.probe.xp.prefix.name").append(String.valueOf(xp)).append(Component.translatable("ic2.probe.xp.suffix.name")).withStyle(ChatFormatting.GREEN));
+
+                }
             }
 
             int speed;
