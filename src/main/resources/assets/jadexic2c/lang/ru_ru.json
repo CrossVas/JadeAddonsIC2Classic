@@ -44,5 +44,5 @@
   "ic2.probe.chunkloader.radius": "Радиус: %s чанк(а)",
   "ic2.probe.chunkloader.ticks": "Тики чанков: %s",
   "ic2.probe.personal.owner": "Владелец: %s",
-  "ic2.probe.machine.xp": "Хранится: %s опыт"
+  "ic2.probe.machine.xp": "Хранится: %s опыта"
 }
