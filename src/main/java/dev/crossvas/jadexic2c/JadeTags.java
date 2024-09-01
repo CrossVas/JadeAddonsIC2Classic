@@ -1,6 +1,6 @@
 package dev.crossvas.jadexic2c;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 public class JadeTags {
 

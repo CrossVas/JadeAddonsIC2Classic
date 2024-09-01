@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.base.interfaces;
 
-import ic2.core.util.math.Vec2i;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.phys.Vec2;
 
 public interface IJadeElementBuilder {
 
@@ -11,9 +11,9 @@ public interface IJadeElementBuilder {
      * */
     IJadeElementBuilder align(String side);
 
-    IJadeElementBuilder translate(Vec2i translation);
+    IJadeElementBuilder translate(Vec2 translation);
 
-    NBTTagCompound save(NBTTagCompound tag);
+    CompoundTag save(CompoundTag tag);
 
     String getTagId();
 }

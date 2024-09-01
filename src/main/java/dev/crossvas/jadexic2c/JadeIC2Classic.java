@@ -1,9 +1,10 @@
 package dev.crossvas.jadexic2c;
 
-import net.minecraft.resources.ResourceLocation;
+import dev.crossvas.ic2classicjade.Tags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod("jadexic2c")
+@Mod(modid = Tags.MOD_ID, version = Tags.VERSION, name = Tags.MOD_NAME, acceptedMinecraftVersions = "[1.12.2]")
 public class JadeIC2Classic {
 
     public static final String ID_IC2 = "ic2";
