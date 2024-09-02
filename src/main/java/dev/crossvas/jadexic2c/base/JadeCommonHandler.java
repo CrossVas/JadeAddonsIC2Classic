@@ -2,6 +2,8 @@ package dev.crossvas.jadexic2c.base;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.providers.EUStorageInfo;
+import dev.crossvas.jadexic2c.providers.WrenchableInfo;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,6 +17,12 @@ import java.util.List;
 public class JadeCommonHandler {
 
     public static List<IInfoProvider> INFO_PROVIDERS = new ObjectArrayList<>();
+
+    static {
+        INFO_PROVIDERS.add(EUStorageInfo.THIS);
+
+        INFO_PROVIDERS.add(WrenchableInfo.THIS);
+    }
 
     public static void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity != null) {
