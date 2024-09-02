@@ -2,6 +2,7 @@ package dev.crossvas.jadexic2c.base;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.providers.AdjustableTransformerInfo;
 import dev.crossvas.jadexic2c.providers.BaseEnergyStorageInfo;
 import dev.crossvas.jadexic2c.providers.EUStorageInfo;
 import dev.crossvas.jadexic2c.providers.WrenchableInfo;
@@ -22,6 +23,7 @@ public class JadeCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(BaseEnergyStorageInfo.THIS);
+        INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }

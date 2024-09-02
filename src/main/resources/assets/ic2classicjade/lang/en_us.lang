@@ -42,6 +42,7 @@ ic2.probe.machine.xp=Stored: %s XP
 
 tooltip.item.ic2.eu_reader.cable_flow_out=Energy Out: %sEU/t
 tooltip.item.ic2.eu_reader.cable_flow_in=Energy In: %sEU/t
+tooltip.item.ic2.eu_reader.cable_flow=Energy Flow: %sEU/t
 
 ic2.probe.sneak.info=Sneak for energy stats...
 ic2.probe.energy.stats.info=-== Energy Stats ==-
