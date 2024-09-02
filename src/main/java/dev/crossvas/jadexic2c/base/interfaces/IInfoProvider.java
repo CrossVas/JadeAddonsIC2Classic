@@ -8,6 +8,7 @@ import ic2.core.inventory.filters.CommonFilters;
 import ic2.core.inventory.filters.IFilter;
 import ic2.core.util.misc.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -19,7 +20,12 @@ public interface IInfoProvider {
     IFilter READER = CommonFilters.euReaderActive;
     IFilter THERMOMETER = CommonFilters.thermometerActive;
     IFilter CROP_ANALYZER = CommonFilters.cropAnalyzerActive;
-    IFilter ALWAYS = CommonFilters.Anything;
+    IFilter ALWAYS = new IFilter() {
+        @Override
+        public boolean matches(ItemStack itemStack) {
+            return true;
+        }
+    };
 
     default IFilter getFilter() {
         return READER;
