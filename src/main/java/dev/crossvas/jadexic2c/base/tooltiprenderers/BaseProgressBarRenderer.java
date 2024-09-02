@@ -48,13 +48,19 @@ public class BaseProgressBarRenderer implements IWailaTooltipRenderer {
             this.subTooltips.put(strings, WailaTickHandler.instance().tooltip);
         }
         int width;
+        int height;
+        if ("1".equals(strings[4])) {
+            height = 10;
+        } else {
+            height = 14;
+        }
         try {
             width = FIELD_WIDTH.getInt(tooltip);
         } catch (IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();
             return new Dimension();
         }
-        return new Dimension(width, 14);
+        return new Dimension(width, height);
     }
 
     @Override

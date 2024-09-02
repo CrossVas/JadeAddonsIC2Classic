@@ -15,6 +15,7 @@ public class Formatter {
     public static final DecimalFormat SOLAR_TURBINE;
     public static final DecimalFormat NATURAL;
     public static final DecimalFormat DECIMAL;
+    public static final DecimalFormat EU_FORMAT;
 
     public static String formatNumber(double number, int digits) {
         return formatNumber(number, digits, false);
@@ -97,5 +98,6 @@ public class Formatter {
         SOLAR_TURBINE = new DecimalFormat("#00.00", new DecimalFormatSymbols(Locale.US));
         NATURAL = new DecimalFormat("###,##0", new DecimalFormatSymbols(Locale.US));
         DECIMAL = new DecimalFormat(".#########", new DecimalFormatSymbols(Locale.US));
+        EU_FORMAT = new DecimalFormat("###,###", new DecimalFormatSymbols(Locale.US));
     }
 }
