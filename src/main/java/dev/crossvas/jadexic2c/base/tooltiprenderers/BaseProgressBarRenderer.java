@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c.base.tooltiprenderers;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.utils.ColorUtils;
 import dev.crossvas.jadexic2c.utils.GuiHelper;
 import mcp.mobius.waila.api.IWailaCommonAccessor;
@@ -89,7 +90,7 @@ public class BaseProgressBarRenderer implements IWailaTooltipRenderer {
             int color = Integer.parseInt(strings[2]);
             String text = strings[3];
             boolean isStringOnly = "1".equals(strings[4]);
-            String fluidIcon = strings[6];
+            String fluidIcon = JadeCommonHandler.MAPPED_FLUIDS.getOrDefault(strings[6], "0");
             FontRenderer font = Minecraft.getMinecraft().fontRenderer;
             if (!isStringOnly) {
                 GuiHelper.THIS.render(current, max, x, y, width, height + 1, color, fluidIcon);
