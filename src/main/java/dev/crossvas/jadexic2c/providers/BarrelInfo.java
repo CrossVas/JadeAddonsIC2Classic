@@ -59,7 +59,7 @@ public class BarrelInfo implements IInfoProvider {
                     textCentered(helper, translatable("ic2.probe.barrel.status.storage.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
                     bar(helper, wheatAmount, 64, translatable("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
                     bar(helper, hopsAmount, 64, translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
-                    JadeCommonHandler.loadTankInfo(helper, waterFluid, 32);
+                    bar(helper, waterAmount, 32, translatable("probe.info.fluid", waterFluid.getLocalizedName(), waterAmount, 32 + "k"), -1, waterFluid.getFluid().getName());
 
                     textCentered(helper, translatable("ic2.probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
                     text(helper, translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));

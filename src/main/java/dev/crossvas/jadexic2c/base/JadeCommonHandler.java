@@ -28,6 +28,8 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(BarrelInfo.THIS);
         INFO_PROVIDERS.add(BaseGeneratorInfo.THIS);
         INFO_PROVIDERS.add(BaseMachineInfo.THIS);
+        INFO_PROVIDERS.add(CableInfo.THIS);
+        INFO_PROVIDERS.add(ChargePadInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }
@@ -43,7 +45,6 @@ public class JadeCommonHandler {
     }
 
     public static void addTankInfo(IJadeHelper helper, TileEntity blockEntity) {
-//        TANK_REMOVAL.add(blockEntity);
         if (blockEntity instanceof IFluidHandler) {
             loadTankData(helper, (IFluidHandler) blockEntity);
         } else {

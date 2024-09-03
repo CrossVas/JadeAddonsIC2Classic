@@ -16,6 +16,7 @@ public class Formatter {
     public static final DecimalFormat NATURAL;
     public static final DecimalFormat DECIMAL;
     public static final DecimalFormat EU_FORMAT;
+    public static final DecimalFormat CABLE_LOSS_FORMAT;
 
     public static String formatNumber(double number, int digits) {
         return formatNumber(number, digits, false);
@@ -99,5 +100,6 @@ public class Formatter {
         NATURAL = new DecimalFormat("###,##0", new DecimalFormatSymbols(Locale.US));
         DECIMAL = new DecimalFormat(".#########", new DecimalFormatSymbols(Locale.US));
         EU_FORMAT = new DecimalFormat("###,###", new DecimalFormatSymbols(Locale.US));
+        CABLE_LOSS_FORMAT = new DecimalFormat("0.####", new DecimalFormatSymbols(Locale.US));
     }
 }

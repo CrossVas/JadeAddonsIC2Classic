@@ -10,7 +10,6 @@ import ic2.core.block.machine.med.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 
 import java.text.DecimalFormat;
 
@@ -22,9 +21,9 @@ public class BaseMachineInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityElecMachine) {
             TileEntityElecMachine machine = (TileEntityElecMachine) blockEntity;
-            ITextComponent tier = new TextComponentString("");
-            ITextComponent maxIn = new TextComponentString("");
-            ITextComponent usage = new TextComponentString("");
+            ITextComponent tier = null;
+            ITextComponent maxIn = null;
+            ITextComponent usage = null;
             float progress = 0;
             float maxProgress = 0;
             float progressPerTick = 0;
@@ -73,11 +72,11 @@ public class BaseMachineInfo implements IInfoProvider {
                 scaledProgress = (double) speed / maxSpeed;
             }
             // tier
-            text(helper, tier);
+            if (tier != null) text(helper, tier);
             // maxIn
-            text(helper, maxIn);
+            if (maxIn != null) text(helper, maxIn);
             // usage
-            text(helper, usage);
+            if (usage != null) text(helper, usage);
             if (speed > 0) {
                 bar(helper, (int) speed, (int) maxSpeed, translatable(name, new DecimalFormat().format(scaledProgress * 100.0)), ColorUtils.ORANGE);
             }
