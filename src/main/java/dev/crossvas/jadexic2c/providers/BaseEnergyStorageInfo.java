@@ -18,9 +18,9 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock electricBlock = (TileEntityElectricBlock) blockEntity;
-            text(helper, translatable("tileInfo.euTier.name", getDisplayTier(electricBlock.tier)));
-            text(helper, translatable("itemInfo.electricMaxIn.name", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
-            text(helper, translatable("container.energyStorageOutput.name", electricBlock.getMaxSendingEnergy()));
+            text(helper, translatable("probe.energy.tier", getDisplayTier(electricBlock.tier)));
+            text(helper, translatable("probe.energy.input.max", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
+            text(helper, translatable("probe.energy.output.max", electricBlock.getMaxSendingEnergy()));
             EnergyContainer container = EnergyContainer.getContainer(electricBlock);
             if (player.isSneaking()) {
                 text(helper, translatable("ic2.probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);

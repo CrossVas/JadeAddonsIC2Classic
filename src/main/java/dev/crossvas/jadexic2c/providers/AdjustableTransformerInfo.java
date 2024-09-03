@@ -20,9 +20,9 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             TileEntityAdjustableTransformer transformer = (TileEntityAdjustableTransformer) blockEntity;
             int energyPacket = transformer.energyPacket;
             int packets = transformer.packetCount;
-            text(helper, translatable("itemInfo.electricMaxIn.name", (int) EnergyNet.instance.getPowerFromTier(transformer.sinkTier)));
-            text(helper, translatable("container.energyStorageOutput.name", energyPacket));
-            text(helper, translatable("container.packetCountPerTick.name", packets));
+            text(helper, translatable("probe.energy.tier", (int) EnergyNet.instance.getPowerFromTier(transformer.sinkTier)));
+            text(helper, translatable("probe.energy.output.max", energyPacket));
+            text(helper, translatable("probe.packet.tick", packets));
             EnergyContainer container = EnergyContainer.getContainer(transformer);
             if (player.isSneaking()) {
                 text(helper, translatable("ic2.probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);

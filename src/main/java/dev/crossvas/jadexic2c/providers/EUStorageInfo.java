@@ -26,13 +26,13 @@ public class EUStorageInfo implements IInfoProvider {
         if (blockEntity instanceof TileEntityBlock) {
             TileEntityBlock machine = (TileEntityBlock) blockEntity;
             if (machine instanceof TileEntityCreativeEnergyStorage) {
-                bar(helper, 1, 1, translatable("ic2.probe.eu.storage.name", "Infinite"), ColorUtils.RED);
+                bar(helper, 1, 1, translatable("probe.energy.storage.name", "Infinite"), ColorUtils.RED);
             } else if (machine instanceof IEUStorage && !(machine instanceof TileEntityElectrolyzer || machine instanceof TileEntityChargedElectrolyzer || machine instanceof TileEntityMassFabricator)) {
                 IEUStorage storage = (IEUStorage) blockEntity;
-                bar(helper, storage.getStoredEU(), storage.getMaxEU(), translatable("ic2.probe.eu.storage.full.name", Formatter.formatInt(storage.getStoredEU(), 4), Formatter.formatInt(storage.getMaxEU(), 4)), ColorUtils.RED);
+                bar(helper, storage.getStoredEU(), storage.getMaxEU(), translatable("probe.energy.storage.full.name", Formatter.formatInt(storage.getStoredEU(), 4), Formatter.formatInt(storage.getMaxEU(), 4)), ColorUtils.RED);
             } else if (machine instanceof TileEntityTeleporter) {
                 TileEntityTeleporter tp = (TileEntityTeleporter) machine;
-                bar(helper, tp.getAvailableEnergy(), tp.getAvailableEnergy(), translatable("ic2.probe.eu.storage.name", Formatter.formatInt(tp.getAvailableEnergy(), 4)), ColorUtils.RED);
+                bar(helper, tp.getAvailableEnergy(), tp.getAvailableEnergy(), translatable("probe.energy.storage.name", Formatter.formatInt(tp.getAvailableEnergy(), 4)), ColorUtils.RED);
             }
             if (machine instanceof TileEntityMachineTank || machine instanceof TileEntityWoodGasser) {
                 JadeCommonHandler.addTankInfo(helper, machine);

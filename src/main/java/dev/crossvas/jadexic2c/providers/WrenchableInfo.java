@@ -23,9 +23,9 @@ public class WrenchableInfo implements IInfoProvider {
             int actualRate = (int) (wrenchableTile.getWrenchDropRate() * 100);
             ItemStack handItem = player.getHeldItemMainhand();
             if (handItem.getItem() instanceof IWrench) {
-                text(helper, translatable("ic2.probe.wrenchable.drop_chance.info", new TextComponentString(actualRate + "%").setStyle(new Style().setColor(TextFormatting.AQUA))).setStyle(new Style().setColor(TextFormatting.GRAY)));
+                text(helper, translatable("probe.wrenchable.drop_chance.info", new TextComponentString(actualRate + "%").setStyle(new Style().setColor(TextFormatting.AQUA))).setStyle(new Style().setColor(TextFormatting.GRAY)));
             } else {
-                text(helper, translatable("ic2.probe.wrenchable.info").setStyle(new Style().setColor(TextFormatting.GOLD)));
+                text(helper, translatable("probe.wrenchable.info").setStyle(new Style().setColor(TextFormatting.GOLD)));
             }
         }
     }

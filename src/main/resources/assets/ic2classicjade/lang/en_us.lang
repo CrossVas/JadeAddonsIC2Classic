@@ -1,6 +1,5 @@
 #ic2.probe.wrenchable.drop_chance.info=Drop Chance
-ic2.probe.wrenchable.drop_chance.info=%s Drop Chance
-ic2.probe.wrenchable.info=Wrenchable Block
+
 ic2.probe.wrenchable.optional.info= (optional)
 ic2.tube.round_robin.info=Round Robin Rules
 ic2.tube.directional.info=Direction: %s
@@ -11,9 +10,8 @@ ic2.tube.teleport.info=Network ID: %s
 ic2.tube.pickup.info=Large Radius: %s
 ic2.probe.pipe.transported=Fluids:
 
-ic2.barrel.info.fluid= %s: %s/%s mB
-ic2.probe.eu.storage.full.name=Energy: %s/%s EU
-ic2.probe.eu.storage.name=Energy: %s EU
+
+
 ic2.progress.material.name=Material: %s/%s
 ic2.probe.transformer.inverted=Inverted: %s
 ic2.probe.uum.providing.name=Providing:
@@ -38,7 +36,6 @@ ic2.probe.crop.seed_drop=Seed Mode: %s
 ic2.probe.chunkloader.radius=Radius: %s chunk(s)
 ic2.probe.chunkloader.ticks=Chunk Ticks: %s
 ic2.probe.personal.owner=Owner: %s
-ic2.probe.machine.xp=Stored: %s XP
 
 tooltip.item.ic2.eu_reader.cable_flow_out=Energy Out: %sEU/t
 tooltip.item.ic2.eu_reader.cable_flow_in=Energy In: %sEU/t
@@ -51,14 +48,11 @@ ic2.probe.barrel.status.beer.name=Type: Beer
 ic2.probe.barrel.status.rum.name=Type: Rum
 ic2.probe.barrel.status.storage.name=Storage
 ic2.probe.barrel.status.brew.name=Brew
-ic2.probe.barrel.beer.wheat.name=Wheat: %s / 64
 
+ic2.probe.barrel.beer.wheat.name=Wheat: %s / 64
 ic2.probe.barrel.beer.hops.name=Hops: %s / 64
+
 ic2.probe.barrel.beer.sugar_cane.name=Sugarcane: %s / 32
-ic2.probe.barrel.beer.redstone.name=Redstone: %s / 20
-ic2.probe.barrel.beer.glowstone.name=Glowstone: %s / 20
-ic2.probe.barrel.whisky.grist.name=Grist: %s / 16
-ic2.probe.barrel.whisky.years.name=Years: %s / 50
 
 ic2.probe.barrel.beer.alc.0.name=Alcohol Level: Soup
 ic2.probe.barrel.beer.alc.1.name=Alcohol Level: Alcfree
@@ -80,3 +74,19 @@ ic2.probe.barrel.beer.solid.3.name=Solid Ratio: Normal
 ic2.probe.barrel.beer.solid.4.name=Solid Ratio: Strong
 ic2.probe.barrel.beer.solid.5.name=Solid Ratio: Thick
 ic2.probe.barrel.beer.solid.6.name=Solid Ratio: Stodge
+ic2.probe.barrel.beer.solid.6a=Solid Ratio: Stodge
+
+// New Translations
+probe.energy.tier=Tier: %s
+probe.energy.output=Current Output: %s EU/t
+probe.energy.output.max=Max Output: %s EU/t
+probe.energy.input.max=Max Input: %s EU/t
+probe.machine.heat=Heat: %s
+probe.energy.output.passive=Passive Output: %s EU/t
+probe.storage.fuel=Fuel: %s
+probe.packet.tick=Output Packets: %s
+probe.energy.storage.name=Energy: %s EU
+probe.energy.storage.full.name=Energy: %s/%s EU
+probe.info.fluid=%s: %s/%s mB
+probe.wrenchable.drop_chance.info=%s Drop Chance
+probe.wrenchable.info=Wrenchable Block

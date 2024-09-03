@@ -26,6 +26,8 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(BaseEnergyStorageInfo.THIS);
         INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
         INFO_PROVIDERS.add(BarrelInfo.THIS);
+        INFO_PROVIDERS.add(BaseGeneratorInfo.THIS);
+
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }
 
@@ -67,7 +69,7 @@ public class JadeCommonHandler {
         MAPPED_FLUIDS.put(fluidStack.getFluid().getName(), fluidStack.getFluid().getStill().toString());
         int color = fluidStack.getUnlocalizedName().contains("lava") ? -29925 : fluidStack.getFluid().getColor(fluidStack) | -16777216;
         helper.add(new CommonBarElement(fluidStack.amount, capacity,
-                new TextComponentTranslation("ic2.barrel.info.fluid", fluidStack.getLocalizedName(),
+                new TextComponentTranslation("probe.info.fluid", fluidStack.getLocalizedName(),
                         Formatter.formatNumber(fluidStack.amount, String.valueOf(fluidStack.amount).length() - 1),
                         Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)),
                 color, fluidStack.getFluid().getName()));
