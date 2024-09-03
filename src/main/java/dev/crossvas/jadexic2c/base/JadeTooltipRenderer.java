@@ -52,7 +52,8 @@ public class JadeTooltipRenderer implements IWailaDataProvider, IToolTipHelper {
                     int current = barElement.getCurrent();
                     int max = barElement.getMax();
                     ITextComponent text = barElement.getText();
-                    bar(tooltip, current, max, color, text);
+                    String texture = barElement.getTextureData();
+                    bar(tooltip, current, max, color, text, texture);
                 }
             }
         }

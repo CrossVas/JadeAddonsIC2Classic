@@ -46,3 +46,36 @@ tooltip.item.ic2.eu_reader.cable_flow=Energy Flow: %sEU/t
 
 ic2.probe.sneak.info=Sneak for energy stats...
 ic2.probe.energy.stats.info=-== Energy Stats ==-
+
+ic2.probe.barrel.status.beer.name=Type: Beer
+ic2.probe.barrel.status.storage.name=Storage
+ic2.probe.barrel.status.brew.name=Brew
+ic2.probe.barrel.beer.wheat.name=Wheat: %s / 64
+
+ic2.probe.barrel.beer.hops.name=Hops: %s / 64
+ic2.probe.barrel.beer.sugar_cane.name=Sugarcane: %s / 32
+ic2.probe.barrel.beer.redstone.name=Redstone: %s / 20
+ic2.probe.barrel.beer.glowstone.name=Glowstone: %s / 20
+ic2.probe.barrel.whisky.grist.name=Grist: %s / 16
+ic2.probe.barrel.whisky.years.name=Years: %s / 50
+
+ic2.probe.barrel.beer.alc.0.name=Alcohol Level: Soup
+ic2.probe.barrel.beer.alc.1.name=Alcohol Level: Alcfree
+ic2.probe.barrel.beer.alc.2.name=Alcohol Level: White
+ic2.probe.barrel.beer.alc.3.name=Alcohol Level: Normal
+ic2.probe.barrel.beer.alc.4.name=Alcohol Level: Dark
+ic2.probe.barrel.beer.alc.5.name=Alcohol Level: Full
+ic2.probe.barrel.beer.alc.6.name=Alcohol Level: Black
+ic2.probe.barrel.beer.quality.0.name=Brew Quality: Brew
+ic2.probe.barrel.beer.quality.1.name=Brew Quality: Youngster
+ic2.probe.barrel.beer.quality.2.name=Brew Quality: Beer
+ic2.probe.barrel.beer.quality.3.name=Brew Quality: Ale
+ic2.probe.barrel.beer.quality.4.name=Brew Quality: Dragonblood
+ic2.probe.barrel.beer.quality.5.name=Brew Quality: Bad
+ic2.probe.barrel.beer.solid.0.name=Solid Ratio: Watery
+ic2.probe.barrel.beer.solid.1.name=Solid Ratio: Clear
+ic2.probe.barrel.beer.solid.2.name=Solid Ratio: Lite
+ic2.probe.barrel.beer.solid.3.name=Solid Ratio: Normal
+ic2.probe.barrel.beer.solid.4.name=Solid Ratio: Strong
+ic2.probe.barrel.beer.solid.5.name=Solid Ratio: Thick
+ic2.probe.barrel.beer.solid.6.name=Solid Ratio: Stodge

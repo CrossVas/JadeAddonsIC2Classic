@@ -74,7 +74,11 @@ public interface IInfoProvider {
     void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player);
 
     default void bar(IJadeHelper helper, int current, int max, ITextComponent text, int color) {
-        CommonBarElement element = new CommonBarElement(current, max, text, color);
+        this.bar(helper, current, max, text, color, "0");
+    }
+
+    default void bar(IJadeHelper helper, int current, int max, ITextComponent text, int color, String textureData) {
+        CommonBarElement element = new CommonBarElement(current, max, text, color, textureData);
         add(helper, element);
     }
 

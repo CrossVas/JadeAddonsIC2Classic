@@ -89,9 +89,10 @@ public class BaseProgressBarRenderer implements IWailaTooltipRenderer {
             int color = Integer.parseInt(strings[2]);
             String text = strings[3];
             boolean isStringOnly = "1".equals(strings[4]);
+            String fluidIcon = strings[6];
             FontRenderer font = Minecraft.getMinecraft().fontRenderer;
             if (!isStringOnly) {
-                GuiHelper.THIS.render(current, max, x, y, width, height + 1, color);
+                GuiHelper.THIS.render(current, max, x, y, width, height + 1, color, fluidIcon);
                 x += width / 2 - font.getStringWidth(text) / 2 + 1;
             }
             boolean centered = "1".equals(strings[5]);

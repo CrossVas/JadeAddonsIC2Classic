@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.utils.ColorUtils;
@@ -9,6 +10,8 @@ import ic2.core.block.base.tile.TileEntityBlock;
 import ic2.core.block.machine.high.TileEntityMassFabricator;
 import ic2.core.block.machine.high.TileEntityTeleporter;
 import ic2.core.block.machine.low.TileEntityElectrolyzer;
+import ic2.core.block.machine.low.TileEntityMachineTank;
+import ic2.core.block.machine.low.TileEntityWoodGasser;
 import ic2.core.block.machine.med.TileEntityChargedElectrolyzer;
 import ic2.core.block.wiring.tile.TileEntityCreativeEnergyStorage;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,6 +33,9 @@ public class EUStorageInfo implements IInfoProvider {
             } else if (machine instanceof TileEntityTeleporter) {
                 TileEntityTeleporter tp = (TileEntityTeleporter) machine;
                 bar(helper, tp.getAvailableEnergy(), tp.getAvailableEnergy(), translatable("ic2.probe.eu.storage.name", Formatter.formatInt(tp.getAvailableEnergy(), 4)), ColorUtils.RED);
+            }
+            if (machine instanceof TileEntityMachineTank || machine instanceof TileEntityWoodGasser) {
+                JadeCommonHandler.addTankInfo(helper, machine);
             }
         }
     }

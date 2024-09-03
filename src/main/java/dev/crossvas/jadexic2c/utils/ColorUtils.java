@@ -7,6 +7,7 @@ public class ColorUtils {
     public static final int GRAY = rgb(128, 128, 128);
     public static final int DARK_GRAY = rgb(64, 64, 64);
     public static final int BLACK = -16777216;
+    public static final int PROGRESS = -16733185;
     public static final int RED = rgb(255, 0, 0);
     public static final int PINK = rgb(255, 175, 175);
     public static final int ORANGE = rgb(255, 200, 0);
@@ -40,7 +41,11 @@ public class ColorUtils {
     }
 
     public static int fromFluid(int color) {
-        return rgb(getRed(color), getGreen(color), getBlue(color), getAlpha(color));
+        float r = ((color >> 16) & 0xFF) / 255f; // red
+        float g = ((color >> 8) & 0xFF) / 255f; // green
+        float b = ((color) & 0xFF) / 255f; // blue
+        float a = ((color >> 24) & 0xFF) / 255f; // alpha
+        return rgb(r, g, b, a);
     }
 
     public static int getRed(int rgb) {
