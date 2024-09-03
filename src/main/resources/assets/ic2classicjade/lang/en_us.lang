@@ -48,6 +48,7 @@ ic2.probe.sneak.info=Sneak for energy stats...
 ic2.probe.energy.stats.info=-== Energy Stats ==-
 
 ic2.probe.barrel.status.beer.name=Type: Beer
+ic2.probe.barrel.status.rum.name=Type: Rum
 ic2.probe.barrel.status.storage.name=Storage
 ic2.probe.barrel.status.brew.name=Brew
 ic2.probe.barrel.beer.wheat.name=Wheat: %s / 64

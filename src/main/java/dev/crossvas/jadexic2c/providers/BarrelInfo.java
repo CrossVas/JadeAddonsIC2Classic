@@ -8,6 +8,7 @@ import ic2.core.block.misc.tile.TileEntityBarrel;
 import ic2.core.inventory.filters.IFilter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -40,11 +41,13 @@ public class BarrelInfo implements IInfoProvider {
 
             int age;
             double maxValue;
-            double current;
+            double current = 0;
             int brewType = barrel.type;
-            DecimalFormat format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ROOT));
+
             FluidStack waterFluid = new FluidStack(FluidRegistry.WATER, waterAmount);
-            switch (brewType) {
+            DecimalFormat format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ROOT));
+            Tuple<String, Integer> STATUS;
+                    switch (brewType) {
                 case 0:
                 default:
                     break;
@@ -58,26 +61,40 @@ public class BarrelInfo implements IInfoProvider {
                     bar(helper, hopsAmount, 64, translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
                     JadeCommonHandler.loadTankInfo(helper, waterFluid, 32);
 
-                    String status = format.format(current) + "%";
-                    int brewColor = 0;
-                    switch (brewQuality) {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4: brewColor = ColorUtils.GREEN; break;
-                        case 5: {
-                            brewColor = ColorUtils.RED;
-                            status = "Wasted!";
-                        } break;
-                    }
                     textCentered(helper, translatable("ic2.probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
                     text(helper, translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));
                     text(helper, translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"));
                     text(helper, translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"));
-                    bar(helper, age, (int) maxValue, new TextComponentString(status), brewColor);
+                    STATUS = getStatus(current, brewQuality);
+                    bar(helper, age, (int) maxValue, new TextComponentString(STATUS.getFirst()), STATUS.getSecond());
+                    break;
+                case 2:
+                    maxValue = barrel.timeNedForRum(sugarcane);
+                    age = (int) Math.min(barrel.age, maxValue);
+                    text(helper, translatable(getBrewType(brewType)));
+                    textCentered(helper, translatable("ic2.probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+                    bar(helper, sugarcane, 32, translatable("ic2.probe.barrel.beer.sugar_cane.name", sugarcane), ColorUtils.GREEN);
+                    bar(helper, age, (int) maxValue, new TextComponentString(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), ColorUtils.PROGRESS);
                     break;
             }
         }
+    }
+
+    public Tuple<String, Integer> getStatus(double current, int beerQuality) {
+        DecimalFormat format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ROOT));
+        String status = format.format(current) + "%";
+        int brewColor = 0;
+        switch (beerQuality) {
+            case 1:
+            case 2:
+            case 3:
+            case 4: brewColor = ColorUtils.GREEN; break;
+            case 5: {
+                brewColor = ColorUtils.RED;
+                status = "Wasted!";
+            } break;
+        }
+        return new Tuple<>(status, brewColor);
     }
 
     public String getBrewType(int type) {
@@ -85,8 +102,6 @@ public class BarrelInfo implements IInfoProvider {
             case 0: return "ic2.probe.barrel.status.empty.name";
             case 1: return "ic2.probe.barrel.status.beer.name";
             case 2: return "ic2.probe.barrel.status.rum.name";
-            case 5: return "ic2.probe.barrel.status.whisky.name";
-            case 10: return "ic2.probe.barrel.status.potion.name";
             default: return "I AM ERROR";
         }
     }
