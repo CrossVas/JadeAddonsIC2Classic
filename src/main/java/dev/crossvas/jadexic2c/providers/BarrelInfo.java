@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers;
 
+import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.utils.ColorUtils;
@@ -42,7 +43,7 @@ public class BarrelInfo implements IInfoProvider {
             double current;
             int brewType = barrel.type;
             DecimalFormat format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ROOT));
-            FluidStack waterFluid = new FluidStack(FluidRegistry.WATER, 1000);
+            FluidStack waterFluid = new FluidStack(FluidRegistry.WATER, waterAmount);
             switch (brewType) {
                 case 0:
                 default:
@@ -55,7 +56,7 @@ public class BarrelInfo implements IInfoProvider {
                     textCentered(helper, translatable("ic2.probe.barrel.status.storage.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
                     bar(helper, wheatAmount, 64, translatable("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
                     bar(helper, hopsAmount, 64, translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
-                    bar(helper, waterAmount, 32, translatable("ic2.barrel.info.fluid", FluidRegistry.WATER.getBlock().getLocalizedName(), waterAmount, 32 + "k"), ColorUtils.brighter(ColorUtils.BLUE));
+                    JadeCommonHandler.loadTankInfo(helper, waterFluid, 32);
 
                     String status = format.format(current) + "%";
                     int brewColor = 0;

@@ -57,15 +57,19 @@ public class JadeCommonHandler {
             int capacity = fluidHandler.getTankProperties()[i].getCapacity();
             if (fluid != null) {
                 if (fluid.amount > 0) {
-                    MAPPED_FLUIDS.put(fluid.getFluid().getName(), fluid.getFluid().getStill().toString());
-                    int color = fluid.getUnlocalizedName().contains("lava") ? -29925 : fluid.getFluid().getColor(fluid) | -16777216;
-                    helper.add(new CommonBarElement(fluid.amount, capacity,
-                            new TextComponentTranslation("ic2.barrel.info.fluid", fluid.getLocalizedName(),
-                                    Formatter.formatNumber(fluid.amount, String.valueOf(fluid.amount).length() - 1),
-                                    Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)),
-                            color, fluid.getFluid().getName()));
+                    loadTankInfo(helper, fluid, capacity);
                 }
             }
         }
+    }
+
+    public static void loadTankInfo(IJadeHelper helper, FluidStack fluidStack, int capacity) {
+        MAPPED_FLUIDS.put(fluidStack.getFluid().getName(), fluidStack.getFluid().getStill().toString());
+        int color = fluidStack.getUnlocalizedName().contains("lava") ? -29925 : fluidStack.getFluid().getColor(fluidStack) | -16777216;
+        helper.add(new CommonBarElement(fluidStack.amount, capacity,
+                new TextComponentTranslation("ic2.barrel.info.fluid", fluidStack.getLocalizedName(),
+                        Formatter.formatNumber(fluidStack.amount, String.valueOf(fluidStack.amount).length() - 1),
+                        Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)),
+                color, fluidStack.getFluid().getName()));
     }
 }
