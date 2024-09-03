@@ -27,6 +27,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
         INFO_PROVIDERS.add(BarrelInfo.THIS);
         INFO_PROVIDERS.add(BaseGeneratorInfo.THIS);
+        INFO_PROVIDERS.add(BaseMachineInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }

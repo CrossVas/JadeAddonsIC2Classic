@@ -104,4 +104,16 @@ public interface IInfoProvider {
     default ITextComponent translatable(String translatable, Object... args) {
         return new TextComponentTranslation(translatable, args);
     }
+
+    default ITextComponent tier(int tier) {
+        return translatable("probe.energy.tier", getDisplayTier(tier));
+    }
+
+    default ITextComponent maxIn(int maxIn) {
+        return translatable("probe.energy.input.max", maxIn);
+    }
+
+    default ITextComponent usage(int usage) {
+        return translatable("probe.energy.usage", usage);
+    }
 }
