@@ -116,3 +116,7 @@ probe.reactor.breeding=Breeding Multiplier: %sX
 probe.steam.output=Steam Production: %s mB/t
 probe.water.consumption=Water Usage: %s mB/t
 probe.reactor.heat=Heat: %s / %s
+probe.personal.view=Allow Viewing: %s
+probe.personal.import=Allow injection from world: %s
+probe.personal.export=Allow extraction to world: %s
+probe.personal.team=Allow team member interaction: %s

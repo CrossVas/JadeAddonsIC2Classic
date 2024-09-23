@@ -29,6 +29,10 @@ public interface IInfoProvider {
         return StackUtil.hasHotbarItem(player, getFilter()) || player.isCreative();
     }
 
+    default String status(boolean status) {
+        return status ? TextFormatting.GREEN + String.valueOf(true) : TextFormatting.RED + String.valueOf(false);
+    }
+
     default String getDisplayTier(int tier) {
         switch (tier) {
             case 1: return "LV";
