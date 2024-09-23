@@ -10,9 +10,9 @@ import ic2.core.block.machine.med.TileEntityChargedElectrolyzer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class ElectrolyzerInfoProvider implements IInfoProvider {
+public class ElectrolyzerInfo implements IInfoProvider {
 
-    public static final ElectrolyzerInfoProvider THIS = new ElectrolyzerInfoProvider();
+    public static final ElectrolyzerInfo THIS = new ElectrolyzerInfo();
 
     @Override
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {

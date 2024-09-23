@@ -20,9 +20,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
-public class ElectricBlockInfoProvider implements IInfoProvider {
+public class ElectricBlockInfo implements IInfoProvider {
 
-    public static final ElectricBlockInfoProvider THIS = new ElectricBlockInfoProvider();
+    public static final ElectricBlockInfo THIS = new ElectricBlockInfo();
 
     @Override
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
