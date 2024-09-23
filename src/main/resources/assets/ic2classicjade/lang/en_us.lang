@@ -112,3 +112,7 @@ probe.miner.retracting=State: Retracting
 probe.miner.power=State: Out of Power
 probe.miner.refuel=State: Refueling
 probe.miner.progress=Mining Level: %s
+probe.reactor.breeding=Breeding Multiplier: %sX
+probe.steam.output=Steam Production: %s mB/t
+probe.water.consumption=Water Usage: %s mB/t
+probe.reactor.heat=Heat: %s / %s
