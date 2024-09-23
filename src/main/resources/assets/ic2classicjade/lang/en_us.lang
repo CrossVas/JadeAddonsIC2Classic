@@ -131,3 +131,4 @@ probe.teleporter.type.fluid=Fluid
 probe.teleporter.type.energy=Energy
 probe.teleporter.type.spawner=Spawner
 probe.teleporter.target=Target: %s %s %s
+probe.uranium.type=%s: %s / 1000

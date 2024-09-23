@@ -47,6 +47,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(StoneMachineInfo.THIS);
         INFO_PROVIDERS.add(TeleporterInfo.THIS);
         INFO_PROVIDERS.add(TransformerInfo.THIS);
+        INFO_PROVIDERS.add(UraniumEnricherInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }

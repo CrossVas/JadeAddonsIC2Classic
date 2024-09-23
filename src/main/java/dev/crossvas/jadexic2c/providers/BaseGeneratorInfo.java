@@ -21,7 +21,7 @@ public class BaseGeneratorInfo implements IInfoProvider {
             TileEntityGeneratorBase generator = (TileEntityGeneratorBase) blockEntity;
             double euProduction = generator.getOfferedEnergy();
             float maxOutput = generator.getMaxSendingEnergy();
-            if (generator instanceof TileEntityGeoGenerator || generator instanceof TileEntityGenerator || generator instanceof TileEntityLiquidFuelGenerator) {
+            if (generator instanceof TileEntityGeoGenerator || generator instanceof TileEntityGenerator || generator instanceof TileEntityLiquidFuelGenerator || generator instanceof TileEntityWaveGenerator) {
                 maxOutput -= 1;
             }
             text(helper, translatable("probe.energy.tier", getDisplayTier(generator.tier)));
