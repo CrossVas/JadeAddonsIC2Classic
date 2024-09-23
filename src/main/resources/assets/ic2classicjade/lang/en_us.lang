@@ -120,3 +120,5 @@ probe.personal.view=Allow Viewing: %s
 probe.personal.import=Allow injection from world: %s
 probe.personal.export=Allow extraction to world: %s
 probe.personal.team=Allow team member interaction: %s
+probe.plasma=Plasma: %s / 10000
+probe.matter=Matter: %s / 100
