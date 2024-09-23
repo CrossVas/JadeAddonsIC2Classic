@@ -1,158 +1,67 @@
 buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "https://maven.minecraftforge.net/"
+        }
+    }
     dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.0.+') {
+            changing = true
+        }
     }
 }
 
-plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-}
+apply plugin: 'forge'
 
 version = project.mod_version
-group = 'dev.crossvas.mods'
-archivesBaseName = 'IC2CJadeAddon'
+group= "com." + project.modid 
+archivesBaseName = project.modid
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19.2'
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'examplemod'
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "eclipse"
+    //replace "@VERSION@", project.version
+    //replaceIn "Ref.java"
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
 
 repositories {
     maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
     }
-
     maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
+        url "https://cursemaven.com"
     }
-
-    maven { url "https://maven.shedaniel.me" }
-    maven { url "https://maven.architectury.dev" }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.4.0'
-
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3965693")
-    implementation fg.deobf("mekanism:Mekanism:1.19.2-10.3.8.477")
-
-    implementation fg.deobf("curse.maven:ic2-classic-242942:5612597")
-    implementation fg.deobf("curse.maven:jade-324717:4914105")
-    runtimeOnly fg.deobf("curse.maven:jade-addons-583345:4850581")
-
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.3.103")
-    implementation fg.deobf("dev.architectury:architectury-forge:6.5.85")
-
-    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.1.663")
-    runtimeOnly fg.deobf("curse.maven:rei-addons-ic2classic-947865:5035657")
-
-    runtimeOnly fg.deobf("curse.maven:advanced-solars-classic-314835:4856232")
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.118:dev"
+    compile "curse.maven:ic2-classic-242942:5230413"
+    compile "curse.maven:waila-73488:2230518"
+//	compile files("libs/<jar_name>.jar")
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "examplemod",
-                "Specification-Vendor"    : "examplemodsareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "examplemodsareus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-}
-
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
+     
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
     }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier = "sources"
-    archiveExtension = "zip"
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
 }
