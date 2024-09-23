@@ -78,7 +78,7 @@ public class BaseMachineInfo implements IInfoProvider {
             // usage
             if (usage != null) text(helper, usage);
             if (speed > 0) {
-                bar(helper, (int) speed, (int) maxSpeed, translatable(name, new DecimalFormat().format(scaledProgress * 100.0)), ColorUtils.ORANGE);
+                bar(helper, (int) speed, (int) maxSpeed, translatable(name, new DecimalFormat().format(scaledProgress * 100.0)), ColorUtils.SPEED);
             }
             if (progress > 0) {
                 int scaledOp = (int) Math.min(6.0E7F, progress / progressPerTick);

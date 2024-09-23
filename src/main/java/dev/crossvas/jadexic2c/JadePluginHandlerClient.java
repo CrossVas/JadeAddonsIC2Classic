@@ -11,6 +11,5 @@ public class JadePluginHandlerClient implements IWailaPlugin {
     @Override
     public void register(IWailaRegistrar registration) {
         registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
-//        registration.registerTooltipRenderer("jade.text", new BaseProgressBarRenderer());
     }
 }

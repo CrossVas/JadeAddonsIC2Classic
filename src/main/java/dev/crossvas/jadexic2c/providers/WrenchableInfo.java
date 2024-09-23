@@ -22,10 +22,12 @@ public class WrenchableInfo implements IInfoProvider {
             IWrenchableTile wrenchableTile = (IWrenchableTile) blockEntity;
             int actualRate = (int) (wrenchableTile.getWrenchDropRate() * 100);
             ItemStack handItem = player.getHeldItemMainhand();
-            if (handItem.getItem() instanceof IWrench) {
-                text(helper, translatable("probe.wrenchable.drop_chance.info", new TextComponentString(actualRate + "%").setStyle(new Style().setColor(TextFormatting.AQUA))).setStyle(new Style().setColor(TextFormatting.GRAY)));
-            } else {
-                text(helper, translatable("probe.wrenchable.info").setStyle(new Style().setColor(TextFormatting.GOLD)));
+            if (wrenchableTile.canRemoveBlock(player)) {
+                if (handItem.getItem() instanceof IWrench) {
+                    text(helper, translatable("probe.wrenchable.drop_chance.info", new TextComponentString(actualRate + "%").setStyle(new Style().setColor(TextFormatting.AQUA))).setStyle(new Style().setColor(TextFormatting.GRAY)));
+                } else {
+                    text(helper, translatable("probe.wrenchable.info").setStyle(new Style().setColor(TextFormatting.GOLD)));
+                }
             }
         }
     }
