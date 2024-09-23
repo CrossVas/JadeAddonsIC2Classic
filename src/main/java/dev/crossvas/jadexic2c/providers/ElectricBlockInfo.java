@@ -49,12 +49,12 @@ public class ElectricBlockInfo implements IInfoProvider {
                 float progress = enchanter.getProgress();
                 float maxProgress = enchanter.getMaxProgress();
                 if (storedXP <= 0) {
-                    text(helper, translatable("ic2.probe.enchanter.missing").setStyle(new Style().setColor(TextFormatting.RED)));
+                    text(helper, translatable("probe.enchanter.missing").setStyle(new Style().setColor(TextFormatting.RED)));
                 } else {
-                    bar(helper, storedXP, 1000, translatable("ic2.probe.machine.xp", storedXP), ColorUtils.GREEN);
+                    bar(helper, storedXP, 1000, translatable("probe.machine.xp", storedXP), ColorUtils.GREEN);
                 }
                 if (progress > 0) {
-                    bar(helper, (int) progress, (int) maxProgress, translatable("ic2.probe.progress.full.name", progress, maxProgress).appendText("t"), -16733185);
+                    bar(helper, (int) progress, (int) maxProgress, translatable("probe.progress.full.name", progress, maxProgress).appendText("t"), -16733185);
 
                 }
             }
@@ -71,7 +71,7 @@ public class ElectricBlockInfo implements IInfoProvider {
                             Formatter.THERMAL_GEN.format(finalProgress)), -4441721);
                 }
                 if (massFab.scrap > 0) {
-                    bar(helper, massFab.scrap, massFab.lastScrap * 2, translatable("ic2.probe.matter.amplifier.name",
+                    bar(helper, massFab.scrap, massFab.lastScrap * 2, translatable("probe.matter.amplifier.name",
                             massFab.scrap), -10996205);
                 }
             }

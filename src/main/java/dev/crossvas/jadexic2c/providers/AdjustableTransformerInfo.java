@@ -25,10 +25,10 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             text(helper, translatable("probe.packet.tick", packets));
             EnergyContainer container = EnergyContainer.getContainer(transformer);
             if (player.isSneaking()) {
-                text(helper, translatable("ic2.probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
+                text(helper, translatable("probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
                 addCableOut(helper, container);
             } else {
-                text(helper, translatable("ic2.probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
+                text(helper, translatable("probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
             }
         }
     }

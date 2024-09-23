@@ -50,7 +50,7 @@ public class PersonalInfo implements IInfoProvider {
 
     public void addOwnerInfo(IJadeHelper helper, EntityPlayer owner) {
         if (owner != null) {
-            text(helper, translatable("ic2.probe.personal.owner", owner.getDisplayName().setStyle(new Style().setColor(TextFormatting.GREEN))).setStyle(new Style().setColor(TextFormatting.AQUA)));
+            text(helper, translatable("probe.personal.owner", owner.getDisplayName().setStyle(new Style().setColor(TextFormatting.GREEN))).setStyle(new Style().setColor(TextFormatting.AQUA)));
         }
     }
 }

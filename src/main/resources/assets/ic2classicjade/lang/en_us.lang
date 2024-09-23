@@ -1,82 +1,49 @@
-#ic2.probe.wrenchable.drop_chance.info=Drop Chance
+progress.material.name=Material: %s/%s
+probe.transformer.inverted=Inverted: %s
+probe.enchanter.missing=Requires XP!
 
-ic2.probe.wrenchable.optional.info= (optional)
-ic2.tube.round_robin.info=Round Robin Rules
-ic2.tube.directional.info=Direction: %s
-ic2.tube.filter.info=Filter:
-ic2.tube.meta_filter.info=Meta Filter:
-ic2.tube.extraction_filter_whitelist.info=Whitelist: %s
-ic2.tube.teleport.info=Network ID: %s
-ic2.tube.pickup.info=Large Radius: %s
-ic2.probe.pipe.transported=Fluids:
+probe.crop.seed_drop=Seed Mode: %s
+probe.personal.owner=Owner: %s
 
+tooltip.item.eu_reader.cable_flow_out=Energy Out: %sEU/t
+tooltip.item.eu_reader.cable_flow_in=Energy In: %sEU/t
+tooltip.item.eu_reader.cable_flow=Energy Flow: %sEU/t
 
+probe.sneak.info=Sneak for energy stats...
+probe.energy.stats.info=-== Energy Stats ==-
 
-ic2.progress.material.name=Material: %s/%s
-ic2.probe.transformer.inverted=Inverted: %s
-ic2.probe.uum.providing.name=Providing:
-ic2.probe.memory_expansion.name=Memory: %s/%s recipes
-ic2.probe.memory_expansion.can_craft.name=Recipes:
-ic2.probe.storage_expansion.slot.name=Storage:
-ic2.probe.uum_expansion.missing=Requires UU-Matter!
-ic2.probe.enchanter.missing=Requires XP!
-ic2.multiblock.reform.next=Next Reform: %s Ticks
+probe.barrel.status.beer.name=Type: Beer
+probe.barrel.status.rum.name=Type: Rum
+probe.barrel.status.storage.name=Storage
+probe.barrel.status.brew.name=Brew
 
-ic2.tube.direction.prio=Prio Direction: %s
-ic2.tube.inv_priority=Prioritize Inventory Insertion: %s
-ic2.tube.blocked=Output Insertion Blocked: %s
-ic2.tube.redstone.control=Redstone Control: %s
-ic2.tube.redstone.comparator=Read Comparator from Output: %s
-ic2.tube.redstone.pulse=Pulse Mode: %s
-ic2.tube.inserter.existing=Insert only existing: %s
-ic2.tube.teleport.private=Private Network: %s
-ic2.tube.teleport.send=Can Send: %s
-ic2.tube.teleport.receive=Can Receive: %s
-ic2.probe.crop.seed_drop=Seed Mode: %s
-ic2.probe.chunkloader.radius=Radius: %s chunk(s)
-ic2.probe.chunkloader.ticks=Chunk Ticks: %s
-ic2.probe.personal.owner=Owner: %s
+probe.barrel.beer.wheat.name=Wheat: %s / 64
+probe.barrel.beer.hops.name=Hops: %s / 64
 
-tooltip.item.ic2.eu_reader.cable_flow_out=Energy Out: %sEU/t
-tooltip.item.ic2.eu_reader.cable_flow_in=Energy In: %sEU/t
-tooltip.item.ic2.eu_reader.cable_flow=Energy Flow: %sEU/t
+probe.barrel.beer.sugar_cane.name=Sugarcane: %s / 32
 
-ic2.probe.sneak.info=Sneak for energy stats...
-ic2.probe.energy.stats.info=-== Energy Stats ==-
+probe.barrel.beer.alc.0.name=Alcohol Level: Soup
+probe.barrel.beer.alc.1.name=Alcohol Level: Alcfree
+probe.barrel.beer.alc.2.name=Alcohol Level: White
+probe.barrel.beer.alc.3.name=Alcohol Level: Normal
+probe.barrel.beer.alc.4.name=Alcohol Level: Dark
+probe.barrel.beer.alc.5.name=Alcohol Level: Full
+probe.barrel.beer.alc.6.name=Alcohol Level: Black
+probe.barrel.beer.quality.0.name=Brew Quality: Brew
+probe.barrel.beer.quality.1.name=Brew Quality: Youngster
+probe.barrel.beer.quality.2.name=Brew Quality: Beer
+probe.barrel.beer.quality.3.name=Brew Quality: Ale
+probe.barrel.beer.quality.4.name=Brew Quality: Dragonblood
+probe.barrel.beer.quality.5.name=Brew Quality: Bad
+probe.barrel.beer.solid.0.name=Solid Ratio: Watery
+probe.barrel.beer.solid.1.name=Solid Ratio: Clear
+probe.barrel.beer.solid.2.name=Solid Ratio: Lite
+probe.barrel.beer.solid.3.name=Solid Ratio: Normal
+probe.barrel.beer.solid.4.name=Solid Ratio: Strong
+probe.barrel.beer.solid.5.name=Solid Ratio: Thick
+probe.barrel.beer.solid.6.name=Solid Ratio: Stodge
+probe.barrel.beer.solid.6a=Solid Ratio: Stodge
 
-ic2.probe.barrel.status.beer.name=Type: Beer
-ic2.probe.barrel.status.rum.name=Type: Rum
-ic2.probe.barrel.status.storage.name=Storage
-ic2.probe.barrel.status.brew.name=Brew
-
-ic2.probe.barrel.beer.wheat.name=Wheat: %s / 64
-ic2.probe.barrel.beer.hops.name=Hops: %s / 64
-
-ic2.probe.barrel.beer.sugar_cane.name=Sugarcane: %s / 32
-
-ic2.probe.barrel.beer.alc.0.name=Alcohol Level: Soup
-ic2.probe.barrel.beer.alc.1.name=Alcohol Level: Alcfree
-ic2.probe.barrel.beer.alc.2.name=Alcohol Level: White
-ic2.probe.barrel.beer.alc.3.name=Alcohol Level: Normal
-ic2.probe.barrel.beer.alc.4.name=Alcohol Level: Dark
-ic2.probe.barrel.beer.alc.5.name=Alcohol Level: Full
-ic2.probe.barrel.beer.alc.6.name=Alcohol Level: Black
-ic2.probe.barrel.beer.quality.0.name=Brew Quality: Brew
-ic2.probe.barrel.beer.quality.1.name=Brew Quality: Youngster
-ic2.probe.barrel.beer.quality.2.name=Brew Quality: Beer
-ic2.probe.barrel.beer.quality.3.name=Brew Quality: Ale
-ic2.probe.barrel.beer.quality.4.name=Brew Quality: Dragonblood
-ic2.probe.barrel.beer.quality.5.name=Brew Quality: Bad
-ic2.probe.barrel.beer.solid.0.name=Solid Ratio: Watery
-ic2.probe.barrel.beer.solid.1.name=Solid Ratio: Clear
-ic2.probe.barrel.beer.solid.2.name=Solid Ratio: Lite
-ic2.probe.barrel.beer.solid.3.name=Solid Ratio: Normal
-ic2.probe.barrel.beer.solid.4.name=Solid Ratio: Strong
-ic2.probe.barrel.beer.solid.5.name=Solid Ratio: Thick
-ic2.probe.barrel.beer.solid.6.name=Solid Ratio: Stodge
-ic2.probe.barrel.beer.solid.6a=Solid Ratio: Stodge
-
-// New Translations
 probe.energy.tier=Tier: %s
 probe.energy.output=Current Output: %s EU/t
 probe.energy.output.max=Max Output: %s EU/t
@@ -132,3 +99,29 @@ probe.teleporter.type.energy=Energy
 probe.teleporter.type.spawner=Spawner
 probe.teleporter.target=Target: %s %s %s
 probe.uranium.type=%s: %s / 1000
+
+probe.crop.grow.not=Can't grow
+probe.crop.grow.rate=~ Growth Rate: %s
+probe.crop.growth=Growth
+probe.crop.stats=Stats
+probe.crop.storage=Storage
+probe.crop.env=Environment
+probe.crop.info.stage=Stage: %s/%s
+probe.crop.info.points=Points: %s/%s
+probe.crop.info.stage_done=Stage: %s (Grown)
+probe.crop.info.growth=Growth: %s/%s
+probe.crop.info.gain=Gain: %s/%s
+probe.crop.info.resistance=Resist.: %s/%s
+probe.crop.info.needs=Stress: ~%s/%s
+probe.crop.info.scan=Scan: %s/%s
+probe.crop.info.fertilizer=Fertilizer: %s/%s
+probe.crop.info.water=Water: %s/%s
+probe.crop.info.weedex=WeedEx: %s/%s
+probe.crop.info.nutrients=Nutrients: %s/%s
+probe.crop.info.humidity=Humidity: %s/%s
+probe.crop.info.env=Env. Quality: %s/%s
+probe.crop.info.light=Light Level: %s/%s
+probe.crop.unknown=Unknown Crop
+probe.crop.discovered=Discovered by: %s
+probe.crop.name=Crop: %s
+probe.machine.xp=Stored: %s XP

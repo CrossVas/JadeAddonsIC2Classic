@@ -17,7 +17,7 @@ public class TransformerInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityTransformer) {
             TileEntityTransformer transformer = (TileEntityTransformer) blockEntity;
-            text(helper, translatable("ic2.probe.transformer.inverted", status(transformer.isActive)).setStyle(new Style().setColor(TextFormatting.GOLD)));
+            text(helper, translatable("probe.transformer.inverted", status(transformer.isActive)).setStyle(new Style().setColor(TextFormatting.GOLD)));
             text(helper, maxIn(transformer.isActive ? transformer.lowOutput : transformer.highOutput));
             text(helper, translatable("probe.energy.output.max", transformer.isActive ? transformer.highOutput : transformer.lowOutput));
             text(helper, translatable("probe.packet.tick", transformer.isActive ? 1 : 4));

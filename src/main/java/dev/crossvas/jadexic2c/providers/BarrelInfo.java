@@ -55,15 +55,15 @@ public class BarrelInfo implements IInfoProvider {
                     maxValue = 24000.0 * Math.pow(3.0, brewQuality == 4 ? 6.0 : (double) brewQuality);
                     current = age / maxValue * 100.0;
                     text(helper, translatable(getBrewType(brewType)));
-                    textCentered(helper, translatable("ic2.probe.barrel.status.storage.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
-                    bar(helper, wheatAmount, 64, translatable("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
-                    bar(helper, hopsAmount, 64, translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
+                    textCentered(helper, translatable("probe.barrel.status.storage.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+                    bar(helper, wheatAmount, 64, translatable("probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
+                    bar(helper, hopsAmount, 64, translatable("probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
                     bar(helper, waterAmount, 32, translatable("probe.info.fluid", waterFluid.getLocalizedName(), waterAmount, 32 + "k"), -1, waterFluid.getFluid().getName());
 
-                    textCentered(helper, translatable("ic2.probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
-                    text(helper, translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));
-                    text(helper, translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"));
-                    text(helper, translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"));
+                    textCentered(helper, translatable("probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+                    text(helper, translatable("probe.barrel.beer.quality." + brewQuality + ".name"));
+                    text(helper, translatable("probe.barrel.beer.alc." + alcoholLevel + ".name"));
+                    text(helper, translatable("probe.barrel.beer.solid." + solidRatio + ".name"));
                     STATUS = getStatus(current, brewQuality);
                     bar(helper, age, (int) maxValue, new TextComponentString(STATUS.getFirst()), STATUS.getSecond());
                     break;
@@ -71,8 +71,8 @@ public class BarrelInfo implements IInfoProvider {
                     maxValue = barrel.timeNedForRum(sugarcane);
                     age = (int) Math.min(barrel.age, maxValue);
                     text(helper, translatable(getBrewType(brewType)));
-                    textCentered(helper, translatable("ic2.probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
-                    bar(helper, sugarcane, 32, translatable("ic2.probe.barrel.beer.sugar_cane.name", sugarcane), ColorUtils.GREEN);
+                    textCentered(helper, translatable("probe.barrel.status.brew.name").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+                    bar(helper, sugarcane, 32, translatable("probe.barrel.beer.sugar_cane.name", sugarcane), ColorUtils.GREEN);
                     bar(helper, age, (int) maxValue, new TextComponentString(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), ColorUtils.PROGRESS);
                     break;
             }
@@ -98,9 +98,9 @@ public class BarrelInfo implements IInfoProvider {
 
     public String getBrewType(int type) {
         switch (type) {
-            case 0: return "ic2.probe.barrel.status.empty.name";
-            case 1: return "ic2.probe.barrel.status.beer.name";
-            case 2: return "ic2.probe.barrel.status.rum.name";
+            case 0: return "probe.barrel.status.empty.name";
+            case 1: return "probe.barrel.status.beer.name";
+            case 2: return "probe.barrel.status.rum.name";
             default: return "I AM ERROR";
         }
     }

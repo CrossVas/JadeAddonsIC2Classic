@@ -22,10 +22,10 @@ public class CableInfo implements IInfoProvider {
             text(helper, translatable("probe.energy.loss", Formatter.CABLE_LOSS_FORMAT.format(cable.getConductionLoss())));
             EnergyContainer container = EnergyContainer.getContainer(cable);
             if (player.isSneaking()) {
-                text(helper, translatable("ic2.probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
+                text(helper, translatable("probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
                 addCableOut(helper, container);
             } else {
-                text(helper, translatable("ic2.probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
+                text(helper, translatable("probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
             }
         }
     }
