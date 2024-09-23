@@ -36,6 +36,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(FluidOMatInfo.THIS);
         INFO_PROVIDERS.add(FuelBoilerInfo.THIS);
         INFO_PROVIDERS.add(LuminatorInfo.THIS);
+        INFO_PROVIDERS.add(MinerInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }
