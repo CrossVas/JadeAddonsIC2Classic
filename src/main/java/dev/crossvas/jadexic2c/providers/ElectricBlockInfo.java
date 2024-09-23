@@ -67,7 +67,7 @@ public class ElectricBlockInfo implements IInfoProvider {
                 if (progress > 0) {
                     double finalProgress = progress / massFab.getMaxProgress() * 100.0;
                     if (finalProgress > 100) finalProgress = 100;
-                    bar(helper, progress, maxProgress, translatable("ic2.probe.progress.moderate.name",
+                    bar(helper, progress, maxProgress, translatable("probe.speed.massFab",
                             Formatter.THERMAL_GEN.format(finalProgress)), -4441721);
                 }
                 if (massFab.scrap > 0) {

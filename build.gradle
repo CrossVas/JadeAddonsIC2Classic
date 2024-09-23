@@ -172,6 +172,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:hwyla-253449:2568751")
     implementation rfg.deobf("curse.maven:ic2-classic-242942:5554368")
     runtimeOnly rfg.deobf("curse.maven:jei-238222:5101347")
+    runtimeOnly rfg.deobf("curse.maven:the-one-probe-community-edition-885670:5745309")
 }
 
 // Adds Access Transformer files to tasks
