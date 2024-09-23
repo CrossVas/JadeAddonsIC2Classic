@@ -122,3 +122,4 @@ probe.personal.export=Allow extraction to world: %s
 probe.personal.team=Allow team member interaction: %s
 probe.plasma=Plasma: %s / 10000
 probe.matter=Matter: %s / 100
+probe.pump.progress=Pump level: %s
