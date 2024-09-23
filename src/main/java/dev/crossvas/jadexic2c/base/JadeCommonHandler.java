@@ -32,6 +32,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(ChargePadInfo.THIS);
         INFO_PROVIDERS.add(CropLibraryInfo.THIS);
         INFO_PROVIDERS.add(ElectricBlockInfoProvider.THIS);
+        INFO_PROVIDERS.add(ElectrolyzerInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }

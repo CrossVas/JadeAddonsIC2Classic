@@ -11,10 +11,7 @@ import ic2.core.block.machine.high.TileEntityElectricEnchanter;
 import ic2.core.block.machine.high.TileEntityMassFabricator;
 import ic2.core.block.machine.high.TileEntityTeleporterHub;
 import ic2.core.block.machine.high.TileEntityTerraformer;
-import ic2.core.block.machine.low.TileEntityCropmatron;
-import ic2.core.block.machine.low.TileEntityMachineBuffer;
-import ic2.core.block.machine.low.TileEntityMachineTank;
-import ic2.core.block.machine.low.TileEntityMagnetizer;
+import ic2.core.block.machine.low.*;
 import ic2.core.block.machine.med.TileEntityCropHarvester;
 import ic2.core.block.machine.med.TileEntityReactorPlanner;
 import ic2.core.block.machine.med.TileEntityTeslaCoil;
@@ -37,7 +34,7 @@ public class ElectricBlockInfoProvider implements IInfoProvider {
                 text(helper, maxIn(baseTile.maxInput));
             }
 
-            if (baseTile instanceof TileEntityMachineTank || baseTile instanceof TileEntityCropmatron) {
+            if (baseTile instanceof TileEntityMachineTank || baseTile instanceof TileEntityCropmatron || baseTile instanceof TileEntityElectricWoodGasser) {
                 text(helper, tier(baseTile.tier));
                 text(helper, maxIn(baseTile.maxInput));
                 JadeCommonHandler.addTankInfo(helper, baseTile);
