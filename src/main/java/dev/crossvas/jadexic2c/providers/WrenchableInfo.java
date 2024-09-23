@@ -4,7 +4,6 @@ import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.base.tile.TileEntityBlock;
 import ic2.core.block.base.util.info.misc.IWrench;
-import ic2.core.block.personal.base.misc.IOwnerBlock;
 import ic2.core.inventory.filters.IFilter;
 import ic2.core.util.obj.IWrenchableTile;
 import net.minecraft.entity.player.EntityPlayer;
