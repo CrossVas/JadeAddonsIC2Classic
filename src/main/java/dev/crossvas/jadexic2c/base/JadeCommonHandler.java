@@ -42,6 +42,7 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(PersonalInfo.THIS);
         INFO_PROVIDERS.add(PlasmafierInfo.THIS);
         INFO_PROVIDERS.add(RangedPumpInfo.THIS);
+        INFO_PROVIDERS.add(SolarPanelInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }
