@@ -18,7 +18,12 @@ public class ElectrolyzerInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityElectrolyzer) {
             TileEntityElectrolyzer electrolyzer = (TileEntityElectrolyzer) blockEntity;
-            addElectrolyzerInfo(helper, electrolyzer.shouldDrain(), electrolyzer.canPower(), electrolyzer.provider.getProcessRate(), electrolyzer.energy, electrolyzer.maxEnergy);
+            IElectrolyzerProvider provider = electrolyzer.provider;
+            int transfer = 0;
+            if (provider != null) {
+                transfer = provider.getProcessRate();
+            }
+            addElectrolyzerInfo(helper, electrolyzer.shouldDrain(), electrolyzer.canPower(), transfer, electrolyzer.energy, electrolyzer.maxEnergy);
         }
         if (blockEntity instanceof TileEntityChargedElectrolyzer) {
             TileEntityChargedElectrolyzer electrolyzer = (TileEntityChargedElectrolyzer) blockEntity;
