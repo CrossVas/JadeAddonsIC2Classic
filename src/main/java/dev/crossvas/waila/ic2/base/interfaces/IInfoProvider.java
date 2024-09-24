@@ -19,8 +19,8 @@ import net.minecraft.util.IChatComponent;
 
 public interface IInfoProvider {
 
-    IItemTransporter.IFilter READER = stack -> stack.getItem() instanceof ItemToolMeter;
-    IItemTransporter.IFilter CROP_ANALYZER = stack -> stack.getItem() instanceof ItemCropnalyzer;
+    IItemTransporter.IFilter READER = stack -> stack != null && stack.getItem() instanceof ItemToolMeter;
+    IItemTransporter.IFilter CROP_ANALYZER = stack -> stack != null && stack.getItem() instanceof ItemCropnalyzer;
     IItemTransporter.IFilter ALWAYS = itemStack -> true;
 
     default IItemTransporter.IFilter getFilter() {
@@ -48,15 +48,16 @@ public interface IInfoProvider {
     default boolean hasHotbarItem(EntityPlayer player, IItemTransporter.IFilter filter) {
         if (player == null) {
             return false;
-        }
-        InventoryPlayer inventoryPlayer = player.inventory;
-        for (int i = 0; i < 9; i++) {
-            ItemStack stack = inventoryPlayer.getStackInSlot(i);
-            if (filter.matches(stack)) {
-                return true;
+        } else {
+            InventoryPlayer inventoryPlayer = player.inventory;
+            for (int i = 0; i < 9; i++) {
+                ItemStack stack = inventoryPlayer.getStackInSlot(i);
+                if (filter.matches(stack)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
 
     default String status(boolean status) {

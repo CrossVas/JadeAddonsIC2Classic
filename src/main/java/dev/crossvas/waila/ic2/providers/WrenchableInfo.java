@@ -31,7 +31,7 @@ public class WrenchableInfo implements IInfoProvider {
                 show = actualRate > 0;
             }
             if (show) {
-                if (handItem.getItem() instanceof ItemToolWrench) {
+                if (handItem != null && handItem.getItem() instanceof ItemToolWrench) {
                     text(helper, translatable("probe.wrenchable.drop_chance.info", new ChatComponentText(actualRate + "%").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
                 } else {
                     text(helper, translatable("probe.wrenchable.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
