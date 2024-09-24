@@ -23,6 +23,7 @@ public class PersonalInfo implements IInfoProvider {
             owner = getPlayerEntityByUUID(player.worldObj, personalStorage.owner);
             addOwnerInfo(helper, owner);
         }
+        // TODO: Re-add these when `owner` field is available
 //        if (blockEntity instanceof TileEntityTradeOMat) {
 //            TileEntityTradeOMat tradeOMat = (TileEntityTradeOMat) blockEntity;
 //            owner = getPlayerEntityByUUID(player.worldObj, tradeOMat.owner);
