@@ -37,13 +37,11 @@ public class EnergyContainer {
             CACHE.put(pos, result);
         }
 
-        result.tick(tile.getWorldObj().getTotalWorldTime(), EnergyNet.instance.getNodeStats(tile));
-        System.out.println(tile.getWorldObj().getTotalWorldTime());
+        tick(tile.getWorldObj().getTotalWorldTime(), EnergyNet.instance.getNodeStats(tile));
         return result;
     }
 
     public static void tick(long time, NodeStats stats) {
-        System.out.println(lastTime);
         if (lastTime == 0L) {
             lastTime = time;
             lastIn = (long) stats.getEnergyIn();
