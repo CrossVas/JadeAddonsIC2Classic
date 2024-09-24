@@ -27,7 +27,6 @@ public class EnergyContainer {
     long lastIn;
     long lastOut;
 
-
     public EnergyContainer() {}
 
     public static EnergyContainer getContainer(TileEntity tile) {

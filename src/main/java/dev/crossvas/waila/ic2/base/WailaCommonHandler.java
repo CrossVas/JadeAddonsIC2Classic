@@ -3,6 +3,7 @@ package dev.crossvas.waila.ic2.base;
 import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.interfaces.IInfoProvider;
 import dev.crossvas.waila.ic2.base.interfaces.IWailaHelper;
+import dev.crossvas.waila.ic2.providers.AdjustableTransformerInfo;
 import dev.crossvas.waila.ic2.providers.EUStorageInfo;
 import dev.crossvas.waila.ic2.providers.WrenchableInfo;
 import dev.crossvas.waila.ic2.utils.Formatter;
@@ -25,6 +26,7 @@ public class WailaCommonHandler {
 
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
+        INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }
