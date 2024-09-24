@@ -42,22 +42,18 @@ public class EnergyContainer {
     }
 
     public static void tick(long time, NodeStats stats) {
-        if (lastTime == 0L) {
-            lastTime = time;
-            lastIn = (long) stats.getEnergyIn();
-            lastOut = (long) stats.getEnergyOut();
-        } else {
+        if (lastTime != 0L) {
             long diff = time - lastTime;
             if (diff <= 0L) {
                 return;
             }
             energyIn.addEntry((long) ((stats.getEnergyIn() - lastIn) / diff));
             energyOut.addEntry((long) ((stats.getEnergyOut() - lastOut) / diff));
-            lastTime = time;
-            lastIn = (long) stats.getEnergyIn();
-            lastOut = (long) stats.getEnergyOut();
 
         }
+        lastTime = time;
+        lastIn = (long) stats.getEnergyIn();
+        lastOut = (long) stats.getEnergyOut();
     }
 
     public int getAverageIn() {
