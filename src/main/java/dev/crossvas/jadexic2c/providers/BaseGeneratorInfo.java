@@ -24,7 +24,7 @@ public class BaseGeneratorInfo implements IInfoProvider {
             if (generator instanceof TileEntityGeoGenerator || generator instanceof TileEntityGenerator || generator instanceof TileEntityLiquidFuelGenerator || generator instanceof TileEntityWaveGenerator) {
                 maxOutput -= 1;
             }
-            text(helper, translatable("probe.energy.tier", getDisplayTier(generator.tier)));
+            text(helper, tier(generator.getSourceTier()));
             text(helper, translatable("probe.energy.output", Formatter.formatNumber(euProduction, 4)));
             text(helper, translatable("probe.energy.output.max", Formatter.formatNumber(maxOutput, 3)));
 

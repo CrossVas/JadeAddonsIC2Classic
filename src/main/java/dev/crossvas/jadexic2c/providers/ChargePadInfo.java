@@ -6,8 +6,6 @@ import dev.crossvas.jadexic2c.utils.EnergyContainer;
 import ic2.core.block.base.tile.TileEntityChargePadBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
 
 public class ChargePadInfo implements IInfoProvider {
 

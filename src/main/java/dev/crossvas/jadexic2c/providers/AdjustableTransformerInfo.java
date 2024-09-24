@@ -17,7 +17,7 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             TileEntityAdjustableTransformer transformer = (TileEntityAdjustableTransformer) blockEntity;
             int energyPacket = transformer.energyPacket;
             int packets = transformer.packetCount;
-            text(helper, translatable("probe.energy.tier", transformer.sinkTier));
+            text(helper, tier(transformer.getSinkTier()));
             text(helper, translatable("probe.energy.output.max", energyPacket));
             text(helper, translatable("probe.packet.tick", packets));
             EnergyContainer container = EnergyContainer.getContainer(transformer);

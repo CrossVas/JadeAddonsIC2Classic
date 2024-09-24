@@ -7,8 +7,6 @@ import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tile.TileEntityElectricBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
 
 public class BaseEnergyStorageInfo implements IInfoProvider {
 
@@ -18,7 +16,7 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock electricBlock = (TileEntityElectricBlock) blockEntity;
-            text(helper, translatable("probe.energy.tier", getDisplayTier(electricBlock.tier)));
+            text(helper, tier(electricBlock.getTier()));
             text(helper, translatable("probe.energy.input.max", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
             text(helper, translatable("probe.energy.output.max", electricBlock.getMaxSendingEnergy()));
             EnergyContainer container = EnergyContainer.getContainer(electricBlock);

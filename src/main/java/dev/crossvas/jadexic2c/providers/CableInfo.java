@@ -7,8 +7,6 @@ import dev.crossvas.jadexic2c.utils.Formatter;
 import ic2.core.block.wiring.tile.TileEntityCable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
 
 public class CableInfo implements IInfoProvider {
 
