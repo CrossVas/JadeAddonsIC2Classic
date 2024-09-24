@@ -33,16 +33,16 @@ public class NuclearInfo implements IInfoProvider {
             IReactor reactor = (IReactor) blockEntity;
             if (blockEntity instanceof TileEntityNuclearReactorElectric) {
                 TileEntityNuclearReactorElectric nuclearReactor = (TileEntityNuclearReactorElectric) blockEntity;
-                text(helper, translatable("probe.energy.output", Formatter.formatNumber(nuclearReactor.getReactorEUEnergyOutput(), 3)));
-                text(helper, translatable("probe.reactor.breeding", reactor.getHeat() / 3000 + 1));
+                text(helper, translate("probe.energy.output", Formatter.formatNumber(nuclearReactor.getReactorEUEnergyOutput(), 3)));
+                text(helper, translate("probe.reactor.breeding", reactor.getHeat() / 3000 + 1));
             } else if (blockEntity instanceof ISteamReactor) {
                 ISteamReactor steamReactor = (ISteamReactor) blockEntity;
-                text(helper, translatable("probe.steam.output", Formatter.THERMAL_GEN.format(steamReactor.getReactorEUEnergyOutput() * 3.200000047683716)));
-                text(helper, translatable("probe.water.consumption", Formatter.THERMAL_GEN.format(steamReactor.getReactorEnergyOutput() / 50.0)));
+                text(helper, translate("probe.steam.output", Formatter.THERMAL_GEN.format(steamReactor.getReactorEUEnergyOutput() * 3.200000047683716)));
+                text(helper, translate("probe.water.consumption", Formatter.THERMAL_GEN.format(steamReactor.getReactorEnergyOutput() / 50.0)));
                 WailaCommonHandler.addTankInfo(helper, blockEntity);
             }
 
-            bar(helper, reactor.getHeat(), reactor.getMaxHeat(), translatable("probe.reactor.heat",
+            bar(helper, reactor.getHeat(), reactor.getMaxHeat(), translate("probe.reactor.heat",
                 Formatter.formatNumber(reactor.getHeat(), 4), Formatter.formatNumber(reactor.getMaxHeat(), 2)), getReactorColor(reactor.getHeat(), reactor.getMaxHeat()));
         }
     }

@@ -4,6 +4,7 @@ import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.elements.CommonTextElement;
 import dev.crossvas.waila.ic2.utils.EnergyContainer;
 import dev.crossvas.waila.ic2.utils.Formatter;
+import dev.crossvas.waila.ic2.utils.TextFormatter;
 import ic2.core.block.inventory.IItemTransporter;
 import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
@@ -60,8 +61,8 @@ public interface IInfoProvider {
         }
     }
 
-    default String status(boolean status) {
-        return status ? EnumChatFormatting.GREEN + String.valueOf(true) : EnumChatFormatting.RED + String.valueOf(false);
+    default IChatComponent status(boolean status) {
+        return status ? TextFormatter.GREEN.literal("" + true) : TextFormatter.RED.literal("" + false);
     }
 
     default String getDisplayTier(int tier) {
@@ -84,7 +85,7 @@ public interface IInfoProvider {
     default void addAveragesIn(IWailaHelper helper, EnergyContainer container) {
         int averageIn = container.getAverageIn();
         if (averageIn > 0) {
-            text(helper, translatable("tooltip.item.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translate(TextFormatter.AQUA, "tooltip.item.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)));
         }
     }
 
@@ -95,14 +96,14 @@ public interface IInfoProvider {
     default void addAveragesOut(IWailaHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translate(TextFormatter.AQUA, "tooltip.item.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)));
         }
     }
 
     default void addCableOut(IWailaHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translate(TextFormatter.AQUA, "tooltip.item.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)));
         }
     }
 
@@ -136,28 +137,52 @@ public interface IInfoProvider {
         helper.add(element);
     }
 
-    default IChatComponent translatable(String translatable, Object... args) {
+    default IChatComponent translate(String translatable) {
+        return new ChatComponentTranslation(translatable);
+    }
+
+    default IChatComponent translate(String translatable, Object... args) {
         return new ChatComponentTranslation(translatable, args);
     }
 
+    default IChatComponent literal(String translatable) {
+        return new ChatComponentText(translatable);
+    }
+
+    default IChatComponent translate(TextFormatter formatter, String translatable) {
+        return formatter.translate(translatable);
+    }
+
+    default IChatComponent translate(TextFormatter formatter, String translatable, Object... args) {
+        return formatter.translate(translatable, args);
+    }
+
+    default IChatComponent literal(TextFormatter formatter, String translatable) {
+        return formatter.literal(translatable);
+    }
+
+    default IChatComponent literal(TextFormatter formatter, String translatable, Object... args) {
+        return formatter.literal(translatable, args);
+    }
+
     default IChatComponent tier(int tier) {
-        return translatable("probe.energy.tier", getDisplayTier(tier));
+        return translate("probe.energy.tier", getDisplayTier(tier));
     }
 
     default IChatComponent maxIn(int maxIn) {
-        return translatable("probe.energy.input.max", maxIn);
+        return translate("probe.energy.input.max", maxIn);
     }
 
     default IChatComponent usage(int usage) {
-        return translatable("probe.energy.usage", usage);
+        return translate("probe.energy.usage", usage);
     }
 
     default void addStats(IWailaHelper helper, EntityPlayer player, IStatProvider stats) {
         if (player.isSneaking()) {
-            text(helper, translatable("probe.energy.stats.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)), true);
+            text(helper, translate(TextFormatter.GREEN, "probe.energy.stats.info"), true);
             stats.addTooltips();
         } else {
-            text(helper, translatable("probe.sneak.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)), true);
+            text(helper, translate(TextFormatter.AQUA, "probe.sneak.info"), true);
         }
     }
 

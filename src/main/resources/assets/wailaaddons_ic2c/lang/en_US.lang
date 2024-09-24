@@ -57,7 +57,7 @@ probe.packet.tick=Output Packets: %s
 probe.energy.storage.name=Energy: %s EU
 probe.energy.storage.full.name=Energy: %s/%s EU
 probe.info.fluid=%s: %s/%s mB
-probe.wrenchable.drop_chance.info=%s Drop Chance
+probe.wrenchable.drop_chance.info=%s%% Drop Chance
 probe.wrenchable.info=Wrenchable Block
 probe.progress.full.name=Progress: %s / %st
 probe.progress.full_misc.name=Progress: %s / %s
@@ -98,6 +98,7 @@ probe.teleporter.type.fluid=Fluid
 probe.teleporter.type.energy=Energy
 probe.teleporter.type.spawner=Spawner
 probe.teleporter.target=Target: %s %s %s
+probe.teleporter.target.set=Target Set: %s
 probe.uranium.type=%s: %s / 1000
 
 probe.crop.grow.not=Can't grow

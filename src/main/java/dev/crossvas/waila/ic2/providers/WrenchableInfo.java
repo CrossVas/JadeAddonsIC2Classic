@@ -2,15 +2,13 @@ package dev.crossvas.waila.ic2.providers;
 
 import dev.crossvas.waila.ic2.base.interfaces.IInfoProvider;
 import dev.crossvas.waila.ic2.base.interfaces.IWailaHelper;
+import dev.crossvas.waila.ic2.utils.TextFormatter;
 import ic2.api.tile.IWrenchable;
 import ic2.core.block.inventory.IItemTransporter;
 import ic2.core.item.tool.ItemToolWrench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
 
 public class WrenchableInfo implements IInfoProvider {
 
@@ -24,9 +22,9 @@ public class WrenchableInfo implements IInfoProvider {
             ItemStack handItem = player.getHeldItem();
             if (actualRate > 0) {
                 if (handItem != null && handItem.getItem() instanceof ItemToolWrench) {
-                    textCentered(helper, translatable("probe.wrenchable.drop_chance.info", new ChatComponentText(actualRate + "%").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
+                    textCentered(helper, translate(TextFormatter.GRAY, "probe.wrenchable.drop_chance.info", literal(TextFormatter.AQUA, "" + actualRate)));
                 } else {
-                    textCentered(helper, translatable("probe.wrenchable.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+                    textCentered(helper, translate(TextFormatter.GOLD, "probe.wrenchable.info"));
                 }
             }
         }

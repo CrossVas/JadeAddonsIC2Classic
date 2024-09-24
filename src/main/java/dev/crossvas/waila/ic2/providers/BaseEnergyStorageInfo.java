@@ -17,8 +17,8 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
         if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock electricBlock = (TileEntityElectricBlock) blockEntity;
             text(helper, tier(electricBlock.getTier()));
-            text(helper, translatable("probe.energy.input.max", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
-            text(helper, translatable("probe.energy.output.max", electricBlock.getOutputEnergyUnitsPerTick()));
+            text(helper, translate("probe.energy.input.max", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
+            text(helper, translate("probe.energy.output.max", electricBlock.getOutputEnergyUnitsPerTick()));
             EnergyContainer container = EnergyContainer.getContainer(electricBlock);
             addStats(helper, player, () -> addAveragesFull(helper, container));
         }

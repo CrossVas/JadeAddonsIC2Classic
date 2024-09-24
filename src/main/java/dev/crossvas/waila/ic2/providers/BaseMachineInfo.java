@@ -75,12 +75,12 @@ public class BaseMachineInfo implements IInfoProvider {
             // usage
             if (usage != null) text(helper, usage);
             if (speed > 0) {
-                bar(helper, (int) speed, (int) maxSpeed, translatable(name, new DecimalFormat().format(scaledProgress * 100.0)), ColorUtils.SPEED);
+                bar(helper, (int) speed, (int) maxSpeed, translate(name, new DecimalFormat().format(scaledProgress * 100.0)), ColorUtils.SPEED);
             }
             if (progress > 0) {
                 int scaledOp = (int) Math.min(6.0E7F, progress / progressPerTick);
                 int scaledMaxOp = (int) Math.min(6.0E7F, maxProgress / progressPerTick);
-                bar(helper, scaledOp, scaledMaxOp, translatable("probe.progress.full.name", scaledOp, scaledMaxOp), ColorUtils.PROGRESS);
+                bar(helper, scaledOp, scaledMaxOp, translate("probe.progress.full.name", scaledOp, scaledMaxOp), ColorUtils.PROGRESS);
             }
         }
     }

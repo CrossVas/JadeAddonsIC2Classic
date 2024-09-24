@@ -32,10 +32,10 @@ public class ElectrolyzerInfo implements IInfoProvider {
     }
 
     public void addElectrolyzerInfo(IWailaHelper helper, boolean charging, boolean discharging, int transfer, int energy, int maxEnergy) {
-        text(helper, translatable("probe.energy.transfer", transfer));
-        text(helper, translatable("probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing"))));
+        text(helper, translate("probe.energy.transfer", transfer));
+        text(helper, translate("probe.electrolyzer." + (discharging ? (charging ? "transfer" : "discharging") : (charging ? "charging" : "nothing"))));
         if (energy > 0) {
-            bar(helper, energy, maxEnergy, translatable("probe.progress.full_misc.name", energy, maxEnergy).appendText(" EU"), ColorUtils.RED);
+            bar(helper, energy, maxEnergy, translate("probe.progress.full_misc.name", energy, maxEnergy).appendText(" EU"), ColorUtils.RED);
         }
     }
 

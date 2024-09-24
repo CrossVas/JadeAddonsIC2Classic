@@ -36,14 +36,14 @@ public class UraniumEnricherInfo implements IInfoProvider {
 
             if (enricher.itemProgress > 0) {
                 int color = type != null ? ColorUtils.rgb(type.getColor().getRed(), type.getColor().getGreen(), type.getColor().getBlue()) : ColorUtils.PROGRESS;
-                bar(helper, enricher.itemProgress, 100, translatable("probe.progress.full.name", enricher.itemProgress, 100), color);
+                bar(helper, enricher.itemProgress, 100, translate("probe.progress.full.name", enricher.itemProgress, 100), color);
             }
             if (enricher.uranProgress > 0) {
-                bar(helper, enricher.uranProgress / 20, 1000 / 20, translatable("probe.progress.full_misc.name", enricher.uranProgress / 20, 1000 / 20).appendText("s"), ColorUtils.PROGRESS);
+                bar(helper, enricher.uranProgress / 20, 1000 / 20, translate("probe.progress.full_misc.name", enricher.uranProgress / 20, 1000 / 20).appendText("s"), ColorUtils.PROGRESS);
             }
 
             if (type != null && enricher.amount > 0) {
-                bar(helper, enricher.amount, 1000, translatable("probe.uranium.type",
+                bar(helper, enricher.amount, 1000, translate("probe.uranium.type",
                         SanityHelper.toPascalCase(type.getItem().getDisplayName()), enricher.amount, 1000),
                         ColorUtils.rgb(type.getColor().getRed(), type.getColor().getGreen(), type.getColor().getBlue()));
             }

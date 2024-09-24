@@ -18,8 +18,8 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             int energyPacket = transformer.energyPacket;
             int packets = transformer.packetCount;
             text(helper, tier(transformer.sinkTier));
-            text(helper, translatable("probe.energy.output.max", energyPacket));
-            text(helper, translatable("probe.packet.tick", packets));
+            text(helper, translate("probe.energy.output.max", energyPacket));
+            text(helper, translate("probe.packet.tick", packets));
             EnergyContainer container = EnergyContainer.getContainer(transformer);
             addStats(helper, player, () -> addCableOut(helper, container));
         }

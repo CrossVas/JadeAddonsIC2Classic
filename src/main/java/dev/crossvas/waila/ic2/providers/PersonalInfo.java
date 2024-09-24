@@ -2,12 +2,10 @@ package dev.crossvas.waila.ic2.providers;
 
 import dev.crossvas.waila.ic2.base.interfaces.IInfoProvider;
 import dev.crossvas.waila.ic2.base.interfaces.IWailaHelper;
+import dev.crossvas.waila.ic2.utils.TextFormatter;
 import ic2.core.block.personal.TileEntityPersonalChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -44,7 +42,8 @@ public class PersonalInfo implements IInfoProvider {
 
     public void addOwnerInfo(IWailaHelper helper, EntityPlayer owner) {
         if (owner != null) {
-            text(helper, translatable("probe.personal.owner", new ChatComponentText(owner.getDisplayName()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translate(TextFormatter.AQUA, "probe.personal.owner", literal(TextFormatter.GREEN, owner.getDisplayName())));
+
         }
     }
 

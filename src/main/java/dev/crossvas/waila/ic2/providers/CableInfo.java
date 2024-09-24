@@ -16,8 +16,8 @@ public class CableInfo implements IInfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityCable) {
             TileEntityCable cable = (TileEntityCable) blockEntity;
-            text(helper, translatable("probe.energy.limit", cable.getConductorBreakdownEnergy() - 1));
-            text(helper, translatable("probe.energy.loss", Formatter.CABLE_LOSS_FORMAT.format(cable.getConductionLoss())));
+            text(helper, translate("probe.energy.limit", cable.getConductorBreakdownEnergy() - 1));
+            text(helper, translate("probe.energy.loss", Formatter.CABLE_LOSS_FORMAT.format(cable.getConductionLoss())));
             EnergyContainer container = EnergyContainer.getContainer(cable);
             addStats(helper, player, () -> addCableOut(helper, container));
         }

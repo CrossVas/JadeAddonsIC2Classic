@@ -25,8 +25,8 @@ public class BaseGeneratorInfo implements IInfoProvider {
                 maxOutput -= 1;
             }
             text(helper, tier(generator.getSourceTier()));
-            text(helper, translatable("probe.energy.output", Formatter.formatNumber(euProduction, 4)));
-            text(helper, translatable("probe.energy.output.max", Formatter.formatNumber(maxOutput, 3)));
+            text(helper, translate("probe.energy.output", Formatter.formatNumber(euProduction, 4)));
+            text(helper, translate("probe.energy.output.max", Formatter.formatNumber(maxOutput, 3)));
 
             if (generator instanceof TileEntityGeoGenerator) {
                 WailaCommonHandler.addTankInfo(helper, generator);
@@ -35,7 +35,7 @@ public class BaseGeneratorInfo implements IInfoProvider {
             int fuel = generator.fuel;
             int maxFuel = generator.storage;
             if (fuel > 0) {
-                bar(helper, fuel, maxFuel, translatable("probe.storage.fuel", fuel), ColorUtils.DARK_GRAY);
+                bar(helper, fuel, maxFuel, translate("probe.storage.fuel", fuel), ColorUtils.DARK_GRAY);
             }
         }
     }

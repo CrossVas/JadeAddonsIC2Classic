@@ -23,15 +23,15 @@ public class EUStorageInfo implements IInfoProvider {
         if (blockEntity instanceof TileEntityBlock) {
             TileEntityBlock machine = (TileEntityBlock) blockEntity;
             if (machine instanceof TileEntityCreativeStorage) {
-                bar(helper, 1, 1, translatable("probe.energy.storage.name", "Infinite"), ColorUtils.RED);
+                bar(helper, 1, 1, translate("probe.energy.storage.name", "Infinite"), ColorUtils.RED);
             } else if (machine instanceof IEnergyContainer && !(machine instanceof TileEntityElectrolyzer || machine instanceof TileEntityCharged || machine instanceof TileEntityMatter)) {
                 IEnergyContainer storage = (IEnergyContainer) blockEntity;
                 int stored = storage.getStoredEnergy();
                 int max = storage.getEnergyCapacity();
-                bar(helper, stored, max, translatable("probe.energy.storage.full.name", Formatter.formatInt(stored, 4), Formatter.formatInt(max, 4)), ColorUtils.RED);
+                bar(helper, stored, max, translate("probe.energy.storage.full.name", Formatter.formatInt(stored, 4), Formatter.formatInt(max, 4)), ColorUtils.RED);
             } else if (machine instanceof TileEntityTeleporter) {
                 TileEntityTeleporter tp = (TileEntityTeleporter) machine;
-                bar(helper, tp.getAvailableEnergy(), tp.getAvailableEnergy(), translatable("probe.energy.storage.name", Formatter.formatInt(tp.getAvailableEnergy(), 4)), ColorUtils.RED);
+                bar(helper, tp.getAvailableEnergy(), tp.getAvailableEnergy(), translate("probe.energy.storage.name", Formatter.formatInt(tp.getAvailableEnergy(), 4)), ColorUtils.RED);
             }
         }
     }
