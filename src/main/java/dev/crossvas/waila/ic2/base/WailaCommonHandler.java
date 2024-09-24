@@ -3,9 +3,7 @@ package dev.crossvas.waila.ic2.base;
 import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.interfaces.IInfoProvider;
 import dev.crossvas.waila.ic2.base.interfaces.IWailaHelper;
-import dev.crossvas.waila.ic2.providers.AdjustableTransformerInfo;
-import dev.crossvas.waila.ic2.providers.EUStorageInfo;
-import dev.crossvas.waila.ic2.providers.WrenchableInfo;
+import dev.crossvas.waila.ic2.providers.*;
 import dev.crossvas.waila.ic2.utils.Formatter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +25,25 @@ public class WailaCommonHandler {
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
         INFO_PROVIDERS.add(AdjustableTransformerInfo.THIS);
+        INFO_PROVIDERS.add(BarrelInfo.THIS);
+        INFO_PROVIDERS.add(BaseEnergyStorageInfo.THIS);
+        INFO_PROVIDERS.add(BaseGeneratorInfo.THIS);
+        INFO_PROVIDERS.add(BaseMachineInfo.THIS);
+        INFO_PROVIDERS.add(CableInfo.THIS);
+        INFO_PROVIDERS.add(ChargePadInfo.THIS);
+        INFO_PROVIDERS.add(CropInfo.THIS);
+        INFO_PROVIDERS.add(ElectricBlockInfo.THIS);
+        INFO_PROVIDERS.add(ElectrolyzerInfo.THIS);
+        INFO_PROVIDERS.add(FluidOMatInfo.THIS);
+        INFO_PROVIDERS.add(LuminatorInfo.THIS);
+        INFO_PROVIDERS.add(MinerInfo.THIS);
+        INFO_PROVIDERS.add(NuclearInfo.THIS);
+        INFO_PROVIDERS.add(OreScannerInfo.THIS);
+        INFO_PROVIDERS.add(PersonalInfo.THIS);
+        INFO_PROVIDERS.add(SteamTurbineInfo.THIS);
+        INFO_PROVIDERS.add(TeleporterInfo.THIS);
+        INFO_PROVIDERS.add(TransformerInfo.THIS);
+        INFO_PROVIDERS.add(UraniumEnricherInfo.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfo.THIS);
     }

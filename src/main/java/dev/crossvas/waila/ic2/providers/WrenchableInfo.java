@@ -24,9 +24,9 @@ public class WrenchableInfo implements IInfoProvider {
             ItemStack handItem = player.getHeldItem();
             if (actualRate > 0) {
                 if (handItem != null && handItem.getItem() instanceof ItemToolWrench) {
-                    text(helper, translatable("probe.wrenchable.drop_chance.info", new ChatComponentText(actualRate + "%").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
+                    textCentered(helper, translatable("probe.wrenchable.drop_chance.info", new ChatComponentText(actualRate + "%").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
                 } else {
-                    text(helper, translatable("probe.wrenchable.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+                    textCentered(helper, translatable("probe.wrenchable.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
                 }
             }
         }

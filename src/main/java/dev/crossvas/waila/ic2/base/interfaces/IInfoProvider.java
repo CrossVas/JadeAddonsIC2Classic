@@ -7,6 +7,8 @@ import dev.crossvas.waila.ic2.utils.Formatter;
 import ic2.core.block.inventory.IItemTransporter;
 import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
+import ic2.core.item.tool.ItemTreetap;
+import ic2.core.item.tool.ItemTreetapElectric;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,7 +19,8 @@ import net.minecraft.util.*;
 public interface IInfoProvider {
 
     IItemTransporter.IFilter READER = stack -> stack != null && stack.getItem() instanceof ItemToolMeter;
-    IItemTransporter.IFilter CROP_ANALYZER = stack -> stack != null && stack.getItem() instanceof ItemCropnalyzer;
+    IItemTransporter.IFilter ANALYZER = stack -> stack != null && stack.getItem() instanceof ItemCropnalyzer;
+    IItemTransporter.IFilter TREETAP = stack -> stack != null && (stack.getItem() instanceof ItemTreetap || stack.getItem() instanceof ItemTreetapElectric);
     IItemTransporter.IFilter ALWAYS = itemStack -> true;
 
     default IItemTransporter.IFilter getFilter() {
