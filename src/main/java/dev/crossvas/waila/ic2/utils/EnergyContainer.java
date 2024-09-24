@@ -21,11 +21,11 @@ public class EnergyContainer {
         CACHE = CacheBuilder.newBuilder().expireAfterAccess(1L, TimeUnit.SECONDS).maximumSize(128L).build();
     }
 
-    LongAverager energyIn = new LongAverager(5);
-    LongAverager energyOut = new LongAverager(5);
-    long lastTime;
-    long lastIn;
-    long lastOut;
+    static LongAverager energyIn = new LongAverager(5);
+    static LongAverager energyOut = new LongAverager(5);
+    static long lastTime;
+    static long lastIn;
+    static long lastOut;
 
     public EnergyContainer() {}
 
@@ -38,33 +38,35 @@ public class EnergyContainer {
         }
 
         result.tick(tile.getWorldObj().getTotalWorldTime(), EnergyNet.instance.getNodeStats(tile));
+        System.out.println(tile.getWorldObj().getTotalWorldTime());
         return result;
     }
 
-    public void tick(long time, NodeStats stats) {
-        if (this.lastTime == 0L) {
-            this.lastTime = time;
-            this.lastIn = (long) stats.getEnergyIn();
-            this.lastOut = (long) stats.getEnergyOut();
+    public static void tick(long time, NodeStats stats) {
+        System.out.println(lastTime);
+        if (lastTime == 0L) {
+            lastTime = time;
+            lastIn = (long) stats.getEnergyIn();
+            lastOut = (long) stats.getEnergyOut();
         } else {
-            long diff = time - this.lastTime;
+            long diff = time - lastTime;
             if (diff <= 0L) {
                 return;
             }
-            this.energyIn.addEntry((long) ((stats.getEnergyIn() - this.lastIn) / diff));
-            this.energyOut.addEntry((long) ((stats.getEnergyOut() - this.lastOut) / diff));
-            this.lastTime = time;
-            this.lastIn = (long) stats.getEnergyIn();
-            this.lastOut = (long) stats.getEnergyOut();
+            energyIn.addEntry((long) ((stats.getEnergyIn() - lastIn) / diff));
+            energyOut.addEntry((long) ((stats.getEnergyOut() - lastOut) / diff));
+            lastTime = time;
+            lastIn = (long) stats.getEnergyIn();
+            lastOut = (long) stats.getEnergyOut();
 
         }
     }
 
     public int getAverageIn() {
-        return (int) this.energyIn.getAverage();
+        return (int) energyIn.getAverage();
     }
 
     public int getAverageOut() {
-        return (int) this.energyOut.getAverage();
+        return (int) energyOut.getAverage();
     }
 }

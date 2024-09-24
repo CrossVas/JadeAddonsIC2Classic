@@ -25,4 +25,9 @@ public class BlockPos {
     public int getZ() {
         return this.Z;
     }
+
+    @Override
+    public String toString() {
+        return "BlockPos{" + "X=" + X + ", Y=" + Y + ", Z=" + Z + '}';
+    }
 }

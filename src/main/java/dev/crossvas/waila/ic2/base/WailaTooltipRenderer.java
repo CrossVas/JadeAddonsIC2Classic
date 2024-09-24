@@ -3,7 +3,6 @@ package dev.crossvas.waila.ic2.base;
 import dev.crossvas.waila.ic2.WailaTags;
 import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.elements.CommonTextElement;
-import dev.crossvas.waila.ic2.utils.IToolTipHelper;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;

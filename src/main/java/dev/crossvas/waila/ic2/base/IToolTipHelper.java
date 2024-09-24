@@ -1,4 +1,4 @@
-package dev.crossvas.waila.ic2.utils;
+package dev.crossvas.waila.ic2.base;
 
 import mcp.mobius.waila.api.SpecialChars;
 import net.minecraft.util.IChatComponent;

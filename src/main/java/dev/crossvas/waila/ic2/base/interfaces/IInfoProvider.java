@@ -81,7 +81,7 @@ public interface IInfoProvider {
     default void addAveragesIn(IWailaHelper helper, EnergyContainer container) {
         int averageIn = container.getAverageIn();
         if (averageIn > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
@@ -92,14 +92,14 @@ public interface IInfoProvider {
     default void addAveragesOut(IWailaHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
     default void addCableOut(IWailaHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
@@ -107,7 +107,6 @@ public interface IInfoProvider {
 
     default void bar(IWailaHelper helper, int current, int max, IChatComponent text, int color) {
         this.bar(helper, current, max, text, color, "0");
-        new ChatComponentTranslation("aaa");
     }
 
     default void bar(IWailaHelper helper, int current, int max, IChatComponent text, int color, String textureData) {
@@ -153,7 +152,6 @@ public interface IInfoProvider {
     default void addStats(IWailaHelper helper, EntityPlayer player, IStatProvider stats) {
         if (player.isSneaking()) {
             text(helper, translatable("probe.energy.stats.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)), true);
-            textCentered(helper, new ChatComponentText("WIP").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             stats.addTooltips();
         } else {
             text(helper, translatable("probe.sneak.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)), true);
