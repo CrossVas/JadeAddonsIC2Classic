@@ -1,62 +1,89 @@
 package dev.crossvas.waila.ic2.base.interfaces;
 
-import dev.crossvas.jadexic2c.base.elements.*;
-import dev.crossvas.waila.ic2.base.elements.*;
-import dev.crossvas.waila.ic2.helpers.EnergyContainer;
-import ic2.core.inventory.filter.IFilter;
-import ic2.core.inventory.filter.SpecialFilters;
-import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.helpers.StackUtil;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.fluids.FluidStack;
-
-import java.util.List;
+import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
+import dev.crossvas.waila.ic2.base.elements.CommonTextElement;
+import dev.crossvas.waila.ic2.utils.EnergyContainer;
+import dev.crossvas.waila.ic2.utils.Formatter;
+import ic2.core.block.inventory.IItemTransporter;
+import ic2.core.item.tool.ItemCropnalyzer;
+import ic2.core.item.tool.ItemToolMeter;
+import ic2.core.util.StackUtil;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 
 public interface IInfoProvider {
 
-    IFilter READER = SpecialFilters.EU_READER;
-    IFilter THERMOMETER = SpecialFilters.THERMOMETER;
-    IFilter CROP_ANALYZER = SpecialFilters.CROP_SCANNER;
-    IFilter ALWAYS = SpecialFilters.ALWAYS_TRUE;
+    IItemTransporter.IFilter READER = stack -> stack.getItem() instanceof ItemToolMeter;
+    IItemTransporter.IFilter CROP_ANALYZER = stack -> stack.getItem() instanceof ItemCropnalyzer;
+    IItemTransporter.IFilter ALWAYS = itemStack -> true;
 
-    void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player);
-
-    default IFilter getFilter() {
+    default IItemTransporter.IFilter getFilter() {
         return READER;
     }
 
-    default boolean canHandle(Player player) {
-        return StackUtil.hasHotbarItems(player, getFilter()) || player.isCreative();
+    default boolean canHandle(EntityPlayer player) {
+        return hasHotbarItem(player, getFilter()) || player.capabilities.isCreativeMode;
     }
 
-    default void addAveragesFull(IJadeHelper helper, EnergyContainer container) {
-        addAveragesIn(helper, container, 3);
-        addAveragesOut(helper, container, 0);
+    default boolean hasHotbarItem(EntityPlayer player, ItemStack filter) {
+        if (player == null) {
+            return false;
+        }
+        InventoryPlayer inventoryPlayer = player.inventory;
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = inventoryPlayer.getStackInSlot(i);
+            if (StackUtil.isStackEqual(stack, filter)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     * common: energyIn, packetIn
-     * */
-
-    default void addAveragesIn(IJadeHelper helper, EnergyContainer container) {
-        addAveragesIn(helper, container, 3);
+    default boolean hasHotbarItem(EntityPlayer player, IItemTransporter.IFilter filter) {
+        if (player == null) {
+            return false;
+        }
+        InventoryPlayer inventoryPlayer = player.inventory;
+        for (int i = 0; i < 9; i++) {
+            ItemStack stack = inventoryPlayer.getStackInSlot(i);
+            if (filter.matches(stack)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    default void addAveragesIn(IJadeHelper helper, EnergyContainer container, int padding) {
+    default String status(boolean status) {
+        return status ? EnumChatFormatting.GREEN + String.valueOf(true) : EnumChatFormatting.RED + String.valueOf(false);
+    }
+
+    default String getDisplayTier(int tier) {
+        switch (tier) {
+            case 1: return "LV";
+            case 2: return "MV";
+            case 3: return "HV";
+            case 4: return "EV";
+            case 5: return "IV";
+            case 6: return "LuV";
+            default: return String.valueOf(tier);
+        }
+    }
+
+    default void addAveragesFull(IWailaHelper helper, EnergyContainer container) {
+        addAveragesIn(helper, container);
+        addAveragesOut(helper, container);
+    }
+
+    default void addAveragesIn(IWailaHelper helper, EnergyContainer container) {
         int averageIn = container.getAverageIn();
-        int packetsIn = container.getPacketsIn();
-        MutableComponent full = getFullStatus(averageIn, packetsIn);
         if (averageIn > 0) {
-            paddingY(helper, padding);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
-            if (packetsIn <= 0) packetsIn = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
@@ -64,174 +91,64 @@ public interface IInfoProvider {
      * common: energyOut, packetOut
      * */
 
-    default void addAveragesOut(IJadeHelper helper, EnergyContainer container) {
-        addAveragesOut(helper, container, 3);
-    }
-
-    default void addAveragesOut(IJadeHelper helper, EnergyContainer container, int padding) {
+    default void addAveragesOut(IWailaHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
-        int packetsOut = container.getPacketsOut();
-        MutableComponent full = getFullStatus(averageOut, packetsOut);
         if (averageOut > 0) {
-            paddingY(helper, padding);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
-            if (packetsOut <= 0) packetsOut = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
-    default void addCableAverages(IJadeHelper helper, int energyFlow, int packetFlow) {
-        if (energyFlow > 0) {
-            MutableComponent full = getFullStatus(energyFlow, packetFlow);
-            paddingY(helper, 3);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(energyFlow)).withStyle(ChatFormatting.AQUA));
-            if (packetFlow <= 0) packetFlow = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)).withStyle(ChatFormatting.AQUA)));
+    default void addCableOut(IWailaHelper helper, EnergyContainer container) {
+        int averageOut = container.getAverageOut();
+        if (averageOut > 0) {
+            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
         }
     }
 
-    // new
+    void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player);
 
-    default void centered(IJadeHelper helper, Component component) {
-        CommonTextElement element = new CommonTextElement(component, true);
+    default void bar(IWailaHelper helper, int current, int max, IChatComponent text, int color) {
+        this.bar(helper, current, max, text, color, "0");
+        new ChatComponentTranslation("aaa");
+    }
+
+    default void bar(IWailaHelper helper, int current, int max, IChatComponent text, int color, String textureData) {
+        CommonBarElement element = new CommonBarElement(current, max, text, color, textureData);
         add(helper, element);
     }
 
-    default void defaultCentered(IJadeHelper helper, Component component) {
-        CommonTextElement element = new CommonTextElement(component.copy(), true);
+    default void text(IWailaHelper helper, IChatComponent text, boolean centered) {
+        CommonTextElement element = new CommonTextElement(text, centered);
         add(helper, element);
     }
 
-    default void defaultCenteredText(IJadeHelper helper, String translatable, Object... args) {
-        defaultCentered(helper, Component.translatable(translatable, args));
-    }
-
-    default void text(IJadeHelper helper, Component text) {
+    default void text(IWailaHelper helper, IChatComponent text) {
         CommonTextElement element = new CommonTextElement(text, false);
         add(helper, element);
     }
 
-    default void appendText(IJadeHelper helper, Component text) {
-        CommonTextElement element = new CommonTextElement(text, false);
-        append(helper, element);
-    }
-
-    default void defaultText(IJadeHelper helper, String translatable, Object... args) {
-        text(helper, Component.translatable(translatable, args));
-    }
-
-    default void appendDefaultText(IJadeHelper helper, String translatable, Object... args) {
-        appendText(helper, Component.translatable(translatable, args));
-    }
-
-    default void defaultText(IJadeHelper helper, Component component) {
-        text(helper, component);
-    }
-
-    default void appendDefaultText(IJadeHelper helper, Component component) {
-        appendText(helper, component);
-    }
-
-    default void bar(IJadeHelper helper, int current, int max, Component text, int color) {
-        CommonBarElement element = new CommonBarElement(current, max, text, color);
+    default void textCentered(IWailaHelper helper, IChatComponent text) {
+        CommonTextElement element = new CommonTextElement(text, true);
         add(helper, element);
     }
 
-    default void fluid(IJadeHelper helper, FluidStack fluid, int capacity, boolean ignoreCapacity) {
-        CommonFluidBarElement element = new CommonFluidBarElement(fluid, capacity, ignoreCapacity);
-        add(helper, element);
-    }
-
-    default void fluid(IJadeHelper helper, FluidStack fluid, int capacity) {
-        fluid(helper, fluid, capacity, false);
-    }
-
-    default void padding(IJadeHelper helper, int x, int y) {
-        add(helper, new CommonPaddingElement(x, y));
-    }
-
-    default void paddingX(IJadeHelper helper, int x) {
-        add(helper, new CommonPaddingElement(x, 0));
-    }
-
-    default void paddingY(IJadeHelper helper, int y) {
-        add(helper, new CommonPaddingElement(0, y));
-    }
-
-    default void appendPadding(IJadeHelper helper, int x, int y) {
-        append(helper, new CommonPaddingElement(x, y));
-    }
-
-    default void appendPaddingX(IJadeHelper helper, int x) {
-        append(helper, new CommonPaddingElement(x, 0));
-    }
-
-    default void appendPaddingY(IJadeHelper helper, int y) {
-        append(helper, new CommonPaddingElement(0, y));
-    }
-
-    default void add(IJadeHelper helper, IJadeElementBuilder element) {
+    default void add(IWailaHelper helper, IWailaElementBuilder element) {
         helper.add(element);
     }
 
-    default void append(IJadeHelper helper, IJadeElementBuilder element) {
-        helper.append(element);
+    default IChatComponent translatable(String translatable, Object... args) {
+        return new ChatComponentTranslation(translatable, args);
     }
 
-    default void item(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, -5), "LEFT");
-        helper.add(stackElement);
+    default IChatComponent tier(int tier) {
+        return translatable("probe.energy.tier", getDisplayTier(tier));
     }
 
-    default void appendItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, -5), "LEFT");
-        helper.append(stackElement);
+    default IChatComponent maxIn(int maxIn) {
+        return translatable("probe.energy.input.max", maxIn);
     }
 
-    default void defaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, 0), "LEFT");
-        helper.add(stackElement);
-    }
-
-    default void appendDefaultItem(IJadeHelper helper, ItemStack stack) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, new Vec2(0, 0), "LEFT");
-        helper.append(stackElement);
-    }
-
-    default void item(IJadeHelper helper, ItemStack stack, Vec2 translation) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, translation, "LEFT");
-        helper.add(stackElement);
-    }
-
-    default void appendItem(IJadeHelper helper, ItemStack stack, Vec2 translation) {
-        CommonItemStackElement stackElement = new CommonItemStackElement(stack, translation, "LEFT");
-        helper.append(stackElement);
-    }
-
-    default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component, int size) {
-        int counter = 0;
-        if (!stacks.isEmpty()) {
-            text(helper, component);
-            paddingY(helper, 2);
-            for (ItemStack stack : stacks) {
-                if (counter < size + 1) {
-                    appendDefaultItem(helper, stack);
-                    counter++;
-                    if (counter == size) {
-                        counter = 0;
-                        padding(helper, 0, 0);
-                    }
-                }
-            }
-            paddingY(helper, 2);
-        }
-    }
-
-    default void addGrid(IJadeHelper helper, List<ItemStack> stacks, Component component) {
-        addGrid(helper, stacks, component, 6);
-    }
-
-    default MutableComponent getFullStatus(int energy, int packet) {
-        return (energy > 0 && packet <= 0) ? Component.literal("~").withStyle(ChatFormatting.GREEN) : Component.empty();
+    default IChatComponent usage(int usage) {
+        return translatable("probe.energy.usage", usage);
     }
 }

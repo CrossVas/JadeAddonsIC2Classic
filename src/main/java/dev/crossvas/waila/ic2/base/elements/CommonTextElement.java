@@ -1,26 +1,22 @@
 package dev.crossvas.waila.ic2.base.elements;
 
 import dev.crossvas.waila.ic2.WailaTags;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.phys.Vec2;
+import dev.crossvas.waila.ic2.base.interfaces.IWailaElementBuilder;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IChatComponent;
 
-public class CommonTextElement extends CommonElement {
+public class CommonTextElement implements IWailaElementBuilder {
 
-    Component TEXT;
+    IChatComponent TEXT;
     boolean CENTERED;
 
-    public CommonTextElement(Component text, boolean centered) {
-        this(text, new Vec2(0, 0), "LEFT", centered);
-    }
-
-    public CommonTextElement(Component text, Vec2 translation, String side, boolean centered) {
-        super(translation, side);
+    public CommonTextElement(IChatComponent text, boolean centered) {
         this.TEXT = text;
         this.CENTERED = centered;
     }
 
-    public Component getText() {
+
+    public IChatComponent getText() {
         return TEXT;
     }
 
@@ -29,21 +25,16 @@ public class CommonTextElement extends CommonElement {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        tag.putString("text", Component.Serializer.toStableJson(TEXT));
-        tag.putString("side", SIDE);
-        tag.putInt("translationX", (int) TRANSLATION.x);
-        tag.putInt("translationY", (int) TRANSLATION.y);
-        tag.putBoolean("centered", this.CENTERED);
+    public NBTTagCompound save(NBTTagCompound tag) {
+        tag.setString("text", IChatComponent.Serializer.func_150696_a(this.TEXT));
+        tag.setBoolean("centered", this.CENTERED);
         return tag;
     }
 
-    public static CommonTextElement load(CompoundTag tag) {
-        Component text = Component.Serializer.fromJson(tag.getString("text"));
-        Vec2 translation = new Vec2(tag.getInt("translationX"), tag.getInt("translationY"));
-        String side = tag.getString("side");
+    public static CommonTextElement load(NBTTagCompound tag) {
+        IChatComponent text = IChatComponent.Serializer.func_150699_a(tag.getString("text"));
         boolean centered = tag.getBoolean("centered");
-        return new CommonTextElement(text, translation, side, centered);
+        return new CommonTextElement(text, centered);
     }
 
     @Override

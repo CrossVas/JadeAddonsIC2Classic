@@ -1,0 +1,13 @@
+[
+  {
+    "modid": "wailaaddons_ic2c",
+    "name": "Waila Addons: IC2Classic",
+    "version": "${modVersion}",
+    "mcversion": "1.7.10",
+    "description": "Compat layer between IC2Classic and waila mod backported from modern versions.",
+    "url": "",
+    "credits": "",
+    "authorList": ["CrossVas"],
+    "dependencies": []
+  }
+]

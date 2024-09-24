@@ -1,26 +1,27 @@
 package dev.crossvas.waila.ic2.base.elements;
 
 import dev.crossvas.waila.ic2.WailaTags;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.phys.Vec2;
+import dev.crossvas.waila.ic2.base.interfaces.IWailaElementBuilder;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IChatComponent;
 
-public class CommonBarElement extends CommonElement {
+public class CommonBarElement implements IWailaElementBuilder {
 
     int CURRENT;
     int MAX;
     int COLOR;
-    Component TEXT;
+    IChatComponent TEXT;
+    String TEXTURE_DATA;
 
-    public CommonBarElement(int current, int max, Component text, int color) {
-        super(new Vec2(0, 0), "LEFT");
+    public CommonBarElement(int current, int max, IChatComponent text, int color, String textureData) {
         this.CURRENT = current;
         this.MAX = max;
         this.TEXT = text;
         this.COLOR = color;
+        this.TEXTURE_DATA = textureData;
     }
 
-    public Component getText() {
+    public IChatComponent getText() {
         return this.TEXT;
     }
 
@@ -36,21 +37,27 @@ public class CommonBarElement extends CommonElement {
         return this.COLOR;
     }
 
-    public static CommonBarElement load(CompoundTag tag) {
-        Component text = Component.Serializer.fromJson(tag.getString("text"));
-        int current = tag.getInt("current");
-        int max = tag.getInt("max");
-        int color = tag.getInt("color");
-        return new CommonBarElement(current, max, text, color);
+    public String getTextureData() {
+        return this.TEXTURE_DATA;
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        tag.putString("text", Component.Serializer.toStableJson(this.TEXT));
-        tag.putInt("current", this.CURRENT);
-        tag.putInt("max", this.MAX);
-        tag.putInt("color", this.COLOR);
+    public NBTTagCompound save(NBTTagCompound tag) {
+        tag.setString("text", IChatComponent.Serializer.func_150696_a(this.TEXT));
+        tag.setInteger("current", this.CURRENT);
+        tag.setInteger("max", this.MAX);
+        tag.setInteger("color", this.COLOR);
+        tag.setString("texture", this.TEXTURE_DATA);
         return tag;
+    }
+
+    public static CommonBarElement load(NBTTagCompound tag) {
+        IChatComponent text = IChatComponent.Serializer.func_150699_a(tag.getString("text"));
+        int current = tag.getInteger("current");
+        int max = tag.getInteger("max");
+        int color = tag.getInteger("color");
+        String texture = tag.getString("texture");
+        return new CommonBarElement(current, max, text, color, texture);
     }
 
     @Override
