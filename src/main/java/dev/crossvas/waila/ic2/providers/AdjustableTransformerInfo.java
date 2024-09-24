@@ -6,8 +6,6 @@ import dev.crossvas.waila.ic2.utils.EnergyContainer;
 import ic2.core.block.wiring.TileEntityAdjustableTransformer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
 
 public class AdjustableTransformerInfo implements IInfoProvider {
 
@@ -23,12 +21,7 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             text(helper, translatable("probe.energy.output.max", energyPacket));
             text(helper, translatable("probe.packet.tick", packets));
             EnergyContainer container = EnergyContainer.getContainer(transformer);
-            if (player.isSneaking()) {
-                text(helper, translatable("probe.energy.stats.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)), true);
-                addCableOut(helper, container);
-            } else {
-                text(helper, translatable("probe.sneak.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)), true);
-            }
+            addStats(helper, player, () -> addCableOut(helper, container));
         }
     }
 }

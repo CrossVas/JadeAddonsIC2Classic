@@ -12,10 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.*;
 
 public interface IInfoProvider {
 
@@ -151,5 +148,19 @@ public interface IInfoProvider {
 
     default IChatComponent usage(int usage) {
         return translatable("probe.energy.usage", usage);
+    }
+
+    default void addStats(IWailaHelper helper, EntityPlayer player, IStatProvider stats) {
+        if (player.isSneaking()) {
+            text(helper, translatable("probe.energy.stats.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)), true);
+            textCentered(helper, new ChatComponentText("WIP").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            stats.addTooltips();
+        } else {
+            text(helper, translatable("probe.sneak.info").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)), true);
+        }
+    }
+
+    interface IStatProvider {
+        void addTooltips();
     }
 }
