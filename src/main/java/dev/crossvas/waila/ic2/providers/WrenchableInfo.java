@@ -3,7 +3,6 @@ package dev.crossvas.waila.ic2.providers;
 import dev.crossvas.waila.ic2.base.interfaces.IInfoProvider;
 import dev.crossvas.waila.ic2.base.interfaces.IWailaHelper;
 import ic2.api.tile.IWrenchable;
-import ic2.core.block.TileEntityBlock;
 import ic2.core.block.inventory.IItemTransporter;
 import ic2.core.item.tool.ItemToolWrench;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,14 +22,7 @@ public class WrenchableInfo implements IInfoProvider {
             IWrenchable wrenchableTile = (IWrenchable) blockEntity;
             int actualRate = (int) (wrenchableTile.getWrenchDropRate() * 100);
             ItemStack handItem = player.getHeldItem();
-            boolean show;
-            if (wrenchableTile instanceof TileEntityBlock) {
-                TileEntityBlock machines = (TileEntityBlock) wrenchableTile;
-                show = machines.wrenchCanRemove(player);
-            } else {
-                show = actualRate > 0;
-            }
-            if (show) {
+            if (actualRate > 0) {
                 if (handItem != null && handItem.getItem() instanceof ItemToolWrench) {
                     text(helper, translatable("probe.wrenchable.drop_chance.info", new ChatComponentText(actualRate + "%").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA))).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
                 } else {
