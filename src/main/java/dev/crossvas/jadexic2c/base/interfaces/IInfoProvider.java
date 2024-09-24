@@ -53,7 +53,7 @@ public interface IInfoProvider {
     default void addAveragesIn(IJadeHelper helper, EnergyContainer container) {
         int averageIn = container.getAverageIn();
         if (averageIn > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setStyle(new Style().setColor(TextFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow_in", Formatter.EU_FORMAT.format(averageIn)).setStyle(new Style().setColor(TextFormatting.AQUA)));
         }
     }
 
@@ -64,14 +64,14 @@ public interface IInfoProvider {
     default void addAveragesOut(IJadeHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setStyle(new Style().setColor(TextFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow_out", Formatter.EU_FORMAT.format(averageOut)).setStyle(new Style().setColor(TextFormatting.AQUA)));
         }
     }
 
     default void addCableOut(IJadeHelper helper, EnergyContainer container) {
         int averageOut = container.getAverageOut();
         if (averageOut > 0) {
-            text(helper, translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setStyle(new Style().setColor(TextFormatting.AQUA)));
+            text(helper, translatable("tooltip.item.eu_reader.cable_flow", Formatter.EU_FORMAT.format(averageOut)).setStyle(new Style().setColor(TextFormatting.AQUA)));
         }
     }
 
@@ -119,5 +119,18 @@ public interface IInfoProvider {
 
     default ITextComponent usage(int usage) {
         return translatable("probe.energy.usage", usage);
+    }
+
+    default void addStats(IJadeHelper helper, EntityPlayer player, IStatProvider stats) {
+        if (player.isSneaking()) {
+            text(helper, translatable("probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
+            stats.addTooltips();
+        } else {
+            text(helper, translatable("probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
+        }
+    }
+
+    interface IStatProvider {
+        void addTooltips();
     }
 }

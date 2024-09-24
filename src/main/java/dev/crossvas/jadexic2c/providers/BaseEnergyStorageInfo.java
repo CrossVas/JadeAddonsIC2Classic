@@ -22,12 +22,7 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
             text(helper, translatable("probe.energy.input.max", (int) EnergyNet.instance.getPowerFromTier(electricBlock.tier)));
             text(helper, translatable("probe.energy.output.max", electricBlock.getMaxSendingEnergy()));
             EnergyContainer container = EnergyContainer.getContainer(electricBlock);
-            if (player.isSneaking()) {
-                text(helper, translatable("probe.energy.stats.info").setStyle(new Style().setColor(TextFormatting.GREEN)), true);
-                addAveragesFull(helper, container);
-            } else {
-                text(helper, translatable("probe.sneak.info").setStyle(new Style().setColor(TextFormatting.AQUA)), true);
-            }
+            addStats(helper, player, () -> addAveragesFull(helper, container));
         }
     }
 }

@@ -22,7 +22,7 @@ public class TransformerInfo implements IInfoProvider {
             text(helper, translatable("probe.energy.output.max", transformer.isActive ? transformer.highOutput : transformer.lowOutput));
             text(helper, translatable("probe.packet.tick", transformer.isActive ? 1 : 4));
             EnergyContainer container = EnergyContainer.getContainer(transformer);
-            addCableOut(helper, container);
+            addStats(helper, player, () -> addCableOut(helper, container));
         }
     }
 }
