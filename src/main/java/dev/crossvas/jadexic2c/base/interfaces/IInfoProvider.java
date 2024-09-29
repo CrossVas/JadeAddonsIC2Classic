@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.base.interfaces;
 
+import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.*;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.inventory.filter.IFilter;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.fluids.FluidStack;
+import snownee.jade.Jade;
 
 import java.util.List;
 
@@ -232,5 +234,20 @@ public interface IInfoProvider {
 
     default MutableComponent getFullStatus(int energy, int packet) {
         return (energy > 0 && packet <= 0) ? Component.literal("~").withStyle(ChatFormatting.GREEN) : Component.empty();
+    }
+
+    default void addStats(IJadeHelper helper, Player player, IStatProvider stats) {
+        boolean isRequired = Jade.CONFIG.get().getPlugin().get(JadeTags.SNEAK_FOR_DETAILS);
+        boolean condition = !isRequired || player.isCrouching();
+        if (condition) {
+            centered(helper, Component.translatable("probe.energy.stats.info").withStyle(ChatFormatting.GREEN));
+            stats.addStats();
+        } else {
+            centered(helper, Component.translatable("probe.sneak.info").withStyle(ChatFormatting.AQUA));
+        }
+    }
+
+    interface IStatProvider {
+        void addStats();
     }
 }

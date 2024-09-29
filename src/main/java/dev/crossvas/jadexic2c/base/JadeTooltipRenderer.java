@@ -65,7 +65,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IServerData
                     CompoundTag elementTag = serverTag.getCompound(JADE_ADDON_TEXT_TAG);
                     CommonTextElement textElement = CommonTextElement.load(elementTag);
                     boolean centered = textElement.isCentered();
-                    IElement jadeElement = new SpecialTextElement(refreshComponent(textElement.getText(), defaultFormatting)).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
+                    IElement jadeElement = new SpecialTextElement(/*refreshComponent(textElement.getText(), defaultFormatting)*/textElement.getText()).centered(centered).translate(textElement.getTranslation()).align(IElement.Align.valueOf(textElement.getSide()));
                     addElement(tooltip, jadeElement, elementTag);
                 }
                 // bar

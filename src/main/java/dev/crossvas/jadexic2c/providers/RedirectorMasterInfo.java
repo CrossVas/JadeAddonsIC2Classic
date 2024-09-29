@@ -24,7 +24,7 @@ public class RedirectorMasterInfo implements IInfoProvider {
             }
 
             EnergyContainer container = EnergyContainer.getContainer(master);
-            addCableAverages(helper, container.getAverageIn(), container.getPacketsIn());
+            addStats(helper, player, () -> addCableAverages(helper, container.getAverageIn(), container.getPacketsIn()));
         }
     }
 }

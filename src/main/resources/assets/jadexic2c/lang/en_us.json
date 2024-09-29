@@ -1,5 +1,6 @@
 {
   "config.jade.plugin_ic2.force_top_style": "Use TOP Style",
+  "config.jade.plugin_ic2.sneak_for_details": "Requires Sneak for details",
   "config.jade.plugin_ic2.relocate_modid": "Relocate Mod Name",
   "config.jade.plugin_ic2.remove_modid": "Remove Mod Name",
   "config.jade.plugin_ic2.remove_renders_fluid": "Use custom style for IC2 Tanks",
@@ -44,5 +45,7 @@
   "ic2.probe.chunkloader.radius": "Radius: %s chunk(s)",
   "ic2.probe.chunkloader.ticks": "Chunk Ticks: %s",
   "ic2.probe.personal.owner": "Owner: %s",
-  "ic2.probe.machine.xp": "Stored: %s XP"
+  "ic2.probe.machine.xp": "Stored: %s XP",
+  "probe.sneak.info": "Sneak for energy stats...",
+  "probe.energy.stats.info": "-== Energy Stats ==-"
 }

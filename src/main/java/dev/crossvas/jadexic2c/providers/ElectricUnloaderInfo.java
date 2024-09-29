@@ -19,7 +19,7 @@ public class ElectricUnloaderInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.output.max.name", unloader.getMaxEnergyOutput());
             defaultText(helper, "ic2.probe.transformer.packets.name", 10);
             EnergyContainer container = EnergyContainer.getContainer(unloader);
-            addAveragesOut(helper, container);
+            addStats(helper, player, () -> addAveragesOut(helper, container));
         }
     }
 }

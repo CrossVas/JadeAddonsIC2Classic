@@ -39,7 +39,7 @@ public class CableInfo implements IInfoProvider {
             defaultText(helper, "tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
             defaultText(helper, "tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
             EnergyContainer container = EnergyContainer.getContainer(cable);
-            addCableAverages(helper, container.getAverageOut(), container.getPacketsOut());
+            addStats(helper, player, () -> addCableAverages(helper, container.getAverageOut(), container.getPacketsOut()));
         }
     }
 

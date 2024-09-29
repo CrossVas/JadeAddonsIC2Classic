@@ -24,7 +24,7 @@ public class ChargePadInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.chargepad.transferrate.name", transfer);
             defaultText(helper, "ic2.probe.chargepad.radius.name", range + 1.0F);
             EnergyContainer container = EnergyContainer.getContainer(chargePad);
-            addAveragesIn(helper, container);
+            addStats(helper, player, () -> addAveragesIn(helper, container));
         }
     }
 }

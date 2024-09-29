@@ -18,8 +18,7 @@ public class ElectricLoaderInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(loader.getSinkTier()));
             defaultText(helper, "ic2.probe.eu.max_in.name", loader.getMaxInput());
             EnergyContainer container = EnergyContainer.getContainer(loader);
-            addAveragesIn(helper, container);
-
+            addStats(helper, player, () -> addAveragesIn(helper, container));
         }
     }
 }

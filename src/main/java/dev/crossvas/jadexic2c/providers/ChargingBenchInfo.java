@@ -48,7 +48,7 @@ public class ChargingBenchInfo implements IInfoProvider {
                         DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (toDischargeEnergy / dischargeEnergy * 50L), "HH:mm:ss")).withStyle(ChatFormatting.WHITE), -16733185);
             }
             EnergyContainer container = EnergyContainer.getContainer(bench);
-            addAveragesIn(helper, container);
+            addStats(helper, player, () -> addAveragesIn(helper, container));
         }
     }
 }

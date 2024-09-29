@@ -52,7 +52,7 @@ public class BatteryStationInfo implements IInfoProvider {
                         DurationFormatUtils.formatDuration(dischargeEnergy <= 0 ? 0L : (missingEnergy / dischargeEnergy * 50L), "HH:mm:ss")), -16733185);
             }
             EnergyContainer container = EnergyContainer.getContainer(station);
-            addAveragesOut(helper, container);
+            addStats(helper, player, () -> addAveragesOut(helper, container));
         }
     }
 }

@@ -23,7 +23,7 @@ public class AdjustableTransformerInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.transformer.packets.name", packetCount);
 
             EnergyContainer container = EnergyContainer.getContainer(transformer);
-            addCableAverages(helper, container.getAverageOut(), container.getPacketsOut());
+            addStats(helper, player, () -> addCableAverages(helper, container.getAverageOut(), container.getPacketsOut()));
         }
     }
 }

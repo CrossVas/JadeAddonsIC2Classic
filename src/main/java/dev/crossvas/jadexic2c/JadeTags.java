@@ -14,6 +14,7 @@ public class JadeTags {
     public static final ResourceLocation TANK_RENDER = JadeIC2Classic.rl("remove_renders_fluid");
     // general config
     public static final ResourceLocation TOP_STYLE = JadeIC2Classic.rl("force_top_style");
+    public static final ResourceLocation SNEAK_FOR_DETAILS = JadeIC2Classic.rl("sneak_for_details");
 
     public static final String JADE_ADDON_TEXT_TAG = "jade_addon_text";
     public static final String JADE_ADDON_ITEM_TAG = "jade_addon_item";

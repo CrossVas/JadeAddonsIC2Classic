@@ -4,6 +4,7 @@ import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
+import ic2.core.block.base.features.IXPMachine;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseAdvMultiMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseColossalMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseMultiMachineTileEntity;
@@ -12,6 +13,7 @@ import ic2.core.utils.math.ColorUtils;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +30,13 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
             defaultText(helper, "ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
             defaultText(helper, "ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
+            if (multiMachine instanceof IXPMachine xpMachine) {
+                int xp = xpMachine.getCreatedXP(false);
+                if (xp > 0) {
+                    text(helper, Component.translatable("ic2.probe.machine.xp", xp).withStyle(ChatFormatting.GREEN));
 
+                }
+            }
             if (multiMachine instanceof BaseAdvMultiMachineTileEntity adv) {
                 int speed = adv.getSpeed();
                 int maxSpeed = adv.getMaxSpeed();

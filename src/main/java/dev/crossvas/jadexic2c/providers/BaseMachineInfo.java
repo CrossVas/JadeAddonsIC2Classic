@@ -13,7 +13,6 @@ import ic2.core.block.machines.tiles.mv.RefineryTileEntity;
 import ic2.core.block.machines.tiles.mv.SlowGrinderTileEntity;
 import ic2.core.block.machines.tiles.mv.VacuumCannerTileEntity;
 import ic2.core.utils.helpers.Formatters;
-import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;

@@ -30,7 +30,7 @@ public class CommonTextElement extends CommonElement {
 
     @Override
     public CompoundTag save(CompoundTag tag) {
-        tag.putString("text", Component.Serializer.toStableJson(TEXT));
+        tag.putString("text", Component.Serializer.toJson(TEXT));
         tag.putString("side", SIDE);
         tag.putInt("translationX", (int) TRANSLATION.x);
         tag.putInt("translationY", (int) TRANSLATION.y);

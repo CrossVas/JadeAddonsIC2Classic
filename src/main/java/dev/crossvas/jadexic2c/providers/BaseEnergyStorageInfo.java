@@ -20,7 +20,7 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
             defaultText(helper, "ic2.probe.eu.output.name", energyStorage.getProvidedEnergy());
 
             EnergyContainer container = EnergyContainer.getContainer(energyStorage);
-            addAveragesFull(helper, container);
+            addStats(helper, player, () -> addAveragesFull(helper, container));
         }
     }
 }
