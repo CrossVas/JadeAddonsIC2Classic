@@ -1,3 +1,4 @@
+item.probe.name=IC2C: Probe Item
 progress.material.name=Material: %s/%s
 probe.transformer.inverted=Inverted: %s
 probe.enchanter.missing=Requires XP!

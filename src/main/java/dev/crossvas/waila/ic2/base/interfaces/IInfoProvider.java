@@ -1,11 +1,15 @@
 package dev.crossvas.waila.ic2.base.interfaces;
 
+import akka.util.Helpers;
+import dev.crossvas.waila.ic2.WailaIC2Classic;
 import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.elements.CommonTextElement;
 import dev.crossvas.waila.ic2.utils.EnergyContainer;
 import dev.crossvas.waila.ic2.utils.Formatter;
 import dev.crossvas.waila.ic2.utils.TextFormatter;
 import ic2.core.block.inventory.IItemTransporter;
+import ic2.core.item.armor.ItemArmorNanoSuit;
+import ic2.core.item.armor.ItemArmorQuantumSuit;
 import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
@@ -14,6 +18,7 @@ import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 
@@ -23,27 +28,29 @@ public interface IInfoProvider {
     IItemTransporter.IFilter ANALYZER = stack -> stack != null && stack.getItem() instanceof ItemCropnalyzer;
     IItemTransporter.IFilter TREETAP = stack -> stack != null && (stack.getItem() instanceof ItemTreetap || stack.getItem() instanceof ItemTreetapElectric);
     IItemTransporter.IFilter ALWAYS = itemStack -> true;
+    IItemTransporter.IFilter OMNI = stack -> stack != null && stack.getItem() == WailaIC2Classic.PROBE;
+
 
     default IItemTransporter.IFilter getFilter() {
         return READER;
     }
 
     default boolean canHandle(EntityPlayer player) {
-        return hasHotbarItem(player, getFilter()) || player.capabilities.isCreativeMode;
+        return (hasHotbarItem(player, getFilter()) || hasProbe(player)) || player.capabilities.isCreativeMode;
     }
 
-    default boolean hasHotbarItem(EntityPlayer player, ItemStack filter) {
-        if (player == null) {
-            return false;
-        }
-        InventoryPlayer inventoryPlayer = player.inventory;
-        for (int i = 0; i < 9; i++) {
-            ItemStack stack = inventoryPlayer.getStackInSlot(i);
-            if (StackUtil.isStackEqual(stack, filter)) {
-                return true;
+    default boolean hasProbe(EntityPlayer player) {
+        ItemStack helmet = player.getCurrentArmor(3);
+        boolean helmetProbe = false;
+        if (helmet != null) {
+            if (helmet.getItem() instanceof ItemArmorNanoSuit || helmet.getItem() instanceof ItemArmorQuantumSuit) {
+                NBTTagCompound tag = StackUtil.getOrCreateNbtData(helmet);
+                if (tag.hasKey(WailaIC2Classic.PROBE_ID)) {
+                    helmetProbe = tag.getBoolean(WailaIC2Classic.PROBE_ID);
+                }
             }
         }
-        return false;
+        return helmetProbe || hasHotbarItem(player, OMNI);
     }
 
     default boolean hasHotbarItem(EntityPlayer player, IItemTransporter.IFilter filter) {
@@ -159,10 +166,6 @@ public interface IInfoProvider {
 
     default IChatComponent literal(TextFormatter formatter, String translatable) {
         return formatter.literal(translatable);
-    }
-
-    default IChatComponent literal(TextFormatter formatter, String translatable, Object... args) {
-        return formatter.literal(translatable, args);
     }
 
     default IChatComponent tier(int tier) {

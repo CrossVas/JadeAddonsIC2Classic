@@ -1,9 +1,6 @@
 package dev.crossvas.waila.ic2.utils;
 
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.*;
 
 public enum TextFormatter {
     BLACK(EnumChatFormatting.BLACK),
@@ -42,11 +39,7 @@ public enum TextFormatter {
         return new ChatComponentTranslation(translatable, args).setChatStyle(new ChatStyle().setColor(this.FORMAT));
     }
 
-    public IChatComponent literal(String translatable) {
-        return new ChatComponentTranslation(translatable).setChatStyle(new ChatStyle().setColor(this.FORMAT));
-    }
-
-    public IChatComponent literal(String translatable, Object... args) {
-        return new ChatComponentTranslation(translatable, args).setChatStyle(new ChatStyle().setColor(this.FORMAT));
+    public IChatComponent literal(String literal) {
+        return new ChatComponentText(literal).setChatStyle(new ChatStyle().setColor(this.FORMAT));
     }
 }
