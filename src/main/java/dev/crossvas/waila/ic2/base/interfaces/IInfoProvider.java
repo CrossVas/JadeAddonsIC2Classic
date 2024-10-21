@@ -1,6 +1,5 @@
 package dev.crossvas.waila.ic2.base.interfaces;
 
-import akka.util.Helpers;
 import dev.crossvas.waila.ic2.WailaIC2Classic;
 import dev.crossvas.waila.ic2.base.elements.CommonBarElement;
 import dev.crossvas.waila.ic2.base.elements.CommonTextElement;
@@ -20,7 +19,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 
 public interface IInfoProvider {
 
