@@ -61,29 +61,14 @@ public class WailaCommonHandler {
     public static void addTankInfo(IWailaHelper helper, TileEntity blockEntity) {
         if (blockEntity instanceof IFluidHandler) {
             loadTankData(helper, (IFluidHandler) blockEntity);
-        } /*else {
-            IFluidHandler fluidHandler = blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-
-            if (fluidHandler != null) {
-                loadTankData(helper, fluidHandler);
-            }
-        }*/
+        }
     }
 
     public static void loadTankData(IWailaHelper helper, IFluidHandler fluidHandler) {
-//        for (int i = 0; i < fluidHandler.getTankProperties().length; i++) {
-//            FluidStack fluid = fluidHandler.getTankProperties()[i].getContents();
-//            int capacity = fluidHandler.getTankProperties()[i].getCapacity();
-//            if (fluid != null) {
-//                if (fluid.amount > 0) {
-//                    loadTankInfo(helper, fluid, capacity);
-//                }
-//            }
-//        }
         FluidTankInfo[] tanks = fluidHandler.getTankInfo(ForgeDirection.UNKNOWN);
-        for (int i = 0; i < tanks.length; i++) {
-            FluidStack fluid = tanks[i].fluid;
-            int capacity = tanks[i].capacity;
+        for (FluidTankInfo tank : tanks) {
+            FluidStack fluid = tank.fluid;
+            int capacity = tank.capacity;
             if (fluid != null) {
                 if (fluid.amount > 0) {
                     loadTankInfo(helper, fluid, capacity);
