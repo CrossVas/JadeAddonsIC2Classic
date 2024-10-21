@@ -22,7 +22,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 @Mod(modid = Refs.ID, name = Refs.NAME, version = Refs.VERSION, acceptedMinecraftVersions = Refs.MC, dependencies = Refs.DEPS)
 public class WailaIC2Classic {
 
-    public static final String ID_IC2 = "ic2";
     public static final String PROBE_ID = "probe";
 
     public static Item PROBE;
@@ -45,7 +44,7 @@ public class WailaIC2Classic {
             'C', Ic2Items.insulatedCopperCableItem.copy(),
             'G', Items.glowstone_dust,
             '#', Ic2Items.electronicCircuit,
-            'R', StackUtil.copyWithSize(new ItemStack(Items.redstone), 2));
+            'R', Items.redstone);
     }
 
     public static ItemStack probeHelmet(ItemStack stack) {

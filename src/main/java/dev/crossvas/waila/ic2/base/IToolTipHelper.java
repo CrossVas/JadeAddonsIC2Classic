@@ -9,9 +9,9 @@ public interface IToolTipHelper {
 
     /**
      * Tooltip Builder
-     * @param 4 - string only, 0 - false, 1 - true
-     * @param 5 - centered, 0 - means false, 1 - true
-     * @param 6 - texture info, leave 0 for nothing
+     * index 4 - string only, 0 - false, 1 - true
+     * index 5 - centered, 0 - means false, 1 - true
+     * index 6 - texture info, leave 0 for nothing
      *
      * */
 
