@@ -3,6 +3,7 @@ package dev.crossvas.jadexic2c.base.interfaces;
 import dev.crossvas.jadexic2c.JadeTags;
 import dev.crossvas.jadexic2c.base.elements.*;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
@@ -36,6 +37,10 @@ public interface IInfoProvider {
         return StackUtil.hasHotbarItems(player, getFilter()) || player.isCreative();
     }
 
+    default MutableComponent status(boolean status) {
+        return status ? TextFormatter.GREEN.literal(true + "") : TextFormatter.RED.literal(false + "");
+    }
+
     default void addAveragesFull(IJadeHelper helper, EnergyContainer container) {
         addAveragesIn(helper, container, 3);
         addAveragesOut(helper, container, 0);
@@ -55,9 +60,9 @@ public interface IInfoProvider {
         MutableComponent full = getFullStatus(averageIn, packetsIn);
         if (averageIn > 0) {
             paddingY(helper, padding);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format(averageIn)).withStyle(ChatFormatting.AQUA));
+            text(helper, TextFormatter.AQUA.translate("info.energy.in", Formatters.EU_FORMAT.format(averageIn)));
             if (packetsIn <= 0) packetsIn = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_FORMAT.format(packetsIn)).withStyle(ChatFormatting.AQUA)));
+            text(helper, full.append(TextFormatter.AQUA.translate("info.packet.in", Formatters.EU_FORMAT.format(packetsIn))));
         }
     }
 
@@ -75,9 +80,9 @@ public interface IInfoProvider {
         MutableComponent full = getFullStatus(averageOut, packetsOut);
         if (averageOut > 0) {
             paddingY(helper, padding);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA));
+            text(helper, TextFormatter.AQUA.translate("info.energy.out", Formatters.EU_FORMAT.format(averageOut)));
             if (packetsOut <= 0) packetsOut = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA)));
+            text(helper, full.append(TextFormatter.AQUA.translate("info.packet.out", Formatters.EU_FORMAT.format(packetsOut))));
         }
     }
 
@@ -85,9 +90,9 @@ public interface IInfoProvider {
         if (energyFlow > 0) {
             MutableComponent full = getFullStatus(energyFlow, packetFlow);
             paddingY(helper, 3);
-            text(helper, Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(energyFlow)).withStyle(ChatFormatting.AQUA));
+            text(helper, TextFormatter.AQUA.translate("info.energy.flow", Formatters.EU_FORMAT.format(energyFlow)));
             if (packetFlow <= 0) packetFlow = 1;
-            text(helper, full.append(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetFlow)).withStyle(ChatFormatting.AQUA)));
+            text(helper, full.append(TextFormatter.AQUA.translate("info.packet.flow", Formatters.EU_FORMAT.format(packetFlow))));
         }
     }
 
@@ -118,7 +123,7 @@ public interface IInfoProvider {
     }
 
     default void defaultText(IJadeHelper helper, String translatable, Object... args) {
-        text(helper, Component.translatable(translatable, args));
+        text(helper, TextFormatter.WHITE.translate(translatable, args));
     }
 
     default void appendDefaultText(IJadeHelper helper, String translatable, Object... args) {
@@ -240,10 +245,9 @@ public interface IInfoProvider {
         boolean isRequired = Jade.CONFIG.get().getPlugin().get(JadeTags.SNEAK_FOR_DETAILS);
         boolean condition = !isRequired || player.isCrouching();
         if (condition) {
-            centered(helper, Component.translatable("probe.energy.stats.info").withStyle(ChatFormatting.GREEN));
             stats.addStats();
         } else {
-            centered(helper, Component.translatable("probe.sneak.info").withStyle(ChatFormatting.AQUA));
+            centered(helper, TextFormatter.AQUA.translate("info.sneak.details"));
         }
     }
 

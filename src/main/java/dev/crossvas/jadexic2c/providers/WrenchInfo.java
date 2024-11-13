@@ -1,13 +1,11 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.items.readers.IWrenchTool;
 import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.platform.registries.IC2Items;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -45,22 +43,21 @@ public class WrenchInfo implements IBlockComponentProvider {
                 showInfo = actualRate > 0;
             }
             if (showInfo) {
-                PluginHelper.spacerY(iTooltip, 5);
+                spacerY(iTooltip, 5);
                 if (tile.isHarvestWrenchRequired(player)) {
                     iTooltip.add(wrenchIcon);
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
-                        int dropChance = Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0);
-                        if (dropChance > 100) dropChance = 100;
-                        iTooltip.append(iTooltip.getElementHelper().text(Component.literal(dropChance + "% ").withStyle(PluginHelper.getTextColorFromDropChance(dropChance)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY))));
+                        int dropChance = Math.min(Mth.floor(tool.getActualLoss(handHeldStack, tile.getDropRate(player)) * 100.0), 100);
+                        iTooltip.append(TextFormatter.WHITE.translate("ic2.probe.wrenchable.drop_chance.info", TextFormatter.formatPercentage(dropChance).literal(dropChance + "")));
                     } else {
-                        iTooltip.append(Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY));
+                        iTooltip.append(TextFormatter.GOLD.translate("ic2.probe.wrenchable.info"));
                     }
                 } else {
-                    PluginHelper.spacerY(iTooltip, 5);
-                    iTooltip.append(Component.literal(100 + "% ").withStyle(PluginHelper.getTextColorFromDropChance(100)).append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)));
-                    PluginHelper.spacerY(iTooltip, 5);
+                    spacerY(iTooltip, 5);
+                    iTooltip.append(TextFormatter.WHITE.translate("ic2.probe.wrenchable.drop_chance.info", TextFormatter.formatPercentage(100).literal(100 + "")));
+                    spacerY(iTooltip, 5);
                     iTooltip.add(wrenchIcon);
-                    iTooltip.append(Component.translatable("ic2.probe.wrenchable.optional.info").withStyle(ChatFormatting.AQUA));
+                    iTooltip.append(TextFormatter.AQUA.translate("ic2.probe.wrenchable.optional.info"));
                 }
             }
         }
@@ -74,5 +71,9 @@ public class WrenchInfo implements IBlockComponentProvider {
     @Override
     public ResourceLocation getUid() {
         return JadeTags.WRENCHABLE;
+    }
+
+    public static void spacerY(ITooltip tooltip, int y) {
+        tooltip.add(tooltip.getElementHelper().spacer(0, y));
     }
 }

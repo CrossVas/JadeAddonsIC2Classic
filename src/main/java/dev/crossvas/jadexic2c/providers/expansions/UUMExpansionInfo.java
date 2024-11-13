@@ -2,9 +2,8 @@ package dev.crossvas.jadexic2c.providers.expansions;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.machines.tiles.nv.UUMatterExpansionTileEntity;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,9 +21,9 @@ public class UUMExpansionInfo implements IInfoProvider {
             int currentUUM = uumExpansion.uuMatter;
             int maxUUM = uumExpansion.maxUUMatter;
             if (currentUUM > 0) {
-                bar(helper, currentUUM, maxUUM, Component.literal("UU: " + currentUUM / 1000 + " / " + maxUUM / 1000), -5829955);
+                bar(helper, currentUUM, maxUUM, TextFormatter.WHITE.translate("info.uum.storage", currentUUM / 1000, maxUUM / 1000), -5829955);
             } else {
-                text(helper, Component.translatable("ic2.probe.uum_expansion.missing").withStyle(ChatFormatting.RED));
+                text(helper, TextFormatter.RED.translate("info.uum.missing"));
             }
             List<ItemStack> providing = new ArrayList<>();
             for (int i = 0; i < uumExpansion.filter.getSlotCount(); i++) {
@@ -34,7 +33,7 @@ public class UUMExpansionInfo implements IInfoProvider {
                 }
             }
             if (!providing.isEmpty()) {
-                addGrid(helper, providing, Component.translatable("ic2.probe.uum.providing.name").withStyle(ChatFormatting.YELLOW));
+                addGrid(helper, providing, TextFormatter.YELLOW.translate("info.uum.providing"));
             }
         }
     }

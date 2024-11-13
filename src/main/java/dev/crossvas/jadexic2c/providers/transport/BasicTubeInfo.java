@@ -2,16 +2,14 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
 import ic2.core.block.transport.item.TubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenCustomHashMap;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,10 +23,10 @@ public class BasicTubeInfo implements IInfoProvider {
         if (blockEntity instanceof TubeTileEntity tube) {
             int priority = tube.getPrioritySide();
             if (priority > 0) {
-                text(helper, Component.translatable("ic2.tube.direction.prio", Component.translatable("misc.ic2.side." + Direction.from3DDataValue(priority - 1)).withStyle(PluginHelper.getColor(priority - 1))).withStyle(ChatFormatting.GOLD));
+                text(helper, TextFormatter.GOLD.translate("info.tube.prio", TextFormatter.getColor(priority - 1).translate("misc.ic2.side." + Direction.from3DDataValue(priority - 1))));
             }
             if (!tube.synchronize) {
-                text(helper, Component.translatable("ic2.probe.tube.invisible").withStyle(ChatFormatting.RED));
+                text(helper, TextFormatter.RED.translate("ic2.probe.tube.invisible"));
             }
 
             NonNullList<ItemStack> list = NonNullList.create();
@@ -43,7 +41,7 @@ public class BasicTubeInfo implements IInfoProvider {
 
                 mapped.forEach((K, V) -> list.add(StackUtil.copyWithSize(K, V)));
                 paddingY(helper, 3);
-                addGrid(helper, list, Component.translatable("ic2.probe.tube.transported").withStyle(ChatFormatting.GOLD));
+                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.transported"));
             }
         }
     }

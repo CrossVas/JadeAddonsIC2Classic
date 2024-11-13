@@ -2,11 +2,10 @@ package dev.crossvas.jadexic2c.providers.expansions;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.machines.tiles.nv.BufferStorageExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.StorageExpansionTileEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +27,7 @@ public class StorageExpansionInfo implements IInfoProvider {
                 }
             }
             if (!stacks.isEmpty()) {
-                addGrid(helper, stacks, Component.translatable("ic2.probe.storage_expansion.slot.name").withStyle(ChatFormatting.YELLOW), 9);
+                addGrid(helper, stacks, TextFormatter.YELLOW.translate("info.storage.storage"), 9);
             }
         }
         if (blockEntity instanceof StorageExpansionTileEntity storage) {
@@ -40,7 +39,7 @@ public class StorageExpansionInfo implements IInfoProvider {
                 }
             }
             if (!stacks.isEmpty()) {
-                addGrid(helper, stacks, Component.translatable("ic2.probe.storage_expansion.slot.name").withStyle(ChatFormatting.YELLOW));
+                addGrid(helper, stacks, TextFormatter.YELLOW.translate("info.storage.storage"));
             }
         }
     }

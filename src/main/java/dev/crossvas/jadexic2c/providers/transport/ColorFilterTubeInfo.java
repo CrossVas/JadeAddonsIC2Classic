@@ -3,11 +3,11 @@ package dev.crossvas.jadexic2c.providers.transport;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.util.DirectionList;
 import ic2.core.block.transport.item.tubes.ColorFilterTubeTileEntity;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -27,7 +27,7 @@ public class ColorFilterTubeInfo implements IInfoProvider {
     public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof ColorFilterTubeTileEntity colorFilterTube) {
             boolean invPrio = colorFilterTube.invPriority;
-            text(helper, Component.translatable("ic2.tube.inv_priority", (invPrio ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(invPrio)).withStyle(ChatFormatting.GOLD));
+            text(helper, TextFormatter.GOLD.translate("info.tube.inv.prio", status(invPrio)));
 
             List<FilterEntry> filters = new ObjectArrayList<>();
             for (int i = 0; i < colorFilterTube.colorDirections.length; i++) {
@@ -55,11 +55,11 @@ public class ColorFilterTubeInfo implements IInfoProvider {
                 }
                 // apply
                 mappedFilters.keySet().forEach(side -> {
-                    text(helper, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                    text(helper, TextFormatter.GOLD.translate("info.tube.filter"));
                     for (FilterEntry entry : mappedFilters.get(side)) {
                         appendItem(helper, entry.stack);
                     }
-                    appendText(helper, Component.literal(" → ").withStyle(ChatFormatting.WHITE));
+                    appendText(helper, TextFormatter.WHITE.literal(" → "));
                     appendText(helper, side);
                 });
             }

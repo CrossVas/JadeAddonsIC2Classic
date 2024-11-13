@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.base.removals;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.JadeTags;
+import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.StackUtil;
 import net.minecraft.nbt.CompoundTag;

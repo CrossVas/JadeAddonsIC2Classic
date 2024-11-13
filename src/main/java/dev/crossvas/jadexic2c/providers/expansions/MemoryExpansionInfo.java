@@ -37,10 +37,10 @@ public class MemoryExpansionInfo implements IInfoProvider {
             boolean firstSlot = !memoryExpansion.inventory.getStackInSlot(0).isEmpty();
             boolean secondSlot = !memoryExpansion.inventory.getStackInSlot(1).isEmpty();
             if (firstSlot) {
-                bar(helper, firstStick.size(), 9, Component.translatable("ic2.probe.memory_expansion.name", firstStick.size(), 9), -16733185);
+                bar(helper, firstStick.size(), 9, Component.translatable("info.memory.recipes", firstStick.size(), 9), -16733185);
             }
             if (secondSlot) {
-                bar(helper, secondStick.size(), 9, Component.translatable("ic2.probe.memory_expansion.name", secondStick.size(), 9), -16733185);
+                bar(helper, secondStick.size(), 9, Component.translatable("info.memory.recipes", secondStick.size(), 9), -16733185);
             }
             addGrid(helper, common, Component.translatable("ic2.probe.memory_expansion.can_craft.name").withStyle(ChatFormatting.YELLOW));
         }

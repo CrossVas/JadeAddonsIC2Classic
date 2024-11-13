@@ -2,8 +2,8 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.FilteredExtractionTubeTileEntity;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +32,7 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
 
             if (!generalFilter.isEmpty()) {
                 List<ItemStack> stacks = generalFilter.stream().map(FilteredExtractionTubeTileEntity.FilterEntry::getStack).toList();
-                addGrid(helper, stacks, Component.translatable("ic2.tube.filter.info").withStyle(ChatFormatting.GOLD));
+                addGrid(helper, stacks, TextFormatter.GOLD.translate("info.tube.filter"));
             }
             if (!metaFilter.isEmpty()) {
                 metaFilter.forEach(filter -> {
@@ -40,25 +40,26 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
                     boolean checkFluid = (filter.getFlags() & 128) != 0;
                     boolean checkDurability = (filter.getFlags() & 256) != 0;
                     int keepItem = filter.getKeepItems();
-                    text(helper, Component.translatable("ic2.tube.meta_filter.info").withStyle(ChatFormatting.GOLD));
+                    TextFormatter meta = TextFormatter.GREEN;
+                    text(helper, TextFormatter.GOLD.translate("info.tube.filter.meta"));
                     appendItem(helper, filter.getStack());
                     appendText(helper, Component.literal(" ")
-                            .append(checkNBT ? ChatFormatting.GREEN + "*nbt " : "")
-                            .append(checkFluid ? ChatFormatting.GREEN + "*fluid " : "")
-                            .append(checkDurability ? ChatFormatting.GREEN + "*meta " : "")
-                            .append(keepItem > 0 ? ChatFormatting.WHITE + "Keep: " + keepItem : ""));
+                            .append(checkNBT ? meta.literal("*nbt ") : Component.empty())
+                            .append(checkFluid ? meta.literal("*fluid ") : Component.empty())
+                            .append(checkDurability ? meta.literal("*meta ") : Component.empty())
+                            .append(keepItem > 0 ? TextFormatter.WHITE.translate("info.tube.keep", keepItem) : Component.empty()));
                 });
             }
 
             boolean whitelist = filteredExtraction.whitelist;
             boolean redstoneControl = filteredExtraction.sensitive;
-            text(helper, Component.translatable("ic2.tube.extraction_filter_whitelist.info", (whitelist ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(whitelist)).withStyle(ChatFormatting.GOLD));
-            text(helper, Component.translatable("ic2.tube.redstone.control", (redstoneControl ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(redstoneControl)).withStyle(ChatFormatting.GOLD));
+            text(helper, TextFormatter.GOLD.translate("info.tube.whitelist", status(whitelist)));
+            text(helper, TextFormatter.GOLD.translate("info.tube.redstone", status(redstoneControl)));
             if (redstoneControl) {
                 boolean comparator = filteredExtraction.comparator;
                 boolean pulse = filteredExtraction.pulse;
-                text(helper, Component.translatable("ic2.tube.redstone.comparator", (comparator ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(comparator)).withStyle(ChatFormatting.LIGHT_PURPLE));
-                text(helper, Component.translatable("ic2.tube.redstone.pulse", (pulse ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(pulse)).withStyle(ChatFormatting.LIGHT_PURPLE));
+                text(helper, TextFormatter.LIGHT_PURPLE.translate("info.tube.comparator", status(comparator)));
+                text(helper, TextFormatter.LIGHT_PURPLE.translate("info.tube.pulse", status(pulse)));
             }
         }
     }

@@ -2,10 +2,9 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.StackingTubeTileEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,12 +23,11 @@ public class StackingTubeInfo implements IInfoProvider {
                 for (StackingTubeTileEntity.StackingStack item : stackingTube.cached) {
                     cached.add(item.getStack());
                 }
-                addGrid(helper, cached, Component.translatable("ic2.probe.tube.cached").withStyle(ChatFormatting.GOLD));
+                addGrid(helper, cached, TextFormatter.GOLD.translate("ic2.probe.tube.cached"));
             }
             boolean ignoreColored = stackingTube.ignoreColors;
-            text(helper, Component.translatable("ic2.probe.tube.stacking.color").withStyle(ChatFormatting.GOLD)
-                    .append((ignoreColored ? ChatFormatting.GREEN : ChatFormatting.RED) + String.valueOf(ignoreColored)));
-            text(helper, Component.translatable("ic2.probe.tube.stacking.limit", Component.literal(stackingTube.stacking + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GOLD));
+            text(helper, TextFormatter.GOLD.translate("info.tube.ignore", status(ignoreColored)));
+            text(helper, TextFormatter.GOLD.translate("ic2.probe.tube.stacking.limit", TextFormatter.AQUA.literal(stackingTube.stacking + "")));
         }
     }
 }

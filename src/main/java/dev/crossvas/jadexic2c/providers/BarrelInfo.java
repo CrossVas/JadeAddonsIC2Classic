@@ -6,7 +6,6 @@ import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.platform.registries.IC2Blocks;
-import ic2.core.platform.registries.IC2Items;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -137,9 +136,9 @@ public class BarrelInfo implements IInfoProvider {
             case 0 -> "ic2.probe.barrel.status.empty.name";
             case 1 -> "ic2.probe.barrel.status.beer.name";
             case 2 -> "ic2.probe.barrel.status.rum.name";
-            default -> "I AM ERROR";
             case 5 -> "ic2.probe.barrel.status.whisky.name";
             case 10 -> "ic2.probe.barrel.status.potion.name";
+            default -> "I AM ERROR";
         };
     }
 
@@ -172,7 +171,5 @@ public class BarrelInfo implements IInfoProvider {
         public ResourceLocation getUid() {
             return JadeTags.INFO_RENDERER;
         }
-
-
     }
 }

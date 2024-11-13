@@ -2,10 +2,9 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
+import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.LimiterTubeTileEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
@@ -27,7 +26,7 @@ public class LimiterTubeInfo implements IInfoProvider {
                 dyeStacks.add(stack);
             }
             if (!dyeStacks.isEmpty()) {
-                addGrid(helper, dyeStacks, Component.translatable("ic2.probe.tube.limiter.unblocked").withStyle(ChatFormatting.GOLD));
+                addGrid(helper, dyeStacks, TextFormatter.GOLD.translate("info.tube.colors"));
             }
         }
     }
