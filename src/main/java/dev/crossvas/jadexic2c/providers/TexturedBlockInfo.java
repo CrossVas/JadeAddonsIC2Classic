@@ -54,12 +54,12 @@ public class TexturedBlockInfo implements IBlockComponentProvider {
     }
 
     public static void addFakeInfo(Block texturedBlock, ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        ItemStack fakeStack = texturedBlock.getCloneItemStack(blockAccessor.getBlockState(), blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer());
+        ItemStack fakeStack = getFakeIcon(texturedBlock, blockAccessor);
         iTooltip.remove(Identifiers.CORE_OBJECT_NAME); // remove block name
         iTooltip.remove(Identifiers.CORE_MOD_NAME); // remove mod name
         iTooltip.remove(ModNameRender.RELOCATE); // disable relocator
         Component fakeNameComponent = fakeStack.getHoverName().copy().withStyle(ChatFormatting.WHITE);
-        String fakeModName = ModIdentification.getModName(texturedBlock.getCloneItemStack(blockAccessor.getBlockState(), blockAccessor.getHitResult(), blockAccessor.getLevel(), blockAccessor.getPosition(), blockAccessor.getPlayer()));
+        String fakeModName = ModIdentification.getModName(fakeStack);
         String fakeModNameFormatted = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), fakeModName);
         // add fake block name
         iTooltip.add(new TextElement(fakeNameComponent).size(new Vec2(Minecraft.getInstance().font.width(fakeNameComponent.getString()) + 16, Minecraft.getInstance().font.lineHeight)));
