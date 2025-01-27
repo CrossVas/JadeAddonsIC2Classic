@@ -161,7 +161,7 @@ public class CropInfo implements IInfoProvider {
                     } else {
                         iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
                         elements.forEach(element -> iTooltip.append(0, element.align(IElement.Align.RIGHT)));
-                        iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().getString()).withStyle(ChatFormatting.WHITE).withStyle(ChatFormatting.ITALIC)));
+                        iTooltip.add(1, iTooltip.getElementHelper().text(Component.translatable("jei.ic2.reactor.by", crop.discoveredBy().copy().withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE)));
                     }
                 }
             }
