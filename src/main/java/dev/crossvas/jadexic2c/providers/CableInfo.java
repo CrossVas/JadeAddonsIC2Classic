@@ -1,13 +1,14 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.base.removals.ModNameRender;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import ic2.core.block.cables.CableBlock;
 import ic2.core.block.cables.CableTileEntity;
 import ic2.core.utils.helpers.Formatters;
+import ic2.core.utils.tooltips.ILangHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -34,16 +35,16 @@ public class CableInfo implements IInfoProvider {
     public static final CableInfo THIS = new CableInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof CableTileEntity cable) {
-            defaultText(helper, "tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
-            defaultText(helper, "tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
+            helper.defaultText("tooltip.item.ic2.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1);
+            helper.defaultText("tooltip.item.ic2.eu_reader.cable_loss", Formatters.CABLE_LOSS_FORMAT.format(cable.getConductionLoss()));
             EnergyContainer container = EnergyContainer.getContainer(cable);
-            addStats(helper, player, () -> addCableAverages(helper, container.getAverageOut(), container.getPacketsOut()));
+            helper.addStats(player, () -> helper.addCableAverages(container.getAverageOut(), container.getPacketsOut()));
         }
     }
 
-    public static class CableIconProvider implements IBlockComponentProvider {
+    public static class CableIconProvider implements IBlockComponentProvider, ILangHelper {
 
         @Override
         public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
@@ -61,7 +62,7 @@ public class CableInfo implements IInfoProvider {
                     elements.forEach(element -> iTooltip.append(0, element.align(IElement.Align.RIGHT)));
                     String fakeModName = ModIdentification.getModName(fakeStack);
                     String fakeModNameFormatted = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), fakeModName);
-                    iTooltip.add(Component.literal(fakeModNameFormatted));
+                    iTooltip.add(string(fakeModNameFormatted));
                     iTooltip.remove(ModNameRender.RELOCATE);
                 }
             }

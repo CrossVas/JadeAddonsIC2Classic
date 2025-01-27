@@ -1,6 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.base.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
@@ -16,22 +17,22 @@ public class FuelBoilerInfo implements IInfoProvider {
     public static final FuelBoilerInfo THIS = new FuelBoilerInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof FuelBoilerTileEntity fuelBoiler) {
             int fuel = fuelBoiler.getFuel();
             int maxFuel = fuelBoiler.getMaxFuel();
             int heat = fuelBoiler.getHeat();
             int maxHeat = fuelBoiler.getMaxHeat();
 
-            bar(helper, fuel, maxFuel, Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
+            helper.bar(fuel, maxFuel, Component.translatable("ic2.probe.fuel.storage.name").append(String.valueOf(fuel)), ColorUtils.DARK_GRAY);
             if (PlayerHandler.getHandler(player).hasThermometer()) {
-                bar(helper, heat, maxHeat, Component.translatable("ic2.probe.reactor.heat.name",
+                helper.bar(heat, maxHeat, Component.translatable("ic2.probe.reactor.heat.name",
                         heat / 30, Formatters.EU_READER_FORMAT.format((double) maxHeat / 30)), ColorUtils.GREEN);
             }
-            JadeCommonHandler.addTankInfo(helper, fuelBoiler);
+            helper.addTankInfo(fuelBoiler);
             if (!fuelBoiler.isValid) {
                 long time = fuelBoiler.clockTime(512);
-                bar(helper, (int) time, 512, Component.translatable("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
+                helper.bar((int) time, 512, translate("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
             }
         }
     }

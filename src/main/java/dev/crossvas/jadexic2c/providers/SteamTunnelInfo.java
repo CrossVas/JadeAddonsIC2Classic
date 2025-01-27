@@ -1,14 +1,12 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.Formatter;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.BaseLinkingTileEntity;
 import ic2.core.block.generators.tiles.SteamTunnelTileEntity;
 import ic2.core.utils.math.ColorUtils;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -17,12 +15,12 @@ public class SteamTunnelInfo implements IInfoProvider {
     public static final SteamTunnelInfo THIS = new SteamTunnelInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof SteamTunnelTileEntity steamTunnel) {
             addTunnelInfo(helper, steamTunnel);
             if (!steamTunnel.isValid || steamTunnel.isDynamic()) {
                 long time = steamTunnel.clockTime(512);
-                bar(helper, (int) time, 512, Component.translatable("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
+                helper.bar((int) time, 512, translate("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
             }
         }
         if (blockEntity instanceof BaseLinkingTileEntity linkingTile) {
@@ -33,10 +31,10 @@ public class SteamTunnelInfo implements IInfoProvider {
         }
     }
 
-    public void addTunnelInfo(IJadeHelper helper, SteamTunnelTileEntity steamTunnel) {
-        defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(steamTunnel.getSourceTier()));
-        defaultText(helper, "ic2.probe.eu.output.current.name", Formatter.formatNumber(steamTunnel.getEUProduction(), 3));
-        defaultText(helper, "ic2.probe.eu.output.max.name", steamTunnel.getMaxEnergyOutput());
-        JadeCommonHandler.addTankInfo(helper, steamTunnel);
+    public void addTunnelInfo(JadeHelper helper, SteamTunnelTileEntity steamTunnel) {
+        helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(steamTunnel.getSourceTier()));
+        helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(steamTunnel.getEUProduction(), 3));
+        helper.defaultText("ic2.probe.eu.output.max.name", steamTunnel.getMaxEnergyOutput());
+        helper.addTankInfo(steamTunnel);
     }
 }

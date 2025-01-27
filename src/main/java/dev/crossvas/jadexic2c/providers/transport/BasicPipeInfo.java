@@ -1,8 +1,7 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.FluidContainer;
 import ic2.core.block.transport.fluid.graph.FluidNet;
 import ic2.core.block.transport.fluid.graph.IFluidPipe;
@@ -18,7 +17,7 @@ public class BasicPipeInfo implements IInfoProvider {
     public static final BasicPipeInfo THIS = new BasicPipeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof PipeTileEntity pipe) {
             addPipeInfo(helper, pipe);
         }
@@ -27,15 +26,15 @@ public class BasicPipeInfo implements IInfoProvider {
         }
     }
 
-    public void addPipeInfo(IJadeHelper helper, BlockEntity blockEntity) {
-        JadeCommonHandler.TANK_REMOVAL.add(blockEntity);
+    public void addPipeInfo(JadeHelper helper, BlockEntity blockEntity) {
+        JadeHelper.TANK_REMOVAL.add(blockEntity);
         FluidNet.TransportStats stats = FluidNet.INSTANCE.getStats((IFluidPipe) blockEntity);
         FluidContainer container = FluidContainer.getContainer((IFluidPipe) blockEntity);
         for (Fluid fluid : stats.getTransfered().keySet()) {
             int avg = container.getAverage(fluid);
             if (avg <= 0) continue;
             if (fluid != null) {
-                fluid(helper, new FluidStack(fluid, 1), 1, true);
+                helper.fluid(new FluidStack(fluid, 1), 1, true);
             }
         }
     }

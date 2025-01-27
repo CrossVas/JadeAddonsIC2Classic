@@ -1,8 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.machine.single.BaseAdvMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
@@ -23,16 +22,16 @@ public class BaseMachineInfo implements IInfoProvider {
     public static final BaseMachineInfo THIS = new BaseMachineInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMachineTileEntity baseMachine) {
-            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(baseMachine.getTier()));
-            defaultText(helper, "ic2.probe.eu.max_in.name", baseMachine.getMaxInput());
-            defaultText(helper, "ic2.probe.eu.usage.name", baseMachine.getEnergyPerTick());
+            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(baseMachine.getTier()));
+            helper.defaultText("ic2.probe.eu.max_in.name", baseMachine.getMaxInput());
+            helper.defaultText("ic2.probe.eu.usage.name", baseMachine.getEnergyPerTick());
             if (baseMachine instanceof SlowGrinderTileEntity slowGrinder) {
-                defaultText(helper, "ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(slowGrinder.getChance(0.25F) * 100.0F));
+                helper.defaultText("ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(slowGrinder.getChance(0.25F) * 100.0F));
             }
             if (baseMachine instanceof RefineryTileEntity refinery) {
-                JadeCommonHandler.addTankInfo(helper, refinery);
+                helper.addTankInfo(refinery);
             }
 
             int speed;
@@ -49,7 +48,7 @@ public class BaseMachineInfo implements IInfoProvider {
                 speedName = adv.getSpeedName();
                 scaledProgress = (double) speed / maxSpeed;
                 if (speed > 0) {
-                    bar(helper, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
+                    helper.bar(speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
                 }
             }
             if (baseMachine instanceof VacuumCannerTileEntity canner) {
@@ -58,33 +57,33 @@ public class BaseMachineInfo implements IInfoProvider {
                 speedName = canner.getSpeedName();
                 scaledProgress = (double) speed / maxSpeed;
                 if (speed > 0) {
-                    bar(helper, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
+                    helper.bar(speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
                 }
             }
             int material;
             if (baseMachine instanceof RareEarthExtractorTileEntity rareExtractor) {
                 material = (int) rareExtractor.materialProgress;
                 if (material > 0) {
-                    bar(helper, material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), -5829955);
+                    helper.bar(material, 1000, translate("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), -5829955);
                 }
             } else if (baseMachine instanceof RareEarthCentrifugeTileEntity rareEarthCentrifuge) {
                 material = (int) rareEarthCentrifuge.materialProgress;
                 if (material > 0) {
-                    bar(helper, material, 1000, Component.translatable("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), -5829955);
+                    helper.bar(material, 1000, translate("ic2.probe.progress.material.name", Formatters.EU_READER_FORMAT.format(material)), -5829955);
                 }
                 speed = rareEarthCentrifuge.getSpeed();
                 maxSpeed = rareEarthCentrifuge.getMaxSpeed();
                 speedName = rareEarthCentrifuge.getSpeedName();
                 scaledProgress = (double) speed / maxSpeed;
                 if (speed > 0) {
-                    bar(helper, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
+                    helper.bar(speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
                 }
             }
 
             if (progress > 0) {
                 int scaledOp = (int) Math.min(6.0E7F, progress / progressPerTick);
                 int scaledMaxOp = (int) Math.min(6.0E7F, maxProgress / progressPerTick);
-                bar(helper, scaledOp, scaledMaxOp, Component.translatable("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append("t"), -16733185);
+                helper.bar(scaledOp, scaledMaxOp, translate("ic2.probe.progress.full.name", scaledOp, scaledMaxOp).append("t"), -16733185);
             }
         }
     }

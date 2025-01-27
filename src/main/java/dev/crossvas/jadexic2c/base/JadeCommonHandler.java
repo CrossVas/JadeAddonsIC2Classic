@@ -21,7 +21,6 @@ import java.util.List;
 public class JadeCommonHandler {
 
     public static List<IInfoProvider> INFO_PROVIDERS = new ObjectArrayList<>();
-    public static final List<BlockEntity> TANK_REMOVAL = new ObjectArrayList<>();
 
     static {
         INFO_PROVIDERS.add(EUStorageInfo.THIS);
@@ -92,31 +91,13 @@ public class JadeCommonHandler {
         INFO_PROVIDERS.add(BasicTubeInfo.THIS);
     }
 
-    public static void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public static void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity != null) {
             INFO_PROVIDERS.forEach(infoProvider -> {
                 if (infoProvider.canHandle(player)) {
                     infoProvider.addInfo(helper, blockEntity, player);
                 }
             });
-        }
-    }
-
-    public static void addTankInfo(IJadeHelper helper, BlockEntity blockEntity) {
-        TANK_REMOVAL.add(blockEntity);
-        if (blockEntity instanceof IFluidHandler fluidHandler) {
-            loadTankData(helper, fluidHandler);
-        } else {
-            blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(handler -> loadTankData(helper, handler));
-        }
-    }
-
-    public static void loadTankData(IJadeHelper helper, IFluidHandler fluidHandler) {
-        for (int i = 0; i < fluidHandler.getTanks(); i++) {
-            FluidStack fluid = fluidHandler.getFluidInTank(i);
-            if (fluid.getAmount() > 0) {
-                helper.add(new CommonFluidBarElement(fluid, fluidHandler.getTankCapacity(i), false));
-            }
         }
     }
 }

@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.FilteredExtractionTubeTileEntity;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
     public static final FilteredExtractionTubeInfo THIS = new FilteredExtractionTubeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof FilteredExtractionTubeTileEntity filteredExtraction) {
             List<FilteredExtractionTubeTileEntity.FilterEntry> generalFilter = new ArrayList<>();
             List<FilteredExtractionTubeTileEntity.FilterEntry> metaFilter = new ArrayList<>();
@@ -32,7 +32,7 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
 
             if (!generalFilter.isEmpty()) {
                 List<ItemStack> stacks = generalFilter.stream().map(FilteredExtractionTubeTileEntity.FilterEntry::getStack).toList();
-                addGrid(helper, stacks, TextFormatter.GOLD.translate("info.tube.filter"));
+                helper.addGrid(stacks, TextFormatter.GOLD.translate("info.tube.filter"));
             }
             if (!metaFilter.isEmpty()) {
                 metaFilter.forEach(filter -> {
@@ -41,9 +41,9 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
                     boolean checkDurability = (filter.getFlags() & 256) != 0;
                     int keepItem = filter.getKeepItems();
                     TextFormatter meta = TextFormatter.GREEN;
-                    text(helper, TextFormatter.GOLD.translate("info.tube.filter.meta"));
-                    appendItem(helper, filter.getStack());
-                    appendText(helper, Component.literal(" ")
+                    helper.text(TextFormatter.GOLD.translate("info.tube.filter.meta"));
+                    helper.appendItem(filter.getStack());
+                    helper.appendText(string(" ")
                             .append(checkNBT ? meta.literal("*nbt ") : Component.empty())
                             .append(checkFluid ? meta.literal("*fluid ") : Component.empty())
                             .append(checkDurability ? meta.literal("*meta ") : Component.empty())
@@ -53,18 +53,18 @@ public class FilteredExtractionTubeInfo implements IInfoProvider {
 
             boolean whitelist = filteredExtraction.whitelist;
             boolean redstoneControl = filteredExtraction.sensitive;
-            text(helper, TextFormatter.GOLD.translate("info.tube.whitelist", status(whitelist)));
-            text(helper, TextFormatter.GOLD.translate("info.tube.redstone", status(redstoneControl)));
+            helper.text(TextFormatter.GOLD.translate("info.tube.whitelist", status(whitelist)));
+            helper.text(TextFormatter.GOLD.translate("info.tube.redstone", status(redstoneControl)));
             if (redstoneControl) {
                 boolean comparator = filteredExtraction.comparator;
                 boolean pulse = filteredExtraction.pulse;
-                text(helper, TextFormatter.LIGHT_PURPLE.translate("info.tube.comparator", status(comparator)));
-                text(helper, TextFormatter.LIGHT_PURPLE.translate("info.tube.pulse", status(pulse)));
+                helper.text(TextFormatter.LIGHT_PURPLE.translate("info.tube.comparator", status(comparator)));
+                helper.text(TextFormatter.LIGHT_PURPLE.translate("info.tube.pulse", status(pulse)));
             }
         }
     }
 
-    public static boolean hasFlags(FilteredExtractionTubeTileEntity.FilterEntry entry) {
+    public boolean hasFlags(FilteredExtractionTubeTileEntity.FilterEntry entry) {
         boolean checkNBT = (entry.getFlags() & 16) != 0;
         boolean checkFluid = (entry.getFlags() & 128) != 0;
         boolean checkDurability = (entry.getFlags() & 256) != 0;

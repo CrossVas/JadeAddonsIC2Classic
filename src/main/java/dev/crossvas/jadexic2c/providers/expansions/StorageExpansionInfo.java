@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers.expansions;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.machines.tiles.nv.BufferStorageExpansionTileEntity;
 import ic2.core.block.machines.tiles.nv.StorageExpansionTileEntity;
@@ -17,7 +17,7 @@ public class StorageExpansionInfo implements IInfoProvider {
     public static final StorageExpansionInfo THIS = new StorageExpansionInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BufferStorageExpansionTileEntity buffer) {
             List<ItemStack> stacks = new ObjectArrayList<>();
             for (int i = 0; i < buffer.inventory.getSlotCount(); i++) {
@@ -27,7 +27,7 @@ public class StorageExpansionInfo implements IInfoProvider {
                 }
             }
             if (!stacks.isEmpty()) {
-                addGrid(helper, stacks, TextFormatter.YELLOW.translate("info.storage.storage"), 9);
+                helper.addGrid(stacks, TextFormatter.YELLOW.translate("info.storage.storage"), 9);
             }
         }
         if (blockEntity instanceof StorageExpansionTileEntity storage) {
@@ -39,7 +39,7 @@ public class StorageExpansionInfo implements IInfoProvider {
                 }
             }
             if (!stacks.isEmpty()) {
-                addGrid(helper, stacks, TextFormatter.YELLOW.translate("info.storage.storage"));
+                helper.addGrid(stacks, TextFormatter.YELLOW.translate("info.storage.storage"));
             }
         }
     }

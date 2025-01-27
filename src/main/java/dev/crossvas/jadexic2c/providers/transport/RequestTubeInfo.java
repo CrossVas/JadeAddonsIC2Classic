@@ -1,5 +1,6 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
@@ -17,25 +18,25 @@ public class RequestTubeInfo implements IInfoProvider {
     public static final RequestTubeInfo THIS = new RequestTubeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof RequestTubeTileEntity requester) {
             NonNullList<ItemStack> list;
             // general
             boolean redstoneControl = requester.redstoneRequest;
-            text(helper, TextFormatter.GOLD.translate("info.tube.redstone", status(redstoneControl)));
+            helper.text(TextFormatter.GOLD.translate("info.tube.redstone", status(redstoneControl)));
             // requests
             list = NonNullList.create();
             for (RequestTubeTileEntity.RequestEntry entry : requester.filters) {
                 list.add(StackUtil.copyWithSize(entry.getStack(), entry.getAmount()));
             }
             if (!list.isEmpty()) {
-                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.requests"));
+                helper.addGrid(list, TextFormatter.GOLD.translate("ic2.probe.tube.requests"));
             }
             // missing
             list = NonNullList.create();
             requester.getMissing(list);
             if (!list.isEmpty()) {
-                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.missing"));
+                helper.addGrid(list, TextFormatter.GOLD.translate("ic2.probe.tube.missing"));
             }
             // requested
             list = NonNullList.create();
@@ -43,7 +44,7 @@ public class RequestTubeInfo implements IInfoProvider {
                 list.add(StackUtil.copyWithSize(entry.getKey(), entry.getIntValue()));
             }
             if (!list.isEmpty()) {
-                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.requesting"));
+                helper.addGrid(list, TextFormatter.GOLD.translate("ic2.probe.tube.requesting"));
             }
             // insertion
             list = NonNullList.create();
@@ -51,7 +52,7 @@ public class RequestTubeInfo implements IInfoProvider {
                 list.addAll(requester.toInsert);
             }
             if (!list.isEmpty()) {
-                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.stuck"));
+                helper.addGrid(list, TextFormatter.GOLD.translate("ic2.probe.tube.stuck"));
             }
         }
     }

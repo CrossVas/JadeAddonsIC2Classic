@@ -1,8 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.features.IXPMachine;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseAdvMultiMachineTileEntity;
@@ -25,16 +24,15 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
     public static final BaseMultiBlockMachineInfo THIS = new BaseMultiBlockMachineInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMultiMachineTileEntity multiMachine) {
-            defaultText(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
-            defaultText(helper, "ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
-            defaultText(helper, "ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
+            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
+            helper.defaultText("ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
+            helper.defaultText("ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
             if (multiMachine instanceof IXPMachine xpMachine) {
                 int xp = xpMachine.getCreatedXP(false);
                 if (xp > 0) {
-                    text(helper, Component.translatable("ic2.probe.machine.xp", xp).withStyle(ChatFormatting.GREEN));
-
+                    helper.text(translate("ic2.probe.machine.xp", xp).withStyle(ChatFormatting.GREEN));
                 }
             }
             if (multiMachine instanceof BaseAdvMultiMachineTileEntity adv) {
@@ -43,18 +41,18 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                 Component speedName = adv.getSpeedName();
                 double scaledProgress = (double) speed / maxSpeed;
                 if (speed > 0) {
-                    bar(helper, speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
+                    helper.bar(speed, maxSpeed, speedName.plainCopy().append(": " + new DecimalFormat().format(scaledProgress * 100.0) + "%"), -295680);
                 }
             }
 
             if (!multiMachine.isValid) {
                 long time = multiMachine.clockTime(512);
-                bar(helper, (int) time, 512, Component.translatable("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
+                helper.bar((int) time, 512, translate("ic2.multiblock.reform.next", 512 - time), ColorUtils.GRAY);
             }
 
             if (multiMachine instanceof BasicMultiMachineTileEntity machineTile) {
                 if (multiMachine.isMachineWorking() || machineTile.getProgress() > 0) {
-                    bar(helper, (int) machineTile.getProgress(), (int) machineTile.getMaxProgress(), Component.translatable("ic2.probe.progress.full.name", (int) machineTile.getProgress() / 1000, (int) machineTile.getMaxProgress() / 1000).append("t"), -16733185);
+                    helper.bar((int) machineTile.getProgress(), (int) machineTile.getMaxProgress(), translate("ic2.probe.progress.full.name", (int) machineTile.getProgress() / 1000, (int) machineTile.getMaxProgress() / 1000).append("t"), -16733185);
                 }
             }
 
@@ -71,7 +69,7 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                     do {
                         if (!activeSlotsIterator.hasNext()) {
                             for (int i = 0; i < progressFilter.size(); ++i) {
-                                bar(helper, progressFilter.getInt(i), maxProgressFilter.getInt(i), Component.translatable("ic2.probe.progress.full.name", progressFilter.getInt(i) / 1000, maxProgressFilter.getInt(i) / 1000).append("t"), -16733185);
+                                helper.bar(progressFilter.getInt(i), maxProgressFilter.getInt(i), translate("ic2.probe.progress.full.name", progressFilter.getInt(i) / 1000, maxProgressFilter.getInt(i) / 1000).append("t"), -16733185);
                             }
                             break label38;
                         }
@@ -87,7 +85,7 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
                     progressFilter.add(progress);
                 }
             }
-            JadeCommonHandler.addTankInfo(helper, multiMachine);
+            helper.addTankInfo(multiMachine);
         }
     }
 }

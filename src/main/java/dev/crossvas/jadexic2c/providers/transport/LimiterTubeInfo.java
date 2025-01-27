@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.LimiterTubeTileEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -18,7 +18,7 @@ public class LimiterTubeInfo implements IInfoProvider {
     public static final LimiterTubeInfo THIS = new LimiterTubeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof LimiterTubeTileEntity limiter) {
             List<ItemStack> dyeStacks = new ObjectArrayList<>();
             for (DyeColor color : limiter.usedColors) {
@@ -26,7 +26,7 @@ public class LimiterTubeInfo implements IInfoProvider {
                 dyeStacks.add(stack);
             }
             if (!dyeStacks.isEmpty()) {
-                addGrid(helper, dyeStacks, TextFormatter.GOLD.translate("info.tube.colors"));
+                helper.addGrid(dyeStacks, TextFormatter.GOLD.translate("info.tube.colors"));
             }
         }
     }

@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.tiles.tubes.TransportedItem;
 import ic2.core.block.machines.recipes.ItemStackStrategy;
@@ -19,14 +19,14 @@ public class BasicTubeInfo implements IInfoProvider {
     public static final BasicTubeInfo THIS = new BasicTubeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof TubeTileEntity tube) {
             int priority = tube.getPrioritySide();
             if (priority > 0) {
-                text(helper, TextFormatter.GOLD.translate("info.tube.prio", TextFormatter.getColor(priority - 1).translate("misc.ic2.side." + Direction.from3DDataValue(priority - 1))));
+                helper.text(TextFormatter.GOLD.translate("info.tube.prio", TextFormatter.getColor(priority - 1).translate("misc.ic2.side." + Direction.from3DDataValue(priority - 1))));
             }
             if (!tube.synchronize) {
-                text(helper, TextFormatter.RED.translate("ic2.probe.tube.invisible"));
+                helper.text(TextFormatter.RED.translate("ic2.probe.tube.invisible"));
             }
 
             NonNullList<ItemStack> list = NonNullList.create();
@@ -40,8 +40,8 @@ public class BasicTubeInfo implements IInfoProvider {
                 }
 
                 mapped.forEach((K, V) -> list.add(StackUtil.copyWithSize(K, V)));
-                paddingY(helper, 3);
-                addGrid(helper, list, TextFormatter.GOLD.translate("ic2.probe.tube.transported"));
+                helper.paddingY(3);
+                helper.addGrid(list, TextFormatter.GOLD.translate("ic2.probe.tube.transported"));
             }
         }
     }

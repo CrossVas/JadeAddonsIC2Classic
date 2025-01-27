@@ -1,7 +1,7 @@
 package dev.crossvas.jadexic2c.providers.transport;
 
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.util.DirectionList;
@@ -24,10 +24,10 @@ public class ColorFilterTubeInfo implements IInfoProvider {
     public static final ColorFilterTubeInfo THIS = new ColorFilterTubeInfo();
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof ColorFilterTubeTileEntity colorFilterTube) {
             boolean invPrio = colorFilterTube.invPriority;
-            text(helper, TextFormatter.GOLD.translate("info.tube.inv.prio", status(invPrio)));
+            helper.text(TextFormatter.GOLD.translate("info.tube.inv.prio", status(invPrio)));
 
             List<FilterEntry> filters = new ObjectArrayList<>();
             for (int i = 0; i < colorFilterTube.colorDirections.length; i++) {
@@ -39,7 +39,7 @@ public class ColorFilterTubeInfo implements IInfoProvider {
                 }
             }
             if (!filters.isEmpty()) {
-                paddingY(helper, 3);
+                helper.paddingY(3);
                 Object2ObjectOpenHashMap<Component, List<FilterEntry>> mappedFilters = new Object2ObjectOpenHashMap<>();
                 for (FilterEntry entry : filters) {
                     Component side = PluginHelper.getSides(entry.directions);
@@ -55,12 +55,12 @@ public class ColorFilterTubeInfo implements IInfoProvider {
                 }
                 // apply
                 mappedFilters.keySet().forEach(side -> {
-                    text(helper, TextFormatter.GOLD.translate("info.tube.filter"));
+                    helper.text(TextFormatter.GOLD.translate("info.tube.filter"));
                     for (FilterEntry entry : mappedFilters.get(side)) {
-                        appendItem(helper, entry.stack);
+                        helper.appendItem(entry.stack);
                     }
-                    appendText(helper, TextFormatter.WHITE.literal(" → "));
-                    appendText(helper, side);
+                    helper.appendText(TextFormatter.WHITE.literal(" → "));
+                    helper.appendText(side);
                 });
             }
         }

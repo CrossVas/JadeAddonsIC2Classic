@@ -1,8 +1,8 @@
 package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.JadeTags;
+import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.misc.tiles.BarrelTileEntity;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.platform.registries.IC2Blocks;
@@ -42,7 +42,7 @@ public class BarrelInfo implements IInfoProvider {
     }
 
     @Override
-    public void addInfo(IJadeHelper helper, BlockEntity blockEntity, Player player) {
+    public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BarrelTileEntity barrelTile) {
             // common
             int brewQuality = barrelTile.beerQuality;
@@ -65,6 +65,59 @@ public class BarrelInfo implements IInfoProvider {
 
             int brewType = barrelTile.brewType;
             switch (brewType) {
+                case 1:
+                    age = barrelTile.age;
+                    maxValue = 24000.0 * Math.pow(3.0, brewQuality == 4 ? 6.0 : (double) brewQuality);
+                    current = age / maxValue * 100.0;
+
+                    helper.defaultText(getBrewType(brewType));
+                    helper.centered(translate("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
+                    helper.bar(wheatAmount, 64, translate("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
+                    helper.bar(hopsAmount, 64, translate("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
+                    helper.fluid(waterStack, maxFluidCapacity);
+
+                    helper.centered(translate("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
+                    helper.text(translate("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));
+                    helper.text(translate("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"));
+                    helper.text(translate("ic2.probe.barrel.beer.solid." + solidRatio + ".name"));
+                    helper.bar(age, (int) maxValue, string(format.format(current) + "%"), -16733185);
+                    break;
+                case 2:
+                    maxValue = barrelTile.timeNeededForRum();
+                    age = (int) Math.min(barrelTile.age, maxValue);
+                    helper.defaultText(getBrewType(brewType));
+                    helper.centered(translate("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
+                    helper.bar(fluidAmount / 1000, 32, translate("ic2.probe.barrel.beer.sugar_cane.name", fluidAmount / 1000), ColorUtils.GREEN);
+                    helper.bar(age, (int) maxValue, string(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), -16733185);
+                    break;
+                case 5:
+                    double ageWhisky = barrelTile.age;
+                    int whiskyBrewTime = barrelTile.getWhiskBrewTime();
+                    helper.defaultText(getBrewType(brewType));
+                    helper.centered(translate("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
+                    helper.bar(hopsAmount, 16, translate("ic2.probe.barrel.whisky.grist.name", hopsAmount), ColorUtils.GREEN);
+                    helper.fluid(waterStack, maxFluidCapacity);
+                    helper.centered(translate("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
+                    helper.bar(Math.min(brewQuality, 50), 50, translate("ic2.probe.barrel.whisky.years.name", Math.min(brewQuality, 50)), -16733185);
+                    helper.bar((int) ageWhisky, 1728000, string(format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%"), -16733185);
+                    break;
+                case 10:
+                    helper.defaultText(getBrewType(brewType));
+                    helper.centered(translate("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
+                    helper.bar(wheatAmount, 20, translate("ic2.probe.barrel.beer.redstone.name", wheatAmount), ColorUtils.RED);
+                    helper.bar(hopsAmount, 20, translate("ic2.probe.barrel.beer.glowstone.name", hopsAmount), ColorUtils.YELLOW);
+                    helper.fluid(waterStack, maxPotionCapacity);
+                    helper.centered(translate("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
+                    int brewedPotion = MobEffect.getId(barrelTile.potionType);
+                    Component potionID = brewedPotion == -1 ? translate("tooltip.block.ic2.barrel.unknown") : barrelTile.potionType.getDisplayName();
+                    helper.defaultText("ic2.probe.barrel.status.output.name", potionID);
+                    helper.defaultText("ic2.probe.barrel.potion.quality." + brewQuality + ".name", brewQuality);
+
+                    age = barrelTile.age;
+                    maxValue = 5000.0 * Math.pow(3.0, brewQuality);
+                    current = age / maxValue;
+                    helper.bar(age, (int) maxValue, string(format.format(current * 100.0) + "%"), -16733185);
+                    break;
                 case 0:
                 case 3:
                 case 4:
@@ -73,59 +126,6 @@ public class BarrelInfo implements IInfoProvider {
                 case 8:
                 case 9:
                 default:
-                    break;
-                case 1:
-                    age = barrelTile.age;
-                    maxValue = 24000.0 * Math.pow(3.0, brewQuality == 4 ? 6.0 : (double) brewQuality);
-                    current = age / maxValue * 100.0;
-
-                    defaultText(helper, getBrewType(brewType));
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
-                    bar(helper, wheatAmount, 64, Component.translatable("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorUtils.YELLOW);
-                    bar(helper, hopsAmount, 64, Component.translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorUtils.GREEN);
-                    fluid(helper, waterStack, maxFluidCapacity);
-
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
-                    text(helper, Component.translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));
-                    text(helper, Component.translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"));
-                    text(helper, Component.translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"));
-                    bar(helper, age, (int) maxValue, Component.literal(format.format(current) + "%"), -16733185);
-                    break;
-                case 2:
-                    maxValue = barrelTile.timeNeededForRum();
-                    age = (int) Math.min(barrelTile.age, maxValue);
-                    defaultText(helper, getBrewType(brewType));
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
-                    bar(helper, fluidAmount / 1000, 32, Component.translatable("ic2.probe.barrel.beer.sugar_cane.name", fluidAmount / 1000), ColorUtils.GREEN);
-                    bar(helper, age, (int) maxValue, Component.literal(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), -16733185);
-                    break;
-                case 5:
-                    double ageWhisky = barrelTile.age;
-                    int whiskyBrewTime = barrelTile.getWhiskBrewTime();
-                    defaultText(helper, getBrewType(brewType));
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
-                    bar(helper, hopsAmount, 16, Component.translatable("ic2.probe.barrel.whisky.grist.name", hopsAmount), ColorUtils.GREEN);
-                    fluid(helper, waterStack, maxFluidCapacity);
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
-                    bar(helper, Math.min(brewQuality, 50), 50, Component.translatable("ic2.probe.barrel.whisky.years.name", Math.min(brewQuality, 50)), -16733185);
-                    bar(helper, (int) ageWhisky, 1728000, Component.literal(format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%"), -16733185);
-                    break;
-                case 10:
-                    defaultText(helper, getBrewType(brewType));
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.storage.name").withStyle(ChatFormatting.YELLOW));
-                    bar(helper, wheatAmount, 20, Component.translatable("ic2.probe.barrel.beer.redstone.name", wheatAmount), ColorUtils.RED);
-                    bar(helper, hopsAmount, 20, Component.translatable("ic2.probe.barrel.beer.glowstone.name", hopsAmount), ColorUtils.YELLOW);
-                    fluid(helper, waterStack, maxPotionCapacity);
-                    centered(helper, Component.translatable("ic2.probe.barrel.status.brew.name").withStyle(ChatFormatting.YELLOW));
-                    int brewedPotion = MobEffect.getId(barrelTile.potionType);
-                    Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : barrelTile.potionType.getDisplayName();
-                    defaultText(helper, "ic2.probe.barrel.status.output.name", potionID);
-                    defaultText(helper, "ic2.probe.barrel.potion.quality." + brewQuality + ".name", brewQuality);
-
-                    age = barrelTile.age;
-                    maxValue = 5000.0 * Math.pow(3.0, brewQuality);
-                    current = age / maxValue;
-                    bar(helper, age, (int) maxValue, Component.literal(format.format(current * 100.0) + "%"), -16733185);
                     break;
             }
         }
