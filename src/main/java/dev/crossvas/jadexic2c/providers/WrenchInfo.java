@@ -53,10 +53,8 @@ public class WrenchInfo implements IBlockComponentProvider {
                         iTooltip.append(TextFormatter.GOLD.translate("ic2.probe.wrenchable.info"));
                     }
                 } else {
-                    spacerY(iTooltip, 5);
-                    iTooltip.append(TextFormatter.WHITE.translate("ic2.probe.wrenchable.drop_chance.info", TextFormatter.formatPercentage(100).literal(100 + "")));
-                    spacerY(iTooltip, 5);
                     iTooltip.add(wrenchIcon);
+                    iTooltip.append(TextFormatter.WHITE.translate("ic2.probe.wrenchable.drop_chance.info", TextFormatter.formatPercentage(100).literal(100 + "")));
                     iTooltip.append(TextFormatter.AQUA.translate("ic2.probe.wrenchable.optional.info"));
                 }
             }
