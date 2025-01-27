@@ -8,6 +8,7 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.reactor.ISteamReactor;
 import ic2.core.block.generators.tiles.ElectricNuclearReactorTileEntity;
+import ic2.core.block.generators.tiles.SteamReactorChamberTileEntity;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import ic2.core.utils.helpers.StackUtil;
@@ -27,6 +28,9 @@ public class NuclearInfo implements IInfoProvider {
         }
         if (blockEntity instanceof IReactorChamber chamber) {
             addTooltips(helper, (BlockEntity) chamber.getReactor(), player);
+        }
+        if (blockEntity instanceof SteamReactorChamberTileEntity steamChamber) {
+            JadeCommonHandler.addTankInfo(helper, steamChamber);
         }
     }
 
