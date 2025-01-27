@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import static dev.crossvas.jadexic2c.JadeTags.*;
 
+@SuppressWarnings("all")
 public class JadeTooltipRenderer implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
     public static final JadeTooltipRenderer INSTANCE = new JadeTooltipRenderer();

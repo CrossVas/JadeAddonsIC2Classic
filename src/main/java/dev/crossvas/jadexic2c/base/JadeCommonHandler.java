@@ -1,8 +1,6 @@
 package dev.crossvas.jadexic2c.base;
 
-import dev.crossvas.jadexic2c.base.elements.CommonFluidBarElement;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.providers.*;
 import dev.crossvas.jadexic2c.providers.expansions.FluidExpansionInfo;
 import dev.crossvas.jadexic2c.providers.expansions.MemoryExpansionInfo;
@@ -12,9 +10,6 @@ import dev.crossvas.jadexic2c.providers.transport.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package dev.crossvas.jadexic2c.elements;
 
 import snownee.jade.api.ui.BoxStyle;
 
+@SuppressWarnings("all")
 public class SpecialBoxStyle extends BoxStyle {
 
     public SpecialBoxStyle(int borderColor, int backColor) {

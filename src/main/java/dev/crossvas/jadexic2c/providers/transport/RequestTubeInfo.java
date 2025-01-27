@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.core.block.transport.item.tubes.RequestTubeTileEntity;
 import ic2.core.utils.helpers.StackUtil;

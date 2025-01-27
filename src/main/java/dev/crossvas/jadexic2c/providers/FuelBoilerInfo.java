@@ -1,9 +1,7 @@
 package dev.crossvas.jadexic2c.providers;
 
-import dev.crossvas.jadexic2c.base.JadeCommonHandler;
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import ic2.core.block.generators.tiles.FuelBoilerTileEntity;
 import ic2.core.platform.player.PlayerHandler;
 import ic2.core.utils.helpers.Formatters;

@@ -15,6 +15,7 @@ import snownee.jade.overlay.OverlayRenderer;
 
 import java.util.Objects;
 
+@SuppressWarnings("all")
 public class SpecialProgressStyle extends ProgressStyle {
 
     @Override

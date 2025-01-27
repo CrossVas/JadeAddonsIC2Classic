@@ -2,14 +2,11 @@ package dev.crossvas.jadexic2c.providers.transport;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
-import dev.crossvas.jadexic2c.helpers.PluginHelper;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
 import ic2.api.util.DirectionList;
 import ic2.core.block.transport.item.tubes.RoundRobinTubeTileEntity;
 import ic2.core.utils.helpers.SanityHelper;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
