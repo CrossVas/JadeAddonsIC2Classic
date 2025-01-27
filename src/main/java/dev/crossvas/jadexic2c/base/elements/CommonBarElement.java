@@ -46,7 +46,7 @@ public class CommonBarElement extends CommonElement {
 
     @Override
     public CompoundTag save(CompoundTag tag) {
-        tag.putString("text", Component.Serializer.toStableJson(this.TEXT));
+        tag.putString("text", Component.Serializer.toJson(this.TEXT));
         tag.putInt("current", this.CURRENT);
         tag.putInt("max", this.MAX);
         tag.putInt("color", this.COLOR);
