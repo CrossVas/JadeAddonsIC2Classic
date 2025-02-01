@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec2;
+import snownee.jade.Jade;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -49,18 +50,18 @@ public class TexturedBlockInfo implements IBlockComponentProvider {
         Block block = blockAccessor.getBlock();
         if (block instanceof TexturedBlockBlock || block instanceof TexturedSlabBlock ||
                 block instanceof TexturedWallBlock || block instanceof TexturedStairsBlock) {
-            addFakeInfo(block, iTooltip, blockAccessor, iPluginConfig);
+            addFakeInfo(block, iTooltip, blockAccessor);
         }
     }
 
-    public static void addFakeInfo(Block texturedBlock, ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
+    public static void addFakeInfo(Block texturedBlock, ITooltip iTooltip, BlockAccessor blockAccessor) {
         ItemStack fakeStack = getFakeIcon(texturedBlock, blockAccessor);
         iTooltip.remove(Identifiers.CORE_OBJECT_NAME); // remove block name
         iTooltip.remove(Identifiers.CORE_MOD_NAME); // remove mod name
         iTooltip.remove(ModNameRender.RELOCATE); // disable relocator
         Component fakeNameComponent = fakeStack.getHoverName().copy().withStyle(ChatFormatting.WHITE);
         String fakeModName = ModIdentification.getModName(fakeStack);
-        String fakeModNameFormatted = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), fakeModName);
+        String fakeModNameFormatted = String.format(Jade.CONFIG.get().getFormatting().getModName(), fakeModName);
         // add fake block name
         iTooltip.add(new TextElement(fakeNameComponent).size(new Vec2(Minecraft.getInstance().font.width(fakeNameComponent.getString()) + 16, Minecraft.getInstance().font.lineHeight)));
         // add fake block modid

@@ -4,6 +4,7 @@ import dev.crossvas.jadexic2c.JadeIC2Classic;
 import ic2.core.block.base.IToolProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import snownee.jade.Jade;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.util.ModIdentification;
@@ -37,7 +38,7 @@ public class ModNameRender {
                     if (getUid() == REMOVER) {
                         iTooltip.remove(Identifiers.CORE_MOD_NAME);
                     } else if (getUid() == RELOCATE) {
-                        String modName = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), MOD_NAME);
+                        String modName = String.format(Jade.CONFIG.get().getFormatting().getModName(), MOD_NAME);
                         iTooltip.add(Component.literal(modName));
                     }
                 }

@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
+import snownee.jade.Jade;
 import snownee.jade.addon.harvest.HarvestToolProvider;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
@@ -159,7 +160,7 @@ public class CropInfo implements IInfoProvider {
                         iTooltip.add(0, translate("info.crop.ic2.data.unknown").withStyle(ChatFormatting.WHITE));
                         elements.forEach(element -> iTooltip.append(0, element.align(IElement.Align.RIGHT)));
                     } else {
-                        iTooltip.add(0, iPluginConfig.getWailaConfig().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
+                        iTooltip.add(0, Jade.CONFIG.get().getFormatting().title(crop.getName()), Identifiers.CORE_OBJECT_NAME);
                         elements.forEach(element -> iTooltip.append(0, element.align(IElement.Align.RIGHT)));
                         iTooltip.add(1, iTooltip.getElementHelper().text(translate("jei.ic2.reactor.by", crop.discoveredBy().copy().withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE)));
                     }
