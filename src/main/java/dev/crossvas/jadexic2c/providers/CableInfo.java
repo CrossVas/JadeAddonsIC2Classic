@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
+import snownee.jade.Jade;
 import snownee.jade.addon.harvest.HarvestToolProvider;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -61,7 +62,7 @@ public class CableInfo implements IInfoProvider {
                     iTooltip.add(0, new TextElement(fakeNameComponent).size(new Vec2(Minecraft.getInstance().font.width(fakeNameComponent.getString()) + 15, Minecraft.getInstance().font.lineHeight)));
                     elements.forEach(element -> iTooltip.append(0, element.align(IElement.Align.RIGHT)));
                     String fakeModName = ModIdentification.getModName(fakeStack);
-                    String fakeModNameFormatted = String.format(iPluginConfig.getWailaConfig().getFormatting().getModName(), fakeModName);
+                    String fakeModNameFormatted = String.format(Jade.CONFIG.get().getFormatting().getModName(), fakeModName);
                     iTooltip.add(string(fakeModNameFormatted));
                     iTooltip.remove(ModNameRender.RELOCATE);
                 }
