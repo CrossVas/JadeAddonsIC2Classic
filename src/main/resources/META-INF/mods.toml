@@ -4,10 +4,10 @@ loaderVersion="[43,)" #mandatory This is typically bumped every Minecraft versio
 license="All rights reserved"
 [[mods]] #mandatory
 # The modid of the mod
-modId="jadexic2c" #mandatory
+modId="ic2jadeplugin" #mandatory
 version="${file.jarVersion}" #mandatory
  # A display name for the mod
-displayName="IC2Classic Jade Plugin" #mandatory
+displayName="IC2Classic: Jade Plugin" #mandatory
 # A text field displayed in the mod UI
 credits="Jade and IC2Classic Devs" #optional
 # A text field displayed in the mod UI
@@ -18,14 +18,14 @@ description='''
 Qui quaerit, reperit - you know.
 '''
 
-[[dependencies.jadexic2c]]
+[[dependencies.ic2jadeplugin]]
     modId="jade"
     mandatory=true
     versionRange="[8.8, )"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.jadexic2c]]
+[[dependencies.ic2jadeplugin]]
     modId="ic2"
     mandatory=true
     versionRange="[1.19.2-2.0.9,)"
