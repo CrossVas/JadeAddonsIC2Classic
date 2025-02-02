@@ -74,4 +74,19 @@ public enum TextFormatter {
             default -> TextFormatter.WHITE;
         };
     }
+
+    public static TextFormatter tier(int tier) {
+        return switch (tier) {
+            case 0 -> DARK_GRAY; // ULV
+            case 1 -> GRAY; // LV
+            case 2 -> AQUA; // MV
+            case 3 -> GOLD; // HV
+            case 4 -> DARK_PURPLE; // EV
+            case 5 -> BLUE; // IV
+            case 6 -> LIGHT_PURPLE; // LuV
+            case 7 -> RED; // ZPM
+            case 8 -> DARK_AQUA; // UV
+            default -> WHITE;
+        };
+    }
 }

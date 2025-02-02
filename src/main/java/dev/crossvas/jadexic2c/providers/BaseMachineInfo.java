@@ -24,9 +24,9 @@ public class BaseMachineInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMachineTileEntity baseMachine) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(baseMachine.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", baseMachine.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", baseMachine.getEnergyPerTick());
+            helper.tier(baseMachine.getTier());
+            helper.maxIn(baseMachine.getMaxInput());
+            helper.usage(baseMachine.getEnergyPerTick());
             if (baseMachine instanceof SlowGrinderTileEntity slowGrinder) {
                 helper.defaultText("ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(slowGrinder.getChance(0.25F) * 100.0F));
             }

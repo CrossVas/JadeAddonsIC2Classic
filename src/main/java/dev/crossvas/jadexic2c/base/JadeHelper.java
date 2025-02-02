@@ -7,6 +7,7 @@ import dev.crossvas.jadexic2c.base.interfaces.IJadeElementBuilder;
 import dev.crossvas.jadexic2c.base.interfaces.IJadeHelper;
 import dev.crossvas.jadexic2c.helpers.EnergyContainer;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
+import ic2.api.energy.EnergyNet;
 import ic2.core.utils.helpers.Formatters;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
@@ -274,5 +275,49 @@ public class JadeHelper implements IJadeHelper {
         } else {
             centered(TextFormatter.AQUA.translate("info.sneak.details"));
         }
+    }
+
+    public void tierFromPower(int power) {
+        int tier = EnergyNet.INSTANCE.getTierFromPower(power);
+        defaultText("ic2.probe.eu.tier.name", TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+    }
+
+    public void tier(int tier) {
+        defaultText("ic2.probe.eu.tier.name", TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+    }
+
+    public void maxIn(int maxIn) {
+        int tier = EnergyNet.INSTANCE.getTierFromPower(maxIn);
+        defaultText("info.energy.max_in", maxIn, TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+    }
+
+    public void maxOut(int maxOut) {
+        int tier = EnergyNet.INSTANCE.getTierFromPower(maxOut);
+        defaultText("info.energy.max_out", maxOut, TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+    }
+
+    public void usage(int usage) {
+        defaultText("ic2.probe.eu.usage.name", usage);
+    }
+
+    public String getTierDisplayFromTier(int tier) {
+        return switch (tier) {
+            case 0 -> "ULV"; // ultra low voltage
+            case 1 -> "LV"; // low voltage
+            case 2 -> "MV"; // medium voltage
+            case 3 -> "HV"; // high voltage
+            case 4 -> "EV"; // extreme voltage
+            case 5 -> "IV"; // insane voltage
+            case 6 -> "LuV"; // ludicrous voltage
+            case 7 -> "ZPM"; // ZPM voltage
+            case 8 -> "UV"; // Ultimate voltage
+            case 9 -> "UHV";
+            case 10 -> "UEV";
+            case 11 -> "UIV";
+            case 12 -> "UMV";
+            case 13 -> "UXV";
+            case 14 -> "MAX";
+            default -> String.valueOf(tier);
+        };
     }
 }
