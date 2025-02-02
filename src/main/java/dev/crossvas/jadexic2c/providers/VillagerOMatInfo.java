@@ -3,7 +3,6 @@ package dev.crossvas.jadexic2c.providers;
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
 import dev.crossvas.jadexic2c.helpers.TextFormatter;
-import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.hv.VillagerOMatTileEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.player.Player;

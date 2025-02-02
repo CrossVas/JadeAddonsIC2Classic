@@ -2,9 +2,7 @@ package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import ic2.api.energy.EnergyNet;
 import ic2.api.energy.tile.IEnergySink;
-import ic2.api.tiles.readers.IEUStorage;
 import ic2.core.block.cables.luminator.ConstructionLightTileEntity;
 import ic2.core.block.cables.luminator.LuminatorTileEntity;
 import net.minecraft.world.entity.player.Player;

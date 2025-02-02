@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.recipes.misc.EnrichRecipe;
 import ic2.core.block.machines.tiles.hv.UraniumEnchricherTileEntity;
 import ic2.core.utils.helpers.SanityHelper;

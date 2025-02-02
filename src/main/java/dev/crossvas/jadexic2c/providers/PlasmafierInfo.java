@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import ic2.api.energy.EnergyNet;
 import ic2.core.block.machines.tiles.ev.PlasmafierTileEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;

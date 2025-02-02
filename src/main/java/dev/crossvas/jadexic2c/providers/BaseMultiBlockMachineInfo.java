@@ -2,7 +2,6 @@ package dev.crossvas.jadexic2c.providers;
 
 import dev.crossvas.jadexic2c.base.JadeHelper;
 import dev.crossvas.jadexic2c.base.interfaces.IInfoProvider;
-import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseAdvMultiMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseColossalMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.multi.BaseMultiMachineTileEntity;
