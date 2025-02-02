@@ -15,9 +15,9 @@ public class WaveGenInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof WaveGenTileEntity waveGen) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(waveGen.getSourceTier()));
+            helper.tier(waveGen.getSourceTier());
             helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(waveGen.getEUProduction(), 3));
-            helper.defaultText("ic2.probe.eu.output.max.name", waveGen.getMaxEnergyOutput());
+            helper.maxOut(waveGen.getMaxEnergyOutput());
         }
     }
 }

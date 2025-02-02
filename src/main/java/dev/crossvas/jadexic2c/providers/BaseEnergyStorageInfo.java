@@ -15,7 +15,6 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseEnergyStorageTileEntity energyStorage) {
-//            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
             helper.tier(energyStorage.getSourceTier());
             helper.defaultText("info.energy.io", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getSourceTier()));
 

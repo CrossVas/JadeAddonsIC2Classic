@@ -19,8 +19,7 @@ public class ChargingBenchInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseChargingBenchTileEntity bench) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(bench.getSinkTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", bench.getMaxInput());
+            helper.maxIn(bench.getMaxInput());
 
             int missingEnergy = 0;
             for (int i = 0; i < 16; i++) {

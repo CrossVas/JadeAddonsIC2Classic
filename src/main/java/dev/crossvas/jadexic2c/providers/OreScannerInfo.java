@@ -14,9 +14,8 @@ public class OreScannerInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof OreScannerTileEntity scanner) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(scanner.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", scanner.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", 1000);
+            helper.maxIn(scanner.getMaxInput());
+            helper.usage(1000);
 
             int blocks = scanner.blocks;
             int maxBlocks = scanner.maxBlocks;

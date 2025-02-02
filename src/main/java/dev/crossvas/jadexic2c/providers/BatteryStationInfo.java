@@ -19,8 +19,7 @@ public class BatteryStationInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseBatteryStationTileEntity station) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(station.getSourceTier()));
-            helper.defaultText("ic2.probe.eu.output.max.name", station.getMaxEnergyOutput());
+            helper.maxOut(station.getMaxEnergyOutput());
 
             int capacity = 0;
             int maxCapacity = 0;

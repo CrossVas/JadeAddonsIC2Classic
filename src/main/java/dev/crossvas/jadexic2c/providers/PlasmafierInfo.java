@@ -15,9 +15,8 @@ public class PlasmafierInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof PlasmafierTileEntity plasmafier) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(plasmafier.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", plasmafier.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", 10240);
+            helper.maxIn(plasmafier.getMaxInput());
+            helper.usage(10240);
 
             int plasma = plasmafier.getPumpProgress();
             int maxPlasma = plasmafier.getPumpMaxProgress();

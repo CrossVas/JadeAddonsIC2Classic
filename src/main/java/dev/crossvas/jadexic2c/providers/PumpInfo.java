@@ -15,9 +15,8 @@ public class PumpInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof PumpTileEntity pump) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(pump.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", pump.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", pump.getPumpCost());
+            helper.maxIn(pump.getMaxInput());
+            helper.usage(pump.getPumpCost());
             helper.defaultText("ic2.probe.pump.pressure", 100);
             helper.defaultText("ic2.probe.pump.amount", Formatters.EU_FORMAT.format(800L));
 

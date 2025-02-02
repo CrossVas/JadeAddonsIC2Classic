@@ -17,9 +17,8 @@ public class LuminatorInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof LuminatorTileEntity || blockEntity instanceof ConstructionLightTileEntity) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(((IEUStorage) blockEntity).getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(((IEnergySink) blockEntity).getSinkTier()));
-            helper.defaultText("ic2.probe.eu.usage.name", 0.1);
+            helper.maxInFromTier(((IEnergySink) blockEntity).getSinkTier());
+            helper.usage(0.1);
         }
 
         if (blockEntity instanceof LuminatorTileEntity luminator) {

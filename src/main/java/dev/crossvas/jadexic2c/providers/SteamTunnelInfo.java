@@ -32,9 +32,9 @@ public class SteamTunnelInfo implements IInfoProvider {
     }
 
     public void addTunnelInfo(JadeHelper helper, SteamTunnelTileEntity steamTunnel) {
-        helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(steamTunnel.getSourceTier()));
+        helper.tier(steamTunnel.getSourceTier());
         helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(steamTunnel.getEUProduction(), 3));
-        helper.defaultText("ic2.probe.eu.output.max.name", steamTunnel.getMaxEnergyOutput());
+        helper.maxOut(steamTunnel.getMaxEnergyOutput());
         helper.addTankInfo(steamTunnel);
     }
 }

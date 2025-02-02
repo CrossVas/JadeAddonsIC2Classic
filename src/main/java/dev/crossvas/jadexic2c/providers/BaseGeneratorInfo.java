@@ -18,9 +18,9 @@ public class BaseGeneratorInfo implements IInfoProvider {
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseGeneratorTileEntity gen) {
             float euProduction = gen.getEUProduction();
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
+            helper.tier(gen.getSourceTier());
             helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(euProduction, 3));
-            helper.defaultText("ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
+            helper.maxOut(gen.getMaxEnergyOutput());
 
             if (gen instanceof SolarTurbineTileEntity solarTurbine) {
                 int heat = solarTurbine.getHeat();

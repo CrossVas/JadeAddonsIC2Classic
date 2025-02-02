@@ -17,7 +17,7 @@ public class AdjustableTransformerInfo implements IInfoProvider {
         if (blockEntity instanceof AdjustableTransformerTileEntity transformer) {
             int energyPacket = transformer.energyPacket;
             int packetCount = transformer.getPacketCount();
-            helper.maxIn(EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
+            helper.maxInFromTier(transformer.getSinkTier());
             helper.maxOut(energyPacket);
             helper.defaultText("ic2.probe.transformer.packets.name", packetCount);
 

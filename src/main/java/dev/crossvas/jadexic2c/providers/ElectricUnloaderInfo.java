@@ -15,8 +15,7 @@ public class ElectricUnloaderInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseElectricUnloaderTileEntity unloader) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(unloader.getSourceTier()));
-            helper.defaultText("ic2.probe.eu.output.max.name", unloader.getMaxEnergyOutput());
+            helper.maxOut(unloader.getMaxEnergyOutput());
             helper.defaultText("ic2.probe.transformer.packets.name", 10);
             EnergyContainer container = EnergyContainer.getContainer(unloader);
             helper.addStats(player, () -> helper.addAveragesOut(container));

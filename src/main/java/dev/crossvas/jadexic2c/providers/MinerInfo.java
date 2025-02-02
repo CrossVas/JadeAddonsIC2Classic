@@ -16,9 +16,8 @@ public class MinerInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof MinerTileEntity miner) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(miner.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", miner.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", miner.getEnergyUsage());
+            helper.maxIn(miner.getMaxInput());
+            helper.usage(miner.getEnergyUsage());
 
             float progress = miner.getProgress();
             boolean isStuck = miner.isStuck();

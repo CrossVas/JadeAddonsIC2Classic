@@ -16,9 +16,8 @@ public class ElectricWoodGassifierInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof WoodGassifierTileEntity woodGassifier) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(woodGassifier.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", woodGassifier.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", 1);
+            helper.maxIn(woodGassifier.getMaxInput());
+            helper.usage(1);
             helper.defaultText("ic2.probe.pump.pressure", 25);
             helper.defaultText("ic2.probe.pump.amount", Formatters.EU_FORMAT.format(1800L));
             float progress = woodGassifier.getProgress();

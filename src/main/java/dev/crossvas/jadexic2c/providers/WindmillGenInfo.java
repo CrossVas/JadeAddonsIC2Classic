@@ -16,9 +16,9 @@ public class WindmillGenInfo implements IInfoProvider {
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof WindmillTileEntity windmill) {
             float euProduction = Math.max(0, windmill.getEUProduction()); // because -0.001 is a thing
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(windmill.getSourceTier()));
+            helper.tier(windmill.getSourceTier());
             helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(euProduction, 3));
-            helper.defaultText("ic2.probe.eu.output.max.name", windmill.getMaxEnergyOutput());
+            helper.maxOut(windmill.getMaxEnergyOutput());
         }
     }
 }

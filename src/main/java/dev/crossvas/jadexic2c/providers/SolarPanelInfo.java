@@ -15,9 +15,9 @@ public class SolarPanelInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof SolarPanelTileEntity solarPanel) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(solarPanel.getSourceTier()));
+            helper.tier(solarPanel.getSourceTier());
             helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(solarPanel.getEUProduction(), 3));
-            helper.defaultText("ic2.probe.eu.output.max.name", solarPanel.getMaxEnergyOutput());
+            helper.maxOut(solarPanel.getMaxEnergyOutput());
         }
     }
 }

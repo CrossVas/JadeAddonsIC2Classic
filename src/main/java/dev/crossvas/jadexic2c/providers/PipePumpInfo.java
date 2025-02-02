@@ -17,8 +17,7 @@ public class PipePumpInfo implements IInfoProvider {
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof SimplePipePumpTileEntity simplePump) {
             if (simplePump instanceof ElectricPipePumpTileEntity electricPump) {
-                helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(electricPump.getTier()));
-                helper.defaultText("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(electricPump.getTier()));
+                helper.maxInFromTier(electricPump.getTier());
             }
             helper.defaultText("ic2.probe.pump.pressure", simplePump.getPressure());
             helper.defaultText("ic2.probe.pump.amount", Formatters.EU_FORMAT.format(simplePump.getDrainAmount() / 20));

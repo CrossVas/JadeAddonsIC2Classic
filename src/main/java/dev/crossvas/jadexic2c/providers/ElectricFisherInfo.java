@@ -16,9 +16,8 @@ public class ElectricFisherInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof ElectricFisherTileEntity fisher) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(fisher.getSinkTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", fisher.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", 150);
+            helper.maxIn(fisher.getMaxInput());
+            helper.usage(150);
 
             int progress = (int) fisher.getProgress();
             int maxProgress = (int) fisher.getMaxProgress();

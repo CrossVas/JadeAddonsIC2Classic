@@ -15,8 +15,7 @@ public class ElectricLoaderInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseElectricLoaderTileEntity loader) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(loader.getSinkTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", loader.getMaxInput());
+            helper.maxIn(loader.getMaxInput());
             EnergyContainer container = EnergyContainer.getContainer(loader);
             helper.addStats(player, () -> helper.addAveragesIn(container));
         }

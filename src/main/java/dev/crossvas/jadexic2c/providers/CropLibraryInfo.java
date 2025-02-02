@@ -22,9 +22,8 @@ public class CropLibraryInfo implements IInfoProvider {
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseCropLibraryTileEntity baseCropLibrary) {
             if (baseCropLibrary instanceof IEnergySink sink) {
-                helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(sink.getSinkTier()));
-                helper.defaultText("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(sink.getSinkTier()));
-                helper.defaultText("ic2.probe.eu.usage.name", 1);
+                helper.maxInFromTier(sink.getSinkTier());
+                helper.usage(1);
             }
 
             if (baseCropLibrary instanceof UUCropLibraryTileEntity uum) {

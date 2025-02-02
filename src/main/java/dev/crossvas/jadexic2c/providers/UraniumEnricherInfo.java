@@ -16,10 +16,9 @@ public class UraniumEnricherInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof UraniumEnchricherTileEntity enricher) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(enricher.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", enricher.getMaxInput());
+            helper.maxIn(enricher.getMaxInput());
             EnrichRecipe recipe = enricher.getRecipeList().getRecipe(enricher.storedType);
-            helper.defaultText("ic2.probe.eu.usage.name", recipe != null ? recipe.getEnergyCost() + 100 : 100);
+            helper.usage(recipe != null ? recipe.getEnergyCost() + 100 : 100);
             if (enricher.mainProgress > 0) {
                 helper.bar(enricher.mainProgress / 20, 1000 / 20, translate("ic2.probe.progress.full.name", enricher.mainProgress / 20, 1000 / 20).append("s"), -16733185);
             }

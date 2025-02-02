@@ -288,16 +288,24 @@ public class JadeHelper implements IJadeHelper {
 
     public void maxIn(int maxIn) {
         int tier = EnergyNet.INSTANCE.getTierFromPower(maxIn);
-        defaultText("info.energy.max_in", maxIn, TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+        defaultText("info.energy.max_in", TextFormatter.GREEN.literal(maxIn + ""), TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+    }
+
+    public void maxInFromTier(int tier) {
+        defaultText("info.energy.max_in", TextFormatter.GREEN.literal(EnergyNet.INSTANCE.getPowerFromTier(tier) + ""), TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
     }
 
     public void maxOut(int maxOut) {
         int tier = EnergyNet.INSTANCE.getTierFromPower(maxOut);
-        defaultText("info.energy.max_out", maxOut, TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
+        defaultText("info.energy.max_out", TextFormatter.GREEN.literal(maxOut + ""), TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));
     }
 
     public void usage(int usage) {
-        defaultText("ic2.probe.eu.usage.name", usage);
+        defaultText("ic2.probe.eu.usage.name", TextFormatter.GREEN.literal(usage + ""));
+    }
+
+    public void usage(double usage) {
+        defaultText("ic2.probe.eu.usage.name", TextFormatter.GREEN.literal(usage + ""));
     }
 
     public String getTierDisplayFromTier(int tier) {

@@ -15,9 +15,9 @@ public class OceanGenInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof OceanGeneratorTileEntity oceanGen) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(oceanGen.getSourceTier()));
+            helper.tier(oceanGen.getSourceTier());
             helper.defaultText("ic2.probe.eu.output.current.name", Formatter.formatNumber(oceanGen.getEUProduction(), 3));
-            helper.defaultText("ic2.probe.eu.output.max.name", oceanGen.getMaxEnergyOutput());
+            helper.maxOut(oceanGen.getMaxEnergyOutput());
 
             int water = Integer.parseInt(Formatter.formatInt(oceanGen.waterFound, 4));
             int coral = Integer.parseInt(Formatter.formatInt(oceanGen.coralsFound, 4));

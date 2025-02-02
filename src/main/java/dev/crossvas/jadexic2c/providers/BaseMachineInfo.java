@@ -24,7 +24,6 @@ public class BaseMachineInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMachineTileEntity baseMachine) {
-            helper.tier(baseMachine.getTier());
             helper.maxIn(baseMachine.getMaxInput());
             helper.usage(baseMachine.getEnergyPerTick());
             if (baseMachine instanceof SlowGrinderTileEntity slowGrinder) {

@@ -14,9 +14,8 @@ public class RangedPumpInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof RangedPumpTileEntity ranged) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(ranged.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", ranged.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", 10);
+            helper.maxIn(ranged.getMaxInput());
+            helper.usage(10);
 
             helper.defaultText(translate(ranged.isOperating() ? "ic2.probe.miner.mining.name" : "ic2.probe.miner.retracting.name"));
             int y = ranged.getPipeTip().getY();

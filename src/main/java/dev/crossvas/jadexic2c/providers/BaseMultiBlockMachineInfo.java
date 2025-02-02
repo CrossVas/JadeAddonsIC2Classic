@@ -24,9 +24,8 @@ public class BaseMultiBlockMachineInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseMultiMachineTileEntity multiMachine) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(multiMachine.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", multiMachine.getMaxInput());
-            helper.defaultText("ic2.probe.eu.usage.name", multiMachine.getEnergyPerTick());
+            helper.maxIn(multiMachine.getMaxInput());
+            helper.usage(multiMachine.getEnergyPerTick());
             if (multiMachine instanceof BaseAdvMultiMachineTileEntity adv) {
                 int speed = adv.getSpeed();
                 int maxSpeed = adv.getMaxSpeed();

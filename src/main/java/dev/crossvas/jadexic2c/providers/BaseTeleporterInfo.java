@@ -18,8 +18,7 @@ public class BaseTeleporterInfo implements IInfoProvider {
     @Override
     public void addInfo(JadeHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseTeleporterTileEntity tp) {
-            helper.defaultText("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tp.getTier()));
-            helper.defaultText("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(tp.getSinkTier()));
+            helper.maxInFromTier(tp.getSinkTier());
             Set<BaseTeleporterTileEntity.LocalTarget> targets = tp.getTargets();
             String name = tp.name;
             String networkID = tp.networkID;
