@@ -1,6 +1,5 @@
 {
   "config.jade.plugin_ic2.force_top_style": "Use TOP Style",
-  "config.jade.plugin_ic2.sneak_for_details": "Requires Sneak for details",
   "config.jade.plugin_ic2.relocate_modid": "Relocate Mod Name",
   "config.jade.plugin_ic2.remove_modid": "Remove Mod Name",
   "config.jade.plugin_ic2.remove_renders_fluid": "Use custom style for IC2 Tanks",
@@ -48,8 +47,6 @@
   "ic2.probe.machine.xp": "Stored: %s XP",
 
   "_comment": "New Translations",
-  "info.sneak.details": "Sneak for energy stats...",
-  "info.energy.stats": "-== Energy Stats ==-",
   "info.energy.io": "Max In/Out: %s EU/t",
   "info.energy.max_in": "Max Input: %s EU/t (%s)",
   "info.energy.max_out": "Max Output: %s EU/t (%s)",
@@ -87,5 +84,5 @@
   "info.tube.send": "Can Send: %s",
   "info.tube.receive": "Can Receive: %s",
   "info.tube.id": "Network ID: %s",
-  "info.tube.direction.set": "Use IC2 Wrench to tweak direction!"
+  "info.tube.direction.set": "Use IC2 Wrench to tweak the direction!"
 }
