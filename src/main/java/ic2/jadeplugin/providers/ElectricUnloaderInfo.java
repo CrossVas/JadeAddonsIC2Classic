@@ -17,7 +17,7 @@ public class ElectricUnloaderInfo implements IInfoProvider {
             helper.maxOut(unloader.getMaxEnergyOutput());
             helper.defaultText("ic2.probe.transformer.packets.name", 10);
             EnergyContainer container = EnergyContainer.getContainer(unloader);
-            helper.addStats(player, () -> helper.addAveragesOut(container));
+            helper.addAveragesOut(container);
         }
     }
 }

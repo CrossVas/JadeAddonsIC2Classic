@@ -267,16 +267,6 @@ public class JadeHelper implements IJadeHelper {
         return (energy > 0 && packet <= 0) ? Component.literal("~").withStyle(ChatFormatting.GREEN) : Component.empty();
     }
 
-    public void addStats(Player player, IInfoProvider.IStatProvider stats) {
-        boolean isRequired = Jade.CONFIG.get().getPlugin().get(JadeTags.SNEAK_FOR_DETAILS);
-        boolean condition = !isRequired || player.isCrouching();
-        if (condition) {
-            stats.addStats();
-        } else {
-            centered(TextFormatter.AQUA.translate("info.sneak.details"));
-        }
-    }
-
     public void tierFromPower(int power) {
         int tier = EnergyNet.INSTANCE.getTierFromPower(power);
         defaultText("ic2.probe.eu.tier.name", TextFormatter.tier(tier).literal(getTierDisplayFromTier(tier)));

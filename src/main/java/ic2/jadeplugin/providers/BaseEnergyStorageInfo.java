@@ -19,7 +19,7 @@ public class BaseEnergyStorageInfo implements IInfoProvider {
             helper.defaultText("info.energy.io", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getSourceTier()));
 
             EnergyContainer container = EnergyContainer.getContainer(energyStorage);
-            helper.addStats(player, () -> helper.addAveragesFull(container));
+            helper.addAveragesFull(container);
         }
     }
 }

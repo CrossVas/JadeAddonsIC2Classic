@@ -46,6 +46,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IServerData
 
     private void appendTooltips(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
         boolean forceTOPStyle = config.get(TOP_STYLE);
+        boolean showIC2Tanks = config.get(TANK_RENDER);
         TextFormatter defaultFormat = forceTOPStyle ? TextFormatter.WHITE : TextFormatter.GRAY;
         CompoundTag serverData = accessor.getServerData();
         IElementHelper helper = tooltip.getElementHelper();
@@ -92,7 +93,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IServerData
                     addElement(tooltip, jadeElement, elementTag);
                 }
                 // fluid
-                if (serverTag.contains(JADE_ADDON_FLUID_TAG)) {
+                if (serverTag.contains(JADE_ADDON_FLUID_TAG) && showIC2Tanks) {
                     CompoundTag elementTag = serverTag.getCompound(JADE_ADDON_FLUID_TAG);
                     CommonFluidBarElement fluidElement = CommonFluidBarElement.load(elementTag);
                     FluidStack fluid = fluidElement.getFluid();

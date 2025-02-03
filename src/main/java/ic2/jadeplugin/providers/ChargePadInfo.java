@@ -23,7 +23,7 @@ public class ChargePadInfo implements IInfoProvider {
             helper.defaultText("ic2.probe.chargepad.transferrate.name", TextFormatter.GREEN.literal(transfer + ""));
             helper.defaultText("ic2.probe.chargepad.radius.name", range + 1.0F);
             EnergyContainer container = EnergyContainer.getContainer(chargePad);
-            helper.addStats(player, () -> helper.addAveragesIn(container));
+            helper.addAveragesIn(container);
         }
     }
 }

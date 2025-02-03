@@ -30,8 +30,4 @@ public interface IInfoProvider extends ILangHelper {
     default MutableComponent status(boolean status) {
         return status ? TextFormatter.GREEN.literal(true + "") : TextFormatter.RED.literal(false + "");
     }
-
-    interface IStatProvider {
-        void addStats();
-    }
 }

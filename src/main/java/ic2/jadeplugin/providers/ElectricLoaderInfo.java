@@ -16,7 +16,7 @@ public class ElectricLoaderInfo implements IInfoProvider {
         if (blockEntity instanceof BaseElectricLoaderTileEntity loader) {
             helper.maxIn(loader.getMaxInput());
             EnergyContainer container = EnergyContainer.getContainer(loader);
-            helper.addStats(player, () -> helper.addAveragesIn(container));
+            helper.addAveragesIn(container);
         }
     }
 }

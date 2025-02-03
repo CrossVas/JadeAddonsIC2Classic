@@ -22,7 +22,7 @@ public class RedirectorSlaveInfo implements IInfoProvider {
             }
 
             EnergyContainer container = EnergyContainer.getContainer(slave);
-            helper.addStats(player, () -> helper.addCableAverages(container.getAverageOut(), container.getPacketsOut()));
+            helper.addCableAverages(container.getAverageOut(), container.getPacketsOut());
         }
     }
 }

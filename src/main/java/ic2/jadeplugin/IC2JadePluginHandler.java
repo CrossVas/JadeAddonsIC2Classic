@@ -35,7 +35,6 @@ public class IC2JadePluginHandler implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(JadeTags.TOP_STYLE, true);
-        registration.addConfig(JadeTags.SNEAK_FOR_DETAILS, false);
 
         registration.registerBlockIcon(new BarrelInfo.BarrelIconProvider(), BarrelBlock.class);
         registration.registerBlockComponent(CropInfo.CropIcon.THIS, CropBlock.class);
